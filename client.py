@@ -19,7 +19,8 @@ class JSONError(Exception):
 
 
 class GPSCommon:
-    "Isolate socket handling and buffering from the protocol interpretation."
+    """Isolate socket handling and buffering from the protocol interpretation.
+    """
 
     def __init__(self, host="127.0.0.1", port=GPSD_PORT, verbose=0):
         self.sock = None  # in case we blow up in connect
@@ -70,14 +71,14 @@ class GPSCommon:
         self.close()
 
     def waiting(self, timeout=0):
-        "Return True if data is ready for the client."
+        """Return True if data is ready for the client."""
         if self.linebuffer:
             return True
         (winput, _woutput, _wexceptions) = select.select((self.sock,), (), (), timeout)
         return winput != []
 
     def read(self):
-        "Wait for and read data being streamed from the daemon."
+        """Wait for and read data being streamed from the daemon."""
         if self.verbose > 1:
             sys.stderr.write("poll: reading from daemon...\n")
         eol = self.linebuffer.find('\n')
@@ -116,11 +117,11 @@ class GPSCommon:
         return len(self.response)
 
     def data(self):
-        "Return the client data buffer."
+        """Return the client data buffer."""
         return self.response
 
     def send(self, commands):
-        "Ship commands to the daemon."
+        """Ship commands to the daemon."""
         if not commands.endswith("\n"):
             commands += "\n"
         self.sock.send(commands)
@@ -140,7 +141,7 @@ WATCH_DEVICE = 0x000800  # watch specific device
 
 
 class GPSJSON:
-    "Basic JSON decoding."
+    """Basic JSON decoding."""
 
     def __iter__(self):
         return self
@@ -156,7 +157,7 @@ class GPSJSON:
             self.data.satellites = map(DictWrapper, self.data.satellites)
 
     def stream(self, flags=0, devpath=None):
-        "Control streaming reports from the daemon,"
+        """Control streaming reports from the daemon."""
         if flags & WATCH_DISABLE:
             arg = '?WATCH={"enable":false'
             if flags & WATCH_JSON:
@@ -199,7 +200,7 @@ class GPSJSON:
 
 
 class DictWrapper:
-    "Wrapper that yields both class and dictionary behavior,"
+    """Wrapper that yields both class and dictionary behavior."""
 
     def __init__(self, ddict):
         self.__dict__ = ddict
@@ -211,11 +212,11 @@ class DictWrapper:
         return self.__dict__.keys()
 
     def __getitem__(self, key):
-        "Emulate dictionary, for new-style interface."
+        """Emulate dictionary, for new-style interface."""
         return self.__dict__[key]
 
     def __setitem__(self, key, val):
-        "Emulate dictionary, for new-style interface."
+        """Emulate dictionary, for new-style interface."""
         self.__dict__[key] = val
 
     def __contains__(self, key):

@@ -101,7 +101,7 @@ class GPSFix:
 
 
 class GPSData:
-    "Position, track, velocity and status information returned by a GPS."
+    """Position, track, velocity and status information returned by a GPS."""
 
     class satellite:
         def __init__(self, PRN, elevation, azimuth, ss, used=None):
@@ -171,7 +171,7 @@ class GPSData:
 
 
 class GPS(GPSCommon, GPSData, GPSJSON):
-    "Client interface to a running gpsd instance."
+    """Client interface to a running gpsd instance."""
 
     def __init__(self, host="127.0.0.1", port=GPSD_PORT, verbose=0, mode=0):
         GPSCommon.__init__(self, host, port, verbose)
@@ -319,7 +319,7 @@ class GPS(GPSCommon, GPSData, GPSJSON):
             self.valid = ONLINE_SET | SATELLITE_SET
 
     def read(self):
-        "Read and interpret data from the daemon."
+        """Read and interpret data from the daemon."""
         status = GPSCommon.read(self)
         if status <= 0:
             return status
@@ -342,7 +342,7 @@ class GPS(GPSCommon, GPSData, GPSJSON):
             return self.response
 
     def stream(self, flags=0, devpath=None):
-        "Ask gpsd to stream reports at your client."
+        """Ask gpsd to stream reports at your client."""
         if (flags & (WATCH_JSON | WATCH_OLDSTYLE | WATCH_NMEA | WATCH_RAW)) == 0:
             flags |= WATCH_JSON
         if flags & WATCH_DISABLE:
