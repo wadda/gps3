@@ -67,7 +67,7 @@ def earth_distance(lat1, lon1, lat2, lon2):
     return calc_rad((lat1 + lat2) / 2) * acos(a)
 
 
-def MeterOffset(lat1, lon1, lat2, lon2):
+def meter_offset(lat1, lon1, lat2, lon2):
     """Return offset in meters of second arg from first."""
     dx = earth_distance(lat1, lon1, lat1, lon2)
     dy = earth_distance(lat1, lon1, lat2, lon1)
