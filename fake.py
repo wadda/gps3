@@ -179,7 +179,7 @@ class TestLoad:
                         else:
                             raise ValueError
                     except (ValueError, IndexError):
-                        raise TestLoadError("bad serial-parameter spec in %s" % \
+                        raise TestLoadError("bad serial-parameter spec in %s" %
                                             self.name)
                     self.serial = (baud, databits, parity, stopbits)
                 elif "Transport: UDP" in packet:
@@ -193,7 +193,7 @@ class TestLoad:
                         (_dummy, self.delimiter, delay) = packet.strip().split()
                         self.delay = float(delay)
                     except ValueError:
-                        raise TestLoadError("bad Delay-Cookie line in %s" % \
+                        raise TestLoadError("bad Delay-Cookie line in %s" %
                                             self.name)
                     self.resplit = True
             else:
@@ -203,7 +203,7 @@ class TestLoad:
                     print
                     repr(packet)
                 if not packet:
-                    raise TestLoadError("zero-length packet from %s" % \
+                    raise TestLoadError("zero-length packet from %s" %
                                         self.name)
                 self.sentences.append(packet)
         # Look at the first packet to grok the GPS type
@@ -310,8 +310,9 @@ class FakePTY(FakeGPS):
             termios.tcsetattr(self.slave_fd, termios.TCSANOW,
                               [iflag, oflag, cflag, lflag, ispeed, ospeed, cc])
         except termios.error:
-            raise TestLoadError("error attempting to set serial mode to %s %s%s%s" \
-                                % (speed, databits, parity, stopbits))
+            raise TestLoadError(
+                "error attempting to set serial mode to %s %s%s%s"
+                % (speed, databits, parity, stopbits))
 
     def read(self):
         """Discard control strings written by gpsd."""
