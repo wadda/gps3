@@ -26,7 +26,7 @@ class GPSCommon:
         self.sock = None  # in case we blow up in connect
         self.linebuffer = ""
         self.verbose = verbose
-        if host != None:
+        if host is not None:
             self.connect(host, port)
 
     def connect(self, host, port):
