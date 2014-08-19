@@ -11,7 +11,7 @@ else:
 GPSD_PORT = "2947"
 
 
-class json_error(Exception):
+class JSONError(Exception):
     def __init__(self, data, explanation):
         Exception.__init__(self)
         self.data = data
@@ -149,7 +149,7 @@ class gpsjson:
         try:
             self.data = dictwrapper(json.loads(buf.strip(), encoding="ascii"))
         except ValueError as e:
-            raise json_error(buf, e.args[0])
+            raise JSONError(buf, e.args[0])
         # Should be done for any other array-valued subobjects, too.
         # This particular logic can fire on SKY or RTCM2 objects.
         if hasattr(self.data, "satellites"):
