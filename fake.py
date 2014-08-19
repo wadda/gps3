@@ -613,7 +613,7 @@ class TestSession:
     def client_add(self, commands):
         "Initiate a client session and force connection to a fake GPS."
         self.progress("gpsfake: client_add()\n")
-        newclient = gps.gps(port=self.port, verbose=self.verbose)
+        newclient = gps.GPS(port=self.port, verbose=self.verbose)
         self.append(newclient)
         newclient.id = self.client_id + 1
         self.client_id += 1
@@ -626,7 +626,7 @@ class TestSession:
         "Terminate a client session."
         self.progress("gpsfake: client_remove(%d)\n" % cid)
         for obj in self.runqueue:
-            if isinstance(obj, gps.gps) and obj.id == cid:
+            if isinstance(obj, gps.GPS) and obj.id == cid:
                 self.remove(obj)
                 return True
         else:
@@ -675,7 +675,7 @@ class TestSession:
                             chosen.write("# EOF\n")
                     else:
                         chosen.feed()
-                elif isinstance(chosen, gps.gps):
+                elif isinstance(chosen, gps.GPS):
                     if chosen.enqueued:
                         chosen.send(chosen.enqueued)
                         chosen.enqueued = ""
@@ -713,7 +713,7 @@ class TestSession:
         self.runqueue.append(obj)
         if isinstance(obj, FakeGPS):
             self.writers += 1
-        elif isinstance(obj, gps.gps):
+        elif isinstance(obj, gps.GPS):
             self.readers += 1
         if self.threadlock:
             self.threadlock.release()
@@ -725,7 +725,7 @@ class TestSession:
         self.runqueue.remove(obj)
         if isinstance(obj, FakeGPS):
             self.writers -= 1
-        elif isinstance(obj, gps.gps):
+        elif isinstance(obj, gps.GPS):
             self.readers -= 1
         self.index = min(len(self.runqueue) - 1, self.index)
         if self.threadlock:

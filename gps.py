@@ -170,7 +170,7 @@ class GPSData:
         return st
 
 
-class gps(GPSCommon, GPSData, GPSJSON):
+class GPS(GPSCommon, GPSData, GPSJSON):
     "Client interface to a running gpsd instance."
 
     def __init__(self, host="127.0.0.1", port=GPSD_PORT, verbose=0, mode=0):
@@ -251,7 +251,7 @@ class gps(GPSCommon, GPSData, GPSJSON):
                     d1 = int(prefix.pop())
                     newsats = []
                     for i in range(d1):
-                        newsats.append(gps.satellite(*map(int, satellites[i].split())))
+                        newsats.append(GPS.satellite(*map(int, satellites[i].split())))
                     self.satellites = newsats
                     self.valid |= SATELLITE_SET
 
@@ -310,7 +310,7 @@ class gps(GPSCommon, GPSData, GPSJSON):
                 self.satellites = []
                 for sat in self.data['satellites']:
                     self.satellites.append(
-                        gps.satellite(PRN=sat['PRN'], elevation=sat['el'], azimuth=sat['az'], ss=sat['ss'],
+                        GPS.satellite(PRN=sat['PRN'], elevation=sat['el'], azimuth=sat['az'], ss=sat['ss'],
                                       used=sat['used']))
             self.satellites_used = 0
             for sat in self.satellites:
@@ -383,7 +383,7 @@ if __name__ == '__main__':
     if len(arguments) > 1:
         opts["port"] = arguments[1]
 
-    session = gps(**opts)
+    session = GPS(**opts)
     session.stream(WATCH_ENABLE)
     try:
         for report in session:
