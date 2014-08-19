@@ -82,7 +82,7 @@ WATCH_NEWSTYLE = 0x010000  # force JSON streaming
 WATCH_OLDSTYLE = 0x020000  # force old-style streaming
 
 
-class gpsfix:
+class GPSFix:
     def __init__(self):
         self.mode = MODE_NO_FIX
         self.time = NaN
@@ -121,7 +121,7 @@ class gpsdata:
         self.online = 0  # NZ if GPS on, zero if not
 
         self.valid = 0
-        self.fix = gpsfix()
+        self.fix = GPSFix()
 
         self.status = STATUS_NO_FIX
         self.utc = ""
