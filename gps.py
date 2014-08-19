@@ -57,7 +57,8 @@ ERROR_SET = (1 << 31)
 TIMEDRIFT_SET = (1 << 32)
 EOF_SET = (1 << 33)
 SET_HIGH_BIT = 34
-UNION_SET = (RTCM2_SET | RTCM3_SET | SUBFRAME_SET | AIS_SET | VERSION_SET | DEVICELIST_SET | ERROR_SET | GST_SET)
+UNION_SET = (RTCM2_SET | RTCM3_SET | SUBFRAME_SET | AIS_SET | VERSION_SET |
+             DEVICELIST_SET | ERROR_SET | GST_SET)
 STATUS_NO_FIX = 0
 STATUS_FIX = 1
 STATUS_DGPS_FIX = 2
@@ -160,10 +161,14 @@ class GPSData:
             st += "Track:    ?\n"
         else:
             st += "Track:    %f\n" % (self.fix.track)
-        st += "Status:   STATUS_%s\n" % ("NO_FIX", "FIX", "DGPS_FIX")[self.status]
-        st += "Mode:     MODE_%s\n" % ("ZERO", "NO_FIX", "2D", "3D")[self.fix.mode]
-        st += "Quality:  %d p=%2.2f h=%2.2f v=%2.2f t=%2.2f g=%2.2f\n" % \
-              (self.satellites_used, self.pdop, self.hdop, self.vdop, self.tdop, self.gdop)
+        st += "Status:   STATUS_%s\n" % (
+            "NO_FIX", "FIX", "DGPS_FIX")[self.status]
+        st += "Mode:     MODE_%s\n" % (
+            "ZERO", "NO_FIX", "2D", "3D")[self.fix.mode]
+        st += "Quality:  %d p=%2.2f h=%2.2f v=%2.2f t=%2.2f g=%2.2f\n" % (
+              self.satellites_used,
+              self.pdop, self.hdop, self.vdop, self.tdop, self.gdop,
+        )
         st += "Y: %s satellites in view:\n" % len(self.satellites)
         for sat in self.satellites:
             st += "    %r\n" % sat
@@ -251,7 +256,8 @@ class GPS(GPSCommon, GPSData, GPSJSON):
                     d1 = int(prefix.pop())
                     newsats = []
                     for i in range(d1):
-                        newsats.append(GPS.satellite(*map(int, satellites[i].split())))
+                        item = GPS.satellite(*map(int, satellites[i].split()))
+                        newsats.append(item)
                     self.satellites = newsats
                     self.valid |= SATELLITE_SET
 
@@ -305,13 +311,20 @@ class GPS(GPSCommon, GPSData, GPSJSON):
             self.fix.mode = default("mode", 0, MODE_SET)
         elif self.data.get("class") == "SKY":
             for attrp in ("x", "y", "v", "h", "p", "g"):
-                setattr(self, attrp + "dop", default(attrp + "dop", NaN, DOP_SET))
+                setattr(self,
+                        attrp + "dop",
+                        default(attrp + "dop", NaN, DOP_SET))
             if "satellites" in self.data.keys():
                 self.satellites = []
                 for sat in self.data['satellites']:
                     self.satellites.append(
-                        GPS.satellite(PRN=sat['PRN'], elevation=sat['el'], azimuth=sat['az'], ss=sat['ss'],
-                                      used=sat['used']))
+                        GPS.satellite(
+                            PRN=sat['PRN'],
+                            elevation=sat['el'],
+                            azimuth=sat['az'],
+                            ss=sat['ss'],
+                            used=sat['used'],
+                        ))
             self.satellites_used = 0
             for sat in self.satellites:
                 if sat.used:
@@ -343,7 +356,8 @@ class GPS(GPSCommon, GPSData, GPSJSON):
 
     def stream(self, flags=0, devpath=None):
         """Ask gpsd to stream reports at your client."""
-        if (flags & (WATCH_JSON | WATCH_OLDSTYLE | WATCH_NMEA | WATCH_RAW)) == 0:
+        if (flags & (WATCH_JSON | WATCH_OLDSTYLE
+                     | WATCH_NMEA | WATCH_RAW)) == 0:
             flags |= WATCH_JSON
         if flags & WATCH_DISABLE:
             if flags & WATCH_OLDSTYLE:
