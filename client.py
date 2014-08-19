@@ -147,13 +147,13 @@ class GPSJSON:
 
     def unpack(self, buf):
         try:
-            self.data = dictwrapper(json.loads(buf.strip(), encoding="ascii"))
+            self.data = DictWrapper(json.loads(buf.strip(), encoding="ascii"))
         except ValueError as e:
             raise JSONError(buf, e.args[0])
         # Should be done for any other array-valued subobjects, too.
         # This particular logic can fire on SKY or RTCM2 objects.
         if hasattr(self.data, "satellites"):
-            self.data.satellites = map(dictwrapper, self.data.satellites)
+            self.data.satellites = map(DictWrapper, self.data.satellites)
 
     def stream(self, flags=0, devpath=None):
         "Control streaming reports from the daemon,"
@@ -198,7 +198,7 @@ class GPSJSON:
         return self.send(arg + "}")
 
 
-class dictwrapper:
+class DictWrapper:
     "Wrapper that yields both class and dictionary behavior,"
 
     def __init__(self, ddict):
