@@ -70,7 +70,8 @@ the run method in a subthread, with locking of critical regions.
 import os, sys, time, signal, pty, termios  # fcntl, array, struct
 import threading, socket, select
 import gps
-import packet as sniffer
+# TODO: Need to fix this import!
+#import packet as sniffer
 
 # The two magic numbers below have to be derived from observation.  If
 # they're too high you'll slow the tests down a lot.  If they're too low
