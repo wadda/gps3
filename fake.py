@@ -233,7 +233,7 @@ class FakeGPS:
 
     def write(self, line):
         "Throw an error if this superclass is ever instantiated."
-        raise ValueError, line
+        raise ValueError(line)
 
     def feed(self):
         "Feed a line from the contents of the GPS log to the daemon."

@@ -42,7 +42,7 @@ class gpscommon:
             try:
                 port = int(port)
             except ValueError:
-                raise socket.error, "nonnumeric port"
+                raise socket.error("nonnumeric port")
         # if self.verbose > 0:
         # print 'connect:', (host, port)
         msg = "getaddrinfo returns an empty list"
@@ -53,13 +53,13 @@ class gpscommon:
                 self.sock = socket.socket(af, socktype, proto)
                 # if self.debuglevel > 0: print 'connect:', (host, port)
                 self.sock.connect(sa)
-            except socket.error, msg:
+            except socket.error as msg:
                 # if self.debuglevel > 0: print 'connect fail:', (host, port)
                 self.close()
                 continue
             break
         if not self.sock:
-            raise socket.error, msg
+            raise socket.error(msg)
 
     def close(self):
         if self.sock:
@@ -148,7 +148,7 @@ class gpsjson:
     def unpack(self, buf):
         try:
             self.data = dictwrapper(json.loads(buf.strip(), encoding="ascii"))
-        except ValueError, e:
+        except ValueError as e:
             raise json_error(buf, e.args[0])
         # Should be done for any other array-valued subobjects, too.
         # This particular logic can fire on SKY or RTCM2 objects.
