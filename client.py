@@ -18,7 +18,7 @@ class JSONError(Exception):
         self.explanation = explanation
 
 
-class gpscommon:
+class GPSCommon:
     "Isolate socket handling and buffering from the protocol interpretation."
 
     def __init__(self, host="127.0.0.1", port=GPSD_PORT, verbose=0):
