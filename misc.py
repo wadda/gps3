@@ -47,7 +47,7 @@ def calc_rad(lat):
     return r
 
 
-def EarthDistance(lat1, lon1, lat2, lon2):
+def earth_distance(lat1, lon1, lat2, lon2):
     """Distance in meters between two points specified in degrees."""
     x1 = calc_rad(lat1) * cos(radians(lon1)) * sin(radians(90 - lat1))
     x2 = calc_rad(lat2) * cos(radians(lon2)) * sin(radians(90 - lat2))
@@ -69,8 +69,8 @@ def EarthDistance(lat1, lon1, lat2, lon2):
 
 def MeterOffset(lat1, lon1, lat2, lon2):
     """Return offset in meters of second arg from first."""
-    dx = EarthDistance(lat1, lon1, lat1, lon2)
-    dy = EarthDistance(lat1, lon1, lat2, lon1)
+    dx = earth_distance(lat1, lon1, lat1, lon2)
+    dy = earth_distance(lat1, lon1, lat2, lon1)
     if lat1 < lat2:
         dy *= -1
     if lon1 < lon2:
