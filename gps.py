@@ -105,7 +105,7 @@ class GPSFix:
 class GPSData:
     """Position, track, velocity and status information returned by a GPS."""
 
-    class satellite:
+    class Satellite:
         def __init__(self, PRN, elevation, azimuth, ss, used=None):
             self.PRN = PRN
             self.elevation = elevation
@@ -257,7 +257,7 @@ class GPS(GPSCommon, GPSData, GPSJSON):
                     d1 = int(prefix.pop())
                     newsats = []
                     for i in range(d1):
-                        item = GPS.satellite(*map(int, satellites[i].split()))
+                        item = GPS.Satellite(*map(int, satellites[i].split()))
                         newsats.append(item)
                     self.satellites = newsats
                     self.valid |= SATELLITE_SET
@@ -319,7 +319,7 @@ class GPS(GPSCommon, GPSData, GPSJSON):
                 self.satellites = []
                 for sat in self.data['satellites']:
                     self.satellites.append(
-                        GPS.satellite(
+                        GPS.Satellite(
                             PRN=sat['PRN'],
                             elevation=sat['el'],
                             azimuth=sat['az'],
