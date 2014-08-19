@@ -139,7 +139,7 @@ WATCH_PPS = 0x002000  # enable PPS in raw/NMEA
 WATCH_DEVICE = 0x000800  # watch specific device
 
 
-class gpsjson:
+class GPSJSON:
     "Basic JSON decoding."
 
     def __iter__(self):

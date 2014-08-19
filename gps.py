@@ -170,7 +170,7 @@ class gpsdata:
         return st
 
 
-class gps(GPSCommon, gpsdata, gpsjson):
+class gps(GPSCommon, gpsdata, GPSJSON):
     "Client interface to a running gpsd instance."
 
     def __init__(self, host="127.0.0.1", port=GPSD_PORT, verbose=0, mode=0):
@@ -352,7 +352,7 @@ class gps(GPSCommon, gpsdata, gpsjson):
                     arg += 'r-'
                     return self.send(arg)
             else:
-                gpsjson.stream(self, ~flags, devpath)
+                GPSJSON.stream(self, ~flags, devpath)
         else:  # flags & WATCH_ENABLE:
             if flags & WATCH_OLDSTYLE:
                 arg = 'w+'
@@ -360,7 +360,7 @@ class gps(GPSCommon, gpsdata, gpsjson):
                     arg += 'r+'
                     return self.send(arg)
             else:
-                gpsjson.stream(self, flags, devpath)
+                GPSJSON.stream(self, flags, devpath)
 
 
 if __name__ == '__main__':
