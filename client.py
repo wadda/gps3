@@ -74,7 +74,9 @@ class GPSCommon:
         """Return True if data is ready for the client."""
         if self.linebuffer:
             return True
-        (winput, _woutput, _wexceptions) = select.select((self.sock,), (), (), timeout)
+        (winput, _woutput, _wexceptions) = select.select(
+            (self.sock,), (), (), timeout,
+        )
         return winput != []
 
     def read(self):
