@@ -100,7 +100,7 @@ class GPSFix:
         self.epc = NaN
 
 
-class gpsdata:
+class GPSData:
     "Position, track, velocity and status information returned by a GPS."
 
     class satellite:
@@ -170,12 +170,12 @@ class gpsdata:
         return st
 
 
-class gps(GPSCommon, gpsdata, GPSJSON):
+class gps(GPSCommon, GPSData, GPSJSON):
     "Client interface to a running gpsd instance."
 
     def __init__(self, host="127.0.0.1", port=GPSD_PORT, verbose=0, mode=0):
         GPSCommon.__init__(self, host, port, verbose)
-        gpsdata.__init__(self)
+        GPSData.__init__(self)
         self.newstyle = False
         if mode:
             self.stream(mode)
