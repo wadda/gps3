@@ -20,7 +20,8 @@ from misc import isotime
 NaN = float('nan')
 
 
-def isnan(x): return str(x) == 'nan'
+def isnan(x):
+    return str(x) == 'nan'
 
 # Don't hand-hack this list, it's generated.
 ONLINE_SET = (1 << 1)
