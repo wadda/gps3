@@ -26,21 +26,6 @@ If you're like most of humanity **sudo apt-get install gpsd python-gps**
 This gives you the daemon, libgps, and python fun-pack.  If you use a different package system you are obviously smart enough to figure it out.
 
 * Configuration
-Setup of the gpsd is straight forward.  We tend to flip *-n -b -G* flags to cut down on problems, with default setting the rest of the way.  Sometime *-N* is for non-daemon execution and *-D* for diagnostic integer up to *9*, depending how much you want to read. 
 
+Setup of the gpsd is straight forward.  We tend to flip *-n -b -G* flags to cut down on problems, with default setting the rest of the way.  Sometime *-N* is for non-daemon execution and *-D* for diagnostic integer up to *9*, depending how much you want to read. Autostart is your choice.
 
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
