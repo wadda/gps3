@@ -80,9 +80,9 @@ def MeterOffset(lat1, lon1, lat2, lon2):
 
 def isotime(s):
     """Convert timestamps in ISO8661 format to and from Unix time."""
-    if isinstance(s, type(1)):
+    if isinstance(s, type(int)):
         return time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(s))
-    elif isinstance(s, type(1.0)):
+    elif isinstance(s, type(float)):
         date = int(s)
         msec = s - date
         date = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(s))
