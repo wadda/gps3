@@ -7,7 +7,7 @@ gpsd (http://www.catb.org/gpsd/) is a fabulous application that deserves a Pytho
 The goal is to deliver a package to the Cheese Shop (https://pypi.python.org/pypi/gps3/0.1a1) that equals the quality of the source and craftsmanship behind it.
 
 It is a match made in heaven.
-![gps3api.png](https://bitbucket.org/repo/nGqxd8/images/49611737-gps3api.png)
+![gps3api-mod.dia.png](https://bitbucket.org/repo/nGqxd8/images/2994450553-gps3api-mod.dia.png)
 ### How do I get set up? ###
 
 * Summary of set up
