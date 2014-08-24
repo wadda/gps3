@@ -20,7 +20,8 @@ from misc import isotime
 NaN = float('nan')
 
 
-def isnan(x): return str(x) == 'nan'
+def isnan(x):
+    return str(x) == 'nan'
 
 # Don't hand-hack this list, it's generated.
 ONLINE_SET = (1 << 1)
@@ -57,7 +58,8 @@ ERROR_SET = (1 << 31)
 TIMEDRIFT_SET = (1 << 32)
 EOF_SET = (1 << 33)
 SET_HIGH_BIT = 34
-UNION_SET = (RTCM2_SET | RTCM3_SET | SUBFRAME_SET | AIS_SET | VERSION_SET | DEVICELIST_SET | ERROR_SET | GST_SET)
+UNION_SET = (RTCM2_SET | RTCM3_SET | SUBFRAME_SET | AIS_SET | VERSION_SET |
+             DEVICELIST_SET | ERROR_SET | GST_SET)
 STATUS_NO_FIX = 0
 STATUS_FIX = 1
 STATUS_DGPS_FIX = 2
@@ -82,7 +84,7 @@ WATCH_NEWSTYLE = 0x010000  # force JSON streaming
 WATCH_OLDSTYLE = 0x020000  # force old-style streaming
 
 
-class gpsfix:
+class GPSFix:
     def __init__(self):
         self.mode = MODE_NO_FIX
         self.time = NaN
@@ -100,10 +102,10 @@ class gpsfix:
         self.epc = NaN
 
 
-class gpsdata:
-    "Position, track, velocity and status information returned by a GPS."
+class GPSData:
+    """Position, track, velocity and status information returned by a GPS."""
 
-    class satellite:
+    class Satellite:
         def __init__(self, PRN, elevation, azimuth, ss, used=None):
             self.PRN = PRN
             self.elevation = elevation
@@ -121,7 +123,7 @@ class gpsdata:
         self.online = 0  # NZ if GPS on, zero if not
 
         self.valid = 0
-        self.fix = gpsfix()
+        self.fix = GPSFix()
 
         self.status = STATUS_NO_FIX
         self.utc = ""
@@ -160,22 +162,26 @@ class gpsdata:
             st += "Track:    ?\n"
         else:
             st += "Track:    %f\n" % (self.fix.track)
-        st += "Status:   STATUS_%s\n" % ("NO_FIX", "FIX", "DGPS_FIX")[self.status]
-        st += "Mode:     MODE_%s\n" % ("ZERO", "NO_FIX", "2D", "3D")[self.fix.mode]
-        st += "Quality:  %d p=%2.2f h=%2.2f v=%2.2f t=%2.2f g=%2.2f\n" % \
-              (self.satellites_used, self.pdop, self.hdop, self.vdop, self.tdop, self.gdop)
+        st += "Status:   STATUS_%s\n" % (
+            "NO_FIX", "FIX", "DGPS_FIX")[self.status]
+        st += "Mode:     MODE_%s\n" % (
+            "ZERO", "NO_FIX", "2D", "3D")[self.fix.mode]
+        st += "Quality:  %d p=%2.2f h=%2.2f v=%2.2f t=%2.2f g=%2.2f\n" % (
+              self.satellites_used,
+              self.pdop, self.hdop, self.vdop, self.tdop, self.gdop,
+        )
         st += "Y: %s satellites in view:\n" % len(self.satellites)
         for sat in self.satellites:
             st += "    %r\n" % sat
         return st
 
 
-class gps(gpscommon, gpsdata, gpsjson):
-    "Client interface to a running gpsd instance."
+class GPS(GPSCommon, GPSData, GPSJSON):
+    """Client interface to a running gpsd instance."""
 
     def __init__(self, host="127.0.0.1", port=GPSD_PORT, verbose=0, mode=0):
-        gpscommon.__init__(self, host, port, verbose)
-        gpsdata.__init__(self)
+        GPSCommon.__init__(self, host, port, verbose)
+        GPSData.__init__(self)
         self.newstyle = False
         if mode:
             self.stream(mode)
@@ -251,7 +257,8 @@ class gps(gpscommon, gpsdata, gpsjson):
                     d1 = int(prefix.pop())
                     newsats = []
                     for i in range(d1):
-                        newsats.append(gps.satellite(*map(int, satellites[i].split())))
+                        item = GPS.Satellite(*map(int, satellites[i].split()))
+                        newsats.append(item)
                     self.satellites = newsats
                     self.valid |= SATELLITE_SET
 
@@ -305,13 +312,20 @@ class gps(gpscommon, gpsdata, gpsjson):
             self.fix.mode = default("mode", 0, MODE_SET)
         elif self.data.get("class") == "SKY":
             for attrp in ("x", "y", "v", "h", "p", "g"):
-                setattr(self, attrp + "dop", default(attrp + "dop", NaN, DOP_SET))
+                setattr(self,
+                        attrp + "dop",
+                        default(attrp + "dop", NaN, DOP_SET))
             if "satellites" in self.data.keys():
                 self.satellites = []
                 for sat in self.data['satellites']:
                     self.satellites.append(
-                        gps.satellite(PRN=sat['PRN'], elevation=sat['el'], azimuth=sat['az'], ss=sat['ss'],
-                                      used=sat['used']))
+                        GPS.Satellite(
+                            PRN=sat['PRN'],
+                            elevation=sat['el'],
+                            azimuth=sat['az'],
+                            ss=sat['ss'],
+                            used=sat['used'],
+                        ))
             self.satellites_used = 0
             for sat in self.satellites:
                 if sat.used:
@@ -319,8 +333,8 @@ class gps(gpscommon, gpsdata, gpsjson):
             self.valid = ONLINE_SET | SATELLITE_SET
 
     def read(self):
-        "Read and interpret data from the daemon."
-        status = gpscommon.read(self)
+        """Read and interpret data from the daemon."""
+        status = GPSCommon.read(self)
         if status <= 0:
             return status
         if self.response.startswith("{") and self.response.endswith("}\r\n"):
@@ -342,8 +356,9 @@ class gps(gpscommon, gpsdata, gpsjson):
             return self.response
 
     def stream(self, flags=0, devpath=None):
-        "Ask gpsd to stream reports at your client."
-        if (flags & (WATCH_JSON | WATCH_OLDSTYLE | WATCH_NMEA | WATCH_RAW)) == 0:
+        """Ask gpsd to stream reports at your client."""
+        if (flags & (WATCH_JSON | WATCH_OLDSTYLE
+                     | WATCH_NMEA | WATCH_RAW)) == 0:
             flags |= WATCH_JSON
         if flags & WATCH_DISABLE:
             if flags & WATCH_OLDSTYLE:
@@ -352,7 +367,7 @@ class gps(gpscommon, gpsdata, gpsjson):
                     arg += 'r-'
                     return self.send(arg)
             else:
-                gpsjson.stream(self, ~flags, devpath)
+                GPSJSON.stream(self, ~flags, devpath)
         else:  # flags & WATCH_ENABLE:
             if flags & WATCH_OLDSTYLE:
                 arg = 'w+'
@@ -360,7 +375,7 @@ class gps(gpscommon, gpsdata, gpsjson):
                     arg += 'r+'
                     return self.send(arg)
             else:
-                gpsjson.stream(self, flags, devpath)
+                GPSJSON.stream(self, flags, devpath)
 
 
 if __name__ == '__main__':
@@ -383,7 +398,7 @@ if __name__ == '__main__':
     if len(arguments) > 1:
         opts["port"] = arguments[1]
 
-    session = gps(**opts)
+    session = GPS(**opts)
     session.stream(WATCH_ENABLE)
     try:
         for report in session:

@@ -68,9 +68,10 @@ run in threaded mode by calling the start() method.  This simply calls
 the run method in a subthread, with locking of critical regions.
 """
 import os, sys, time, signal, pty, termios  # fcntl, array, struct
-import exceptions, threading, socket, select
+import threading, socket, select
 import gps
-import packet as sniffer
+# TODO: Need to fix this import!
+#import packet as sniffer
 
 # The two magic numbers below have to be derived from observation.  If
 # they're too high you'll slow the tests down a lot.  If they're too low
@@ -123,14 +124,14 @@ else:
     CLOSE_DELAY = 0.8
 
 
-class TestLoadError(exceptions.Exception):
+class TestLoadError(Exception):
     def __init__(self, msg):
-        exceptions.Exception.__init__(self)
+        Exception.__init__(self)
         self.msg = msg
 
 
 class TestLoad:
-    "Digest a logfile into a list of sentences we can cycle through."
+    """Digest a logfile into a list of sentences we can cycle through."""
 
     def __init__(self, logfp, predump=False):
         self.sentences = []  # This is the interesting part
@@ -178,7 +179,7 @@ class TestLoad:
                         else:
                             raise ValueError
                     except (ValueError, IndexError):
-                        raise TestLoadError("bad serial-parameter spec in %s" % \
+                        raise TestLoadError("bad serial-parameter spec in %s" %
                                             self.name)
                     self.serial = (baud, databits, parity, stopbits)
                 elif "Transport: UDP" in packet:
@@ -192,7 +193,7 @@ class TestLoad:
                         (_dummy, self.delimiter, delay) = packet.strip().split()
                         self.delay = float(delay)
                     except ValueError:
-                        raise TestLoadError("bad Delay-Cookie line in %s" % \
+                        raise TestLoadError("bad Delay-Cookie line in %s" %
                                             self.name)
                     self.resplit = True
             else:
@@ -202,7 +203,7 @@ class TestLoad:
                     print
                     repr(packet)
                 if not packet:
-                    raise TestLoadError("zero-length packet from %s" % \
+                    raise TestLoadError("zero-length packet from %s" %
                                         self.name)
                 self.sentences.append(packet)
         # Look at the first packet to grok the GPS type
@@ -216,9 +217,9 @@ class TestLoad:
             self.sentences = text[commentlen:].split(self.delimiter)
 
 
-class PacketError(exceptions.Exception):
+class PacketError(Exception):
     def __init__(self, msg):
-        exceptions.Exception.__init__(self)
+        Exception.__init__(self)
         self.msg = msg
 
 
@@ -229,15 +230,19 @@ class FakeGPS:
         self.go_predicate = lambda: True
         self.readers = 0
         self.index = 0
-        self.progress("gpsfake: %s provides %d sentences\n" % (self.testload.name, len(self.testload.sentences)))
+        self.progress("gpsfake: %s provides %d sentences\n" % (
+            self.testload.name,
+            len(self.testload.sentences),
+        ))
 
     def write(self, line):
-        "Throw an error if this superclass is ever instantiated."
-        raise ValueError, line
+        """Throw an error if this superclass is ever instantiated."""
+        raise ValueError(line)
 
     def feed(self):
-        "Feed a line from the contents of the GPS log to the daemon."
-        line = self.testload.sentences[self.index % len(self.testload.sentences)]
+        """Feed a line from the contents of the GPS log to the daemon."""
+        position = self.index % len(self.testload.sentences)
+        line = self.testload.sentences[position]
         if "%Delay:" in line:
             # Delay specified number of seconds
             delay = line.split()[1]
@@ -245,13 +250,17 @@ class FakeGPS:
         # self.write has to be set by the derived class
         self.write(line)
         if self.progress:
-            self.progress("gpsfake: %s feeds %d=%s\n" % (self.testload.name, len(line), repr(line)))
+            self.progress("gpsfake: %s feeds %d=%s\n" % (
+                self.testload.name,
+                len(line),
+                repr(line),
+            ))
         time.sleep(self.testload.delay)
         self.index += 1
 
 
 class FakePTY(FakeGPS):
-    "A FakePTY is a pty with a test log ready to be cycled to it."
+    """A FakePTY is a pty with a test log ready to be cycled to it."""
 
     def __init__(self, testload,
                  speed=4800, databits=8, parity='N', stopbits=1,
@@ -284,13 +293,15 @@ class FakePTY(FakeGPS):
         }
         (self.fd, self.slave_fd) = pty.openpty()
         self.byname = os.ttyname(self.slave_fd)
-        (iflag, oflag, cflag, lflag, ispeed, ospeed, cc) = termios.tcgetattr(self.slave_fd)
+        (iflag, oflag, cflag, lflag,
+         ispeed, ospeed, cc) = termios.tcgetattr(self.slave_fd)
         cc[termios.VMIN] = 1
         cflag &= ~(termios.PARENB | termios.PARODD | termios.CRTSCTS)
         cflag |= termios.CREAD | termios.CLOCAL
         iflag = oflag = lflag = 0
         iflag &= ~ (termios.PARMRK | termios.INPCK)
-        cflag &= ~ (termios.CSIZE | termios.CSTOPB | termios.PARENB | termios.PARODD)
+        cflag &= ~ (termios.CSIZE | termios.CSTOPB
+                    | termios.PARENB | termios.PARODD)
         if databits == 7:
             cflag |= termios.CS7
         else:
@@ -309,11 +320,12 @@ class FakePTY(FakeGPS):
             termios.tcsetattr(self.slave_fd, termios.TCSANOW,
                               [iflag, oflag, cflag, lflag, ispeed, ospeed, cc])
         except termios.error:
-            raise TestLoadError("error attempting to set serial mode to %s %s%s%s" \
-                                % (speed, databits, parity, stopbits))
+            raise TestLoadError(
+                "error attempting to set serial mode to %s %s%s%s"
+                % (speed, databits, parity, stopbits))
 
     def read(self):
-        "Discard control strings written by gpsd."
+        """Discard control strings written by gpsd."""
         # A tcflush implementation works on Linux but fails on OpenBSD 4.
         termios.tcflush(self.fd, termios.TCIFLUSH)
         # Alas, the FIONREAD version also works on Linux and fails on OpenBSD.
@@ -329,12 +341,12 @@ class FakePTY(FakeGPS):
         os.write(self.fd, line)
 
     def drain(self):
-        "Wait for the associated device to drain (e.g. before closing)."
+        """Wait for the associated device to drain (e.g. before closing)."""
         termios.tcdrain(self.fd)
 
 
 class FakeTCP(FakeGPS):
-    "A TCP serverlet with a test log ready to be cycled to it."
+    """A TCP serverlet with a test log ready to be cycled to it."""
 
     def __init__(self, testload,
                  host, port,
@@ -352,7 +364,7 @@ class FakeTCP(FakeGPS):
         self.readables = [self.dispatcher]
 
     def read(self):
-        "Handle connection requests and data."
+        """Handle connection requests and data."""
         readable, _writable, _errored = select.select(self.readables, [], [], 0)
         for s in readable:
             if s == self.dispatcher:  # Connection request
@@ -366,20 +378,20 @@ class FakeTCP(FakeGPS):
                     self.readables.remove(s)
 
     def write(self, line):
-        "Send the next log packet to everybody connected."
+        """Send the next log packet to everybody connected."""
         for s in self.readables:
             if s != self.dispatcher:
                 s.send(line)
 
     def drain(self):
-        "Wait for the associated device(s) to drain (e.g. before closing)."
+        """Wait for the associated device(s) to drain (e.g. before closing)."""
         for s in self.readables:
             if s != self.dispatcher:
                 s.shutdown(socket.SHUT_RDWR)
 
 
 class FakeUDP(FakeGPS):
-    "A UDP broadcaster with a test log ready to be cycled to it."
+    """A UDP broadcaster with a test log ready to be cycled to it."""
 
     def __init__(self, testload,
                  ipaddr, port,
@@ -391,20 +403,20 @@ class FakeUDP(FakeGPS):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     def read(self):
-        "Discard control strings written by gpsd."
+        """Discard control strings written by gpsd."""
         pass
 
     def write(self, line):
         self.sock.sendto(line, (self.ipaddr, int(self.port)))
 
     def drain(self):
-        "Wait for the associated device to drain (e.g. before closing)."
+        """Wait for the associated device to drain (e.g. before closing)."""
         pass  # shutdown() fails on UDP
 
 
-class DaemonError(exceptions.Exception):
+class DaemonError(Exception):
     def __init__(self, msg):
-        exceptions.Exception.__init__(self)
+        Exception.__init__(self)
         self.msg = msg
 
     def __str__(self):
@@ -412,7 +424,7 @@ class DaemonError(exceptions.Exception):
 
 
 class DaemonInstance:
-    "Control a gpsd instance."
+    """Control a gpsd instance."""
 
     def __init__(self, control_socket=None):
         self.sockfile = None
@@ -421,11 +433,14 @@ class DaemonInstance:
         if control_socket:
             self.control_socket = control_socket
         else:
-            self.control_socket = "%s/gpsfake-%d.sock" % (self.tmpdir, os.getpid())
+            self.control_socket = "%s/gpsfake-%d.sock" % (
+                self.tmpdir,
+                os.getpid(),
+            )
         self.pidfile = "%s/gpsfake-%d.pid" % (self.tmpdir, os.getpid())
 
     def spawn(self, options, port, background=False, prefix=""):
-        "Spawn a daemon instance."
+        """Spawn a daemon instance."""
         self.spawncmd = None
 
         # Look for gpsd in GPSD_HOME env variable
@@ -439,7 +454,7 @@ class DaemonInstance:
         # if we could not find it yet try PATH env variable for it
         if not self.spawncmd:
             if not '/usr/sbin' in os.environ['PATH']:
-                os.environ['PATH'] = os.environ['PATH'] + ":/usr/sbin"
+                os.environ['PATH'] += ":/usr/sbin"
             for path in os.environ['PATH'].split(':'):
                 _spawncmd = "%s/gpsd" % path
                 if os.path.isfile(_spawncmd) and os.access(_spawncmd, os.X_OK):
@@ -447,11 +462,17 @@ class DaemonInstance:
                     break
 
         if not self.spawncmd:
-            raise DaemonError("Cannot execute gpsd: executable not found. Set GPSD_HOME env variable")
+            raise DaemonError("Cannot execute gpsd: executable not found. "
+                              "Set GPSD_HOME env variable")
         # The -b option to suppress hanging on probe returns is needed to cope
         # with OpenBSD (and possibly other non-Linux systems) that don't support
         # anything we can use to implement the FakeGPS.read() method
-        self.spawncmd += " -b -N -S %s -F %s -P %s %s" % (port, self.control_socket, self.pidfile, options)
+        self.spawncmd += " -b -N -S %s -F %s -P %s %s" % (
+            port,
+            self.control_socket,
+            self.pidfile,
+            options,
+        )
         if prefix:
             self.spawncmd = prefix + " " + self.spawncmd.strip()
         if background:
@@ -461,7 +482,7 @@ class DaemonInstance:
             raise DaemonError("daemon exited with status %d" % status)
 
     def wait_pid(self):
-        "Wait for the daemon, get its PID and a control-socket connection."
+        """Wait for the daemon, get its PID and a control-socket connection."""
         while True:
             try:
                 fp = open(self.pidfile)
@@ -492,7 +513,7 @@ class DaemonInstance:
         return self.sock
 
     def is_alive(self):
-        "Is the daemon still alive?"
+        """Is the daemon still alive?"""
         try:
             os.kill(self.pid, 0)
             return True
@@ -500,21 +521,21 @@ class DaemonInstance:
             return False
 
     def add_device(self, path):
-        "Add a device to the daemon's internal search list."
+        """Add a device to the daemon's internal search list."""
         if self.__get_control_socket():
             self.sock.sendall("+%s\r\n\x00" % path)
             self.sock.recv(12)
             self.sock.close()
 
     def remove_device(self, path):
-        "Remove a device from the daemon's internal search list."
+        """Remove a device from the daemon's internal search list."""
         if self.__get_control_socket():
             self.sock.sendall("-%s\r\n\x00" % path)
             self.sock.recv(12)
             self.sock.close()
 
     def kill(self):
-        "Kill the daemon instance."
+        """Kill the daemon instance."""
         if self.pid:
             try:
                 os.kill(self.pid, signal.SIGTERM)
@@ -527,17 +548,18 @@ class DaemonInstance:
             self.pid = None
 
 
-class TestSessionError(exceptions.Exception):
+class TestSessionError(Exception):
     def __init__(self, msg):
-        exceptions.Exception.__init__(self)
+        Exception.__init__(self)
         self.msg = msg
 
 
 class TestSession:
-    "Manage a session including a daemon with fake GPSes and clients."
+    """Manage a session including a daemon with fake GPSes and clients."""
 
-    def __init__(self, prefix=None, port=None, options=None, verbose=0, predump=False, udp=False, tcp=False):
-        "Initialize the test session by launching the daemon."
+    def __init__(self, prefix=None, port=None, options=None, verbose=0,
+                 predump=False, udp=False, tcp=False):
+        """Initialize the test session by launching the daemon."""
         self.prefix = prefix
         self.port = port
         self.options = options
@@ -566,15 +588,20 @@ class TestSession:
     def spawn(self):
         for sig in (signal.SIGQUIT, signal.SIGINT, signal.SIGTERM):
             signal.signal(sig, lambda unused, dummy: self.cleanup())
-        self.daemon.spawn(background=True, prefix=self.prefix, port=self.port, options=self.options)
+        self.daemon.spawn(
+            background=True,
+            prefix=self.prefix,
+            port=self.port,
+            options=self.options,
+        )
         self.daemon.wait_pid()
 
     def set_predicate(self, pred):
-        "Set a default go predicate for the session."
+        """Set a default go predicate for the session."""
         self.default_predicate = pred
 
     def gps_add(self, logfile, speed=19200, pred=None):
-        "Add a simulated GPS being fed by the specified logfile."
+        """Add a simulated GPS being fed by the specified logfile."""
         self.progress("gpsfake: gps_add(%s, %d)\n" % (logfile, speed))
         if logfile not in self.fakegpslist:
             testload = TestLoad(logfile, predump=self.predump)
@@ -602,7 +629,7 @@ class TestSession:
         return newgps.byname
 
     def gps_remove(self, name):
-        "Remove a simulated GPS from the daemon's search list."
+        """Remove a simulated GPS from the daemon's search list."""
         self.progress("gpsfake: gps_remove(%s)\n" % name)
         self.fakegpslist[name].drain()
         self.remove(self.fakegpslist[name])
@@ -610,47 +637,50 @@ class TestSession:
         del self.fakegpslist[name]
 
     def client_add(self, commands):
-        "Initiate a client session and force connection to a fake GPS."
+        """Initiate a client session and force connection to a fake GPS."""
         self.progress("gpsfake: client_add()\n")
-        newclient = gps.gps(port=self.port, verbose=self.verbose)
+        newclient = gps.GPS(port=self.port, verbose=self.verbose)
         self.append(newclient)
         newclient.id = self.client_id + 1
         self.client_id += 1
-        self.progress("gpsfake: client %d has %s\n" % (self.client_id, newclient.device))
+        self.progress("gpsfake: client %d has %s\n" % (
+            self.client_id,
+            newclient.device,
+        ))
         if commands:
             self.initialize(newclient, commands)
         return self.client_id
 
     def client_remove(self, cid):
-        "Terminate a client session."
+        """Terminate a client session."""
         self.progress("gpsfake: client_remove(%d)\n" % cid)
         for obj in self.runqueue:
-            if isinstance(obj, gps.gps) and obj.id == cid:
+            if isinstance(obj, gps.GPS) and obj.id == cid:
                 self.remove(obj)
                 return True
         else:
             return False
 
     def wait(self, seconds):
-        "Wait, doing nothing."
+        """Wait, doing nothing."""
         self.progress("gpsfake: wait(%d)\n" % seconds)
         time.sleep(seconds)
 
     def gather(self, seconds):
-        "Wait, doing nothing but watching for sentences."
+        """Wait, doing nothing but watching for sentences."""
         self.progress("gpsfake: gather(%d)\n" % seconds)
         #mark = time.time()
         time.sleep(seconds)
 
     def cleanup(self):
-        "We're done, kill the daemon."
+        """We're done, kill the daemon."""
         self.progress("gpsfake: cleanup()\n")
         if self.daemon:
             self.daemon.kill()
             self.daemon = None
 
     def run(self):
-        "Run the tests."
+        """Run the tests."""
         try:
             self.progress("gpsfake: test loop begins\n")
             while self.daemon:
@@ -663,18 +693,21 @@ class TestSession:
                 had_output = False
                 chosen = self.choose()
                 if isinstance(chosen, FakeGPS):
-                    if chosen.exhausted and (
-                                    time.time() - chosen.exhausted > CLOSE_DELAY) and chosen.byname in self.fakegpslist:
+                    if (chosen.exhausted
+                            and (time.time() - chosen.exhausted > CLOSE_DELAY)
+                            and chosen.byname in self.fakegpslist):
                         self.gps_remove(chosen.byname)
-                        self.progress("gpsfake: GPS %s removed (timeout)\n" % chosen.byname)
+                        self.progress("gpsfake: GPS %s removed (timeout)\n"
+                                      % chosen.byname)
                     elif not chosen.go_predicate(chosen.index, chosen):
                         if chosen.exhausted == 0:
                             chosen.exhausted = time.time()
-                            self.progress("gpsfake: GPS %s ran out of input\n" % chosen.byname)
+                            self.progress("gpsfake: GPS %s ran out of input\n"
+                                          % chosen.byname)
                             chosen.write("# EOF\n")
                     else:
                         chosen.feed()
-                elif isinstance(chosen, gps.gps):
+                elif isinstance(chosen, gps.GPS):
                     if chosen.enqueued:
                         chosen.send(chosen.enqueued)
                         chosen.enqueued = ""
@@ -687,10 +720,17 @@ class TestSession:
                             # if this were the only logic for device closing
                             # and we could get rid of CLOSE_DELAY, but this
                             # sometimes fails on binary logfiles.
-                            if chosen.data["class"] == "DEVICE" and chosen.data["activated"] == 0 and chosen.data[
-                                "path"] in self.fakegpslist:
+                            condition = bool(
+                                chosen.data["class"] == "DEVICE"
+                                and chosen.data["activated"] == 0
+                                and chosen.data["path"] in self.fakegpslist
+                            )
+                            if condition:
                                 self.gps_remove(chosen.data["path"])
-                                self.progress("gpsfake: GPS %s removed (notification)\n" % chosen.data["path"])
+                                self.progress(
+                                    "gpsfake: GPS %s removed (notification)\n"
+                                    % chosen.data["path"]
+                                )
                         had_output = True
                 else:
                     raise TestSessionError("test object of unknown type")
@@ -706,32 +746,32 @@ class TestSession:
     # in the class init method.
 
     def append(self, obj):
-        "Add a producer or consumer to the object list."
+        """Add a producer or consumer to the object list."""
         if self.threadlock:
             self.threadlock.acquire()
         self.runqueue.append(obj)
         if isinstance(obj, FakeGPS):
             self.writers += 1
-        elif isinstance(obj, gps.gps):
+        elif isinstance(obj, gps.GPS):
             self.readers += 1
         if self.threadlock:
             self.threadlock.release()
 
     def remove(self, obj):
-        "Remove a producer or consumer from the object list."
+        """Remove a producer or consumer from the object list."""
         if self.threadlock:
             self.threadlock.acquire()
         self.runqueue.remove(obj)
         if isinstance(obj, FakeGPS):
             self.writers -= 1
-        elif isinstance(obj, gps.gps):
+        elif isinstance(obj, gps.GPS):
             self.readers -= 1
         self.index = min(len(self.runqueue) - 1, self.index)
         if self.threadlock:
             self.threadlock.release()
 
     def choose(self):
-        "Atomically get the next object scheduled to do something."
+        """Atomically get the next object scheduled to do something."""
         if self.threadlock:
             self.threadlock.acquire()
         chosen = self.index
@@ -742,7 +782,7 @@ class TestSession:
         return self.runqueue[chosen]
 
     def initialize(self, client, commands):
-        "Arrange for client to ship specified commands when it goes active."
+        """Arrange for client to ship specified commands when it goes active."""
         client.enqueued = ""
         if not self.threadlock:
             client.send(commands)

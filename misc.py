@@ -21,7 +21,7 @@ MPS_TO_KNOTS = 1.9438445  # Meters per second to knots
 # EarthDistance code swiped from Kismet and corrected
 
 
-def CalcRad(lat):
+def calc_rad(lat):
     """Radius of curvature in meters at specified latitude."""
     a = 6378.137
     e2 = 0.081082 * 0.081082
@@ -47,15 +47,15 @@ def CalcRad(lat):
     return r
 
 
-def EarthDistance(lat1, lon1, lat2, lon2):
+def earth_distance(lat1, lon1, lat2, lon2):
     """Distance in meters between two points specified in degrees."""
-    x1 = CalcRad(lat1) * cos(radians(lon1)) * sin(radians(90 - lat1))
-    x2 = CalcRad(lat2) * cos(radians(lon2)) * sin(radians(90 - lat2))
-    y1 = CalcRad(lat1) * sin(radians(lon1)) * sin(radians(90 - lat1))
-    y2 = CalcRad(lat2) * sin(radians(lon2)) * sin(radians(90 - lat2))
-    z1 = CalcRad(lat1) * cos(radians(90 - lat1))
-    z2 = CalcRad(lat2) * cos(radians(90 - lat2))
-    a = (x1 * x2 + y1 * y2 + z1 * z2) / pow(CalcRad((lat1 + lat2) / 2), 2)
+    x1 = calc_rad(lat1) * cos(radians(lon1)) * sin(radians(90 - lat1))
+    x2 = calc_rad(lat2) * cos(radians(lon2)) * sin(radians(90 - lat2))
+    y1 = calc_rad(lat1) * sin(radians(lon1)) * sin(radians(90 - lat1))
+    y2 = calc_rad(lat2) * sin(radians(lon2)) * sin(radians(90 - lat2))
+    z1 = calc_rad(lat1) * cos(radians(90 - lat1))
+    z2 = calc_rad(lat2) * cos(radians(90 - lat2))
+    a = (x1 * x2 + y1 * y2 + z1 * z2) / pow(calc_rad((lat1 + lat2) / 2), 2)
     # a should be in [1, -1] but can sometimes fall outside it by
     # a very small amount due to rounding errors in the preceding
     # calculations (this is prone to happen when the argument points
@@ -64,13 +64,13 @@ def EarthDistance(lat1, lon1, lat2, lon2):
         a = 1
     elif a < -1:
         a = -1
-    return CalcRad((lat1 + lat2) / 2) * acos(a)
+    return calc_rad((lat1 + lat2) / 2) * acos(a)
 
 
-def MeterOffset(lat1, lon1, lat2, lon2):
+def meter_offset(lat1, lon1, lat2, lon2):
     """Return offset in meters of second arg from first."""
-    dx = EarthDistance(lat1, lon1, lat1, lon2)
-    dy = EarthDistance(lat1, lon1, lat2, lon1)
+    dx = earth_distance(lat1, lon1, lat1, lon2)
+    dy = earth_distance(lat1, lon1, lat2, lon1)
     if lat1 < lat2:
         dy *= -1
     if lon1 < lon2:
@@ -97,7 +97,8 @@ def isotime(s):
             msec = "0"
         # Note: no leap-second correction!
         return calendar.timegm(
-            time.strptime(date, "%Y-%m-%dT%H:%M:%S")) + float("0." + msec)
+            time.strptime(date, "%Y-%m-%dT%H:%M:%S")
+        ) + float("0." + msec)
     else:
         raise TypeError
 
