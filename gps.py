@@ -119,7 +119,7 @@ class GPSData:
             )
 
     def __init__(self):
-        # Initialize all data members 
+        # Initialize all data members
         self.online = 0  # NZ if GPS on, zero if not
 
         self.valid = 0
@@ -153,23 +153,23 @@ class GPSData:
         if isnan(self.fix.altitude):
             st += "Altitude: ?\n"
         else:
-            st += "Altitude: %f\n" % (self.fix.altitude)
+            st += "Altitude: %f\n" % self.fix.altitude
         if isnan(self.fix.speed):
             st += "Speed:    ?\n"
         else:
-            st += "Speed:    %f\n" % (self.fix.speed)
+            st += "Speed:    %f\n" % self.fix.speed
         if isnan(self.fix.track):
             st += "Track:    ?\n"
         else:
-            st += "Track:    %f\n" % (self.fix.track)
-        st += "Status:   STATUS_%s\n" % (
-            "NO_FIX", "FIX", "DGPS_FIX")[self.status]
-        st += "Mode:     MODE_%s\n" % (
-            "ZERO", "NO_FIX", "2D", "3D")[self.fix.mode]
-        st += "Quality:  %d p=%2.2f h=%2.2f v=%2.2f t=%2.2f g=%2.2f\n" % (
-              self.satellites_used,
-              self.pdop, self.hdop, self.vdop, self.tdop, self.gdop,
-        )
+            st += "Track:    %f\n" % self.fix.track
+        st += "Status:   STATUS_%s\n" % ("NO_FIX",
+                                         "FIX",
+                                         "DGPS_FIX")[self.status]
+        st += "Mode:     MODE_%s\n" % ("ZERO",
+                                       "NO_FIX",
+                                       "2D",
+                                       "3D")[self.fix.mode]
+        st += "Quality:  %d p=%2.2f h=%2.2f v=%2.2f t=%2.2f g=%2.2f\n" % (self.satellites_used, self.pdop, self.hdop, self.vdop, self.tdop, self.gdop)
         st += "Y: %s satellites in view:\n" % len(self.satellites)
         for sat in self.satellites:
             st += "    %r\n" % sat
@@ -292,7 +292,7 @@ class GPS(GPSCommon, GPSData, GPSJSON):
             self.utc = default("time", None, TIME_SET)
             if self.utc is not None:
                 # Time can be either Unix time as a float or an ISO8601 string
-                if type(self.fix.time) == type(0.0):
+                if isinstance(self.fix.time, type(0.0)):
                     self.fix.time = self.utc
                 else:
                     self.fix.time = isotime(self.utc.encode("ascii"))
@@ -312,20 +312,25 @@ class GPS(GPSCommon, GPSData, GPSJSON):
             self.fix.mode = default("mode", 0, MODE_SET)
         elif self.data.get("class") == "SKY":
             for attrp in ("x", "y", "v", "h", "p", "g"):
-                setattr(self,
-                        attrp + "dop",
-                        default(attrp + "dop", NaN, DOP_SET))
-            if "satellites" in self.data.keys():
+                setattr(
+                    self,
+                    attrp +
+                    "dop",
+                    default(
+                        attrp +
+                        "dop",
+                        NaN,
+                        DOP_SET))
+            if "satellites" in list(self.data.keys()):
                 self.satellites = []
                 for sat in self.data['satellites']:
                     self.satellites.append(
-                        GPS.Satellite(
+                        GPS.satellite(
                             PRN=sat['PRN'],
                             elevation=sat['el'],
                             azimuth=sat['az'],
                             ss=sat['ss'],
-                            used=sat['used'],
-                        ))
+                            used=sat['used']))
             self.satellites_used = 0
             for sat in self.satellites:
                 if sat.used:
@@ -371,15 +376,16 @@ class GPS(GPSCommon, GPSData, GPSJSON):
         else:  # flags & WATCH_ENABLE:
             if flags & WATCH_OLDSTYLE:
                 arg = 'w+'
-                if (flags & WATCH_NMEA):
+                if flags & WATCH_NMEA:
                     arg += 'r+'
                     return self.send(arg)
             else:
-                GPSJSON.stream(self, flags, devpath)
+                gpsjson.stream(self, flags, devpath)
 
 
 if __name__ == '__main__':
-    import getopt, sys
+    import getopt
+    import sys
 
     (options, arguments) = getopt.getopt(sys.argv[1:], "v")
     streaming = False
@@ -388,8 +394,7 @@ if __name__ == '__main__':
         if switch == '-v':
             verbose = True
     if len(arguments) > 2:
-        print
-        'Usage: gps.py [-v] [host [port]]'
+        print('Usage: gps.py [-v] [host [port]]')
         sys.exit(1)
 
     opts = {"verbose": verbose}
@@ -402,11 +407,9 @@ if __name__ == '__main__':
     session.stream(WATCH_ENABLE)
     try:
         for report in session:
-            print
-            report
+            print(report)
     except KeyboardInterrupt:
         # Avoid garble on ^C
-        print
-        ""
+        print("Cancelled by user")
 
 # gps.py ends here

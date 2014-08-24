@@ -1,3 +1,4 @@
+# coding=utf-8
 # This file is Copyright (c) 2010 by the GPSD project
 # BSD terms apply: see the file COPYING in the distribution root for details.
 """
@@ -67,11 +68,19 @@ To allow for adding and removing clients while the test is running,
 run in threaded mode by calling the start() method.  This simply calls
 the run method in a subthread, with locking of critical regions.
 """
-import os, sys, time, signal, pty, termios  # fcntl, array, struct
-import threading, socket, select
-import gps
-# TODO: Need to fix this import!
-#import packet as sniffer
+import os
+import sys
+import time
+import signal
+import pty
+import termios  # fcntl, array, struct
+import threading
+import socket
+import select
+
+from . import gps
+from . import packet as sniffer
+
 
 # The two magic numbers below have to be derived from observation.  If
 # they're too high you'll slow the tests down a lot.  If they're too low
@@ -135,7 +144,7 @@ class TestLoad:
 
     def __init__(self, logfp, predump=False):
         self.sentences = []  # This is the interesting part
-        if type(logfp) == type(""):
+        if isinstance(logfp, type("")):
             logfp = open(logfp, "r")
         self.name = logfp.name
         self.logfp = logfp
@@ -150,7 +159,7 @@ class TestLoad:
         logfp = open(logfp.name)
         # Grab the packets in the normal way
         getter = sniffer.new()
-        #gps.packet.register_report(reporter)
+        # gps.packet.register_report(reporter)
         type_latch = None
         commentlen = 0
         while True:
@@ -190,7 +199,9 @@ class TestLoad:
                     if packet.startswith("#"):
                         packet = packet[1:]
                     try:
-                        (_dummy, self.delimiter, delay) = packet.strip().split()
+                        (_dummy,
+                         self.delimiter,
+                         delay) = packet.strip().split()
                         self.delay = float(delay)
                     except ValueError:
                         raise TestLoadError("bad Delay-Cookie line in %s" %
@@ -200,8 +211,7 @@ class TestLoad:
                 if type_latch is None:
                     type_latch = ptype
                 if self.predump:
-                    print
-                    repr(packet)
+                    print(repr(packet))
                 if not packet:
                     raise TestLoadError("zero-length packet from %s" %
                                         self.name)
@@ -293,15 +303,20 @@ class FakePTY(FakeGPS):
         }
         (self.fd, self.slave_fd) = pty.openpty()
         self.byname = os.ttyname(self.slave_fd)
-        (iflag, oflag, cflag, lflag,
-         ispeed, ospeed, cc) = termios.tcgetattr(self.slave_fd)
+        (iflag,
+         oflag,
+         cflag,
+         lflag,
+         ispeed,
+         ospeed,
+         cc) = termios.tcgetattr(self.slave_fd)
         cc[termios.VMIN] = 1
         cflag &= ~(termios.PARENB | termios.PARODD | termios.CRTSCTS)
         cflag |= termios.CREAD | termios.CLOCAL
         iflag = oflag = lflag = 0
         iflag &= ~ (termios.PARMRK | termios.INPCK)
-        cflag &= ~ (termios.CSIZE | termios.CSTOPB
-                    | termios.PARENB | termios.PARODD)
+        cflag &= ~ (
+            termios.CSIZE | termios.CSTOPB | termios.PARENB | termios.PARODD)
         if databits == 7:
             cflag |= termios.CS7
         else:
@@ -321,20 +336,20 @@ class FakePTY(FakeGPS):
                               [iflag, oflag, cflag, lflag, ispeed, ospeed, cc])
         except termios.error:
             raise TestLoadError(
-                "error attempting to set serial mode to %s %s%s%s"
-                % (speed, databits, parity, stopbits))
+                "error attempting to set serial mode to %s %s%s%s" %
+                (speed, databits, parity, stopbits))
 
     def read(self):
         """Discard control strings written by gpsd."""
         # A tcflush implementation works on Linux but fails on OpenBSD 4.
         termios.tcflush(self.fd, termios.TCIFLUSH)
         # Alas, the FIONREAD version also works on Linux and fails on OpenBSD.
-        #try:
+        # try:
         #    buf = array.array('i', [0])
         #    fcntl.ioctl(self.master_fd, termios.FIONREAD, buf, True)
         #    n = struct.unpack('i', buf)[0]
         #    os.read(self.master_fd, n)
-        #except IOError:
+        # except IOError:
         #    pass
 
     def write(self, line):
@@ -365,7 +380,8 @@ class FakeTCP(FakeGPS):
 
     def read(self):
         """Handle connection requests and data."""
-        readable, _writable, _errored = select.select(self.readables, [], [], 0)
+        readable, _writable, _errored = select.select(
+            self.readables, [], [], 0)
         for s in readable:
             if s == self.dispatcher:  # Connection request
                 client_socket, _address = s.accept()
@@ -429,6 +445,7 @@ class DaemonInstance:
     def __init__(self, control_socket=None):
         self.sockfile = None
         self.pid = None
+        self.spawncmd = None
         self.tmpdir = os.environ.get('TMPDIR', '/tmp')
         if control_socket:
             self.control_socket = control_socket
@@ -693,17 +710,21 @@ class TestSession:
                 had_output = False
                 chosen = self.choose()
                 if isinstance(chosen, FakeGPS):
-                    if (chosen.exhausted
-                            and (time.time() - chosen.exhausted > CLOSE_DELAY)
-                            and chosen.byname in self.fakegpslist):
-                        self.gps_remove(chosen.byname)
-                        self.progress("gpsfake: GPS %s removed (timeout)\n"
-                                      % chosen.byname)
+                    if chosen.exhausted and (time.time() - chosen.exhausted > CLOSE_DELAY):
+                        if chosen.byname in self.fakegpslist:
+                            self.gps_remove(chosen.byname)
+                            self.progress("gpsfake: GPS %s removed (timeout)\n" % chosen.byname)
+                        elif not chosen.go_predicate(chosen.index, chosen):
+                            if chosen.exhausted == 0:
+                                chosen.exhausted = time.time()
+                                self.progress("gpsfake: GPS %s ran out of input\n" % chosen.byname)
+                                chosen.write("# EOF\n")
+                        else:
+                            chosen.feed()
                     elif not chosen.go_predicate(chosen.index, chosen):
                         if chosen.exhausted == 0:
                             chosen.exhausted = time.time()
-                            self.progress("gpsfake: GPS %s ran out of input\n"
-                                          % chosen.byname)
+                            self.progress("gpsfake: GPS %s ran out of input\n" % chosen.byname)
                             chosen.write("# EOF\n")
                     else:
                         chosen.feed()
@@ -720,17 +741,11 @@ class TestSession:
                             # if this were the only logic for device closing
                             # and we could get rid of CLOSE_DELAY, but this
                             # sometimes fails on binary logfiles.
-                            condition = bool(
-                                chosen.data["class"] == "DEVICE"
-                                and chosen.data["activated"] == 0
-                                and chosen.data["path"] in self.fakegpslist
-                            )
-                            if condition:
+                            if chosen.data["class"] == "DEVICE" and chosen.data["activated"] == 0 and chosen.data["path"] in self.fakegpslist:
                                 self.gps_remove(chosen.data["path"])
                                 self.progress(
-                                    "gpsfake: GPS %s removed (notification)\n"
-                                    % chosen.data["path"]
-                                )
+                                    "gpsfake: GPS %s removed (notification)\n" %
+                                    chosen.data["path"])
                         had_output = True
                 else:
                     raise TestSessionError("test object of unknown type")
@@ -746,7 +761,8 @@ class TestSession:
     # in the class init method.
 
     def append(self, obj):
-        """Add a producer or consumer to the object list."""
+        """Add a producer or consumer to the object list.
+        """
         if self.threadlock:
             self.threadlock.acquire()
         self.runqueue.append(obj)
@@ -758,7 +774,8 @@ class TestSession:
             self.threadlock.release()
 
     def remove(self, obj):
-        """Remove a producer or consumer from the object list."""
+        """Remove a producer or consumer from the object list.
+        """
         if self.threadlock:
             self.threadlock.acquire()
         self.runqueue.remove(obj)

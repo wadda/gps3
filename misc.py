@@ -1,3 +1,4 @@
+# coding=utf-8
 # misc.py - miscellaneous geodesy and time functions
 #
 # This file is Copyright (c) 2010 by the GPSD project

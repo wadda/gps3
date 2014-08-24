@@ -1,3 +1,4 @@
+# coding=utf-8
 # This file is Copyright (c) 2010 by the GPSD project
 # BSD terms apply: see the file COPYING in the distribution root for details.
 #
@@ -27,8 +28,8 @@ class JSONError(Exception):
         self.explanation = explanation
 
 
-class gpscommon:
-    "Isolate socket handling and buffering from the protocol interpretation."
+class GPSCommon:
+    """Isolate socket handling and buffering from the protocol interpretation."""
 
     def __init__(self, host="127.0.0.1", port=GPSD_PORT, verbose=0):
         self.sock = None  # in case we blow up in connect
@@ -83,7 +84,7 @@ class gpscommon:
         self.close()
 
     def waiting(self, timeout=0):
-        "Return True if data is ready for the client."
+        """Return True if data is ready for the client."""
         if self.linebuffer:
             return True
         (winput, _woutput, _wexceptions) = select.select((self.sock,), (), (), timeout)
@@ -155,23 +156,26 @@ WATCH_DEVICE = 0x000800  # watch specific device
 class GPSJSON:
     """Basic JSON decoding."""
 
+    def __init__(self):
+        self.data = None
+
     def __iter__(self):
         return self
 
     def unpack(self, buf):
         try:
-            self.data = dictwrapper(json.loads(buf.strip(), encoding="ascii"))
-        except ValueError, e:
-            raise json_error(buf, e.args[0])
+            self.data = DictWrapper(json.loads(buf.strip(), encoding="ascii"))
+        except ValueError as e:
+            raise JSONError(buf, e.args[0])
         # Should be done for any other array-valued subobjects, too.
         # This particular logic can fire on SKY or RTCM2 objects.
         if hasattr(self.data, "satellites"):
-            self.data.satellites = list(map(dictwrapper, self.data.satellites))
+            self.data.satellites = list(map(DictWrapper, self.data.satellites))
         # The object DEVICES can have a sub-object "devices"
         # This may clash with 'device' a key in the SKY object
         # I don't know how this pans out, yet.
         # if hasattr(self.data, "DEVICES"):
-        #     self.data.device = list(map(dictwrapper, self.data.device))
+        #     self.data.device = list(map(DictWrapper, self.data.device))
             self.data.satellites = map(DictWrapper, self.data.satellites)
 
     def stream(self, flags=0, devpath=None):
@@ -241,7 +245,7 @@ class DictWrapper:
         return key in self.__dict__
 
     def __str__(self):
-        return "<dictwrapper: " + str(self.__dict__) + ">"
+        return "<DictWrapper: " + str(self.__dict__) + ">"
 
     __repr__ = __str__
 
