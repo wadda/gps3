@@ -9,36 +9,31 @@ import select
 
 
 if sys.hexversion >= 0x2060000:
-    import json  # For Python 2.6
+    import json			# For Python 2.6
 else:
     import simplejson as json  # For Python 2.4 and 2.5
 
 GPSD_PORT = "2947"
 
 
-class JSONError(Exception):
-    """banana
-
-
-    """
+class JSONerror(Exception):
 
     def __init__(self, data, explanation):
-        Exception.__init__(self)
+        exceptions.Exception.__init__(self)
         self.data = data
         self.explanation = explanation
 
 
-class GPSCommon:
+class ClientCommon:
+
     """Isolate socket handling and buffering from the protocol interpretation."""
 
     def __init__(self, host="127.0.0.1", port=GPSD_PORT, verbose=0):
-        self.sock = None  # in case we blow up in connect
+        self.sock = None        # in case we blow up in connect
         self.linebuffer = ""
         self.verbose = verbose
         if host is not None:
             self.connect(host, port)
-        self.response = None
-        self.received = None
 
     def connect(self, host, port):
         """Connect to a host on a given port.
@@ -54,26 +49,24 @@ class GPSCommon:
             try:
                 port = int(port)
             except ValueError:
-                raise OSError("nonnumeric port")
+                raise socket.error("nonnumeric port")
         if self.verbose:
-            sys.stderr.write('connect:', host, port)
+            print('connect:', (host, port))
         msg = "getaddrinfo returns an empty list"
         self.sock = None
         for res in socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM):
             af, socktype, proto, _canonname, sa = res
             try:
                 self.sock = socket.socket(af, socktype, proto)
-                if self.verbose:
-                    sys.stderr.write('connect:', host, port)
+                # if self.verbose: print 'connect:', (host, port)
                 self.sock.connect(sa)
-            except OSError as msg:
-                if self.verbose:
-                    sys.stderr.write('connect fail:', host, port)
+            except socket.error as msg:
+                # if self.verbose: print 'connect fail:', (host, port)
                 self.close()
                 continue
             break
         if not self.sock:
-            raise OSError(msg)
+            raise socket.error(msg)
 
     def close(self):
         if self.sock:
@@ -83,37 +76,30 @@ class GPSCommon:
     def __del__(self):
         self.close()
 
-    def waiting(self, timeout=0):
-        """Return True if data is ready for the client."""
-        if self.linebuffer:
-            return True
-        (winput, _woutput, _wexceptions) = select.select((self.sock,), (), (), timeout)
-        return winput != []
-
     def read(self):
         """Wait for and read data being streamed from the daemon."""
         if self.verbose:
-            sys.stderr.write("poll: reading from daemon...\n")
+            print("read in client.read...\n")
         eol = self.linebuffer.find('\n')
         if eol == -1:
             frag = self.sock.recv(4096)
-            self.linebuffer += frag
+            self.linebuffer += frag.decode('utf-8')
             if self.verbose:
-                sys.stderr.write("poll: read complete.\n")
-            if not self.linebuffer:
+                print("eol == -1 in client.read...\n")
+            if not self.linebuffer: # Does this ever happen?
                 if self.verbose:
-                    sys.stderr.write("poll: returning -1.\n")
+                    print("read fail (-1) in client.read...\n", file=sys.stderr)
                 # Read failed
                 return -1
             eol = self.linebuffer.find('\n')
             if eol == -1:
                 if self.verbose:
-                    sys.stderr.write("poll: returning 0.\n")
+                    print("reading only framgent in client.read (0)...\n", file=sys.stderr)
                 # Read succeeded, but only got a fragment
                 return 0
         else:
             if self.verbose:
-                sys.stderr.write("poll: fetching from buffer.\n")
+                print("I have no idea why this is here in client.read...", file=sys.stderr)
 
         # We got a line
         eol += 1
@@ -124,7 +110,7 @@ class GPSCommon:
         if not self.response:
             return -1
         if self.verbose:
-            sys.stderr.write("poll: data is %s\n" % repr(self.response))
+            print("The read data is: %s\n" % repr(self.response))
         self.received = time.time()
         # We got a \n-terminated line
         return len(self.response)
@@ -137,8 +123,7 @@ class GPSCommon:
         """Ship commands to the daemon."""
         if not commands.endswith("\n"):
             commands += "\n"
-        self.sock.send(commands)
-
+        self.sock.send(bytes(source=commands, encoding='utf-8'))
 
 WATCH_ENABLE = 0x000001  # enable streaming
 WATCH_DISABLE = 0x000002  # disable watching
@@ -153,11 +138,9 @@ WATCH_PPS = 0x002000  # enable PPS in raw/NMEA
 WATCH_DEVICE = 0x000800  # watch specific device
 
 
-class GPSJSON:
-    """Basic JSON decoding."""
+class GpsJson:
 
-    def __init__(self):
-        self.data = None
+    """Basic JSON decoding."""
 
     def __iter__(self):
         return self
@@ -166,20 +149,14 @@ class GPSJSON:
         try:
             self.data = DictWrapper(json.loads(buf.strip(), encoding="ascii"))
         except ValueError as e:
-            raise JSONError(buf, e.args[0])
+            raise JSONerror(buf, e.args[0])
         # Should be done for any other array-valued subobjects, too.
         # This particular logic can fire on SKY or RTCM2 objects.
         if hasattr(self.data, "satellites"):
             self.data.satellites = list(map(DictWrapper, self.data.satellites))
-        # The object DEVICES can have a sub-object "devices"
-        # This may clash with 'device' a key in the SKY object
-        # I don't know how this pans out, yet.
-        # if hasattr(self.data, "DEVICES"):
-        #     self.data.device = list(map(DictWrapper, self.data.device))
-            self.data.satellites = map(DictWrapper, self.data.satellites)
 
     def stream(self, flags=0, devpath=None):
-        """Control streaming reports from the daemon."""
+        """Control streaming reports from the daemon,"""
         if flags & WATCH_DISABLE:
             arg = '?WATCH={"enable":false'
             if flags & WATCH_JSON:
@@ -222,7 +199,8 @@ class GPSJSON:
 
 
 class DictWrapper:
-    """Wrapper that yields both class and dictionary behavior."""
+
+    """Wrapper that yields both class and dictionary behavior,"""
 
     def __init__(self, ddict):
         self.__dict__ = ddict
@@ -231,7 +209,7 @@ class DictWrapper:
         return self.__dict__.get(k, d)
 
     def keys(self):
-        return self.__dict__.keys()
+        return list(self.__dict__.keys())
 
     def __getitem__(self, key):
         """Emulate dictionary, for new-style interface."""
@@ -246,7 +224,6 @@ class DictWrapper:
 
     def __str__(self):
         return "<DictWrapper: " + str(self.__dict__) + ">"
-
     __repr__ = __str__
 
 #
