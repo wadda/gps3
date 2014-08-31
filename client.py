@@ -19,7 +19,6 @@ WATCH_DEVICE = 0x000800  # watch specific device
 
 class ClientCommon:
     """Isolate socket handling and buffering from the protocol interpretation."""
-
     def __init__(self, host=HOST, port=GPSD_PORT, verbose=0):
         self.sock = None  # in case we blow up in connect
         self.response = None  # because two Nones is the start of
