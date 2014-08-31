@@ -1,12 +1,9 @@
 # coding=utf-8
-#
-#
-#
 import socket
 
-
-GPSD_PORT = "2947"
+GPSD_PORT = 2947
 HOST = "127.0.0.1"
+
 WATCH_ENABLE = 0x000001  # enable streaming
 WATCH_DISABLE = 0x000002  # disable watching
 WATCH_JSON = 0x000010  # JSON output
@@ -23,10 +20,9 @@ WATCH_DEVICE = 0x000800  # watch specific device
 class ClientCommon:
     """Isolate socket handling and buffering from the protocol interpretation."""
 
-    def __init__(self, host=HOST, port=GPSD_PORT, verbose=1):
+    def __init__(self, host=HOST, port=GPSD_PORT, verbose=0):
         self.sock = None  # in case we blow up in connect
-        self.linebuffer = ""
-        self.response = None
+        self.response = None  # because two Nones is the start of
         self.verbose = verbose
         if host is not None:
             self.connect(host, port)
@@ -46,14 +42,14 @@ class ClientCommon:
                 self.close()
                 continue
             break
-        if not self.sock:
+        if not self.sock:  # Does this ever happen?
             print('_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-', file=sys.stderr)
             print('Something is really stuffed in the sockets', file=sys.stderr)
             print('_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-', file=sys.stderr)
             sys.exit(1)
 
     def stream(self, flags=0, devpath=None):
-        """Control streaming reports from the daemon,"""
+        """Control stream from the daemon, spigot and content"""
         if flags & WATCH_DISABLE:
             arg = '?WATCH={"enable":false'
             if flags & WATCH_JSON:
@@ -96,54 +92,29 @@ class ClientCommon:
 
     def send(self, commands):
         """Ship commands to the daemon."""
-        # if not commands.endswith("\n"):
-        # commands += "\n"
         self.sock.send(bytes(commands, encoding='utf-8'))
 
     def read(self):
-        """Wait for and read data being streamed from the daemon."""
+        """Read data streamed from the daemon."""
         if self.verbose:
-            print("\nreading data being streamed from the daemon.\n")
-        eol = self.linebuffer.find('\n')
-        if eol == -1:
-            frag = self.sock.recv(4096)
-            self.linebuffer += frag.decode('utf-8')
-            if self.verbose:
-                print("added this blob of data...\n")
-            if not self.linebuffer:  # Does this ever happen?
-                if self.verbose:
-                    print("read fail (-1) in client.read...\n", file=sys.stderr)
-                return -1  # Read failed
+            print("\nreading JSON Object streamed from the daemon.\n")
+        golden_fleece = self.sock.recv(4096)
 
-            eol = self.linebuffer.find('\n')
-            if eol == -1:
-                if self.verbose:
-                    print("reading only framgent in client.read (0)...\n", file=sys.stderr)
-                return 0  # Read succeeded, but only got a fragment
+        if golden_fleece:
+            print('The golden fleece is type: ', type(golden_fleece))
+            print(golden_fleece)
+            return golden_fleece
+
         else:
-            if self.verbose:
-                print("I have no GPS FIX is where this comes in, in client.read...", file=sys.stderr)
-
-        # We got a line
-        eol += 1
-        self.response = self.linebuffer[:eol]  # Split full linebuffer into response
-        self.linebuffer = self.linebuffer[eol:]  # remaining linebuffer becomes new head
-
-        # Can happen if daemon terminates while we're reading.
-        if not self.response:
-            print('gpsd terminated while reading', file=sys.stderr)
-            return -1
-
-        # We got a \n-terminated line
-        return
+            print('gpsd terminated while reading, or something else.', file=sys.stderr)
+            return -1  # Test, test, 1,2,3  Is this even on?
 
     def __iter__(self):
         return self
 
-    @property
     def __next__(self):
         if self.read() == -1:
-            raise StopIteration
+            raise StopIteration  # TODO: error recovery
         if hasattr(self, "data"):
             return self.data  # What's the deal with data and response?
 
@@ -153,7 +124,7 @@ class ClientCommon:
 
     def close(self):
         if self.sock:
-            self.sock.shutdown(flag == SHUT_RDWR)
+            # self.sock.shutdown(flag == SHUT_RDWR) # TODO: syntax and efficacy
             self.sock.close()
         self.sock = None
 
@@ -180,14 +151,14 @@ if __name__ == '__main__':
 
     session = ClientCommon(**opts)
     session.stream(WATCH_JSON)
+
     try:
-        for report in session:
-            print(report)
+        for gpsdata in session:
+            print(None)  # Help Me, Mr. Wizard.
     except KeyboardInterrupt:
         # Avoid garble on ^C
         print("Terminated by user")
 #
 # Someday a cleaner Python interface using this machinery will live here
 #
-
 # End
