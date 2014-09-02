@@ -150,6 +150,7 @@ if __name__ == '__main__':
             print(session.response)
     except KeyboardInterrupt:
         # Avoid garble on ^C
+        session.close()
         print("Terminated by user")
 #
 # Someday a cleaner Python interface will live here
