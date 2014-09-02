@@ -17,11 +17,12 @@ WATCH_PPS = 0x002000  # enable PPS in raw/NMEA
 WATCH_DEVICE = 0x000800  # watch specific device
 
 
-class ClientCommon:
+class CommonClient():
     """Isolate socket handling and buffering from the protocol interpretation."""
-    def __init__(self, host=HOST, port=GPSD_PORT, verbose=0):
+
+    def __init__(self, host=HOST, port=GPSD_PORT, verbose=False):
         self.sock = None  # in case we blow up in connect
-        self.response = None  # because two Nones is the start of
+        self.response = None  # because two Nones is the start of something great
         self.verbose = verbose
         if host is not None:
             self.connect(host, port)
@@ -93,17 +94,16 @@ class ClientCommon:
         """Ship commands to the daemon."""
         self.sock.send(bytes(commands, encoding='utf-8'))
 
+    @property
     def read(self):
         """Read data streamed from the daemon."""
         if self.verbose:
-            print("\nreading JSON Object streamed from the daemon.\n")
+            print("\nreading JSON Object from the daemon.\n")
         golden_fleece = self.sock.recv(4096)
 
         if golden_fleece:
-            print('The golden fleece is type: ', type(golden_fleece))
-            print(golden_fleece)
-            return golden_fleece
-
+            self.response = golden_fleece
+            return
         else:
             print('gpsd terminated while reading, or something else.', file=sys.stderr)
             return -1  # Test, test, 1,2,3  Is this even on?
@@ -112,14 +112,8 @@ class ClientCommon:
         return self
 
     def __next__(self):
-        if self.read() == -1:
-            raise StopIteration  # TODO: error recovery
-        if hasattr(self, "data"):
-            return self.data  # What's the deal with data and response?
-
-    def data(self):
-        """Return the client data buffer."""
-        return self.response
+        if self.read == -1:
+            raise StopIteration  # TODO: error recovery, tell why.
 
     def close(self):
         if self.sock:
@@ -148,16 +142,16 @@ if __name__ == '__main__':
     if len(arguments) > 1:
         opts["port"] = arguments[1]
 
-    session = ClientCommon(**opts)
+    session = CommonClient(**opts)
     session.stream(WATCH_JSON)
 
     try:
-        for gpsdata in session:
-            print(None)  # Help Me, Mr. Wizard.
+        for gpsddata in session:
+            print(session.response)
     except KeyboardInterrupt:
         # Avoid garble on ^C
         print("Terminated by user")
 #
-# Someday a cleaner Python interface using this machinery will live here
+# Someday a cleaner Python interface will live here
 #
 # End
