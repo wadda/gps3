@@ -1,5 +1,6 @@
 # coding=utf-8
 import socket
+import select
 
 GPSD_PORT = 2947
 HOST = "127.0.0.1"
@@ -30,23 +31,25 @@ class CommonClient():
     def connect(self, host, port):
         """Connect to a host on a given port.
         """
-        for lotta_stuff in socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM):
-            afamily, socktype, proto, _canonname, host_port = lotta_stuff
+        for alotta_stuff in socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM):
+            afamily, socktype, proto, _canonname, host_port = alotta_stuff
             try:
                 self.sock = socket.socket(afamily, socktype, proto)
                 self.sock.connect(host_port)
+                self.sock.setblocking(False)
+                # self.sock.settimeout(1)
                 if self.verbose:
                     print('Conecting to gpsd on', host_port)
+                    # self.stream(WATCH_JSON)
             except OSError:
                 print('connect fail:', host, port, file=sys.stderr)
                 self.close()
                 continue
             break
         if not self.sock:  # Does this ever happen?
-            print('_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-', file=sys.stderr)
-            print('Something is really stuffed in the sockets', file=sys.stderr)
-            print('_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-^-_-', file=sys.stderr)
-            sys.exit(1)
+            print(' Something is really stuffed in the sockets; possibly no gpsd ', file=sys.stderr)
+            # sys.exit(1)
+            return
 
     def stream(self, flags=0, devpath=None):
         """Control stream from the daemon, spigot and content"""
@@ -95,29 +98,28 @@ class CommonClient():
         self.sock.send(bytes(commands, encoding='utf-8'))
 
     @property
-    def read(self):
-        """Read data streamed from the daemon."""
-        if self.verbose:
-            print("\nreading JSON Object from the daemon.\n")
-        golden_fleece = self.sock.recv(4096)
-
-        if golden_fleece:
-            self.response = golden_fleece
+    def ready(self, timeout=60):
+        "Return last read unless new data is ready for the client."
+        try:
+            (waitin, _waitout, _waiterror) = select.select((self.sock,), (), (), timeout)
+            if not waitin:
+                assert isinstance(self.response, object)
+                return self.response
+            else:
+                self.response = self.sock.recv(4096)
+        except OSError as e:
+            print('OSError is this: ', e)
             return
-        else:
-            print('gpsd terminated while reading, or something else.', file=sys.stderr)
-            return -1  # Test, test, 1,2,3  Is this even on?
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        if self.read == -1:
+        if self.ready == -1:
             raise StopIteration  # TODO: error recovery, tell why.
 
     def close(self):
         if self.sock:
-            # self.sock.shutdown(flag == SHUT_RDWR) # TODO: syntax and efficacy
             self.sock.close()
         self.sock = None
 
@@ -146,10 +148,10 @@ if __name__ == '__main__':
     session.stream(WATCH_JSON)
 
     try:
-        for gpsddata in session:
+        for gpsd_data in session:
             print(session.response)
+
     except KeyboardInterrupt:
-        # Avoid garble on ^C
         session.close()
         print("Terminated by user")
 #
