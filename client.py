@@ -98,7 +98,7 @@ class CommonClient():
         self.sock.send(bytes(commands, encoding='utf-8'))
 
     @property
-    def ready(self, timeout=60):
+    def ready(self, timeout=1):
         "Return last read unless new data is ready for the client."
         try:
             (waitin, _waitout, _waiterror) = select.select((self.sock,), (), (), timeout)
