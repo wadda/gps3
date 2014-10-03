@@ -1,4 +1,5 @@
 # coding=utf-8
+import json
 import socket
 import select
 
@@ -18,36 +19,37 @@ WATCH_PPS = 0x002000  # enable PPS in raw/NMEA
 WATCH_DEVICE = 0x000800  # watch specific device
 
 
-class CommonClient():
+class  SocketPuppet():
     """Isolate socket handling and buffering from the protocol interpretation."""
 
     def __init__(self, host=HOST, port=GPSD_PORT, verbose=False):
-        self.sock = None  # in case we blow up in connect
-        self.response = None  # because two Nones is the start of something great
+        self.streamSock = None  # in case we blow up in connect
+        self.results = None
         self.verbose = verbose
+
         if host is not None:
             self.connect(host, port)
 
     def connect(self, host, port):
-        """Connect to a host on a given port.
-        """
+        """Connect to a host on a given port."""
         for alotta_stuff in socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM):
             afamily, socktype, proto, _canonname, host_port = alotta_stuff
             try:
-                self.sock = socket.socket(afamily, socktype, proto)
-                self.sock.connect(host_port)
-                self.sock.setblocking(False)
-                # self.sock.settimeout(1)
+                self.streamSock = socket.socket(afamily, socktype, proto)
+                self.streamSock.connect(host_port)
+                self.streamSock.setblocking(False)
+                # self.streamSock.settimeout(1)
                 if self.verbose:
                     print('Conecting to gpsd on', host_port)
                     # self.stream(WATCH_JSON)
             except OSError:
-                print('connect fail:', host, port, file=sys.stderr)
+                print('connect fail:', host, port, file=sys.stderr)  # TODO: Make Python2.7 compliant
                 self.close()
                 continue
             break
-        if not self.sock:  # Does this ever happen?
-            print(' Something is really stuffed in the sockets; possibly no gpsd ', file=sys.stderr)
+        if not self.streamSock:  # Does this ever happen?
+            print(' Something is really stuffed in the sockets; possibly no gpsd ',
+                  file=sys.stderr)  # TODO: Make Python2.7 compliant
             # sys.exit(1)
             return
 
@@ -95,18 +97,22 @@ class CommonClient():
 
     def send(self, commands):
         """Ship commands to the daemon."""
-        self.sock.send(bytes(commands, encoding='utf-8'))
+        self.streamSock.send(bytes(commands, encoding='utf-8'))
 
     @property
-    def ready(self, timeout=1):
-        "Return last read unless new data is ready for the client."
+    def read(self, timeout=1):
+        """Return empty unless new data is ready for the client."""
         try:
-            (waitin, _waitout, _waiterror) = select.select((self.sock,), (), (), timeout)
+            (waitin, _waitout, _waiterror) = select.select((self.streamSock,), (), (), timeout)
             if not waitin:
-                assert isinstance(self.response, object)
-                return self.response
+                return
             else:
-                self.response = self.sock.recv(4096)
+                gpsd_response = self.streamSock.makefile()
+                line = gpsd_response.readline()
+                self.results = json.loads(line)
+                for key, value in self.results.items():
+                    print(key, ": ", value)
+
         except OSError as e:
             print('OSError is this: ', e)
             return
@@ -115,13 +121,13 @@ class CommonClient():
         return self
 
     def __next__(self):
-        if self.ready == -1:
-            raise StopIteration  # TODO: error recovery, tell why.
+        if self.read == -1:
+            raise StopIteration  # TODO: error recovery, tell why; e.g., no gpsd, no gps, etc.
 
     def close(self):
-        if self.sock:
-            self.sock.close()
-        self.sock = None
+        if self.streamSock:
+            self.streamSock.close()
+        self.streamSock = None
 
 
 if __name__ == '__main__':
@@ -144,16 +150,16 @@ if __name__ == '__main__':
     if len(arguments) > 1:
         opts["port"] = arguments[1]
 
-    session = CommonClient(**opts)
+    session =  SocketPuppet(**opts)
     session.stream(WATCH_JSON)
 
-    try:
-        for gpsd_data in session:
-            print(session.response)
+    for gpsdata in session:
+        try:
+            doitagain = True  # No, this is just a lazy hacked loop.
 
-    except KeyboardInterrupt:
-        session.close()
-        print("Terminated by user")
+        except KeyboardInterrupt:
+            session.close()
+            print("Terminated by user")
 #
 # Someday a cleaner Python interface will live here
 #
