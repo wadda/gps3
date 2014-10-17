@@ -68,30 +68,29 @@ class GPSDSocket():
         """Ship commands to the daemon."""  # session.send("?POLL;")  # TODO: remember why this is here.
         self.streamSock.send(bytes(commands, encoding='utf-8'))
 
-    @property
-    def readline(self, timeout=0):
-        """Return empty unless new data is ready for the client."""
+    def __iter__(self):
+        return self
+
+    def __next__(self, timeout=0):
+        """Return empty unless new data is ready for the client.  Will sit and wait for
+        :param timeout:
+        """
         try:
+            # poll.register(self.streamSock, POLLIN)  # Could be  faster than
             (waitin, _waitout, _waiterror) = select.select((self.streamSock,), (), (), timeout)
             if not waitin:
                 return
             else:
                 gpsd_response = self.streamSock.makefile()
-                a_line = gpsd_response.readline()
-                self.response = a_line
+                self.response = gpsd_response.readline()  # When does this fail?
 
             return self.response
 
         except OSError as error:
             print('readline OSError is this: ', error)
             return
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        if self.readline == -1:
-            raise StopIteration  # TODO: error recovery, tell why; e.g., no gpsd, no gps, etc.
+        # if waitin == -1:
+        #     raise StopIteration  # TODO: error recovery, tell why; e.g., no gpsd, no gps, etc.
 
     def close(self):
         if self.streamSock:
@@ -100,13 +99,15 @@ class GPSDSocket():
         self.streamSock = None
 
     def unpack(self, socket_response):
-        """Mostly a quick proof of concept"""  # TODO: find a place for this with less clumbsy sub-dictionary access
-
-        unpacked_json = json.loads(socket_response)
-
-        key = unpacked_json['class']
-
-        self.output[key] = unpacked_json
+        """Mostly a quick proof of concept
+        :param socket_response:
+        """  # TODO: find a place for this with less clumbsy sub-dictionary access
+        if socket_response is None:
+            return
+        else:
+            unpacked_json = json.loads(socket_response)
+            key = unpacked_json['class']
+            self.output[key] = unpacked_json
         try:
             print('Latitude: {0} Longitude: {1}'.format((self.output['TPV']['lat']), (self.output['TPV']['lon'])))
             print('Speed: {0} Course: {1}'.format((self.output['TPV']['speed']), (self.output['TPV']['track'])))
@@ -114,6 +115,7 @@ class GPSDSocket():
 
         except KeyError:
             print('If no TPV it\'s just this output-->', self.output)
+            # print('key error')
 
 
 if __name__ == '__main__':
@@ -180,8 +182,6 @@ if __name__ == '__main__':
         session.close()
         print("\nTerminated by user\nGood Bye.\n")
         sys.exit(1)
-
-
 #
 # Someday a cleaner Python interface will live here
 #
