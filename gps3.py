@@ -111,6 +111,7 @@ class GPSDSocket():
 
 
 class Fix(object):
+    """Data returned from GPSDSocket"""
 
     def __init__(self):
         version = ("class", "release", "rev", "proto_major", "proto_minor", "remote")
@@ -123,23 +124,20 @@ class Fix(object):
         self.SKY = {key: "n/a" for (key) in sky}
 
     def update(self, socket_response):
-        """Mostly a quick proof of concept
-        :param socket_response:
-        """  # TODO: find less clumbsy sub-dictionary access
-
+        """Mostly a quick proof of concept"""  # TODO: I don't know what, but something.
         try:
-            jsondata = socket_response
-            updated_json = json.loads(jsondata)
-            # if updated_json['class']:
-            #     key = updated_json['class']
-            self.TPV.update(updated_json) # TODO: Impliment 'key'.update
+            fresh_data = json.loads(socket_response)
+            # key = fresh_data['class']
 
-            print('Latitude: {0} Longitude: {1}'.format((self.TPV['lat']), (self.TPV['lon'])))
-            print('Time: {0} Altitude: {1}'.format((self.TPV['time']), (self.TPV['alt'])))
+            self.TPV.update(fresh_data)  # TODO: Impliment 'key'.update; setattr causes keyerror if key is missing.
+
+            print('Latitude: {0}  Longitude: {1}'.format((self.TPV['lat']), (self.TPV['lon'])))
+            print('Error estimate - epx:{0}, epy:{1}, epv:{2}'.format((self.TPV['epx']), (self.TPV['epy']), (self.TPV['epv'])))
             print('Speed: {0}  Course: {1}'.format((self.TPV['speed']), (self.TPV['track'])))
+            print('Altitude: {1}    Time: {0}'.format((self.TPV['time']), (self.TPV['alt'])))
 
-        except KeyError as error:
-            print('There was a KeyError with:', error)
+        except ValueError as error:  # TODO: Needs KeyError too
+            print('There was a ValueError with:', error)
 
             return
 
@@ -182,10 +180,10 @@ if __name__ == '__main__':
             if session.response is not None and args.protocol == 'human':
                 fix.update(session.response)  # Output for the humans, JSON module chokes on None
             else:
-                print('So far we have:', session.response)  # Other for other humans and Nones
+                print('So far we have:', session.response)  # Other output for other humans and Nones
 
             time.sleep(.5)  # A nap to keep from spinning silly.
-            doitagain_yeah = True  # and a quick lazy loop.
+            doitagain_yeah = True
 
     except KeyboardInterrupt:
         session.close()
