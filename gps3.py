@@ -136,8 +136,10 @@ class Fix(object):
             print('Speed: {0}  Course: {1}'.format((self.TPV['speed']), (self.TPV['track'])))
             print('Altitude: {1}    Time: {0}'.format((self.TPV['time']), (self.TPV['alt'])))
 
-        except ValueError as error:  # TODO: Needs KeyError too
+        except ValueError as error:
             print('There was a ValueError with:', error)
+        except KeyError as error:
+            print('There was a KeyError with:', error)
 
             return
 
