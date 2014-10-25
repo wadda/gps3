@@ -73,6 +73,12 @@ optional arguments:
 me@work:~/SyPy_projects/gps3$ 
 ```
 
-Currently not all options are functional.
+Currently not all options are implemented or fully  functional.
 Commandline execution without options is the same as using the DEFAULT option flags.
 
+Don't have a gps to experiment?  Try
+```
+#!bash
+python3 gps3.py -host sypy.ddns.net
+```
+It's not that exciting, as it's not moving, but you will have the gps jitter. 
