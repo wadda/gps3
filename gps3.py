@@ -112,9 +112,9 @@ class Fix(object):
         # Others to be added
         packages = {"VERSION": version, "TPV": tpv, "SKY": sky,
                     "DEVICES": devices}  # The thought is to have a quick repository for add/subtract 'module data packets'
-        for cognomen, datalist in packages.items():  # The struggle for unique/identifiable/readable names continues.
-            _enaydict = {key: "n/a" for (key) in datalist}
-            setattr(self, cognomen, _enaydict)
+        for cognomen, datalist in packages.items():  # And the struggle for unique/identifiable/readable names continues.
+            _emptydict = {key: "n/a" for (key) in datalist}
+            setattr(self, cognomen, _emptydict)
 
     def refresh(self, gpsd_data_package):
         """Mostly a quick proof of concept"""  # TODO: I don't know what, but something.
@@ -122,21 +122,20 @@ class Fix(object):
         try:
             fresh_data = json.loads(gpsd_data_package)
             package_name = fresh_data.pop('class', 'ERROR')  # Kludge to avoid the special class.
-            package = getattr(self, package_name)
-            for key in package:
+            package = getattr(self, package_name)  # Needs more attention for sub-dictionaries (satellites, devices, etc)
+            for key in package:                    # to unpack structure.
 
                 if key not in fresh_data:
-                    pass
-                    # setattr(package, key, 'AWOL')  TODO: Broken
+                    pass  # TODO: Broken, does not revert to empty value
+                    # setattr(package, key, 'AWOL')  TODO: setattr flips out with string
 
                 else:
                     package[key] = fresh_data[key]
                     # setattr(self, package_name, package[key])
 
-        except ValueError as error:
-            print('There was a ValueError with:', error)
-        except KeyError as error:
-            print('There was a KeyError with:', error)
+        except (ValueError, KeyError) as error:
+            print('There was a Value/KeyError with:', error, 'This should never happen.')
+
         finally:
             self.weep()  # TODO: Move
             pass
@@ -195,9 +194,9 @@ if __name__ == '__main__':
                 fix.refresh(socket_response)
                 # if latlon_format is "degree_decimal":
             else:
-                print('So far we have:', socket_response)  # Other output for other humans and Nones
+                print('So far we have:', socket_response, 'Is this a timing issue?')  # Other output for other humans and Nones
 
-            time.sleep(.5)  # A nap to keep from spinning silly.
+            time.sleep(.5)  # to keep from spinning silly.
             doitagain_yeah = True
 
     except KeyboardInterrupt:
