@@ -55,7 +55,7 @@ class GPSDSocket(object):
         'split24', and 'pps'; with option for non-default device path"""
         command = '?WATCH={{"enable":true,"{0}":true}}'.format(gpsd_protocol)
         if gpsd_protocol == 'human':
-            command = command.replace('human', 'json')  # TODO: rework proof of concept hack
+            command = command.replace('human', 'json')  # TODO: rework this for better presentation
         if gpsd_protocol == 'rare':
             command = command.replace('"rare":true', '"raw":1')
         if gpsd_protocol == 'raw':
@@ -70,25 +70,26 @@ class GPSDSocket(object):
         """Ship commands to the daemon"""
         # session.send("?POLL;")  # TODO: remember why this is here.  It has to do with ?WATCH
         self.streamSock.send(bytes(commands, encoding='utf-8'))
+        # This is where it craps out when there is no daemon running  TODO: Add recovery
 
     def __iter__(self):
         return self
 
     def __next__(self, timeout=0):
-        """Return empty unless new data is ready for the client.  Will sit and wait for"""
+        """Return empty unless new data is ready for the client.  Will sit and wait for timeout seconds"""
         try:
-            # poll.register(self.streamSock, POLLIN)  # Could be  faster than
             (waitin, _waitout, _waiterror) = select.select((self.streamSock,), (), (), timeout)
+            # poll.register(self.streamSock, POLLIN)  # Could be faster than that, but...
             if not waitin:
                 return
             else:
                 gpsd_response = self.streamSock.makefile(buffering=4096)
                 self.response = gpsd_response.readline()  # When does this fail?
 
-            return self.response
+            return self.response  # No, seriously; when does this fail?
 
         except OSError as error:
-            print('readline OSError is this: ', error)
+            print('The readline OSError is this: ', error)
             return
             # if waitin == -1:
             # raise StopIteration  # TODO: error recovery, tell why; e.g., no gpsd, no gps, etc.
@@ -103,50 +104,59 @@ class GPSDSocket(object):
 
 class Fix(object):
     """banana"""
+
     def __init__(self):
-        """List and Generator of classes of data 'packages' available fron the device through the GPSD"""
-        version = ("release", "rev", "proto_major", "proto_minor", "remote")
-        tpv = ("tag", "device", "mode", "time", "ept", "lat", "lon", "alt", "epx", "epy", "epv", "track", "speed", "climb", "epd", "eps", "epc")
-        sky = ("xdop", "ydop", "vdop", "tdop", "hdop", "gdop", "pdop", "satellites")
-        devices = ("devices", "remote")  # Faulty device list?
-        # Others to be added
-        packages = {"VERSION": version, "TPV": tpv, "SKY": sky,
-                    "DEVICES": devices}  # The thought is to have a quick repository for add/subtract 'module data packets'
-        for cognomen, datalist in packages.items():  # And the struggle for unique/identifiable/readable names continues.
-            _emptydict = {key: "n/a" for (key) in datalist}
-            setattr(self, cognomen, _emptydict)
+        """Sets and Generator of class attributes from data 'packages' available fron the device through the GPSD"""
+        version = {"release", "rev", "proto_major", "proto_minor", "remote"}
+        tpv = {"tag", "device", "mode", "time", "ept", "lat", "lon", "alt", "epx", "epy", "epv", "track", "speed",
+               "climb", "epd", "eps", "epc"}
+        sky = {"xdop", "ydop", "vdop", "tdop", "hdop", "gdop", "pdop", "satellites"}
+        devices = {"devices", "remote"}  # device set needs to be checked?
+        # Others to be added.  The thought is to have a quick repository to add/subtract
+        packages = {"VERSION": version, "DEVICES": devices, "TPV": tpv, "SKY": sky}  # 'module data packets'
+        # Why clutter with code when you can clutter with comments
+
+        for package_name, datalist in packages.items():  # which can be empty or big
+            _emptydict = {key: "n/a" for (key) in datalist}  # big_dict = dict(zip(datalist, (len(datalist) * "n/a")))
+            setattr(self, package_name, _emptydict)
 
     def refresh(self, gpsd_data_package):
-        """Mostly a quick proof of concept"""  # TODO: I don't know what, but something.
+        """Sets new socket data as Fix attributes"""
 
-        try:
-            fresh_data = json.loads(gpsd_data_package)
-            package_name = fresh_data.pop('class', 'ERROR')  # Kludge to avoid the special class.
-            package = getattr(self, package_name)  # Needs more attention for sub-dictionaries (satellites, devices, etc)
-            for key in package:                    # to unpack structure.
-
-                if key not in fresh_data:
-                    pass  # TODO: Broken, does not revert to empty value
-                    # setattr(package, key, 'AWOL')  TODO: setattr flips out with string
-
-                else:
-                    package[key] = fresh_data[key]
-                    # setattr(self, package_name, package[key])
+        try:  # 'class' is reserved and popped to allow possible attributes
+            fresh_data = json.loads(gpsd_data_package)  # error should be same as named "ERROR" package from gpsd
+            package_name = fresh_data.pop('class', 'ERROR')  # I don't know what that does, as if it happened, it should
+            a_package = getattr(self, package_name)  # have been too broken to run.
+            for key in a_package.keys():
+                a_package[key] = fresh_data.get(key, "n/a")  # that is, update, but if key is absent, present key:'n/a'
 
         except (ValueError, KeyError) as error:
-            print('There was a Value/KeyError with:', error, 'This should never happen.')
+            print('There was a Value/KeyError with:', error, 'This should never happen.', file=sys.stderr)
 
         finally:
             self.weep()  # TODO: Move
             pass
 
+    def used_satellites(self):
+        total_birds = 0
+        used_birds = 0
+        for sats in self.SKY['satellites']:
+            while isinstance(sats, str):
+                return 0, 0
+            used = sats['used']
+            total_birds += 1
+            if used:
+                used_birds += 1
+        return used_birds, total_birds
+
     def weep(self):
         """Read the data and shake what your mama give ya'"""
 
         print('Latitude: {0}  Longitude: {1}'.format(self.TPV['lat'], self.TPV['lon']))
-        print('Error estimate - epx:{0}, epy:{1}, epv:{2}'.format(self.TPV['epx'], self.TPV['epy'], self.TPV['epv']))
         print('Speed: {0}  Course: {1}'.format(self.TPV['speed'], self.TPV['track']))
         print('Altitude: {1}    Time: {0}'.format(self.TPV['time'], self.TPV['alt']))
+        print('Error estimate - epx:{0}, epy:{1}, epv:{2}'.format(self.TPV['epx'], self.TPV['epy'], self.TPV['epv']))
+        print('Using {0[0]} of {0[1]} satellites in view'.format(self.used_satellites()))
 
         return
 
@@ -196,7 +206,7 @@ if __name__ == '__main__':
             else:
                 print('So far we have:', socket_response, 'Is this a timing issue?')  # Other output for other humans and Nones
 
-            time.sleep(.5)  # to keep from spinning silly.
+            time.sleep(.9)  # to keep from spinning silly.
             doitagain_yeah = True
 
     except KeyboardInterrupt:
