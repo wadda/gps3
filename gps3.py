@@ -140,10 +140,11 @@ class Fix(object):
         try:  # 'class' is reserved and is popped to allow easy attributes generation if requested.
             fresh_data = json.loads(gpsd_data_package)  # error should be same as named "ERROR" package from gpsd
             package_name = fresh_data.pop('class', 'ERROR')  # I don't know what 'ERROR' means, as if it happened,
-            a_package = getattr(self, package_name, package_name)  # it should have been too broken to get to this point.
+            a_package = getattr(self, package_name,
+                                package_name)  # it should have been too broken to get to this point.
             for key in a_package.keys():  # Iterate attribute package  TODO: Arouund here it craps out when device disappears
                 a_package[key] = fresh_data.get(key, 'n/a')  # that is, update it, and if key is absent in socket
-                                                                # response, present --> key:'n/a in stead.'
+                # response, present --> key:'n/a in stead.'
                 # setattr(package_name, key, a_package[key])  # setattr for individual keys.
         except (ValueError, KeyError) as error:  # This should not happen, most likely why it's an exception.
             print('There was a Value/KeyError with:', error,  # But, it did happen once, I couldn't replicate it.
@@ -163,7 +164,7 @@ class Fix(object):
 
         return total_satellites, used_satellites
 
-    def make_time(self):
+    def make_datetime(self):
         """Creates datetime object from gpsd data"""
         if not 'n/a' in self.TPV['time']:
             gps_datetime_object = datetime.strptime(self.TPV['time'], "%Y-%m-%dT%H:%M:%S.%fZ")
@@ -171,7 +172,6 @@ class Fix(object):
             gps_datetime_object = datetime.strptime('1582-10-04T12:00:00.000Z', "%Y-%m-%dT%H:%M:%S.%fZ")
 
         return gps_datetime_object
-
 
 
 if __name__ == '__main__':
@@ -186,7 +186,6 @@ if __name__ == '__main__':
     parser.add_argument('-ddd', dest='latlon_format', const='ddd', action='store_const', default=None, help='Degree decimal')
     parser.add_argument('-dmm', dest='latlon_format', const='dmm', action='store_const', default=None, help='Degree, Minute decimal')
     parser.add_argument('-dms', dest='latlon_format', const='dms', action='store_const', default=None, help='Degree, Minute, Second decimal')
-
     # Verbose
     parser.add_argument("-verbose", action="store_true", default=False, help="increases verbosity, but not that much")
     # Alternate devicepath
@@ -217,37 +216,22 @@ if __name__ == '__main__':
                 pass
             if socket_response and args.gpsd_protocol is 'human':  # Output for humans because it's the command line.
                 fix.refresh(socket_response)
-
-                print('Coordinates: {lat:}, {lon:}'.format(**fix.TPV))
-                print('Time: {time}, {lon:^50}'.format(**fix.TPV))
+                print('This is gps3 connecting to gpsd on host {0.host}, port {0.port}.'.format(args))
+                print('At {time}, it reports the device at {device}\n'.format(**fix.TPV))
                 if not 'n/a' in fix.SKY['satellites']:
-                    print('{:^60}'.format("Iterated Satellite Data"))
+                    print('{:^45}'.format("Iterated Satellite Data"))
                     for sats in fix.SKY['satellites']:
-                        print('Sat {PRN:0>3}: Signal: {ss:>2}  {el:>2}:el/az:{az:<3}  Used: {used}'.format(**sats), )
+                        print('Sat {PRN:->3}: Signal: {ss:>2}  {el:>2}:el-az:{az:<3}  Used: {used}'.format(**sats), )
+                    print('  Using {0[1]} of {0[0]} satellites in view to provide \n'.format(fix.satellites_used()))
 
-                # print(fix.TPV, "\n", fix.VERSION, "\n", fix.SKY)
-                # print('Time: ', type(TPV['time']), '{lon:^50}'.format(**TPV))
-                # dt = fix.make_time()
-                # seconds =
-                # print('As you see the seconds {:%S} fly at {:%M} minutes past, there\'s a datetime object'.format(dt))
-                # print(dt, "<--------------that")
-                # d = datetime.datetime(2010, 7, 4, 12, 15, 58)
-                # '{:%Y-%m-%d %H:%M:%S}'.format(d)
-                #
-                print(fix.make_time(), 'UTC')
-
-                # print('This is gps3 connecting to gpsd on host {0.host}, port {0.port}.'.format(args))
-                # print('At {0.time}, it reports the device at {0.device}\n'.format(fix))
-                #
-                print('This device is located Latitude:{lat:>20}  Longitude: {lon:>20}'.format(**fix.TPV))
-                print('It is moving {speed} metres/second at {track} degrees from True North\n'.format(**fix.TPV))
-
-                print('Error estimate - epx:{epx}, epy:{epy}, epv:{epv}'.format(**fix.TPV))
-                print('Using {0[1]} of {0[0]} satellites in view\n'.format(fix.satellites_used()))
+                print('Error estimate - epx:{epx}, epy:{epy}, epv:{epv} metres'.format(**fix.TPV))
+                print('This device is Latitude:{lat:>11}  Longitude: {lon:>12}'.format(**fix.TPV))
+                print('Speed: {speed} metres/second at {track} degrees from True North\n'.format(**fix.TPV))
+                print(fix.make_datetime(), 'UTC, as a Datetime Object in addition to the string')
 
             else:
-                print('So far we have:', socket_response, 'What\'s causing this?')  # Other output for other humans and Nones
-                # print()
+                print('Peek a boo....', socket_response, 'What\'s causing this?')  # Other output for other humans and Nones
+
             time.sleep(.99)  # to keep from spinning silly.
             doitagain_yeah = True
 
