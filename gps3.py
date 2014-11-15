@@ -133,6 +133,7 @@ class Fix(object):
         for package_name, datalist in packages.items():
             _emptydict = {key: 'n/a' for (key) in datalist}
             setattr(self, package_name, _emptydict)
+        self.SKY['satellites'] = [{'PRN': 'n/a', 'ss': 'n/a', 'el': 'n/a', 'az': 'n/a', 'used': None}]  # TODO: Find a better way
 
     def refresh(self, gpsd_data_package):
         """Sets new socket data as Fix attributes"""
@@ -151,11 +152,11 @@ class Fix(object):
                   '\nThis should never happen.', file=sys.stderr)  # TODO: Make Python2.7 compliant
             pass
 
-    def satellites_used(self):  # Should this be ancillary to this class, even included?
+    def satellites_used(self):  # Should this be ancillary to this class, or even included?
         total_satellites = 0
         used_satellites = 0
         for sats in self.SKY['satellites']:
-            while isinstance(sats, str):
+            if sats['used'] is None:
                 return 0, 0
             used = sats['used']
             total_satellites += 1
@@ -164,11 +165,11 @@ class Fix(object):
 
         return total_satellites, used_satellites
 
-    def make_datetime(self):
-        """Creates datetime object from gpsd data"""
+    def make_datetime(self):  # Should this be ancillary to this class, or even included?
+        """Creates timezone -naive- datetime object from gpsd data"""
         if not 'n/a' in self.TPV['time']:
-            gps_datetime_object = datetime.strptime(self.TPV['time'], "%Y-%m-%dT%H:%M:%S.%fZ")
-        else:  # shouldn't break anything, but return Time obviously wrong, IT, PO, ES, and PT switch to gregorian cal
+            gps_datetime_object = (datetime.strptime(self.TPV['time'], "%Y-%m-%dT%H:%M:%S.%fZ"))
+        else:  # shouldn't break anything, but return obviously wrong Time, IT, PO, ES, and PT switch to gregorian calendar
             gps_datetime_object = datetime.strptime('1582-10-04T12:00:00.000Z', "%Y-%m-%dT%H:%M:%S.%fZ")
 
         return gps_datetime_object
@@ -208,31 +209,32 @@ if __name__ == '__main__':
 
     if args.verbose:
         print("verbose is in chatty mode")
-        print('These the command line arguments are: ', args)
+        print('The command line arguments are: ', args)
 
     try:  # TODO: Tidy up for other protocols run on commandline
         for socket_response in session:
-            if socket_response is None:  # JSON module chokes on socket.response == None
-                pass
             if socket_response and args.gpsd_protocol is 'human':  # Output for humans because it's the command line.
                 fix.refresh(socket_response)
+
                 print('This is gps3 connecting to gpsd on host {0.host}, port {0.port}.'.format(args))
                 print('At {time}, it reports the device at {device}\n'.format(**fix.TPV))
-                if not 'n/a' in fix.SKY['satellites']:
-                    print('{:^45}'.format("Iterated Satellite Data"))
-                    for sats in fix.SKY['satellites']:
-                        print('Sat {PRN:->3}: Signal: {ss:>2}  {el:>2}:el-az:{az:<3}  Used: {used}'.format(**sats), )
-                    print('  Using {0[1]} of {0[0]} satellites in view to provide \n'.format(fix.satellites_used()))
+                print('{:^45}'.format("Iterated Satellite Data"))
+                for sats in fix.SKY['satellites']:
+                    print(' Sat {PRN:->3}: Signal: {ss:>2}  {el:>2}:el-az:{az:<3}  Used: {used}'.format(**sats), )
+                print('   Using {0[1]} of {0[0]} satellites in view to provide \n'.format(fix.satellites_used()))
 
                 print('Error estimate - epx:{epx}, epy:{epy}, epv:{epv} metres'.format(**fix.TPV))
-                print('This device is Latitude:{lat:>11}  Longitude: {lon:>12}'.format(**fix.TPV))
-                print('Speed: {speed} metres/second at {track} degrees from True North\n'.format(**fix.TPV))
-                print(fix.make_datetime(), 'UTC, as a Datetime Object in addition to the string')
+                print('Device coordinates- Latitude:{lat:>11}  Longitude: {lon:>12}'.format(**fix.TPV))
+                print('Speed: {speed} metres/second at {track} degrees from True North'.format(**fix.TPV))
+                print('Altitude: {} metres    All via:  session = GPSDSocket()  fix =  Fix()  '.format(fix.TPV['alt']))
+                print("Any data is the respective gpsd 'class'[key]' e.g., fix.TPV['time']")
+                print(fix.make_datetime(), 'UTC, a naive Datetime Object derived from that time string')
+
 
             else:
-                print('Peek a boo....', socket_response, 'What\'s causing this?')  # Other output for other humans and Nones
+                print('Peek a boo.  Socket Response is:', socket_response, 'Why?')  # Other output for other humans and Nones
 
-            time.sleep(.99)  # to keep from spinning silly.
+            time.sleep(.9)  # to keep from spinning silly.
             doitagain_yeah = True
 
     except KeyboardInterrupt:
@@ -243,4 +245,3 @@ if __name__ == '__main__':
 # Someday a cleaner Python interface will live here
 #
 # End
-#
