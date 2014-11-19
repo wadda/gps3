@@ -1,9 +1,9 @@
 # coding=utf-8
 # !/usr/bin/python
 # Concept from these guys
-# Copyright (C) 2007 by Jaroslaw Zachwieja <grok!warwick.ac.uk>
-# Copyright (C) 2008 by TJ <linux!tjworld.net>
-# in gegpsd.py as part of gpsd
+# Jaroslaw Zachwieja <grok!warwick.ac.uk>
+# TJ <linux!tjworld.net>
+# from their work in gegpsd.py included in gpsd (http://catb.org/gpsd)
 """creates google earth kml file (/tmp/gps3_live.kml) for realtime (4 second) updates of gps coordinates"""
 import time
 
@@ -11,10 +11,10 @@ import gps3
 
 the_connection = gps3.GPSDSocket(host='sypy.ddns.net')  # The demo address
 the_fix = gps3.Fix()
-the_link = '/tmp/gps3_live.kml'
+the_link = '/tmp/gps3_live.kml'  # AFAIK, 'Links' call href on time events or entry/exit  Multiple href may be possible.
 the_file = '/tmp/gps3_static.kml'
 
-output_repeater = ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+live_link = ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                    "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n"
                    "<NetworkLink>\n"
                    "    <name>GPS3 Live</name>\n"
@@ -24,9 +24,9 @@ output_repeater = ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                    "    </Link>\n"
                    "</NetworkLink>\n"
                    "</kml>"
-).format(the_file)
+).format(the_file)  # inserts 'the file' into a refresh mode
 f = open(the_link, 'w')
-f.write(output_repeater)
+f.write(live_link)
 f.close()
 
 try:
@@ -38,17 +38,18 @@ try:
             latitude = the_fix.TPV['lat']
             longitude = the_fix.TPV['lon']
             altitude = the_fix.TPV['alt']
+            heading = the_fix.TPV['track']
 
-            output_instance = ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+            static_file = ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                "<kml xmlns=\"http://earth.google.com/kml/2.0\">\n"
                                "    <Placemark>\n"
-                               "        <name>{0} km/h</name>\n"
+                               "        <name>{0:.2f}km/h {4:.0f}°</name>\n"
                                "        <description></description>\n"
                                "        <LookAt>\n"
                                "            <longitude>{1}</longitude>\n"
                                "            <latitude>{2}</latitude>\n"
                                "            <range>600</range>\n"
-                               "            <tilt>30</tilt>\n"
+                               "            <tilt>10</tilt>\n"
                                "            <heading>0</heading>\n"
                                "        </LookAt>\n"
                                "        <Point>\n"
@@ -56,16 +57,15 @@ try:
                                "        </Point>\n"
                                "    </Placemark>\n"
                                "</kml>"
-            ).format(speed, longitude, latitude, altitude)
+            ).format(speed, longitude, latitude, altitude, heading)  # Change heading from '0' to '{4}' for 'Course Up'
 
             f = open(the_file, 'w')
-            f.write(output_instance)
+            f.write(static_file)
             f.close()
 
         else:
             pass
-        time.sleep(1)
-
+        time.sleep(1)  # default GE refresh rate is 4 seconds, therefore no refresh older than 1 second from itself.
 except KeyboardInterrupt:
     the_connection.close()
     print("\nTerminated by user\nGood Bye.\n")
