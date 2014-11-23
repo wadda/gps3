@@ -43,7 +43,7 @@ try:
             static_file = ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
                                "<kml xmlns=\"http://earth.google.com/kml/2.0\">\n"
                                "    <Placemark>\n"
-                               "        <name>{0:.2f}km/h {4:.0f}°</name>\n"
+                               "        <name>{0:.2f}km/h {4}°</name>\n"
                                "        <description></description>\n"
                                "        <LookAt>\n"
                                "            <longitude>{1}</longitude>\n"
