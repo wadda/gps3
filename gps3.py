@@ -1,4 +1,4 @@
-# !/usr/bin/env python3
+#!/usr/bin/env python3
 # coding=utf-8
 """Python( 2.7 - 3.4 ) interface to gpsd """
 from __future__ import print_function
@@ -223,7 +223,7 @@ if __name__ == '__main__':
 
                 print('This is gps3 connecting to gpsd on host {0.host}, port {0.port}.'.format(args))
                 print('At {time}, it reports the device at {device}\n'.format(**fix.TPV))
-                print('This interface is using Python', sys.version_info[:])  # Flagpole kludge
+                print('This interface is using Python {}.{}.{}'.format(*sys.version_info))  # Flagpole kludge
 
                 print('{:^45}'.format("Iterated Satellite Data"))
                 for sats in fix.SKY['satellites']:
