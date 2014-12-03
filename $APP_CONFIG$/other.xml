@@ -57,6 +57,9 @@
     <option name="PLUGIN_ENABLED" value="true" />
     <option name="WHOLEWORDSELECTION_ENABLED" value="true" />
   </component>
+  <component name="TemplateSettings">
+    <defaultShortcut shortcut="TAB" />
+  </component>
   <component name="TodoConfiguration">
     <pattern icon="default" useCustomColors="false" case-sensitive="false" pattern="\btodo\b.*">
       <option name="FOREGROUND" value="ffff00" />
