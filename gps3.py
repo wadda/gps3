@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 # coding=utf-8
 """Python( 2.7 - 3.4 ) interface to gpsd """
-__author__ = 'Moe'
-__copyright__ = "Copyright 2014, http://navigatrix.net"
-__license__ = "GNU General Public License v2 (GPLv2)"  # TODO: finish requirements
-__version__ = "0.1a"
-
 from __future__ import print_function
 from datetime import datetime
 import socket
@@ -86,7 +81,7 @@ class GPSDSocket(object):
             # This is where it craps out when there is no daemon running  TODO: Add recovery check gpsd existence, re/start.
 
     def __iter__(self):
-        """banana"""  # <------- for scale
+        """banana"""  # <------- banana for scale
         return self
 
     def next(self, timeout=0):
@@ -155,7 +150,7 @@ class Fix(object):
             a_package = getattr(self, package_name, package_name)  # should have been too broken to get to this point.
             for key in a_package.keys():  # Iterate attribute package  TODO: It craps out here when device disappears
                 a_package[key] = fresh_data.get(key, 'n/a')  # that is, update it, and if key is absent in the socket
-                # response, present --> "key: 'n/a'" instead.'
+                                                                # response, present --> "key: 'n/a'" instead.'
                 # setattr(package_name, key, a_package[key])  # Uncomment to setattr individual keys. "gps.fix.TPV.lat"
         except (ValueError, KeyError) as error:  # This should not happen, most likely why it's an exception.  But, it
             sys.stderr.write('There was a Value/KeyError with:', error,

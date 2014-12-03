@@ -1,6 +1,0 @@
-<application>
-  <component name="CodeOutlinePlugin">
-    <animated-scroll>true</animated-scroll>
-    <highlight-current-line>true</highlight-current-line>
-  </component>
-</application>
