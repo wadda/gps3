@@ -1,4 +1,23 @@
 <application>
+  <component name="AppInspectionProfilesVisibleTreeState">
+    <entry key="Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Python</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Buildout</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
   <component name="ExternalResourceManagerImpl">
     <ignored-resource url="http://relaxng.org/ns/compatibility/annotations/1.0" />
     <ignored-resource url="http://www.w3.org/1998/Math/MathML" />
