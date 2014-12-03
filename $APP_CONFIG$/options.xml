@@ -18,5 +18,6 @@
     <property name="CommitChangeListDialog.DETAILS_SHOW_OPTION_" value="false" />
     <property name="file.chooser.recent.files" value="$USER_HOME$/projects/gps3" />
     <property name="FindSplitterProportion" value="0.25" />
+    <property name="Copy.OpenInEditor" value="true" />
   </component>
 </application>
