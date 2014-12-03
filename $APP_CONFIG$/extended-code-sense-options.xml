@@ -1,0 +1,8 @@
+<application>
+  <component name="ExtendedCodeSenseOptions">
+    <option name="autoActivationDelay" value="700" />
+    <option name="inWordAutoActivation" value="true" />
+    <option name="outOfWordActivationCharacters" value="&gt;&lt;*/+-~^&amp;|%=!?:[" />
+    <option name="showLiveTemplates" value="true" />
+  </component>
+</application>
