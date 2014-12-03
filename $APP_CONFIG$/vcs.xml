@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+  <component name="Git.Application.Settings">
+    <option name="myPathToGit" value="/usr/bin/git" />
+    <option name="SSH_EXECUTABLE" value="IDEA_SSH" />
+  </component>
+  <component name="GitRememberedInputs">
+    <option name="visitedUrls">
+      <list>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/wadda/Lunacy.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/divvet/GrowControl.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/prahladyeri/hotspotd.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
+      </list>
+    </option>
+    <option name="cloneParentDir" value="$USER_HOME$/projects/" />
+  </component>
+  <component name="HgGlobalSettings">
+    <option name="myHgExecutable" value="hg" />
+  </component>
+</application>
+

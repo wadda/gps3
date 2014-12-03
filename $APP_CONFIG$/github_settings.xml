@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+  <component name="GithubSettings">
+    <option name="LOGIN" value="wadda" />
+    <option name="AUTH_TYPE" value="BASIC" />
+  </component>
+</application>
+

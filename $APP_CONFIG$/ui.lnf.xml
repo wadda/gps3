@@ -1,0 +1,10 @@
+<application>
+  <component name="UISettings">
+    <option name="HIDE_TOOL_STRIPES" value="false" />
+    <option name="WIDESCREEN_SUPPORT" value="true" />
+    <option name="SHOW_MAIN_TOOLBAR" value="true" />
+    <option name="MOVE_MOUSE_ON_DEFAULT_BUTTON" value="true" />
+    <option name="USE_SMALL_LABELS_ON_TABS" value="true" />
+    <option name="MAX_LOOKUP_LIST_HEIGHT" value="5" />
+  </component>
+</application>
