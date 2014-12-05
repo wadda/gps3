@@ -1,7 +1,7 @@
 <application>
   <component name="FindSettings">
-    <option name="customScope" value="File '/home/moe/projects/gps3/gps3.py'" />
-    <option name="defaultScopeName" value="File '/home/moe/projects/gps3/gps3.py'" />
-    <option name="SEARCH_SCOPE" value="File '/home/moe/projects/gps3/gps3.py'" />
+    <option name="customScope" value="File '/home/moe/projects/gps3/jitterbug.py'" />
+    <option name="defaultScopeName" value="File '/home/moe/projects/gps3/jitterbug.py'" />
+    <option name="SEARCH_SCOPE" value="File '/home/moe/projects/gps3/jitterbug.py'" />
   </component>
 </application>
