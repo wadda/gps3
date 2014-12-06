@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 # coding=utf-8
 """Python( 2.7 - 3.4 ) interface to gpsd """
-__author__ = 'Moe'
-__copyright__ = "Copyright 2014, http://navigatrix.net"
-__license__ = "GNU General Public License v2 (GPLv2)"  # TODO: finish requirements
-__version__ = "0.1a"
-
 from __future__ import print_function
 from datetime import datetime
 import socket
@@ -47,7 +42,7 @@ class GPSDSocket(object):
                     print('and will be watching ', self.protocol, ' protocol')
 
             except OSError as error:
-                sys.stderr.write('\nconnect OSError is----->')
+                sys.stderr.write('\nGPSDSocket.connect OSError is-->', error)
                 sys.stderr.write('\nAttempt to connect to a gpsd at {0} on port \'{1}\' failed:\n'.format(host, port))
                 sys.stderr.write('Please, check your number and dial again.\n')
                 self.close()
@@ -75,7 +70,7 @@ class GPSDSocket(object):
         return self.send(command)
 
     def send(self, commands):
-        """Ship commands to the daemon """
+        """Ship commands to the daemon"""
         # session.send("?POLL;")  # TODO: Figure a way to work this in.
         # The POLL command requests data from the last-seen fixes on all active GPS devices.
         # Devices must previously have been activated by ?WATCH to be pollable.
@@ -117,14 +112,14 @@ class GPSDSocket(object):
 
 
 class Fix(object):
-    """Retrieves JSON Object from GPSDSocket unpacking it into respective gpsd 'class' dictionaries, TPV, SKY, etc. """
+    """Retrieves JSON Object from GPSDSocket unpacking it into respective gpsd 'class' dictionaries, TPV, SKY, etc."""
 
     def __init__(self):
-        """Sets of potential data packages from a device through gpsd as generator of class attribute dictionaries"""
+        """Sets of potential data packages from a device through gpsd, as generator of class attribute dictionaries"""
         version = {"release", "rev", "proto_major", "proto_minor", "remote"}
-        tpv = {"tag", "device", "mode", "time", "ept", "lat", "lon", "alt", "epx", "epy", "epv",
-               "track", "speed", "climb", "epd", "eps", "epc"}
-        sky = {"xdop", "ydop", "vdop", "tdop", "hdop", "gdop", "pdop", "satellites"}
+        tpv = {"tag", "device", "mode", "time", "ept", "lat", "lon", "alt",
+               "track", "speed", "climb", "epx", "epy", "epv", "epd", "eps", "epc"}
+        sky = {"gdop", "hdop", "pdop", "tdop", "vdop", "xdop", "ydop", "satellites"}
         gst = {"device", "time", "rms", "major", "minor", "orient", "lat", "lon", "alt"}
         att = {"device", "time", "heading", "mag_st", "pitch", "pitch_st", "yaw", "yaw_st",
                "roll", "roll_st", "dip", "mag_len", "mag_x", "mag_y", "mag_z", "acc_len",
@@ -155,11 +150,11 @@ class Fix(object):
             a_package = getattr(self, package_name, package_name)  # should have been too broken to get to this point.
             for key in a_package.keys():  # Iterate attribute package  TODO: It craps out here when device disappears
                 a_package[key] = fresh_data.get(key, 'n/a')  # that is, update it, and if key is absent in the socket
-                # response, present --> "key: 'n/a'" instead.'
+                                                                # response, present --> "key: 'n/a'" instead.'
                 # setattr(package_name, key, a_package[key])  # Uncomment to setattr individual keys. "gps.fix.TPV.lat"
         except (ValueError, KeyError) as error:  # This should not happen, most likely why it's an exception.  But, it
             sys.stderr.write('There was a Value/KeyError with:', error,
-                             '\nThis should never happen.')  # happened once.  But no idea aside from it broke.
+                             '\nThis should never happen.')  # happened once.  But I've no idea aside from it broke.
             pass
 
     def satellites_used(self):  # Should this be ancillary to this class, or even included?
@@ -190,7 +185,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()  # TODO: beautify and idiot-proof makeover to prevent clash from options error
     # Defaults from the command line
-    parser.add_argument('-human', dest='gpsd_protocol', const='human', action='store_const', default='human', help='DEFAULT Human Friendly ')
+    parser.add_argument('-human', dest='gpsd_protocol', const='human', action='store_const', default='human', help='DEFAULT Human Friendlier ')
     parser.add_argument('-host', action='store', dest='host', default='127.0.0.1', help='DEFAULT "127.0.0.1"')
     parser.add_argument('-port', action='store', dest='port', default='2947', help='DEFAULT 2947', type=int)
     parser.add_argument('-metric', dest='units', const='metric', action='store_const', default='metric', help='DEFAULT METRIC units')
