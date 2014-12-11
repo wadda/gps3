@@ -1,6 +1,6 @@
 <scheme name="warmeon" version="124" parent_scheme="Default">
   <option name="LINE_SPACING" value="1.1" />
-  <option name="EDITOR_FONT_SIZE" value="22" />
+  <option name="EDITOR_FONT_SIZE" value="26" />
   <option name="CONSOLE_FONT_NAME" value="DejaVu Sans Mono" />
   <option name="CONSOLE_FONT_SIZE" value="20" />
   <option name="EDITOR_FONT_NAME" value="DejaVu Sans Mono" />
