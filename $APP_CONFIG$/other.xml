@@ -95,9 +95,9 @@
   <component name="RecentDirectoryProjectsManager">
     <option name="recentPaths">
       <list>
+        <option value="$USER_HOME$/projects/NxGPS" />
         <option value="$USER_HOME$/projects/gps3" />
         <option value="$USER_HOME$/projects/untitled" />
-        <option value="$USER_HOME$/projects/NxGPS" />
         <option value="$USER_HOME$/projects/hotspotd" />
         <option value="$USER_HOME$/projects/fake" />
         <option value="$USER_HOME$/projects/Lunacy" />
@@ -106,7 +106,7 @@
     </option>
     <option name="openPaths">
       <list>
-        <option value="$USER_HOME$/projects/gps3" />
+        <option value="$USER_HOME$/projects/NxGPS" />
       </list>
     </option>
     <option name="names">
@@ -114,7 +114,7 @@
         <entry key="$USER_HOME$/https:/github.com/divvet/GrowControl.git" value="GrowControl.git, GrowControl" />
       </map>
     </option>
-    <option name="lastPath" value="$USER_HOME$/projects/gps3" />
+    <option name="lastPath" value="$USER_HOME$/projects/NxGPS" />
   </component>
   <component name="Registry">
     <entry key="ide.firstStartup" value="false" />
