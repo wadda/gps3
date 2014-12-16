@@ -91,7 +91,7 @@
         <property name="options.searchVisible" value="true" />
         <property name="recentsLimit" value="5" />
         <property name="restartRequiresConfirmation" value="true" />
-        <property name="last_opened_file_path" value="$USER_HOME$/projects/gps3/gps3-work.py" />
+        <property name="last_opened_file_path" value="$USER_HOME$/pyrender" />
       </component>
       <component name="PyConsoleOptionsProvider">
         <option name="myPythonConsoleState">
