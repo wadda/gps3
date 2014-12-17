@@ -11,7 +11,6 @@
       <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
       <component name="Git.Settings">
         <option name="PUSH_AUTO_UPDATE" value="true" />
-        <option name="SYNC_SETTING" value="DONT" />
       </component>
       <component name="InspectionProjectProfileManager">
         <profiles>
