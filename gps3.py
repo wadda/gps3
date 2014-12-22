@@ -9,6 +9,10 @@ import time
 import sys
 import json
 
+__author__ = 'Moe'
+__copyright__ = "Copyright 2014  Maurice Wick"  # nihil sub sole novum.  Everything was learned and adapted from somewhere else.
+__license__ = "MIT"  # TODO: figure this out and finish requirements
+__version__ = "0.1a"
 
 GPSD_PORT = 2947
 HOST = "127.0.0.1"
@@ -20,9 +24,9 @@ class GPSDSocket(object):
 
     def __init__(self, host=HOST, port=GPSD_PORT, gpsd_protocol=PROTOCOL, devicepath=None, verbose=False):
         self.devicepath_alternate = devicepath
-        # self.output = {}  # TODO: a class by itself decision, essentially raw socket JSON unless it's not;-)
+        # self.output = {}  # TODO: an attribute by itself decision, essentially raw socket JSON unless it's not;-)
         self.response = None
-        self.protocol = gpsd_protocol  # What form of data to retrieve from gpsd  TODO: can handle multiple?
+        self.protocol = gpsd_protocol  # What form of data to retrieve from gpsd  TODO: can it handle multiple?
         self.streamSock = None  # Existential
         self.verbose = verbose
 
@@ -65,8 +69,8 @@ class GPSDSocket(object):
         if not enable:
             command = command.replace('true', 'false')
         if devicepath:
-            command = command.replace('}', ',"device":"') + devicepath + '"}'
-            # TODO: add scaled, split24, pps, ais, and rtcm2/3, etc..
+            command = command.replace('}', ',"device":"') + devicepath + '"}'  # TODO: can it handle multiple?
+        # TODO: add scaled, split24, pps, ais, and rtcm2/3, etc..
         return self.send(command)
 
     def send(self, commands):
@@ -77,8 +81,8 @@ class GPSDSocket(object):
         if sys.version_info[0] < 3:  # Not less than 3, but 'broken hearted' because
             self.streamSock.send(commands)  # 2.7 chokes on 'bytes' and 'encoding='
         else:
-            self.streamSock.send(bytes(commands, encoding='utf-8'))
-            # This is where it craps out when there is no daemon running  TODO: Add recovery check gpsd existence, re/start.
+            self.streamSock.send(bytes(commands, encoding='utf-8'))  # It craps out here when there is no daemon running
+            # TODO: Add recovery, check gpsd existence, re/start, etc..
 
     def __iter__(self):
         """banana"""  # <------- for scale
@@ -92,14 +96,14 @@ class GPSDSocket(object):
             if not waitin:
                 return
             else:
-                gpsd_response = self.streamSock.makefile()  # was '.makefile(buffering=4096)' In strictly Python(3)
+                gpsd_response = self.streamSock.makefile()  # was '.makefile(buffering=4096)' In strictly Python3
                 self.response = gpsd_response.readline()  # When does this fail?
 
             return self.response  # No, seriously; when does this fail?
 
         except OSError as error:
-            sys.stderr.write('The readline OSError is this: ', error)
-            return  # TODO: means to recover from error, how/why; e.g., no gpsd, no gps, etc.
+            sys.stderr.write('The readline OSError in GPSDSocket.next is this: ', error)
+            return  # TODO: means to recover from error, except it is an error of unknown etiology or frequency. Good luck.
 
     __next__ = next  # Workaround for changes in iterating between Python(2.7) and (3.4)
 
@@ -109,6 +113,7 @@ class GPSDSocket(object):
             self.watch(enable=False)
             self.streamSock.close()
         self.streamSock = None
+        return
 
 
 class Fix(object):
@@ -132,18 +137,16 @@ class Fix(object):
         # ais = {}  # see: http://catb.org/gpsd/AIVDM.html
         error = {"message"}
 
-        # The thought was a quick repository for stripped down versions, to add/subtract'module data packets'
+        # The thought was a quick repository for stripped down versions, to add/subtract' module data packets'
         packages = {"VERSION": version, "TPV": tpv, "SKY": sky, "ERROR": error}  # "DEVICES": devices, "GST": gst, etc.
-
+        # TODO: Create the full suite of possible JSON objects and a better way for deal with subsets
         for package_name, datalist in packages.items():
             _emptydict = {key: 'n/a' for (key) in datalist}  # There is a case for using None instead of 'n/a'
             setattr(self, package_name, _emptydict)
-        self.SKY['satellites'] = [
-            {'PRN': 'n/a', 'ss': 'n/a', 'el': 'n/a', 'az': 'n/a', 'used': 'n/a'}]  # TODO: Find a better way
+        self.SKY['satellites'] = [{'PRN': 'n/a', 'ss': 'n/a', 'el': 'n/a', 'az': 'n/a', 'used': 'n/a'}]
 
     def refresh(self, gpsd_data_package):
         """Sets new socket data as Fix attributes"""
-
         try:  # 'class' is a reserved word and is popped to allow easy 'setattr(package_name, key, a_package[key])'
             fresh_data = json.loads(gpsd_data_package)  # error should be same as named "ERROR" package from gpsd
             package_name = fresh_data.pop('class', 'ERROR')  # I don't know what 'ERROR' means, as if it happened, it
@@ -151,9 +154,8 @@ class Fix(object):
             for key in a_package.keys():  # Iterate attribute package  TODO: It craps out here when device disappears
                 a_package[key] = fresh_data.get(key, 'n/a')  # that is, update it, and if key is absent in the socket
                                                                 # response, present --> "key: 'n/a'" instead.'
-                # setattr(package_name, key, a_package[key])  # Uncomment to setattr individual keys. "gps.fix.TPV.lat"
         except (ValueError, KeyError) as error:  # This should not happen, most likely why it's an exception.  But, it
-            sys.stderr.write('There was a Value/KeyError with:', error,
+            sys.stderr.write('There was a Value/KeyError at GPSDSocket.refresh: ', error,
                              '\nThis should never happen.')  # happened once.  But I've no idea aside from it broke.
             pass
 
@@ -223,8 +225,8 @@ if __name__ == '__main__':
 
                 print('This is gps3 connecting to gpsd on host {0.host}, port {0.port}.'.format(args))
                 print('At {time}, it reports the device at {device}\n'.format(**fix.TPV))
-                print('This interface is using Python {}.{}.{}'.format(*sys.version_info))  # Flagpole kludge
 
+                print('{:^45}'.format('This interface is using Python {}.{}.{}'.format(*sys.version_info)))  # Flagpole kludge
                 print('{:^45}'.format("Iterated Satellite Data"))
                 for sats in fix.SKY['satellites']:
                     print(' Sat {PRN:->3}: Signal: {ss:>2}  {el:>2}:el-az:{az:<3}  Used: {used}'.format(**sats), )
@@ -234,11 +236,11 @@ if __name__ == '__main__':
                 print('Device coordinates- Latitude:{lat:0<11}  Longitude: {lon:0<12}'.format(**fix.TPV))
                 print('Speed: {speed} metres/second at {track} degrees from True North'.format(**fix.TPV))
                 print('Altitude: {} metres    All via:  session = GPSDSocket()  fix =  Fix()  '.format(fix.TPV['alt']))
-                print("Any data is the respective gpsd 'class'[key]' e.g., fix.TPV['time']")
+                print("Any data is the respective gpsd 'class'[key]' e.g., fix.TPV['time'], yielding")
                 print(fix.make_datetime(), 'UTC, a naive Datetime Object derived from that time string')
 
             else:
-                print('Peek a boo.  Socket Response is:', socket_response, 'Do you know why?')  # Other output for other humans and Nones
+                print('Peek a boo.  Socket Response is:', socket_response, 'Do you know why?')  # Output Nones and other protocols
 
             time.sleep(.9)  # to keep from spinning silly.
 
