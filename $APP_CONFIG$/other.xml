@@ -1,5 +1,25 @@
 <application>
   <component name="AppInspectionProfilesVisibleTreeState">
+    <entry key="2.7">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Python</id>
+          </State>
+          <State>
+            <id>Spelling</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>SpellCheckingInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
     <entry key="Default">
       <profile-state>
         <expanded-state>
