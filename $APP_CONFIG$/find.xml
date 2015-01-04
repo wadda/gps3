@@ -1,7 +1,7 @@
 <application>
   <component name="FindSettings">
-    <option name="customScope" value="File '/home/moe/projects/pyforward/router.py'" />
-    <option name="defaultScopeName" value="File '/home/moe/projects/pyforward/router.py'" />
-    <option name="SEARCH_SCOPE" value="File '/home/moe/projects/pyforward/router.py'" />
+    <option name="customScope" value="File '/home/moe/projects/pyforward/router.glade'" />
+    <option name="defaultScopeName" value="File '/home/moe/projects/pyforward/router.glade'" />
+    <option name="SEARCH_SCOPE" value="File '/home/moe/projects/pyforward/router.glade'" />
   </component>
 </application>
