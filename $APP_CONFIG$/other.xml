@@ -18,7 +18,7 @@
         </expanded-state>
         <selected-state>
           <State>
-            <id>SpellCheckingInspection</id>
+            <id>PyArgumentEqualDefaultInspection</id>
           </State>
         </selected-state>
       </profile-state>

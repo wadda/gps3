@@ -3,7 +3,6 @@
   <option name="myLocal" value="true" />
   <inspection_tool class="InconsistentLineSeparators" enabled="true" level="WARNING" enabled_by_default="true" />
   <inspection_tool class="LossyEncoding" enabled="true" level="WARNING" enabled_by_default="true" />
-  <inspection_tool class="PyArgumentEqualDefaultInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
   <inspection_tool class="PyClassicStyleClassInspection" enabled="true" level="WARNING" enabled_by_default="true" />
   <inspection_tool class="PyCompatibilityInspection" enabled="true" level="WARNING" enabled_by_default="true">
     <option name="ourVersions">
@@ -22,6 +21,11 @@
         <list size="0" />
       </value>
     </option>
+  </inspection_tool>
+  <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
+    <option name="processCode" value="true" />
+    <option name="processLiterals" value="true" />
+    <option name="processComments" value="true" />
   </inspection_tool>
   <inspection_tool class="UnusedDefine" enabled="true" level="WARNING" enabled_by_default="true" />
 </inspections>
