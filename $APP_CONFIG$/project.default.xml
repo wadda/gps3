@@ -90,7 +90,7 @@
         <property name="options.searchVisible" value="true" />
         <property name="recentsLimit" value="5" />
         <property name="restartRequiresConfirmation" value="true" />
-        <property name="last_opened_file_path" value="$USER_HOME$/pyrender" />
+        <property name="last_opened_file_path" value="$USER_HOME$/projects/lewifi" />
       </component>
       <component name="PyConsoleOptionsProvider">
         <option name="myPythonConsoleState">
