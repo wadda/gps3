@@ -1,11 +1,7 @@
 <application>
   <component name="FindSettings">
-    <option name="customScope" value="Project 'lewifi'" />
-    <option name="defaultScopeName" value="Project 'lewifi'" />
-    <option name="localCaseSensitive" value="true" />
-    <option name="localWholeWordsOnly" value="true" />
-    <option name="LOCAL_CASE_SENSITIVE_SEARCH" value="true" />
-    <option name="LOCAL_WHOLE_WORDS_ONLY" value="true" />
-    <option name="SEARCH_SCOPE" value="Project 'lewifi'" />
+    <option name="customScope" value="File '/home/moe/projects/cherie/cherie.py'" />
+    <option name="defaultScopeName" value="File '/home/moe/projects/cherie/cherie.py'" />
+    <option name="SEARCH_SCOPE" value="File '/home/moe/projects/cherie/cherie.py'" />
   </component>
 </application>
