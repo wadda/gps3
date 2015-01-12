@@ -139,8 +139,8 @@
     <option name="recentPaths">
       <list>
         <option value="$USER_HOME$/projects/cherie" />
-        <option value="$USER_HOME$/projects/sampleproject" />
         <option value="$USER_HOME$/projects/lewifi" />
+        <option value="$USER_HOME$/projects/sampleproject" />
         <option value="$USER_HOME$/pyrender" />
         <option value="$USER_HOME$/projects/hotspotd" />
         <option value="$USER_HOME$/projects/pyforward" />
@@ -150,11 +150,6 @@
         <option value="$USER_HOME$/projects/fake" />
         <option value="$USER_HOME$/projects/Lunacy" />
         <option value="$USER_HOME$/https:/github.com/divvet/GrowControl.git" />
-      </list>
-    </option>
-    <option name="openPaths">
-      <list>
-        <option value="$USER_HOME$/projects/lewifi" />
       </list>
     </option>
     <option name="names">
