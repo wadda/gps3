@@ -1,9 +1,9 @@
 <application>
   <component name="FindSettings">
-    <option name="customScope" value="File '/home/moe/projects/cherie/cherie.py'" />
-    <option name="defaultScopeName" value="File '/home/moe/projects/cherie/cherie.py'" />
+    <option name="customScope" value="File '/home/moe/projects/slocum/python/slocum.py'" />
+    <option name="defaultScopeName" value="File '/home/moe/projects/slocum/python/slocum.py'" />
     <option name="localWholeWordsOnly" value="true" />
     <option name="LOCAL_WHOLE_WORDS_ONLY" value="true" />
-    <option name="SEARCH_SCOPE" value="File '/home/moe/projects/cherie/cherie.py'" />
+    <option name="SEARCH_SCOPE" value="File '/home/moe/projects/slocum/python/slocum.py'" />
   </component>
 </application>
