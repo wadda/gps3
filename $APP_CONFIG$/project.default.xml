@@ -147,8 +147,8 @@
           <option name="INTERPRETER_OPTIONS" value="gksu" />
           <option name="PARENT_ENVS" value="true" />
           <envs>
-            <env name="sudo PYTHONPATH=$PYTHONPATH python &quot;$@&quot;" value="" />
             <env name="PYTHONUNBUFFERED" value="1" />
+            <env name="sudo PYTHONPATH=$PYTHONPATH python &quot;$@&quot;" value="" />
           </envs>
           <option name="SDK_HOME" value="/usr/bin/python3.4" />
           <option name="WORKING_DIRECTORY" value="$USER_HOME$/projects/cherie" />
