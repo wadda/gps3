@@ -1,8 +1,10 @@
 <application>
   <component name="FindSettings">
-    <option name="customScope" value="Project 'nightshift'" />
-    <option name="defaultScopeName" value="Project 'nightshift'" />
+    <option name="customScope" value="File '/home/moe/projects/cherie/apunt.py'" />
+    <option name="defaultScopeName" value="File '/home/moe/projects/cherie/apunt.py'" />
+    <option name="localWholeWordsOnly" value="true" />
+    <option name="LOCAL_WHOLE_WORDS_ONLY" value="true" />
     <option name="WITH_SUBDIRECTORIES" value="false" />
-    <option name="SEARCH_SCOPE" value="Project 'nightshift'" />
+    <option name="SEARCH_SCOPE" value="File '/home/moe/projects/cherie/apunt.py'" />
   </component>
 </application>
