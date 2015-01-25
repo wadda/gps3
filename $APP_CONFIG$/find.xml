@@ -2,6 +2,7 @@
   <component name="FindSettings">
     <option name="customScope" value="Project 'nightshift'" />
     <option name="defaultScopeName" value="Project 'nightshift'" />
+    <option name="WITH_SUBDIRECTORIES" value="false" />
     <option name="SEARCH_SCOPE" value="Project 'nightshift'" />
   </component>
 </application>
