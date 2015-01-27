@@ -16,5 +16,6 @@
   </highlighting>
   <extensionMap>
     <mapping pattern=".conkyrc" />
+    <mapping pattern=".conkyrc-test" />
   </extensionMap>
 </filetype>
