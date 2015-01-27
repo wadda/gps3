@@ -11,7 +11,8 @@
       <option name="HAS_PARENS" value="true" />
       <option name="HAS_STRING_ESCAPES" value="true" />
     </options>
-    <keywords keywords="${offset*};size" ignore_case="false" />
+    <keywords keywords="${???*}" ignore_case="false" />
+    <keywords2 keywords="size" />
   </highlighting>
   <extensionMap>
     <mapping pattern=".conkyrc*" />
