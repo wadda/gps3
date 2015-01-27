@@ -7,18 +7,33 @@
             <id />
           </State>
           <State>
+            <id>Buildout</id>
+          </State>
+          <State>
+            <id>General</id>
+          </State>
+          <State>
+            <id>HTML</id>
+          </State>
+          <State>
             <id>Portability issues</id>
           </State>
           <State>
             <id>Python</id>
           </State>
           <State>
+            <id>RELAX NG</id>
+          </State>
+          <State>
             <id>Spelling</id>
+          </State>
+          <State>
+            <id>XML</id>
           </State>
         </expanded-state>
         <selected-state>
           <State>
-            <id>PyCompatibilityInspection</id>
+            <id>XmlHighlighting</id>
           </State>
         </selected-state>
       </profile-state>
