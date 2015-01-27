@@ -5,9 +5,8 @@
       <mapping pattern="LICENSE" type="PLAIN_TEXT" />
       <mapping ext="cfg" type="PLAIN_TEXT" />
       <mapping ext="in" type="PLAIN_TEXT" />
-      <mapping pattern=".conkyrc" type="conky" />
-      <mapping pattern=".conkyrc-test" type="conky" />
+      <mapping pattern=".conkyrc*" type="conky" />
     </extensionMap>
-    <setting name="fileTypeChangedCounter" value="6" />
+    <setting name="fileTypeChangedCounter" value="8" />
   </component>
 </application>

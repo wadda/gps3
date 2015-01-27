@@ -14,7 +14,6 @@
     <keywords keywords="${offset*};size" ignore_case="false" />
   </highlighting>
   <extensionMap>
-    <mapping pattern=".conkyrc" />
-    <mapping pattern=".conkyrc-test" />
+    <mapping pattern=".conkyrc*" />
   </extensionMap>
 </filetype>
