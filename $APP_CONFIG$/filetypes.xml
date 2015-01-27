@@ -8,6 +8,6 @@
       <mapping pattern=".conkyrc" type="conky" />
       <mapping pattern=".conkyrc-test" type="conky" />
     </extensionMap>
-    <setting name="fileTypeChangedCounter" value="5" />
+    <setting name="fileTypeChangedCounter" value="6" />
   </component>
 </application>

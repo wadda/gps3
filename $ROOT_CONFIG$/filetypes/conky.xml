@@ -10,7 +10,6 @@
       <option name="HAS_BRACKETS" value="true" />
       <option name="HAS_PARENS" value="true" />
       <option name="HAS_STRING_ESCAPES" value="true" />
-      <option name="LINE_COMMENT_AT_START" value="true" />
     </options>
     <keywords keywords="${offset*};size" ignore_case="false" />
   </highlighting>
