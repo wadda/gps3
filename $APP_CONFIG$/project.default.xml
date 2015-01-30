@@ -143,14 +143,14 @@
           <option name="USE_PARAM" value="false" />
           <method />
         </configuration>
-        <configuration default="false" name="cherie" type="PythonConfigurationType" factoryName="Python">
-          <option name="INTERPRETER_OPTIONS" value="gksu" />
+        <configuration default="false" name="cherie" type="PythonConfigurationType" factoryName="Python" editBeforeRun="true">
+          <option name="INTERPRETER_OPTIONS" value="" />
           <option name="PARENT_ENVS" value="true" />
           <envs>
             <env name="PYTHONUNBUFFERED" value="1" />
             <env name="sudo PYTHONPATH=$PYTHONPATH python &quot;$@&quot;" value="" />
           </envs>
-          <option name="SDK_HOME" value="/usr/bin/python3.4" />
+          <option name="SDK_HOME" value="/usr/bin/python2.7" />
           <option name="WORKING_DIRECTORY" value="$USER_HOME$/projects/cherie" />
           <option name="IS_MODULE_SDK" value="false" />
           <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -160,7 +160,9 @@
           <option name="SCRIPT_NAME" value="$USER_HOME$/projects/cherie/2cherie.py" />
           <option name="PARAMETERS" value="" />
           <option name="SHOW_COMMAND_LINE" value="false" />
-          <method />
+          <method>
+            <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_External Tools_gksu" />
+          </method>
         </configuration>
         <list size="1">
           <item index="0" class="java.lang.String" itemvalue="Python.cherie" />
