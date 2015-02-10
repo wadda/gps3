@@ -119,7 +119,7 @@
     <option name="SDK_TO_NOSETEST">
       <map>
         <entry key="/usr/bin/python2.7" value="true" />
-        <entry key="/usr/bin/python3.4" value="true" />
+        <entry key="/usr/bin/python3.4" value="false" />
       </map>
     </option>
     <option name="SDK_TO_ATTEST">
@@ -132,9 +132,9 @@
   <component name="RecentDirectoryProjectsManager">
     <option name="recentPaths">
       <list>
+        <option value="$USER_HOME$/projects/gps3" />
         <option value="$USER_HOME$/projects/cherie" />
         <option value="$USER_HOME$/projects/untitled" />
-        <option value="$USER_HOME$/projects/gps3" />
         <option value="$USER_HOME$/projects/NxGPS" />
         <option value="$USER_HOME$/projects/untitled1" />
         <option value="$USER_HOME$/projects/all_wireless" />
@@ -154,17 +154,12 @@
         <option value="$USER_HOME$/https:/github.com/divvet/GrowControl.git" />
       </list>
     </option>
-    <option name="openPaths">
-      <list>
-        <option value="$USER_HOME$/projects/untitled" />
-      </list>
-    </option>
     <option name="names">
       <map>
         <entry key="$USER_HOME$/https:/github.com/divvet/GrowControl.git" value="GrowControl.git, GrowControl" />
       </map>
     </option>
-    <option name="lastPath" value="$USER_HOME$/projects/cherie" />
+    <option name="lastPath" value="$USER_HOME$/projects/gps3" />
   </component>
   <component name="Registry">
     <entry key="ide.firstStartup" value="false" />
