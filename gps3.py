@@ -63,9 +63,9 @@ class GPSDSocket(object):
         if gpsd_protocol == 'human':
             command = command.replace('human', 'json')
         if gpsd_protocol == 'rare':
-            command = command.replace('"rare":true', '"raw":1')
+            command = command.replace('"rare":true', '"raw":1')  # TODO: This doesn't work like this.  FIXME:
         if gpsd_protocol == 'raw':
-            command = command.replace('"raw":true', '"raw",2')
+            command = command.replace('"raw":true', '"raw",2')  # TODO: This doesn't work like this.  FIXME:
         if not enable:
             command = command.replace('true', 'false')
         if devicepath:
