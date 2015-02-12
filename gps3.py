@@ -10,8 +10,8 @@ import sys
 import json
 
 __author__ = 'Moe'
-__copyright__ = "Copyright 2014  Maurice Wick"  # nihil sub sole novum.  Everything was learned and adapted from somewhere else.
-__license__ = "MIT"  # TODO: figure this out and finish requirements
+__copyright__ = "Copyright 2015  Maurice Wick"  # nihil sub sole novum.  Everything learned/adapted from somewhere else.
+__license__ = "MIT"  # Don't forget. Don't abused. Pass it along. TODO: figure the rest out, jot and tittle.
 __version__ = "0.1a"
 
 GPSD_PORT = 2947
@@ -30,15 +30,15 @@ class GPSDSocket(object):
         self.streamSock = None  # Existential
         self.verbose = verbose
 
-        if host is not None:
+        if host:
             self.connect(host, port)  # No host/port will fail here
 
     def connect(self, host, port):
         """Connect to a host on a given port. """
-        for alotta_stuff in socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM):
-            afamily, socktype, proto, _canonname, host_port = alotta_stuff
+        for alotta_stuff in socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM):  # Default parameters
+            family, socktype, proto, _canonname, host_port = alotta_stuff
             try:
-                self.streamSock = socket.socket(afamily, socktype, proto)
+                self.streamSock = socket.socket(family, socktype, proto)
                 self.streamSock.connect(host_port)
                 self.streamSock.setblocking(False)
                 if self.verbose:
@@ -57,20 +57,21 @@ class GPSDSocket(object):
 
     def watch(self, enable=True, gpsd_protocol='json', devicepath=None):
         """watch gpsd in various gpsd_protocols or devices.  The gpsd_protocols could be: 'json', 'nmea', 'rare', 'raw',
-        'scaled', 'timing', 'split24', and 'pps'; with option for non-default device path"""
+        'scaled', 'split24', and 'pps'; with option for non-default device path"""
+        # TODO: add scaled, split24, pps, ais, and rtcm2/3, etc...'timing' requires special attention.
+        # "timing" attribute is undocumented and lives with dragons
         command = '?WATCH={{"enable":true,"{0}":true}}'.format(gpsd_protocol)
-        # TODO: does 'timing' need to be worked in like 'devicepath'? cf. gpsprof from gpsd project
-        if gpsd_protocol == 'human':
+        if gpsd_protocol == 'human':  # human is the only imitation protocol
             command = command.replace('human', 'json')
-        if gpsd_protocol == 'rare':
+        if gpsd_protocol == 'rare':  # 1 for a channel, gpsd reports the unprocessed NMEA or AIVDM data stream
             command = command.replace('"rare":true', '"raw":1')
-        if gpsd_protocol == 'raw':
+        if gpsd_protocol == 'raw':  # 2 channel that processes binary data, received data verbatim without hex-dumping.
             command = command.replace('"raw":true', '"raw",2')
         if not enable:
-            command = command.replace('true', 'false')
+            command = command.replace('true', 'false')  # 3 Musketeers, all for one.
         if devicepath:
             command = command.replace('}', ',"device":"') + devicepath + '"}'  # TODO: can it handle multiple?
-        # TODO: add scaled, split24, pps, ais, and rtcm2/3, etc..
+
         return self.send(command)
 
     def send(self, commands):
@@ -105,7 +106,7 @@ class GPSDSocket(object):
             sys.stderr.write('The readline OSError in GPSDSocket.next is this: ', error)
             return  # TODO: means to recover from error, except it is an error of unknown etiology or frequency. Good luck.
 
-    __next__ = next  # Workaround for changes in iterating between Python(2.7) and (3.4)
+    __next__ = next  # Workaround for changes in iterating between Python 2.7 and 3.4
 
     def close(self):
         """turn off stream and close socket"""
@@ -147,13 +148,13 @@ class Fix(object):
 
     def refresh(self, gpsd_data_package):
         """Sets new socket data as Fix attributes"""
-        try:  # 'class' is a reserved word and is popped to allow easy 'setattr(package_name, key, a_package[key])'
-            fresh_data = json.loads(gpsd_data_package)  # error should be same as named "ERROR" package from gpsd
-            package_name = fresh_data.pop('class', 'ERROR')  # I don't know what 'ERROR' means, as if it happened, it
+        try:  # 'class', a reserved word is popped to allow, if desired, 'setattr(package_name, key, a_package[key])'
+            fresh_data = json.loads(gpsd_data_package)  # error is named "ERROR" the same as the gpsd data package
+            package_name = fresh_data.pop('class', 'ERROR')  # If error, return 'ERROR' except if it happened, it
             a_package = getattr(self, package_name, package_name)  # should have been too broken to get to this point.
             for key in a_package.keys():  # Iterate attribute package  TODO: It craps out here when device disappears
                 a_package[key] = fresh_data.get(key, 'n/a')  # that is, update it, and if key is absent in the socket
-                                                                # response, present --> "key: 'n/a'" instead.'
+                # response, present --> "key: 'n/a'" instead.'
         except (ValueError, KeyError) as error:  # This should not happen, most likely why it's an exception.  But, it
             sys.stderr.write('There was a Value/KeyError at GPSDSocket.refresh: ', error,
                              '\nThis should never happen.')  # happened once.  But I've no idea aside from it broke.
@@ -220,33 +221,35 @@ if __name__ == '__main__':
 
     try:  # TODO: Tidy up for other protocols run on commandline
         for socket_response in session:
-            if socket_response and args.gpsd_protocol is 'human':  # Output for humans because it's the command line.
+            if socket_response is None:
+                print('Socket response is: \'None\' Do you know why?')
+
+            elif socket_response and args.gpsd_protocol is 'human':  # Output for humans because it's the command line.
                 fix.refresh(socket_response)
+                print('{:^45}'.format('This gps3 interface is using Python {}.{}.{}'.format(*sys.version_info)))  # Flagpole kludge
+                print('Connected to a gpsd on host {0.host}, port {0.port}.'.format(args))
+                print('It reports a device at {}\n'.format(fix.TPV['device']))
 
-                print('This is gps3 connecting to gpsd on host {0.host}, port {0.port}.'.format(args))
-                print('At {time}, it reports the device at {device}\n'.format(**fix.TPV))
-
-                print('{:^45}'.format('This interface is using Python {}.{}.{}'.format(*sys.version_info)))  # Flagpole kludge
-                print('{:^45}'.format("Iterated Satellite Data"))
-                for sats in fix.SKY['satellites']:
-                    print(' Sat {PRN:->3}: Signal: {ss:>2}  {el:>2}:el-az:{az:<3}  Used: {used}'.format(**sats), )
-                print('   Using {0[1]} of {0[0]} satellites in view to provide \n'.format(fix.satellites_used()))
+                print('{:^55}'.format("Iterated Satellite Data"))
+                for sats in fix.SKY['satellites'][0:10]:
+                    print('      Sat {PRN:->3}: Signal: {ss:>2}  {el:>2}:el-az:{az:<3}  Used: {used}'.format(**sats))
+                print('  Using {0[1]} of {0[0]} satellites in view (truncated list) providing \n'.format(fix.satellites_used()))
 
                 print('Error estimate - epx:{epx}, epy:{epy}, epv:{epv} in metres'.format(**fix.TPV))
                 print('Device coordinates- Latitude:{lat:0<11}  Longitude: {lon:0<12}'.format(**fix.TPV))
-                print('Speed: {speed} metres/second at {track} degrees from True North'.format(**fix.TPV))
-                print('Altitude: {} metres    All via:  session = GPSDSocket()  fix =  Fix()  '.format(fix.TPV['alt']))
-                print("Any data is the respective gpsd 'class'[key]' e.g., fix.TPV['time'], yielding")
+                print('Speed: {speed} metres/second tracking {track} degrees from True North'.format(**fix.TPV))
+                print('Altitude: {} metres; etc.  All data is the respective gpsd \'class\'[key]'.format(fix.TPV['alt']))
+                print('Via: session = GPSDSocket() and fix =  Fix() e.g., fix.TPV[\'time\'], yielding')
                 print(fix.make_datetime(), 'UTC, a naive Datetime Object derived from that time string')
 
             else:
-                print('Peek a boo.  Socket Response is:', socket_response, 'Do you know why?')  # Output Nones and other protocols
+                print('Socket Response is:', socket_response)  # Output Nones and other protocols
 
-            time.sleep(.9)  # to keep from spinning silly.
+            time.sleep(.9)  # to keep from spinning silly, or set GPSDSocket.streamSock.setblocking(False) to True
 
     except KeyboardInterrupt:
         session.close()
-        print("\nTerminated by user\nGood Bye.\n")
+        print("Keyboard interrupt received\nTerminated by user\nGood Bye.\n")
         sys.exit(1)
 #
 # Someday a cleaner Python interface will live here
