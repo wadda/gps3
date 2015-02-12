@@ -51,7 +51,7 @@ A trivial demonstration of functionality found in
 #!bash
 python3 demo_gegps3.py  # python demo_gegps3.py
 ```
-Presently, when placed in same directory as gps3.py, creates a default 4 second refreshing keyhole (.kml) file for Google Earth with age < 1 sec.
+Presently, when placed in same directory as gps3.py, creates a keyhole (.kml) file for Google Earth (GE defaults 4 second refreshing) with age < 1 sec from refresh.
 Open the generated file (/tmp/gps3_live.kml) with Google Earth and watch the jitter and track scratch that way, all day.
 
-Try them both in Python 2.7, add your improvements.
+Try them both in Python 2.7, add your improvements, send your demo applications.
