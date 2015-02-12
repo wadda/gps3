@@ -57,20 +57,21 @@ class GPSDSocket(object):
 
     def watch(self, enable=True, gpsd_protocol='json', devicepath=None):
         """watch gpsd in various gpsd_protocols or devices.  The gpsd_protocols could be: 'json', 'nmea', 'rare', 'raw',
-        'scaled', 'timing', 'split24', and 'pps'; with option for non-default device path"""
+        'scaled', 'split24', and 'pps'; with option for non-default device path"""
+        # TODO: add scaled, split24, pps, ais, and rtcm2/3, etc...'timing' requires special attention.
+        # "timing" attribute is undocumented and lives with dragons
         command = '?WATCH={{"enable":true,"{0}":true}}'.format(gpsd_protocol)
-        # TODO: does 'timing' need to be worked in like 'devicepath'? cf. gpsprof from gpsd project
-        if gpsd_protocol == 'human':
+        if gpsd_protocol == 'human':  # human is the only imitation protocol
             command = command.replace('human', 'json')
-        if gpsd_protocol == 'rare':
-            command = command.replace('"rare":true', '"raw":1')  # TODO: This doesn't work like this.  FIXME:
-        if gpsd_protocol == 'raw':
-            command = command.replace('"raw":true', '"raw",2')  # TODO: This doesn't work like this.  FIXME:
+        if gpsd_protocol == 'rare':  # 1 for a channel, gpsd reports the unprocessed NMEA or AIVDM data stream
+            command = command.replace('"rare":true', '"raw":1')
+        if gpsd_protocol == 'raw':  # 2 channel that processes binary data, received data verbatim without hex-dumping.
+            command = command.replace('"raw":true', '"raw",2')
         if not enable:
-            command = command.replace('true', 'false')
+            command = command.replace('true', 'false')  # 3 Musketeers, all for one.
         if devicepath:
             command = command.replace('}', ',"device":"') + devicepath + '"}'  # TODO: can it handle multiple?
-        # TODO: add scaled, split24, pps, ais, and rtcm2/3, etc..
+
         return self.send(command)
 
     def send(self, commands):
@@ -153,7 +154,7 @@ class Fix(object):
             a_package = getattr(self, package_name, package_name)  # should have been too broken to get to this point.
             for key in a_package.keys():  # Iterate attribute package  TODO: It craps out here when device disappears
                 a_package[key] = fresh_data.get(key, 'n/a')  # that is, update it, and if key is absent in the socket
-                                                                # response, present --> "key: 'n/a'" instead.'
+                # response, present --> "key: 'n/a'" instead.'
         except (ValueError, KeyError) as error:  # This should not happen, most likely why it's an exception.  But, it
             sys.stderr.write('There was a Value/KeyError at GPSDSocket.refresh: ', error,
                              '\nThis should never happen.')  # happened once.  But I've no idea aside from it broke.
@@ -222,6 +223,7 @@ if __name__ == '__main__':
         for socket_response in session:
             if socket_response is None:
                 print('Socket response is: \'None\' Do you know why?')
+
             elif socket_response and args.gpsd_protocol is 'human':  # Output for humans because it's the command line.
                 fix.refresh(socket_response)
                 print('{:^45}'.format('This gps3 interface is using Python {}.{}.{}'.format(*sys.version_info)))  # Flagpole kludge
@@ -243,7 +245,7 @@ if __name__ == '__main__':
             else:
                 print('Socket Response is:', socket_response)  # Output Nones and other protocols
 
-            time.sleep(.9)  # to keep from spinning silly.
+            time.sleep(.9)  # to keep from spinning silly, or set GPSDSocket.streamSock.setblocking(False) to True
 
     except KeyboardInterrupt:
         session.close()
