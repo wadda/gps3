@@ -504,7 +504,9 @@
     <option name="DELETED_TEXT_ATTRIBUTES">
       <value>
         <option name="FOREGROUND" value="c3c3c3" />
-        <option name="BACKGROUND" value="f0f0f0" />
+        <option name="BACKGROUND" value="f0009f" />
+        <option name="FONT_TYPE" value="2" />
+        <option name="ERROR_STRIPE_COLOR" value="ffffff" />
         <option name="EFFECT_TYPE" value="1" />
       </value>
     </option>
@@ -767,8 +769,8 @@
     <option name="IDENTIFIER_UNDER_CARET_ATTRIBUTES">
       <value>
         <option name="FOREGROUND" value="a50f5d" />
-        <option name="BACKGROUND" value="606060" />
-        <option name="ERROR_STRIPE_COLOR" value="ccccff" />
+        <option name="BACKGROUND" value="a9a9a9" />
+        <option name="EFFECT_COLOR" value="ffffff" />
         <option name="EFFECT_TYPE" value="0" />
       </value>
     </option>
@@ -1662,8 +1664,9 @@
     </option>
     <option name="WRITE_IDENTIFIER_UNDER_CARET_ATTRIBUTES">
       <value>
-        <option name="BACKGROUND" value="ffe4ff" />
-        <option name="ERROR_STRIPE_COLOR" value="ffcdff" />
+        <option name="FOREGROUND" value="ffffff" />
+        <option name="EFFECT_COLOR" value="ffffff" />
+        <option name="ERROR_STRIPE_COLOR" value="ffffff" />
         <option name="EFFECT_TYPE" value="0" />
       </value>
     </option>
