@@ -135,6 +135,11 @@
         <option value="$USER_HOME$/projects/NxGPS" />
       </list>
     </option>
+    <option name="openPaths">
+      <list>
+        <option value="$USER_HOME$/projects/NxGPS" />
+      </list>
+    </option>
     <option name="names">
       <map>
         <entry key="$USER_HOME$/https:/github.com/divvet/GrowControl.git" value="GrowControl.git, GrowControl" />
