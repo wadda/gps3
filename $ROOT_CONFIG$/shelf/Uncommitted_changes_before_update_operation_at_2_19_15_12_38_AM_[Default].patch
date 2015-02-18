@@ -1,0 +1,1287 @@
+Index: gpsclient.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- gpsclient.py	(date 1424266665000)
++++ gpsclient.py	(revision )
+@@ -1,5 +1,7 @@
+ #!/usr/bin/env python
+ # -*- coding: utf-8 -*-
++from __future__ import print_function
++
+ """GPSD client to connect, read, and create gps attributes"""
+ 
+ from gps import time, gps, gpsdata
+@@ -19,9 +21,9 @@
+             self.gpsd = gps(mode=0x000001)  # starting the stream of info
+             self.running = False
+         except socket.error as error:  # TODO: keep alive for reconnection
+-            print "GPSD ERROR CHECK GPS CONNECTION\n" * 5
+-            print 'This is what happened...'
+-            print error
++            print("GPSD ERROR CHECK GPS CONNECTION\n" * 5)
++            print('This is what happened...')
++            print(error)
+             sys.exit()
+ 
+     def run(self):
+@@ -99,34 +101,34 @@
+         gpsdata.start()
+         while True:
+             os.system('clear')  # clear the terminal (optional)
+-            print "latitude ", gpsdata.fix.latitude
+-            print "longitude ", gpsdata.fix.longitude
+-            print "UTC & time ", gpsdata.utc, ' ', gpsdata.fix.time
+-            print "altitude (m)", gpsdata.fix.altitude
+-            print "eps ", gpsdata.fix.eps
+-            print "epx ", gpsdata.fix.epx
+-            print "epv ", gpsdata.fix.epv
+-            print "ept ", gpsdata.gpsd.fix.ept
+-            print "speed (m/s) ", gpsdata.fix.speed
+-            print "climb (m/s)", gpsdata.fix.climb
+-            print "track ", gpsdata.fix.track
+-            print "mode ", gpsdata.fix.mode
+-            print "sats ", gpsdata.satellites
++            print("latitude ", gpsdata.fix.latitude)
++            print("longitude ", gpsdata.fix.longitude)
++            print("UTC & time ", gpsdata.utc, ' ', gpsdata.fix.time)
++            print("altitude (m)", gpsdata.fix.altitude)
++            print("eps ", gpsdata.fix.eps)
++            print("epx ", gpsdata.fix.epx)
++            print("epv ", gpsdata.fix.epv)
++            print("ept ", gpsdata.gpsd.fix.ept)
++            print("speed (m/s) ", gpsdata.fix.speed)
++            print("climb (m/s)", gpsdata.fix.climb)
++            print("track ", gpsdata.fix.track)
++            print("mode ", gpsdata.fix.mode)
++            print("sats ", gpsdata.satellites)
+             time.sleep(.9)
+ 
+     # Ctrl C
+     except KeyboardInterrupt:
+-        print "User cancelled"
++        print("User cancelled")
+ 
+     # Error
+     except:
+-        print "Unexpected error:", sys.exc_info()[0]
++        print("Unexpected error:", sys.exc_info()[0])
+         raise
+ 
+     finally:
+-        print "Stopping gps client"
++        print("Stopping gps client")
+         gpsdata.stopclient()
+         # wait for the tread to finish
+         gpsdata.join()
+ 
+-    print "Done"
++    print("Done")
+Index: instance.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- instance.py	(date 1424266665000)
++++ instance.py	(revision )
+@@ -1,5 +1,7 @@
+ #!/usr/bin/env python
+ # -*- coding: utf-8 -*-
++
++
+ __author__ = 'wadda'
+ # Pinched 2014
+ # Created and re-created many times by a lot of different people over the last 14 years.
+@@ -9,10 +11,10 @@
+ from tempfile import gettempdir
+ 
+ 
+-class singleInstance(object):
++class SingleInstance(object):
+     def __init__(self):
+         self.lockfile = os.path.normpath(gettempdir() + '/' + 'wadda.lock')
+-        print self.lockfile
++        print((self.lockfile))
+         self.single = True
+         import fcntl
+ 
+@@ -28,9 +30,9 @@
+ if __name__ == '__main__':
+     from time import sleep
+ 
+-    lock = singleInstance()
++    lock = SingleInstance()
+     if lock.single:
+-        print 'single instance... running'
++        print('single instance... running')
+         sleep(30)
+     else:
+-        print 'another instance is running... quitting'
++        print('another instance is running... quitting')
+Index: latlon.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- latlon.py	(date 1424266665000)
++++ latlon.py	(revision )
+@@ -6,25 +6,28 @@
+ import gps3
+ import geomag
+ import control
+-from odometer import odometer
++from old_odometer import odometer
+ from waypoint import waypoint
+ 
+ settings = control.settings
+ units = control.units
+ 
+ 
+-class DoLatLon(object):
++class LatLon(object):
+ 
+     def __init__(self):
+         """ do_lat_lon creates lat/lon attributes
+         """
+         self.lat = None
+         self.lon = None
++        self.pretty_lat = "No Data"
++        self.pretty_lon = "No Data"
+ 
++
+     def do_lat_lon(self, lat, lon):
+         """banana
+         """
+-        if isinstance(gps3.Fix.TPV['lat'], str):  # One is not without the other...unless it's severely broken.
++        if isinstance(gps3.Fix.TPV['lat'], str):  # One is not without the other...unless it's not working;-)
+             self.lat = self.lon = None
+             return
+ 
+@@ -47,28 +50,28 @@
+         returns string in fmt DDD or DMM or DMS
+         having been rounded to less than 1 foot @ equator
+         """
+-        pretty_lat = pretty_lon = None
++        self.pretty_lat = self.pretty_lon = "No Data"
+         if not settings.show_latlon:
+             return
+ 
+         if self.lat is None:
+-            pretty_lat = pretty_lon = "No Data"
+-            print('No_Lat:', pretty_lat, ' No_Lon:', pretty_lon)
++            self.pretty_lat = self.pretty_lon = "No Data"
++            print('No_Lat:', self.pretty_lat, ' No_Lon:', self.pretty_lon)
+ 
+         if settings.latlon_units == 'DDD':
+             # Latitude
+             _lat = abs(self.lat)
+             if self.lat > 0.0:
+-                pretty_lat = '{0:3.6f}° N'.format(_lat)
++                self.pretty_lat = '{0:3.6f}° N'.format(_lat)
+             else:
+-                pretty_lat = '{0:3.6f}° S'.format(_lat)
++                self.pretty_lat = '{0:3.6f}° S'.format(_lat)
+ 
+             # Longitude
+             _lon = abs(self.lon)
+             if self.lon > 0.0:
+-                pretty_lon = '{0:3.6f}° E'.format(_lon)
++                self.pretty_lon = '{0:3.6f}° E'.format(_lon)
+             else:
+-                pretty_lon = '{0:3.6f}° W'.format(_lon)
++                self.pretty_lon = '{0:3.6f}° W'.format(_lon)
+ 
+         if settings.latlon_units == 'DMM':
+             # Latitude
+@@ -76,29 +79,29 @@
+             minlat, deglat = modf(_lat)
+             minlat *= 60
+             if self.lat > 0.0:
+-                pretty_lat = '{0}° {1:2.5f}\' N'.format(int(deglat), minlat)
++                self.pretty_lat = '{0}° {1:2.5f}\' N'.format(int(deglat), minlat)
+             else:
+-                pretty_lat = '{0}° {1:2.5f}\' S'.format(int(deglat), minlat)
++                self.pretty_lat = '{0}° {1:2.5f}\' S'.format(int(deglat), minlat)
+ 
+             # Longitude
+             _lon = abs(self.lon)
+             minlon, deglon = modf(_lon)
+             minlon *= 60
+             if self.lon > 0.0:
+-                pretty_lon = '{0}° {1:2.4f}\' E'.format(int(deglon), minlon)
++                self.pretty_lon = '{0}° {1:2.4f}\' E'.format(int(deglon), minlon)
+             else:
+-                pretty_lon = '{0}° {1:2.4f}\' W'.format(int(deglon), minlon)
++                self.pretty_lon = '{0}° {1:2.4f}\' W'.format(int(deglon), minlon)
+ 
+         if settings.latlon_units == 'DMS':
+             # Latitude
+             _lat = abs(self.lat)
+-            mmm, deglat = modf(_lat)
+-            sec, minlat = modf(mmm * 60)
++            minlat, deglat = modf(_lat)
++            sec, minutelat = modf(minlat * 60)
+             sec *= 60.0
+             if self.lat > 0.0:
+-                pretty_lat = '{0}° {1}\' {2:2.3f}\" N'.format(int(deglat), int(minlat), sec)
++                self.pretty_lat = '{0}° {1}\' {2:2.3f}\" N'.format(int(deglat), int(minutelat), sec)
+             else:
+-                pretty_lat = '{0}° {1}\' {2:2.3f}\" S'.format(int(deglat), int(minlat), sec)
++                self.pretty_lat = '{0}° {1}\' {2:2.3f}\" S'.format(int(deglat), int(minutelat), sec)
+ 
+             # Longitude
+             _lon = abs(self.lon)
+@@ -106,12 +109,12 @@
+             sec, minlon = modf(mmm * 60)
+             sec *= 60.0
+             if self.lon > 0.0:
+-                pretty_lon = '{0}° {1}\' {2:2.3f}\" E'.format(int(deglon), int(minlon), sec)
++                self.pretty_lon = '{0}° {1}\' {2:2.3f}\" E'.format(int(deglon), int(minlon), sec)
+             else:
+-                pretty_lon = '{0}° {1}\' {2:2.3f}\" W'.format(int(deglat), int(minlon), sec)
++                self.pretty_lon = '{0}° {1}\' {2:2.3f}\" W'.format(int(deglat), int(minlon), sec)
+ 
+-        # pub.sendMessage('show_latlon', show_lat=pretty_lat, show_lon=pretty_lon)
+-        print('Latitude: ', pretty_lat, ' Lon: ', pretty_lon)  # Test
++        # pub.sendMessage('show_latlon', show_lat=self.pretty_lat, show_lon=self.pretty_lon)
++        print('Latitude: ', self.pretty_lat, ' Lon: ', self.pretty_lon)  # Test
+         return
+ 
+     def magdec(self):
+Index: gps.py
+===================================================================
+--- gps.py	(date 1424266665000)
++++ gps.py	(date 1424266665000)
+@@ -1,385 +0,0 @@
+-#!/usr/bin/env python
+-# -*- coding: utf-8 -*-
+-#
+-# This file is Copyright (c) 2010 by the GPSD project
+-# BSD terms apply: see the file COPYING in the distribution root for details.
+-#
+-# gps.py -- Python interface to GPSD.
+-#
+-# This interface has a lot of historical cruft in it related to old
+-# protocol, and was modeled on the C interface. It won't be thrown
+-# away, but it's likely to be deprecated in favor of something more
+-# Pythonic.
+-#
+-# The JSON parts of this (which will be reused by any new interface)
+-# now live in a different module.
+-###############
+-#
+-# This file was modified by Moe Feb, 2014, as noted.
+-# It lives /usr/lib/python2.7/dist-packages/gps/
+-#
+-#
+-from client import *
+-from misc import isotime
+-
+-NaN = float('nan')
+-
+-
+-def isnan(x): return str(x) == None  # 'nan'
+-
+-# Don't hand-hack this list, it's generated.
+-ONLINE_SET = (1 << 1)
+-TIME_SET = (1 << 2)
+-TIMERR_SET = (1 << 3)
+-LATLON_SET = (1 << 4)
+-ALTITUDE_SET = (1 << 5)
+-SPEED_SET = (1 << 6)
+-TRACK_SET = (1 << 7)
+-CLIMB_SET = (1 << 8)
+-STATUS_SET = (1 << 9)
+-MODE_SET = (1 << 10)
+-DOP_SET = (1 << 11)
+-HERR_SET = (1 << 12)
+-VERR_SET = (1 << 13)
+-ATTITUDE_SET = (1 << 14)
+-SATELLITE_SET = (1 << 15)
+-SPEEDERR_SET = (1 << 16)
+-TRACKERR_SET = (1 << 17)
+-CLIMBERR_SET = (1 << 18)
+-DEVICE_SET = (1 << 19)
+-DEVICELIST_SET = (1 << 20)
+-DEVICEID_SET = (1 << 21)
+-RTCM2_SET = (1 << 22)
+-RTCM3_SET = (1 << 23)
+-AIS_SET = (1 << 24)
+-PACKET_SET = (1 << 25)
+-SUBFRAME_SET = (1 << 26)
+-GST_SET = (1 << 27)
+-VERSION_SET = (1 << 28)
+-POLICY_SET = (1 << 29)
+-ERROR_SET = (1 << 30)
+-UNION_SET = (RTCM2_SET | RTCM3_SET | SUBFRAME_SET | AIS_SET | VERSION_SET | DEVICELIST_SET | ERROR_SET | GST_SET)
+-STATUS_NO_FIX = 0
+-STATUS_FIX = 1
+-STATUS_DGPS_FIX = 2
+-MODE_NO_FIX = 1
+-MODE_2D = 2
+-MODE_3D = 3
+-MAXCHANNELS = 20
+-SIGNAL_STRENGTH_UNKNOWN = NaN
+-
+-WATCH_NEWSTYLE = 0x010000  # force JSON streaming
+-WATCH_OLDSTYLE = 0x020000  # force old-style streaming
+-
+-
+-class gpsfix:
+-    def __init__(self):
+-        self.mode = MODE_NO_FIX
+-        self.time = None  # NaN
+-        self.ept = NaN
+-        self.latitude = self.longitude = None  # 0.0
+-        self.epx = NaN
+-        self.epy = NaN
+-        self.altitude = NaN  # Meters
+-        self.epv = NaN
+-        self.track = None  # NaN            # Degrees from true north
+-        self.speed = None  # NaN             # Knots
+-        self.climb = NaN  # Meters per second
+-        self.epd = NaN
+-        self.eps = NaN
+-        self.epc = NaN
+-
+-
+-class gpsdata:
+-    "Position, track, velocity and status information returned by a GPS."
+-
+-    class satellite:
+-        def __init__(self, PRN, elevation, azimuth, ss, used=None):
+-            self.PRN = PRN
+-            self.elevation = elevation
+-            self.azimuth = azimuth
+-            self.ss = ss
+-            self.used = used
+-
+-        def __repr__(self):
+-            return "PRN: %3d  E: %3d  Az: %3d  Ss: %3d  Used: %s" % (
+-                self.PRN, self.elevation, self.azimuth, self.ss, "ny"[self.used]
+-            )
+-
+-    def __init__(self):
+-        # Initialize all data members
+-        self.online = 0  # NZ if GPS on, zero if not
+-
+-        self.valid = 0
+-        self.fix = gpsfix()
+-
+-        self.status = STATUS_NO_FIX
+-        self.utc = ""
+-
+-        self.satellites_used = 0  # Satellites used in last fix
+-        self.xdop = self.ydop = self.vdop = self.tdop = 0
+-        self.pdop = self.hdop = self.gdop = 0.0
+-
+-        self.epe = 0.0
+-
+-        self.satellites = []  # satellite objects in view
+-
+-        self.gps_id = None
+-        self.driver_mode = 0
+-        self.baudrate = 0
+-        self.stopbits = 0
+-        self.cycle = 0
+-        self.mincycle = 0
+-        self.device = None
+-        self.devices = []
+-
+-        self.version = None
+-
+-    def __repr__(self):
+-        st = "Time:     %s (%s)\n" % (self.utc, self.fix.time)
+-        st += "Lat/Lon:  %f %f\n" % (self.fix.latitude, self.fix.longitude)
+-        if isnan(self.fix.altitude):
+-            st += "Altitude: ?\n"
+-        else:
+-            st += "Altitude: %f\n" % (self.fix.altitude)
+-        if isnan(self.fix.speed):
+-            st += "Speed:    ?\n"
+-        else:
+-            st += "Speed:    %f\n" % (self.fix.speed)
+-        if isnan(self.fix.track):
+-            st += "Track:    ?\n"
+-        else:
+-            st += "Track:    %f\n" % (self.fix.track)
+-        st += "Status:   STATUS_%s\n" % ("NO_FIX", "FIX", "DGPS_FIX")[self.status]
+-        st += "Mode:     MODE_%s\n" % ("ZERO", "NO_FIX", "2D", "3D")[self.fix.mode]
+-        st += "Quality:  %d p=%2.2f h=%2.2f v=%2.2f t=%2.2f g=%2.2f\n" % \
+-              (self.satellites_used, self.pdop, self.hdop, self.vdop, self.tdop, self.gdop)
+-        st += "Y: %s satellites in view:\n" % len(self.satellites)
+-        for sat in self.satellites:
+-            st += "    %r\n" % sat
+-        return st
+-
+-
+-class gps(gpsdata, gpsjson):
+-    "Client interface to a running gpsd instance."
+-
+-    def __init__(self, host="127.0.0.1", port=GPSD_PORT, verbose=0, mode=0):
+-        gpscommon.__init__(self, host, port, verbose)
+-        gpsdata.__init__(self)
+-        self.newstyle = False
+-        if mode:
+-            self.stream(mode)
+-
+-    def __oldstyle_unpack(self, buf):
+-        # unpack a daemon response into the gps instance members
+-        self.fix.time = 0.0
+-        fields = buf.strip().split(",")
+-        if fields[0] == "GPSD":
+-            for field in fields[1:]:
+-                if not field or field[1] != '=':
+-                    continue
+-                cmd = field[0].upper()
+-                data = field[2:]
+-                if data[0] == "?":
+-                    continue
+-                if cmd == 'F':
+-                    self.device = data
+-                elif cmd == 'I':
+-                    self.gps_id = data
+-                elif cmd == 'O':
+-                    fields = data.split()
+-                    if fields[0] == '?':
+-                        self.fix.mode = MODE_NO_FIX
+-                    else:
+-                        def default(i, vbit=0, cnv=float):
+-                            if fields[i] == '?':
+-                                return NaN
+-                            else:
+-                                try:
+-                                    value = cnv(fields[i])
+-                                except ValueError:
+-                                    return NaN
+-                                self.valid |= vbit
+-                                return value
+-
+-                        # clear all valid bits that might be set again below
+-                        self.valid &= ~(
+-                            TIME_SET | TIMERR_SET | LATLON_SET | ALTITUDE_SET |
+-                            HERR_SET | VERR_SET | TRACK_SET | SPEED_SET |
+-                            CLIMB_SET | SPEEDERR_SET | CLIMBERR_SET | MODE_SET
+-                        )
+-                        self.utc = fields[1]
+-                        self.fix.time = default(1, TIME_SET)
+-                        if not isnan(self.fix.time):
+-                            self.utc = isotime(self.fix.time)
+-                        self.fix.ept = default(2, TIMERR_SET)
+-                        self.fix.latitude = default(3, LATLON_SET)
+-                        self.fix.longitude = default(4)
+-                        self.fix.altitude = default(5, ALTITUDE_SET)
+-                        self.fix.epx = self.epy = default(6, HERR_SET)
+-                        self.fix.epv = default(7, VERR_SET)
+-                        self.fix.track = default(8, TRACK_SET)
+-                        self.fix.speed = default(9, SPEED_SET)
+-                        self.fix.climb = default(10, CLIMB_SET)
+-                        self.fix.epd = default(11)
+-                        self.fix.eps = default(12, SPEEDERR_SET)
+-                        self.fix.epc = default(13, CLIMBERR_SET)
+-                        if len(fields) > 14:
+-                            self.fix.mode = default(14, MODE_SET, int)
+-                        else:
+-                            if self.valid & ALTITUDE_SET:
+-                                self.fix.mode = MODE_2D
+-                            else:
+-                                self.fix.mode = MODE_3D
+-                            self.valid |= MODE_SET
+-                elif cmd == 'X':
+-                    self.online = float(data)
+-                    self.valid |= ONLINE_SET
+-                elif cmd == 'Y':
+-                    satellites = data.split(":")
+-                    prefix = satellites.pop(0).split()
+-                    d1 = int(prefix.pop())
+-                    newsats = []
+-                    for i in range(d1):
+-                        newsats.append(gps.satellite(*map(int, satellites[i].split())))
+-                    self.satellites = newsats
+-                    self.valid |= SATELLITE_SET
+-
+-    def __oldstyle_shim(self):
+-        # The rest is backwards compatibility for the old interface
+-        def default(k, dflt, vbit=0):
+-            if k not in self.data.keys():
+-                return dflt
+-            else:
+-                self.valid |= vbit
+-                return self.data[k]
+-
+-        if self.data.get("class") == "VERSION":
+-            self.version = self.data
+-        elif self.data.get("class") == "DEVICE":
+-            self.valid = ONLINE_SET | DEVICE_SET
+-            self.path = self.data["path"]
+-            self.activated = default("activated", None)
+-            driver = default("driver", None, DEVICEID_SET)
+-            subtype = default("subtype", None, DEVICEID_SET)
+-            self.gps_id = driver
+-            if subtype:
+-                self.gps_id += " " + subtype
+-            self.driver_mode = default("native", 0)
+-            self.baudrate = default("bps", 0)
+-            self.serialmode = default("serialmode", "8N1")
+-            self.cycle = default("cycle", NaN)
+-            self.mincycle = default("mincycle", NaN)
+-        elif self.data.get("class") == "TPV":
+-            self.valid = ONLINE_SET
+-            self.utc = default("time", None, TIME_SET)
+-            if self.utc is not None:
+-                # Time can be either Unix time as a float or an ISO8601 string
+-                if type(self.fix.time) == type(0.0):
+-                    self.fix.time = self.utc
+-                else:
+-                    self.fix.time = isotime(self.utc.encode("ascii"))
+-            self.fix.ept = default("ept", NaN, TIMERR_SET)
+-            self.fix.latitude = default("lat", None, LATLON_SET)
+-            self.fix.longitude = default("lon", None)
+-            self.fix.altitude = default("alt", NaN, ALTITUDE_SET)
+-            self.fix.epx = default("epx", NaN, HERR_SET)
+-            self.fix.epy = default("epy", NaN, HERR_SET)
+-            self.fix.epv = default("epv", NaN, VERR_SET)
+-            self.fix.track = default("track", None, TRACK_SET)
+-            self.fix.speed = default("speed", None, SPEED_SET)
+-            self.fix.climb = default("climb", NaN, CLIMB_SET)
+-            self.fix.epd = default("epd", NaN)
+-            self.fix.eps = default("eps", NaN, SPEEDERR_SET)
+-            self.fix.epc = default("epc", NaN, CLIMBERR_SET)
+-            self.fix.mode = default("mode", 0, MODE_SET)
+-        elif self.data.get("class") == "SKY":
+-            for attrp in ("x", "y", "v", "h", "p", "g"):
+-                setattr(self, attrp + "dop", default(attrp + "dop", NaN, DOP_SET))
+-            if "satellites" in self.data.keys():
+-                self.satellites = []
+-                for sat in self.data['satellites']:
+-                    self.satellites.append(
+-                        gps.satellite(PRN=sat['PRN'], elevation=sat['el'], azimuth=sat['az'], ss=sat['ss'],
+-                                      used=sat['used']))
+-            self.satellites_used = 0
+-            for sat in self.satellites:
+-                if sat.used:
+-                    self.satellites_used += 1
+-            self.valid = ONLINE_SET | SATELLITE_SET
+-
+-    def read(self):
+-        "Read and interpret data from the daemon."
+-        status = gpscommon.read(self)
+-        if status <= 0:
+-            return status
+-        if self.response.startswith("{") and self.response.endswith("}\r\n"):
+-            self.unpack(self.response)
+-            self.__oldstyle_shim()
+-            self.newstyle = True
+-            self.valid |= PACKET_SET
+-        elif self.response.startswith("GPSD"):
+-            self.__oldstyle_unpack(self.response)
+-            self.valid |= PACKET_SET
+-        return 0
+-
+-    def next(self):
+-        if self.read() == -1:
+-            raise StopIteration
+-        if hasattr(self, "data"):
+-            return self.data
+-        else:
+-            return self.response
+-
+-    def stream(self, flags=0, devpath=None):
+-        "Ask gpsd to stream reports at your client."
+-        if (flags & (WATCH_JSON | WATCH_OLDSTYLE | WATCH_NMEA | WATCH_RAW)) == 0:
+-            flags |= WATCH_JSON
+-        if flags & WATCH_DISABLE:
+-            if flags & WATCH_OLDSTYLE:
+-                arg = "w-"
+-                if flags & WATCH_NMEA:
+-                    arg += 'r-'
+-                    return self.send(arg)
+-            else:
+-                gpsjson.stream(self, ~flags, devpath)
+-        else:  # flags & WATCH_ENABLE:
+-            if flags & WATCH_OLDSTYLE:
+-                arg = 'w+'
+-                if (flags & WATCH_NMEA):
+-                    arg += 'r+'
+-                    return self.send(arg)
+-            else:
+-                gpsjson.stream(self, flags, devpath)
+-
+-
+-if __name__ == '__main__':
+-    import getopt, sys
+-
+-    (options, arguments) = getopt.getopt(sys.argv[1:], "v")
+-    streaming = False
+-    verbose = False
+-    for (switch, val) in options:
+-        if switch == '-v':
+-            verbose = True
+-    if len(arguments) > 2:
+-        print 'Usage: gps.py [-v] [host [port]]'
+-        sys.exit(1)
+-
+-    opts = {"verbose": verbose}
+-    if len(arguments) > 0:
+-        opts["host"] = arguments[0]
+-    if len(arguments) > 1:
+-        opts["port"] = arguments[1]
+-
+-    session = gps(**opts)
+-    session.stream(WATCH_ENABLE)
+-    try:
+-        for report in session:
+-            print report
+-    except KeyboardInterrupt:
+-        # Avoid garble on ^C
+-        print ""
+-
+-# gps.py ends here
+-
+Index: control.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- control.py	(date 1424266665000)
++++ control.py	(revision )
+@@ -1,7 +1,9 @@
+ #!/usr/bin/env python
+ # -*- coding: utf-8 -*-
++
++
+ """Create and read user configuration file and settings and periodic functions"""
+-import ConfigParser
++import configparser
+ import os
+ from datetime import timedelta
+ from time import time
+@@ -97,8 +99,8 @@
+         # datetime.strptime('2014-04-25', '%Y-%m-%d')  # dummy call  http://bugs.python.org/issue7980 Doesn't work here.
+ 
+         if os.path.isfile(self.configuration_file):
+-            print 'reading configuration from: ', self.configuration_file
+-            configuration = ConfigParser.RawConfigParser()
++            print('reading configuration from: ', self.configuration_file)
++            configuration = configparser.RawConfigParser()
+             configuration.read(self.configuration_file)
+ 
+             try:
+@@ -172,22 +174,11 @@
+                 #                         for s in self.nightcolor[-1].split(','))
+ 
+             except ValueError or IOError as error:
+-                print 'The read configuration error is:', error
++                print('The read configuration error is:', error)
+                 os.makedirs(self.home_directory + '/.wadda/')
+         else:
+-            print '-- writing default configuration file --'
++            print('-- writing default configuration file --')
+             self.write_configuration()
+-                #
+-                # self.write_configuration()
+-                # retries = 0
+-                # while IOError and retries < 2:
+-                #     try:
+-                #         self.read_configuration()
+-                #     except IOError:
+-                #         print 'Error recovery re-read of the configuration file'
+-                #         return
+-                #     retries += 1
+-                # sys.exit('Something is really stuffed.\nCheck ~/.wadda')
+         return
+ 
+     def write_configuration(self):
+@@ -199,8 +190,8 @@
+         # timezone()
+ 
+         try:
+-            print 'writing configuration to: ', self.configuration_file  # TODO: Needs exceptions
+-            configuration = ConfigParser.RawConfigParser()
++            print('writing configuration to: ', self.configuration_file)  # TODO: Needs exceptions
++            configuration = configparser.RawConfigParser()
+ 
+             # NxGPS
+             configuration.add_section('NxGPS')
+@@ -276,24 +267,17 @@
+             # TODO: find file location
+             os.makedirs(self.home_directory + '/.wadda/')
+             os.makedirs(self.waypoint_directory)
+-            # self.write_configuration()
+-            # retries = 0
+-            # if IOError and retries < 2:
+-            #     try:
+-            #         self.write_configuration()
+-            #     except IOError:
+-            #         print 'Error recovery write of the configuration file'
+-            #         return
+-            #     retries += 1
+-            # sys.exit('Something is really stuffed.\nCheck ~/.wadda')
++
+         return
+ 
+ settings = Settings()
+ 
+ 
+-class Units():
+-
++class Units(object):
+     # Units per meter
++    def __init__(self):
++        pass
++
+     DISTANCE = {
+         'NM': 0.0005399568,
+         'Miles': 0.00062137119,
+@@ -310,7 +294,7 @@
+         (360, 'N')
+     )
+     # CARD = {011.25: 'N', 033.75: 'NNE', 056.25: 'NE', 078.75: 'ENE',
+-    #         101.25: 'E', 123.75: 'ESE', 146.25: 'SE', 168.75: 'SSE',
++    # 101.25: 'E', 123.75: 'ESE', 146.25: 'SE', 168.75: 'SSE',
+     #         191.25: 'S', 213.75: 'SSW', 236.25: 'SW', 258.75: 'WSW',
+     #         281.25: 'W', 303.75: 'WNW', 326.25: 'NW', 348.75: 'NNW',
+     #         360: 'N'}
+Index: odometer.py
+===================================================================
+--- odometer.py	(date 1424266665000)
++++ odometer.py	(date 1424266665000)
+@@ -1,132 +0,0 @@
+-#!/usr/bin/env python
+-# -*- coding: utf-8 -*-
+-""" odometer.py
+-    A collection of distance and waypoint functions (2) for the NxGPS Project:
+-    Getting the most out of a $30 gps, for Navigatrix (http://navigatrix.net)
+-    NxGPS project repository is (https://github.com/wadda/NxGPS)
+-"""
+-from pyproj import Geod
+-from cmath import asin, sin
+-import math
+-# from math import radians, degrees
+-# import gps3
+-
+-conversion = {'nautical': 1852.0, 'imperial': 1609.344, 'metric': 1000.0, 'meters': 1.0}
+-
+-
+-class Odometer(object):
+-    """Odometer is a wrapper around pyproj.Geod distance calculations"""
+-
+-    def __init__(self):
+-        self.bearing_to = None
+-        self.bearing_fro = None
+-        self.distance = {}
+-
+-    def do_to_fro_distance(self, lat1, lon1, lat2, lon2, units='meters'):
+-        """lat lon from point A and point B, returns True North
+-        bearings 'to', A-B(1-2), and 'fro', B-A (2-1) and distance in always
+-        fashionable meters with optional nautical, imperial, or (kilo)metric"""
+-        bearing_to = bearing_fro = self.distance['meters'] = None
+-        try:
+-            geoid = Geod(ellps='WGS84')
+-            bearing_to, bearing_fro, self.distance['meters'] = geoid.inv(lon1, lat1, lon2, lat2)
+-
+-        except Exception as error:
+-            print("Can't calculate to/fro because:", error)
+-
+-        finally:
+-            if units not in 'meters':
+-                self.distance[units] = self.distance['meters'] / conversion[units]
+-
+-            self.bearing_to = bearing_to % 360
+-            self.bearing_fro = bearing_fro % 360
+-
+-        return self.bearing_to, self.bearing_fro, self.distance
+-
+-
+-odometer = Odometer()
+-
+-
+-class Waypoints(object):
+-    def __init__(self):
+-        self.startpoint_lat = None
+-        self.startpoint_lon = None
+-        self.a2b_radians = None
+-        self.trip_distance = {}
+-
+-    def do_crosstrack(self, current_lat, current_lon, start_lat=None, start_lon=None,
+-                      end_lat=None, end_lon=None, units='meters'):
+-        """
+-        return crosstrack distance from current position, and last set track or
+-        return crosstrack distance from current position, start, and end positions
+-
+-        Formula from:
+-        http: // williams.best.vwh.net / avform.htm  # XTE
+-
+-        """
+-        default_lat = -15.560615  # Apataki Carenage
+-        default_lon = -146.241122  # Apataki Carenage
+-        default_a2b_radians = 4.2538533202126025  # bearing in radians Apataki to Kaputar
+-        earth_radius = 6371009.0  # meters...It's a mean radius, but nice enough.
+-        crosstrack_distance = {}
+-
+-        try:
+-            if all([start_lon, start_lon, end_lat, end_lon]):  # both start and end shall start and end together.
+-                # A to B
+-                a2b_bearing, _, _ = odometer.do_to_fro_distance(start_lat, start_lon, end_lat, end_lon)
+-                self.a2b_radians = math.radians(a2b_bearing)
+-                self.startpoint_lat = start_lat
+-                self.startpoint_lon = start_lon
+-                # A to C
+-            if not any([start_lat, start_lon, end_lat, end_lon]):
+-                if not self.startpoint_lat:  # one is enough, or one is not enough, depending on perspective
+-                    self.startpoint_lat = default_lat
+-                    self.startpoint_lon = default_lon
+-                    self.a2b_radians = default_a2b_radians
+-                start_lat = self.startpoint_lat
+-                start_lon = self.startpoint_lon
+-
+-            bearing_to, _, distance = odometer.do_to_fro_distance(start_lat, start_lon, current_lat, current_lon)
+-            a2c_radians = math.radians(bearing_to)
+-            self.trip_distance = distance
+-            # Calculations in radians, output in complex numbers {'meters': (281.8893996162284+0j)
+-            crosstrack_distance['meters'] = (asin(sin(distance['meters']) * sin(a2c_radians - self.a2b_radians))
+-                                             * earth_radius)
+-        except Exception as error:
+-            print('Can\'t calculate crosstrack because: ', error)
+-
+-        finally:
+-            if units not in 'meters':
+-                crosstrack_distance[units] = crosstrack_distance['meters'] / conversion[units]
+-            print('Positive should mean right of course, negative means left with the other choice.')
+-
+-            for k, v in crosstrack_distance.items():
+-                print(k, ":", v.real)  # extract 'real' number
+-
+-            print("Scabed on xtrk trip distance:", self.trip_distance)
+-
+-            print('Real and imaginary in complex number:\n')
+-
+-        return crosstrack_distance
+-
+-
+-waypoints = Waypoints()
+-
+-
+-class BestSenario(object):
+-    """Speculative calculations for conjecture and BS to"""
+-    # WIP
+-    pass
+-
+-    def eta(self):
+-        pass
+-
+-    def vmg(self):
+-        pass
+-
+-    def whentack(self):
+-        pass
+-
+-    def shortest(self):
+-        pass
+-
+Index: old_odometer.py
+===================================================================
+--- old_odometer.py	(date 1424266665000)
++++ old_odometer.py	(date 1424266665000)
+@@ -1,149 +0,0 @@
+-# -*- coding: utf-8 -*-
+-
+-"""Module that uses Starting Position, Current Position
+-and pre-calculated bearing from SP to Waypoint"""
+-from cmath import asin, sin
+-from math import radians
+-from pubsub import pub
+-from pyproj import Geod
+-import gps3
+-import control
+-
+-settings = control.settings
+-units = control.units
+-
+-
+-class Odometer(object):
+-    """Odometer and Cross Track Error"""
+-
+-    def __init__(self):
+-        self.odometer_bearing = None
+-        self.odometer_distance = None
+-
+-    def do_odometer(self, lat, lon):
+-        """Start Point to current position distance"""
+-        if not settings.show_odometer and not settings.show_crosstrack:
+-            return
+-
+-        if isinstance(gps3.Fix.TPV['lat'], str):
+-            return
+-
+-        if settings.startpoint_lat is None:
+-            self.reset_startpoint()  # Does anything, or just get in the way?
+-            return
+-        try:
+-            geoid = Geod(ellps='WGS84')
+-            startpoint_lat = settings.startpoint_lat
+-            startpoint_lon = settings.startpoint_lon
+-            self.odometer_bearing, __, self.odometer_distance = geoid.inv(startpoint_lon, startpoint_lat, lon, lat)
+-
+-        except Exception as error:
+-            print("Can't calculate odometer: ", error)
+-
+-        finally:
+-            if settings.show_odometer:
+-                odo_distance = self.odometer_distance
+-                odo_distance *= units.DISTANCE[settings.distance_units]
+-                pretty_odometer = '{0:.2f} {1}'.format(odo_distance, settings.distance_units)
+-
+-                pub.sendMessage('show_odometer', show_odometer=pretty_odometer)
+-                print('Odometer:', pretty_odometer)
+-
+-            self.do_crosstrack()  # Call crosstrack()
+-            return  # TODO: Add unsubscribe
+-
+-    def do_crosstrack(self):
+-        """
+-        http://williams.best.vwh.net/avform.htm#XTE
+-
+-        Cross track error:
+-
+-        Suppose you are proceeding on a great circle route from
+-        A to B (course =crs_AB) and end up at D, perhaps off course.
+-        (We presume that A is ot a pole!) You can calculate the
+-        course from A to D (crs_AD) and the original_distance from A to
+-        D (dist_AD) using the formulae above. In terms of these the cross track
+-        error, XTD, (distance off course) is given by
+-         crosstrack_distance = asin(sin(distancetravelled) * sin(coursetaken - courseintended))
+-         XTD =asin(sin(dist_AD)*sin(crs_AD-crs_AB))
+-
+-        (positive XTD means right of course, negative means left)
+-        (If the point A is the N. or S. Pole replace crs_AD-crs_AB with
+-        lon_D-lon_B or lon_B-lon_D, respectively.)
+-
+-        The "along track distance", ATD, the distance from A along the
+-        course towards B to the point abeam D is given by:
+-
+-                 ATD=acos(cos(dist_AD)/cos(XTD))
+-
+-        For very short distances:
+-
+-                 ATD=asin(sqrt( (sin(dist_AD))^2 - (sin(XTD))^2 )/cos(XTD))
+-
+-        is less susceptible to rounding error
+-
+-        Note that we can also use the above formulae to find the point of
+-        closest approach to the point D on the great circle through A and B
+-
+-        Formula:
+-        self.original_distance = 'distance' from StartPoint to Current Position
+-        self.original_bearing = 'bearing' from StartPoint to Current Position
+-        settings.startpoint_to_waypoint_bearing = 'origc' bearing from StartPoint to Waypoint
+-        'earth_radius' is the earth’s radius...it's big.
+-
+-        crosstrack_distance =asin(sin(original_distance)*sin(bearing - origc)) * earth_radius
+-
+-        (positive crosstrack_distance  means right of course, negative means left...we hope.)
+-        """
+-        if not settings.show_crosstrack:
+-            return
+-
+-        if not settings.waypoint_lat:  # Should be unneccessary
+-            print('Waypoint has not been set')  # TODO: Open waypoint dialogue
+-            return
+-
+-        if not settings.startpoint_to_waypoint_bearing:
+-            return
+-
+-        if not settings.startpoint_to_waypoint_distance:
+-            return
+-
+-        pretty_crosstrack = None
+-        if settings.startpoint_to_waypoint_bearing == float('Inf'):
+-            return
+-
+-        try:
+-            startpoint_to_waypoint_bearing = radians(settings.startpoint_to_waypoint_bearing)
+-
+-            earth_radius = 6371009.0  # meters...It's a mean radius, but nice enough.
+-            odobearing = radians(self.odometer_bearing)
+-            crosstrack_distance = (asin(sin(settings.startpoint_to_waypoint_distance) * sin(odobearing - startpoint_to_waypoint_bearing)) * earth_radius)
+-
+-            crosstrack_distance *= 1  # TODO: REPLACE units.DISTANCE[settings.distance_units]
+-            pretty_crosstrack = '{0:2.1f} {1}'.format(crosstrack_distance, settings.distance_units)
+-            print('-----------')
+-            print(startpoint_to_waypoint_bearing)
+-            print(odobearing)
+-            print(crosstrack_distance)
+-            print('mmmmmmmmmmmmm')
+-
+-        except Exception as error:
+-            print('Can\'t calculate crosstrack because: ', error)
+-            pretty_crosstrack = 'There be dragons.'
+-
+-        finally:
+-            pub.sendMessage('crosstrack', show_crosstrack=pretty_crosstrack)
+-            print('Cross Track: ', pretty_crosstrack)  # Test
+-            return
+-
+-    @staticmethod
+-    def reset_startpoint():
+-        """set to None and re-fetch"""
+-        settings.startpoint_lat = None
+-        settings.startpoint_lon = None
+-        settings.startpoint_to_waypoint_bearing = None
+-        settings.startpoint_to_waypoint_distance = None
+-        return
+-
+-
+-odometer = Odometer()
+Index: timestatus.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- timestatus.py	(date 1424266665000)
++++ timestatus.py	(revision )
+@@ -1,5 +1,7 @@
+ #!/usr/bin/env python
+ # -*- coding: utf-8 -*-
++
++
+ """Time stuff"""
+ from time import time
+ from datetime import datetime
+@@ -43,7 +45,7 @@
+             return
+         else:
+             self.gpstime = dateutil.parser.parse(utc)  # Become datetime object
+-            print type(self.today), type(self.gpstime)
++            print(type(self.today), type(self.gpstime))
+             if not self.today or self.today <= self.gpstime:  # So we can do this comparison
+                 latlon.do_latlon.magdec()  # TODO: Remember to add ui events for this function
+                 deltatee = dateutil.tz.tzlocal()
+@@ -69,7 +71,7 @@
+         if self.gpstime is None:  # Shouldn't ever happen (unnecessary?)
+             pretty_time = "No Data"
+             pub.sendMessage('show_time', show_time=pretty_time)
+-            print 'ND Time: ', pretty_time
++            print('NoData Time: ', pretty_time)
+             return
+ 
+         shiptime = self.gpstime
+@@ -100,7 +102,7 @@
+ 
+         finally:
+             pub.sendMessage('show_time', show_time=pretty_time)
+-            print 'Time: ', pretty_time  # Test
++            print('Time: ', pretty_time)  # Test
+ 
+         return
+ 
+@@ -116,7 +118,7 @@
+         if self.gpstime is None:  # Shouldn't ever happen...should it.
+             pretty_date = "Ooops"
+             pub.sendMessage('show_date', show_date=pretty_date)
+-            print 'Date: ', pretty_date  # Test
++            print('Date: ', pretty_date)  # Test
+             return
+ 
+         shiptime = self.gpstime
+@@ -138,12 +140,12 @@
+                 pretty_date = shiptime.strftime('%A, %b %d, %Y')
+ 
+         except Exception as error:
+-            pretty_date = error
+-            print 'Date error :', error
++            pretty_date = "bRo-KeN"
++            print('Date error :', error)
+ 
+         finally:
+             pub.sendMessage('show_date', show_date=pretty_date)
+-            print 'Date: ', pretty_date
++            print('Date: ', pretty_date)
+             return
+ 
+ 
+@@ -181,7 +183,7 @@
+             pretty_sats = '{} of {}'.format(sats_used, sats_inview)
+ 
+         pub.sendMessage('show_quality', show_mode=pretty_mode, show_usedinview=pretty_sats)
+-        print 'Quality: ', pretty_mode, 'using', pretty_sats, 'satellites in view'  # Test
++        print('Quality: ', pretty_mode, 'using', pretty_sats, 'satellites in view')  # Test
+         return
+ 
+ timestatus = TimeStatus()
+@@ -199,6 +201,7 @@
+             return
+ 
+         pretty_elapsed = None
++        time_delta = None
+         try:
+             time_now = time()
+             time_delta = time_now - settings.time_beginning
+@@ -222,7 +225,7 @@
+ 
+         finally:
+             pub.sendMessage('show_elapsed', show_elapsed=pretty_elapsed)
+-            print 'Elapsed Time: ', pretty_elapsed, 'timedelta: ', time_delta
++            print('Elapsed Time: ', pretty_elapsed, 'timedelta: ', time_delta)
+ 
+             return
+ 
+Index: sogcog.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- sogcog.py	(date 1424266665000)
++++ sogcog.py	(revision )
+@@ -1,5 +1,7 @@
+ #!/usr/bin/env python
+ # -*- coding: utf-8 -*-
++
++
+ """sogcog.py listens for speed/track data;
+ produces smoothed, formatted speed and course. """
+ __author__ = 'wadda'
+@@ -16,13 +18,13 @@
+ MINAVGMAX = [0.0, 0.0, 0.0]
+ 
+ 
+-class SpeedTrack(object):
++class SpeedCourse(object):
+     """
+     Execute Speed/Course calculations
+     """
+ 
+     def __init__(self):
+-        pub.subscribe(self.sogcog_smoother, 'speed_track')
++        # pub.subscribe(self.sogcog_smoother, 'speed_track')
+         self.sog_smoothed = self.cog_smoothed = None
+ 
+     def sogcog_smoother(self, sog, cog):
+@@ -40,15 +42,17 @@
+             cartesian_sog_cog = rect(sog, cog_radian)  # Create complex number 'sog_cog'
+ 
+             SMOOTHQUE.append(cartesian_sog_cog)
+-            # reduce(lambda a, b: a+b,SMOOTHQUE) == (((((a + b) + c) + d + ...) + z)
+-            sog_cog_sum = reduce(lambda a, b: a + b, SMOOTHQUE)
++
++            sog_cog_sum = 0.0
++            for datum in SMOOTHQUE:
++                sog_cog_sum += datum
+             sog_cog_average = sog_cog_sum / len(SMOOTHQUE)
+ 
+             # Un-create the complex number
+             self.sog_smoothed, self.cog_smoothed = polar(sog_cog_average)  # sog in meters; cog is in radians.
+ 
+         except Exception as error:
+-            print 'This Speed/Course error: ', error, "shouldn't happen."
++            print('This Speed/Course error: ', error, "shouldn't happen.")
+             return
+ 
+         finally:
+@@ -74,7 +78,7 @@
+             pretty_sog = '{0:2.2f} {1}'.format(pretty_sog, settings.speed_units)
+ 
+         pub.sendMessage('show_speed', show_speed=pretty_sog)
+-        print 'Speed: ', pretty_sog  # Test
++        print('Speed: ', pretty_sog)  # Test
+         return
+ 
+     def showcourse(self):
+@@ -105,7 +109,7 @@
+             pretty_cog = '{0}°{1} {2} '.format(cog_deg, true_magnetic, direction)
+ 
+         pub.sendMessage('show_course', show_course=pretty_cog)
+-        print 'Course: {0} with {1:.0f}° Dec'.format(pretty_cog, settings.magnetic_declination_degrees)  # Test
++        print('Course: {0} with {1:.0f}° Dec'.format(pretty_cog, settings.magnetic_declination_degrees))  # Test
+         return
+ 
+     def showminmax(self):
+@@ -128,10 +132,11 @@
+             # 1 hour running average of smoothed sog
+             AVERAGEQUE.append(self.sog_smoothed)
+ 
+-            # reduce(lambda a, b: a+b,speed) = (((((a + b) + c) + d + e) + ...)
+-            # Filter 'None' and add '0' in case of empty queue at startup or thermonuclear war.
+-            average_sum = reduce(lambda a, b: a + b, filter(None, AVERAGEQUE), 0)
+-            average_running_sog = average_sum / len(filter(None, AVERAGEQUE))  # Filter neccessary?
++            average_sum = 0.0
++            for datum in AVERAGEQUE:
++                average_sum += datum
++
++            average_running_sog = average_sum / len(AVERAGEQUE)
+             MINAVGMAX[1] = average_running_sog
+ 
+             _min, _avg, _max = [speeddata * units.SPEED[settings.speed_units] for speeddata in MINAVGMAX]
+@@ -139,12 +144,12 @@
+             pretty_minmax = '{0:02.2f} / {1:02.2f} / {2:02.2f} {3}'.format(_min, _avg, _max, settings.speed_units)
+ 
+         except Exception as error:
+-            print 'Minmax error: ', error
++            print('Minmax error: ', error)
+             pretty_minmax = 'Collecting Data'  # Indivisable
+         finally:
+             pub.sendMessage('show_minmax', show_minmax=pretty_minmax)
+-            print 'Min-Max: ', pretty_minmax  # Test
++            print('Min-Max: ', pretty_minmax)  # Test
+             return
+ 
+ 
+-speedtrack = SpeedTrack()
++speedcourse = SpeedCourse()
+Index: run.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- run.py	(date 1424266665000)
++++ run.py	(revision )
+@@ -1,5 +1,7 @@
+ #!/usr/bin/env python
+ # -*- coding: utf-8 -*-
++from __future__ import print_function
++
+ __author__ = 'wadda'
+ #!/usr/bin/env python
+ # -*- coding: utf-8 -*-
+@@ -7,7 +9,7 @@
+ 
+ import gpsclient
+ import latlon
+-import odometer
++import old_odometer
+ import sogcog
+ import timestatus
+ import waypoint
+@@ -19,11 +21,11 @@
+ 
+ def run():
+     """calls instance and runs until it doesn't"""
+-    print 'Fired up------------------------'
++    print('Fired up------------------------')
+     try:
+         settings.read_configuration()
+     except Exception as error:
+-        print 'this error in run.py: ', error
++        print('this error in run.py: ', error)
+         settings.write_configuration()
+ 
+     while gpsclient.data.running:
+@@ -36,13 +38,13 @@
+ 
+     # Ctrl C
+     except KeyboardInterrupt:
+-        # print 'Run error is:', error
+-        print "User cancelled"
++        # print('Run error is:', error
++        print("User cancelled")
+ 
+     finally:
+-        print "Stopping gps client"
++        print("Stopping gps client")
+         gpsclient.data.stopclient()
+         # wait for the tread to finish
+         gpsclient.data.join()
+ 
+-        print "Done"
++        print("Done")
