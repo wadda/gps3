@@ -7,12 +7,33 @@
             <id />
           </State>
           <State>
-            <id>Python</id>
+            <id>Buildout</id>
+          </State>
+          <State>
+            <id>General</id>
+          </State>
+          <State>
+            <id>HTML</id>
+          </State>
+          <State>
+            <id>Ignore</id>
+          </State>
+          <State>
+            <id>Portability issues</id>
+          </State>
+          <State>
+            <id>Potentially confusing code constructs</id>
+          </State>
+          <State>
+            <id>RELAX NG</id>
+          </State>
+          <State>
+            <id>XML</id>
           </State>
         </expanded-state>
         <selected-state>
           <State>
-            <id>PyCompatibilityInspection</id>
+            <id>IgnoreUnusedEntry</id>
           </State>
         </selected-state>
       </profile-state>
@@ -89,7 +110,6 @@
   </component>
   <component name="ExternalResourceManagerImpl">
     <resource url="http://plugins.intellij.net/xstructure/ns/xstructure_1_0.xsd" location="$USER_HOME$/file:/home/moe/.PyCharm40/config/plugins/xstructure/lib/xstructure.jar!/org/sylfra/idea/plugins/xstructure/resources/schemas/xstructure_1_0.xsd" />
-    <resource url="http://plugins.intellij.net/xstructure/ns/xstructure_1_1.xsd" location="$USER_HOME$/file:/home/moe/.PyCharm40/config/plugins/xstructure/lib/xstructure.jar!/org/sylfra/idea/plugins/xstructure/resources/schemas/xstructure_1_1.xsd" />
     <ignored-resource url="http://relaxng.org/ns/compatibility/annotations/1.0" />
     <ignored-resource url="http://www.w3.org/1998/Math/MathML" />
     <ignored-resource url="http://www.w3.org/2000/svg" />
@@ -103,6 +123,7 @@
     <option name="MAKE_NEW_FILES_READ_ONLY" value="false" />
   </component>
   <component name="PyCodeInsightSettings">
+    <option name="SHOW_IMPORT_POPUP" value="true" />
     <option name="RENAME_SEARCH_IN_COMMENTS_FOR_FUNCTION" value="true" />
     <option name="RENAME_SEARCH_NON_CODE_FOR_FUNCTION" value="true" />
     <option name="RENAME_SEARCH_IN_COMMENTS_FOR_CLASS" value="true" />
@@ -179,13 +200,13 @@
   </component>
   <component name="TodoConfiguration">
     <pattern icon="default" useCustomColors="false" case-sensitive="false" pattern="\btodo\b.*">
-      <option name="FOREGROUND" value="ffff00" />
+      <option name="FOREGROUND" value="ff" />
       <option name="FONT_TYPE" value="3" />
       <option name="ERROR_STRIPE_COLOR" value="ff" />
       <option name="EFFECT_TYPE" value="0" />
     </pattern>
     <pattern icon="default" useCustomColors="false" case-sensitive="false" pattern="\bfixme\b.*">
-      <option name="FOREGROUND" value="ffff00" />
+      <option name="FOREGROUND" value="ff" />
       <option name="FONT_TYPE" value="3" />
       <option name="ERROR_STRIPE_COLOR" value="ff" />
       <option name="EFFECT_TYPE" value="0" />

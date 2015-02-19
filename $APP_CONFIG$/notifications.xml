@@ -1,6 +1,7 @@
 <application>
   <component name="NotificationConfiguration">
-    <notification groupId="IDE Usage Statistics" displayType="STICKY_BALLOON" shouldLog="false" />
+    <notification groupId="IDE Usage Statistics" displayType="STICKY_BALLOON" />
+    <notification groupId="System Health" displayType="STICKY_BALLOON" />
     <toolWindow group="Find in Path" />
     <toolWindow group="Debugger messages" />
     <toolWindow group="Inspection Results" />
