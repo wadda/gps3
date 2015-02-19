@@ -1,0 +1,16 @@
+<toolSet name="External Tools">
+  <tool name="gksu" description="gksu" showInMainMenu="true" showInEditor="true" showInProject="true" showInSearchPopup="true" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
+    <exec>
+      <option name="COMMAND" value="/usr/bin/gksu" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="/usr/bin" />
+    </exec>
+  </tool>
+  <tool name="pylint" description="Decsription of Pylint by Moe" showInMainMenu="true" showInEditor="true" showInProject="true" showInSearchPopup="true" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
+    <exec>
+      <option name="COMMAND" value="/usr/bin/pylint" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+    </exec>
+  </tool>
+</toolSet>
