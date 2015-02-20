@@ -26,7 +26,6 @@ class GPSDSocket(object):
         self.devicepath_alternate = devicepath
         # self.output = {}  # TODO: an attribute by itself decision, essentially raw socket JSON unless it's not;-)
         self.response = None
-        self.protocol = gpsd_protocol  # What form of data to retrieve from gpsd  TODO: can it handle multiple?
         self.streamSock = None  # Existential
         self.verbose = verbose
 
@@ -43,7 +42,9 @@ class GPSDSocket(object):
                 self.streamSock.setblocking(False)
                 if self.verbose:
                     print('Connecting to gpsd at {0} on port \'{1}\','.format(host, port))
-                    print('and will be watching ', self.protocol, ' protocol')
+                    print('and will be watching ', gpsd_protocol, ' protocol')
+
+                self.watch(gpsd_protocol)
 
             except OSError as error:
                 sys.stderr.write('\nGPSDSocket.connect OSError is-->', error)
@@ -51,9 +52,6 @@ class GPSDSocket(object):
                 sys.stderr.write('Please, check your number and dial again.\n')
                 self.close()
                 sys.exit(1)  # TODO: gpsd existence check and start
-
-            finally:
-                self.watch(gpsd_protocol=self.protocol)
 
     def watch(self, enable=True, gpsd_protocol='json', devicepath=None):
         """watch gpsd in various gpsd_protocols or devices.  The gpsd_protocols could be: 'json', 'nmea', 'rare', 'raw',
@@ -122,19 +120,65 @@ class Fix(object):
 
     def __init__(self):
         """Sets of potential data packages from a device through gpsd, as generator of class attribute dictionaries"""
-        version = {"release", "rev", "proto_major", "proto_minor", "remote"}
-        tpv = {"tag", "device", "mode", "time", "ept", "lat", "lon", "alt",
-               "track", "speed", "climb", "epx", "epy", "epv", "epd", "eps", "epc"}
-        sky = {"gdop", "hdop", "pdop", "tdop", "vdop", "xdop", "ydop", "satellites"}
-        gst = {"device", "time", "rms", "major", "minor", "orient", "lat", "lon", "alt"}
-        att = {"device", "time", "heading", "mag_st", "pitch", "pitch_st", "yaw", "yaw_st",
-               "roll", "roll_st", "dip", "mag_len", "mag_x", "mag_y", "mag_z", "acc_len",
-               "acc_x", "acc_y", "acc_z", "gyro_x", "gyro_y", "depth", "temperature"}  # TODO: Check Device flags
+        version = {"release",
+                   "proto_major", "proto_minor",
+                   "remote",
+                   "rev"}
+
+        tpv = {"alt",
+               "climb",
+               "device",
+               "epc", "epd", "eps", "ept", "epv", "epx", "epy",
+               "lat", "lon",
+               "mode",
+               "tag",
+               "time",
+               "track",
+               "speed"}
+
+        sky = {"satellites",
+               "gdop", "hdop", "pdop", "tdop", "vdop", "xdop", "ydop"}
+
+        gst = {"alt",
+               "device",
+               "lat", "lon",
+               "major", "minor",
+               "orient"
+               "rms",
+               "time",}
+        att = {"acc_len", "acc_x", "acc_y", "acc_z",
+               "depth",
+               "device",
+               "dip",
+               "gyro_x", "gyro_y",
+               "heading",
+               "mag_len", "mag_st", "mag_x", "mag_y", "mag_z",
+               "pitch", "pitch_st",
+               "roll", "roll_st",
+               "temperature",
+               "time",
+               "yaw", "yaw_st"}  # TODO: Check Device flags
+
         pps = {"device", "real_sec", "real_nsec", "clock_sec", "clock_nsec"}
-        device = {"path", "activated", "flags", "driver", "bps", "parity", "stopbits",
-                  "subtype", "native", "cycle", "mincycle"}  # TODO: Check Device flags
-        poll = {"time", "active", "fixes", "skyviews"}
-        devices = {"devices", "remote"}
+
+        device = {"activated",
+                  "bps",
+                  "cycle", "mincycle",
+                  "driver",
+                  "flags",
+                  "native",
+                  "parity",
+                  "path",
+                  "stopbits",
+                  "subtype"}  # TODO: Check Device flags
+
+        poll = {"active",
+                "fixes",
+                "skyviews",
+                "time"}
+
+        devices = {"devices",
+                   "remote"}
         # ais = {}  # see: http://catb.org/gpsd/AIVDM.html
         error = {"message"}
 
@@ -228,6 +272,8 @@ if __name__ == '__main__':
                 fix.refresh(socket_response)
                 print('{:^45}'.format('This gps3 interface is using Python {}.{}.{}'.format(*sys.version_info)))  # Flagpole kludge
                 print('Connected to a gpsd on host {0.host}, port {0.port}.'.format(args))
+                print()
+                # print('URL of the remote daemon:{}'.format(fix.VERSION['remote']))  #URL of the remote daemon reporting this version. If empty, this is the version of the local daemon.
                 print('It reports a device at {}\n'.format(fix.TPV['device']))
 
                 print('{:^55}'.format("Iterated Satellite Data"))
