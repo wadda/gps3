@@ -25,6 +25,9 @@
             <id>Potentially confusing code constructs</id>
           </State>
           <State>
+            <id>Python</id>
+          </State>
+          <State>
             <id>RELAX NG</id>
           </State>
           <State>

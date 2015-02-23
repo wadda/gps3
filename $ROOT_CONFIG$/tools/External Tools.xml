@@ -13,4 +13,11 @@
       <option name="WORKING_DIRECTORY" />
     </exec>
   </tool>
+  <tool name="pip3" description="pip3" showInMainMenu="true" showInEditor="true" showInProject="true" showInSearchPopup="true" disabled="false" useConsole="true" showConsoleOnStdOut="false" showConsoleOnStdErr="false" synchronizeAfterRun="true">
+    <exec>
+      <option name="COMMAND" value="/usr/local/bin/pip3.4 " />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+    </exec>
+  </tool>
 </toolSet>
