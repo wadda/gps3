@@ -26,6 +26,7 @@ class GPSDSocket(object):
         self.devicepath_alternate = devicepath
         # self.output = {}  # TODO: an attribute by itself decision, essentially raw socket JSON unless it's not;-)
         self.response = None
+        self.protocol = gpsd_protocol  # What form of data to retrieve from gpsd  TODO: can it handle multiple?
         self.streamSock = None  # Existential
         self.verbose = verbose
 
@@ -42,9 +43,7 @@ class GPSDSocket(object):
                 self.streamSock.setblocking(False)
                 if self.verbose:
                     print('Connecting to gpsd at {0} on port \'{1}\','.format(host, port))
-                    print('and will be watching ', gpsd_protocol, ' protocol')
-
-                self.watch(gpsd_protocol)
+                    print('and will be watching ', self.protocol, ' protocol')
 
             except OSError as error:
                 sys.stderr.write('\nGPSDSocket.connect OSError is-->', error)
@@ -52,6 +51,9 @@ class GPSDSocket(object):
                 sys.stderr.write('Please, check your number and dial again.\n')
                 self.close()
                 sys.exit(1)  # TODO: gpsd existence check and start
+
+            finally:
+                self.watch(gpsd_protocol=self.protocol)
 
     def watch(self, enable=True, gpsd_protocol='json', devicepath=None):
         """watch gpsd in various gpsd_protocols or devices.  The gpsd_protocols could be: 'json', 'nmea', 'rare', 'raw',
