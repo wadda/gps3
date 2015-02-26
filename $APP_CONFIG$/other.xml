@@ -157,10 +157,10 @@
   <component name="RecentDirectoryProjectsManager">
     <option name="recentPaths">
       <list>
+        <option value="$USER_HOME$/projects/Best_Practice" />
         <option value="$USER_HOME$/Downloads/GitPython-0.3.6" />
         <option value="$USER_HOME$/projects/gps3" />
         <option value="$USER_HOME$/projects/NxGPS" />
-        <option value="$USER_HOME$/projects/Best_Practice" />
         <option value="$USER_HOME$/projects/cherie" />
       </list>
     </option>
@@ -169,7 +169,7 @@
         <entry key="$USER_HOME$/https:/github.com/divvet/GrowControl.git" value="GrowControl.git, GrowControl" />
       </map>
     </option>
-    <option name="lastPath" value="$USER_HOME$/Downloads/GitPython-0.3.6" />
+    <option name="lastPath" value="$USER_HOME$/projects/Best_Practice" />
   </component>
   <component name="Registry">
     <entry key="ide.firstStartup" value="false" />
