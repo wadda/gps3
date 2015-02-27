@@ -1,7 +1,7 @@
 <application>
   <component name="FindSettings">
-    <option name="customScope" value="Directory '/home/moe/Downloads/GitPython-0.3.6/build/lib'" />
-    <option name="defaultScopeName" value="Directory '/home/moe/Downloads/GitPython-0.3.6/build/lib'" />
-    <option name="SEARCH_SCOPE" value="Directory '/home/moe/Downloads/GitPython-0.3.6/build/lib'" />
+    <option name="customScope" value="Directory '/home/moe/Downloads/pieces'" />
+    <option name="defaultScopeName" value="Directory '/home/moe/Downloads/pieces'" />
+    <option name="SEARCH_SCOPE" value="Directory '/home/moe/Downloads/pieces'" />
   </component>
 </application>
