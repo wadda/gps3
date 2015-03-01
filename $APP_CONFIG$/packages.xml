@@ -49,7 +49,7 @@
         <entry key="ABC" value="0.0.0" />
         <entry key="ABN" value="0.3.2" />
         <entry key="AC-Flask-HipChat" value="0.1.1" />
-        <entry key="ACAutomation" value="0.1" />
+        <entry key="ACAutomation" value="0.2" />
         <entry key="ACCC" value="0.0.2" />
         <entry key="ACO-Pants" value="0.5.2" />
         <entry key="ACSpy" value="0.0.3" />
@@ -61,7 +61,7 @@
         <entry key="ADiPy" value="0.6.3" />
         <entry key="AFStatsd" value="1.1.0" />
         <entry key="AIGO" value="0.1.0" />
-        <entry key="AIKIF" value="0.0.7" />
+        <entry key="AIKIF" value="0.0.8" />
         <entry key="AJDecimalMathAdditions" value="0.2.0" />
         <entry key="AL---Application-Launcher" value="1.0.7" />
         <entry key="AM2302-rpi" value="1.1.2" />
@@ -108,7 +108,7 @@
         <entry key="AcraNetwork" value="0.1" />
         <entry key="ActionServer" value="0.2.6" />
         <entry key="ActionTree" value="0.4.0" />
-        <entry key="Active-SQLAlchemy" value="0.3.2" />
+        <entry key="Active-SQLAlchemy" value="0.3.3" />
         <entry key="ActivePapers.Py" value="0.1.4" />
         <entry key="ActivityStream" value="0.2.0" />
         <entry key="ActivityTracker" value="1.0" />
@@ -295,7 +295,7 @@
         <entry key="AuthRPC" value="0.3.2a" />
         <entry key="AuthServerClient" value="0.0.3" />
         <entry key="AuthTkt" value="0.3.3" />
-        <entry key="AuthZ-Group" value="1.1.3" />
+        <entry key="AuthZ-Group" value="1.1.4" />
         <entry key="Authcode" value="1.1.4" />
         <entry key="Authlog" value="0.7" />
         <entry key="Authomatic" value="0.0.10" />
@@ -618,7 +618,7 @@
         <entry key="CMakeHelp" value="0.1dev" />
         <entry key="CNFgen" value="0.5.2.2" />
         <entry key="CNSdi" value="0.1.4" />
-        <entry key="CNVkit" value="0.3.4" />
+        <entry key="CNVkit" value="0.3.5" />
         <entry key="CONSOLE_COLOR" value="0.00" />
         <entry key="COWROL" value="0.01" />
         <entry key="CPRExtract.py" value="1.0" />
@@ -833,7 +833,7 @@
         <entry key="CocoRPy27" value="1.4.1" />
         <entry key="Code" value="0.3" />
         <entry key="CodeCLI" value="0.1" />
-        <entry key="CodeChat" value="0.0.18" />
+        <entry key="CodeChat" value="0.0.19a1" />
         <entry key="CodeConvert" value="2.0.0" />
         <entry key="CodeDoc" value="0.1" />
         <entry key="CodeHarvester" value="0.0.2" />
@@ -924,7 +924,7 @@
         <entry key="ConsistentHashing" value="0.2.2" />
         <entry key="Console-Utility" value="0.5" />
         <entry key="ConsoleBitly" value="0.1" />
-        <entry key="ConsoleServer" value="1.0" />
+        <entry key="ConsoleServer" value="1.0.1" />
         <entry key="ConsoleiTunesPlayer" value="0.1.3" />
         <entry key="ContactBWC" value="0.1.2" />
         <entry key="ContactGrabber" value="0.1" />
@@ -952,7 +952,7 @@
         <entry key="Corpora" value="1.0" />
         <entry key="Corpse" value="0.2a" />
         <entry key="Cosine" value="20090319" />
-        <entry key="CosmoABC" value="0.1.10" />
+        <entry key="CosmoABC" value="0.1.11" />
         <entry key="CosmoPhotoz" value="0.1" />
         <entry key="CosmoloPy" value="0.1.104" />
         <entry key="CouchDB" value="1.0" />
@@ -1280,7 +1280,7 @@
         <entry key="DocDownloader" value="1.3.2" />
         <entry key="DocUp" value="0.5" />
         <entry key="DockDel" value="0.1.1-alpha" />
-        <entry key="Dockets" value="0.3.3" />
+        <entry key="Dockets" value="0.3.4" />
         <entry key="Docklr" value="0.0.1" />
         <entry key="Doconce" value="0.5.1" />
         <entry key="Docta" value="0.2.1" />
@@ -1386,7 +1386,7 @@
         <entry key="Easy-Jabber-XML-RPC" value="1.0" />
         <entry key="EasyAPI" value="0.1.5" />
         <entry key="EasyBlogger" value="0.9.0" />
-        <entry key="EasyCluster" value="0.21" />
+        <entry key="EasyCluster" value="0.22.1" />
         <entry key="EasyCouch" value="0.3dev" />
         <entry key="EasyDialogs-for-Windows" value="46691.0" />
         <entry key="EasyFrames" value="0.1.7" />
@@ -1527,6 +1527,7 @@
         <entry key="F5NoMore" value="0.1.0" />
         <entry key="FAST" value="2.5" />
         <entry key="FATS" value="1.3.1" />
+        <entry key="FAVRIP" value="0.0.1" />
         <entry key="FAdo" value="1.2" />
         <entry key="FC_CLI" value="0.0.3" />
         <entry key="FErari" value="1.0.0" />
@@ -1714,7 +1715,7 @@
         <entry key="Flask-Compress" value="1.1.0" />
         <entry key="Flask-Compress-nondebug" value="1.0.2" />
         <entry key="Flask-Compressor" value="0.2.0" />
-        <entry key="Flask-Config" value="0.1.0" />
+        <entry key="Flask-Config" value="0.1.1" />
         <entry key="Flask-Config-Override" value="0.0.2" />
         <entry key="Flask-Cors" value="1.10.3" />
         <entry key="Flask-CouchDB" value="0.2.1" />
@@ -1725,7 +1726,7 @@
         <entry key="Flask-CuddlyRest" value="0.1.14" />
         <entry key="Flask-DBConfig" value="0.3.12" />
         <entry key="Flask-DBMigrate" value="0.1" />
-        <entry key="Flask-Dance" value="0.4.0" />
+        <entry key="Flask-Dance" value="0.4.1" />
         <entry key="Flask-Dashboard" value="0.0.6a" />
         <entry key="Flask-Dashed" value="0.1b2" />
         <entry key="Flask-DbShell" value="1.0" />
@@ -1743,7 +1744,7 @@
         <entry key="Flask-Downloader" value="0.2" />
         <entry key="Flask-Dropbox" value="0.3" />
         <entry key="Flask-ESClient" value="0.1.1" />
-        <entry key="Flask-Ecstatic" value="0.2.0" />
+        <entry key="Flask-Ecstatic" value="0.2.1" />
         <entry key="Flask-Edits" value="0.8" />
         <entry key="Flask-Elastic" value="0.2" />
         <entry key="Flask-ElasticUtils" value="0.1.7" />
@@ -1853,7 +1854,7 @@
         <entry key="Flask-Loopback" value="1.3.0" />
         <entry key="Flask-LwAdmin" value="0.6.3" />
         <entry key="Flask-MAB" value="1.1.1" />
-        <entry key="Flask-MIME-Encoders" value="0.1.0" />
+        <entry key="Flask-MIME-Encoders" value="0.1.1" />
         <entry key="Flask-MVC" value="0.0.5" />
         <entry key="Flask-Mail" value="0.9.1" />
         <entry key="Flask-Mailgun" value="0.4" />
@@ -1943,7 +1944,7 @@
         <entry key="Flask-QiniuStorage" value="0.9.3" />
         <entry key="Flask-QueryInspect" value="0.1.2" />
         <entry key="Flask-Quik" value="0.1.1" />
-        <entry key="Flask-RAML" value="0.1.0" />
+        <entry key="Flask-RAML" value="0.1.3" />
         <entry key="Flask-RBAC" value="0.2.0" />
         <entry key="Flask-REST" value="1.1" />
         <entry key="Flask-RESTeasy" value="0.0.1.dev" />
@@ -1977,7 +1978,7 @@
         <entry key="Flask-Roughage" value="0.1" />
         <entry key="Flask-Router" value="0.1.1" />
         <entry key="Flask-Routing" value="0.0.21" />
-        <entry key="Flask-Run" value="0.1.1" />
+        <entry key="Flask-Run" value="0.1.2" />
         <entry key="Flask-Runner" value="2.1.1" />
         <entry key="Flask-S3" value="0.1.7" />
         <entry key="Flask-S3-gzip" value="0.1.8" />
@@ -2001,7 +2002,7 @@
         <entry key="Flask-Security" value="1.7.4" />
         <entry key="Flask-Sendmail" value="0.1" />
         <entry key="Flask-Sentinel" value="0.0.2" />
-        <entry key="Flask-ServerInfo" value="0.1.0" />
+        <entry key="Flask-ServerInfo" value="0.1.1" />
         <entry key="Flask-ServiceLayer" value="0.0.3" />
         <entry key="Flask-Session" value="0.1.1" />
         <entry key="Flask-Shelve" value="0.1.1" />
@@ -2091,6 +2092,7 @@
         <entry key="Flask-YAMLConfig" value="0.0.3" />
         <entry key="Flask-ZODB" value="0.1" />
         <entry key="Flask-Zen" value="0.2" />
+        <entry key="Flask-Zurb-Foundation" value="0.1.2" />
         <entry key="Flask-arrest" value="0.4.4" />
         <entry key="Flask-assets-compile" value="0.1" />
         <entry key="Flask-fillin" value="0.2" />
@@ -2115,7 +2117,7 @@
         <entry key="Flatten" value="0.2" />
         <entry key="FlattenList" value="0.1.4" />
         <entry key="Flearn" value="1.3.0" />
-        <entry key="FlexGet" value="1.2.284" />
+        <entry key="FlexGet" value="1.2.286" />
         <entry key="Flexihash" value="1.0" />
         <entry key="FliKISS" value="0.1" />
         <entry key="Flickr.API" value="0.4.4" />
@@ -2131,7 +2133,7 @@
         <entry key="FlydraAnalysisTools" value="0.0.1" />
         <entry key="FlynnID" value="0.3" />
         <entry key="FmtRW" value="20040603" />
-        <entry key="FoBiS.py" value="1.5.4" />
+        <entry key="FoBiS.py" value="1.5.6" />
         <entry key="FoLiA-tools" value="0.11.1.27" />
         <entry key="Foam" value="1.0" />
         <entry key="FoamAna" value="0.4.4" />
@@ -2159,7 +2161,7 @@
         <entry key="Formosa" value="0.2dev" />
         <entry key="Formular" value="0.2" />
         <entry key="Forthon" value="0.8.15" />
-        <entry key="Fortpy" value="1.4.6" />
+        <entry key="Fortpy" value="1.5.0" />
         <entry key="Fosbury" value="0.9.6.1" />
         <entry key="Fossil" value="0.1" />
         <entry key="Fotografering" value="0.3" />
@@ -2199,7 +2201,7 @@
         <entry key="FullContact.py" value="0.0.2" />
         <entry key="FunEncryptions" value="1.0.2" />
         <entry key="FuncBrows" value="0.1.7" />
-        <entry key="FuncDesigner" value="0.5410" />
+        <entry key="FuncDesigner" value="0.5411" />
         <entry key="FunctionDictionaries" value="1.1.1" />
         <entry key="FunctionalExtensions" value="0.1.1" />
         <entry key="Fungiform" value="0.1" />
@@ -2215,7 +2217,7 @@
         <entry key="GCAP" value="1.1-20140805" />
         <entry key="GChartWrapper" value="0.9" />
         <entry key="GDAL" value="1.11.2" />
-        <entry key="GDM" value="0.1" />
+        <entry key="GDM" value="0.1.4" />
         <entry key="GFX" value="4" />
         <entry key="GHRML" value="0.11" />
         <entry key="GLAMS" value="0.2.4" />
@@ -2260,7 +2262,7 @@
         <entry key="GauminIpuinReader" value="0.1" />
         <entry key="GauminIpuinWriter" value="0.1" />
         <entry key="GauminWriter" value="0.1" />
-        <entry key="GcpUploader" value="2015.2.21.3" />
+        <entry key="GcpUploader" value="2015.2.28" />
         <entry key="Gcurl" value="1.0" />
         <entry key="GearShift" value="1.6a1dev-r4" />
         <entry key="Gears" value="0.7.2" />
@@ -2413,8 +2415,8 @@
         <entry key="Gooey" value="0.1.5" />
         <entry key="GooeyPy" value="0.2" />
         <entry key="Google-Music-Playlist-Importer" value="2012.03.28" />
-        <entry key="Google-Safe-Browsing-v2-Lookup" value="0.1.0" />
-        <entry key="Google-Search-API" value="1.0.0" />
+        <entry key="Google-Safe-Browsing-v2-Lookup" value="0.2.0" />
+        <entry key="Google-Search-API" value="1.1.0" />
         <entry key="GoogleAppEngineCloudStorageClient" value="1.9.15.0" />
         <entry key="GoogleAppEngineMapReduce" value="1.9.17.0" />
         <entry key="GoogleAppEnginePipeline" value="1.9.17.0" />
@@ -2479,7 +2481,7 @@
         <entry key="GstEditor" value="0.1.0" />
         <entry key="Gtools" value="0.16" />
         <entry key="GuiBuilder" value="0.9.9" />
-        <entry key="Gutenberg" value="0.2.2" />
+        <entry key="Gutenberg" value="0.3.3" />
         <entry key="Guython" value="0.0.1dev" />
         <entry key="Gwilio" value="1.3" />
         <entry key="Gwydion" value="0.1dev" />
@@ -2641,7 +2643,7 @@
         <entry key="Hydro" value="0.1.0" />
         <entry key="HyperKitty" value="0.9.3" />
         <entry key="Hyperbola" value="0.0.3" />
-        <entry key="Hyperion" value="0.9.5" />
+        <entry key="Hyperion" value="0.9.6" />
         <entry key="Hyperkit" value="0.2" />
         <entry key="HypnoAPNSWrapper" value="0.3-7" />
         <entry key="Hypr" value="0.4.0" />
@@ -2725,7 +2727,7 @@
         <entry key="InPlace" value="0.1a0.dev-r1518" />
         <entry key="IndexConfigParser" value="1.2" />
         <entry key="IndexedCatalog" value="0.5.0" />
-        <entry key="IndicoIo" value="0.4.15" />
+        <entry key="IndicoIo" value="0.5.1" />
         <entry key="Inflector" value="2.0.11" />
         <entry key="Informant" value="0.01" />
         <entry key="InformixDB" value="2.5" />
@@ -2835,7 +2837,7 @@
         <entry key="KDF" value="0.3" />
         <entry key="KDVS" value="2.0.0" />
         <entry key="KF" value="0.1.3" />
-        <entry key="KFU" value="1.0.0" />
+        <entry key="KFU" value="1.1.0" />
         <entry key="KISSmetrics" value="0.1.0" />
         <entry key="KLM" value="0.3.4" />
         <entry key="KLog" value="0.4.0" />
@@ -3103,6 +3105,7 @@
         <entry key="MHNester" value="1.3.1" />
         <entry key="MI7" value="0.1.0" />
         <entry key="MICC" value="0.1.5" />
+        <entry key="MLYNester" value="1.0.0" />
         <entry key="MLizard" value="0.1.2" />
         <entry key="MMTK" value="2.4.1" />
         <entry key="MOAI" value="2.0.0" />
@@ -3240,7 +3243,7 @@
         <entry key="MetaChecka2000" value="0.1.3" />
         <entry key="MetaEnum" value="1.0" />
         <entry key="MetaLocGramN" value="0.99" />
-        <entry key="MetaMindApi" value="0.4a3" />
+        <entry key="MetaMindApi" value="0.4a4" />
         <entry key="MetaPathways_Python" value="v2.1" />
         <entry key="MetaPython" value="0.2.2" />
         <entry key="Metafone" value="0.5" />
@@ -3272,7 +3275,7 @@
         <entry key="Milton" value="1.0" />
         <entry key="MimiProxy" value="0.0.5" />
         <entry key="MimicDB" value="1.0.3" />
-        <entry key="Mind" value="0.2.1" />
+        <entry key="Mind" value="0.2.2" />
         <entry key="MindTree" value="1.0.0-a002" />
         <entry key="Minerva" value="11.7.23" />
         <entry key="Ming" value="0.5.0" />
@@ -3740,7 +3743,7 @@
         <entry key="Orange-Text" value="1.2a1" />
         <entry key="Orange-Textable" value="1.5" />
         <entry key="Orange-XOPPY" value="1.0" />
-        <entry key="OrbitalPy" value="0.4.0" />
+        <entry key="OrbitalPy" value="0.5.0" />
         <entry key="Orchid" value="1.1" />
         <entry key="OrderBook" value="0.1.2" />
         <entry key="Organizer" value="1.3.1" />
@@ -3949,6 +3952,7 @@
         <entry key="PiRSClock-Full" value="2.0" />
         <entry key="PiShiftPy" value="0.1.1" />
         <entry key="Pibrella" value="1.2" />
+        <entry key="PicasaDeleter" value="0.1.1" />
         <entry key="Picasso" value="0.0.4" />
         <entry key="Picatcha" value="0.1" />
         <entry key="PicoGUI" value="0.44" />
@@ -4152,7 +4156,7 @@
         <entry key="Products.CMFLDAP" value="1.0" />
         <entry key="Products.CMFNotification" value="2.3b1" />
         <entry key="Products.CMFPlacefulWorkflow" value="1.6.0" />
-        <entry key="Products.CMFPlomino" value="1.19.2" />
+        <entry key="Products.CMFPlomino" value="1.19.3" />
         <entry key="Products.CMFPlone" value="5.0a3" />
         <entry key="Products.CMFPublicator" value="1.3.1" />
         <entry key="Products.CMFQuestionnaire" value="0.6.2" />
@@ -4607,6 +4611,7 @@
         <entry key="PyAppleSMS" value="1.0" />
         <entry key="PyArabic" value="0.5" />
         <entry key="PyArduinoProxy" value="0.0.3" />
+        <entry key="PyAstronomy" value="0.8.0" />
         <entry key="PyAuParser" value="0.53.1" />
         <entry key="PyAudio" value="0.2.8" />
         <entry key="PyAuthorize" value="1.1.3" />
@@ -4654,7 +4659,7 @@
         <entry key="PyCDDB" value="0.1.0" />
         <entry key="PyCEGUI" value="0.7.5" />
         <entry key="PyCIM" value="15.13.4" />
-        <entry key="PyCK" value="0.9.8.2" />
+        <entry key="PyCK" value="0.9.8.3" />
         <entry key="PyCLP" value="0.8" />
         <entry key="PyCOSM" value="0.1.1.6" />
         <entry key="PyCPUID" value="0.4" />
@@ -4717,7 +4722,7 @@
         <entry key="PyDSTool" value="0.90.0" />
         <entry key="PyDYN" value="0.2" />
         <entry key="PyDark" value="2.2.0" />
-        <entry key="PyDataLoader" value="0.1.0" />
+        <entry key="PyDataLoader" value="0.1.1" />
         <entry key="PyDataWrap" value="1.2.6" />
         <entry key="PyDatastream" value="0.2.1" />
         <entry key="PyDatcom" value="0.2.5" />
@@ -4950,7 +4955,7 @@
         <entry key="PyMultimethods" value="0.2" />
         <entry key="PyMunin" value="0.9.27" />
         <entry key="PyMunkTMX" value="0.5.3" />
-        <entry key="PyMySQL" value="0.6.4" />
+        <entry key="PyMySQL" value="0.6.6" />
         <entry key="PyMySQL3" value="0.5" />
         <entry key="PyNBT" value="1.3.2" />
         <entry key="PyNDN" value="2.0b3" />
@@ -4960,7 +4965,7 @@
         <entry key="PyNGL" value="1.0" />
         <entry key="PyNIO" value="1.0" />
         <entry key="PyNLPIR" value="0.2.2" />
-        <entry key="PyNLPl" value="0.7.0" />
+        <entry key="PyNLPl" value="0.7.1" />
         <entry key="PyNN" value="0.7.5" />
         <entry key="PyNOAAGeoMagIndiceHandler" value="0.0.1r-apha-jedyais" />
         <entry key="PyNOMAD" value="0.1.0" />
@@ -5032,6 +5037,7 @@
         <entry key="PyPlugger" value="0.0.1" />
         <entry key="PyPocketSphinx" value="12608.5" />
         <entry key="PyPolynomial" value="0.4.1" />
+        <entry key="PyPosAST" value="1.0.1" />
         <entry key="PyPosta" value="1.2" />
         <entry key="PyPreval" value="0.0.0" />
         <entry key="PyPrind" value="2.9.1" />
@@ -5061,7 +5067,7 @@
         <entry key="PyQtdoc" value="4.8.4" />
         <entry key="PyQuante" value="1.5.0" />
         <entry key="PyRA2" value="0.1.1" />
-        <entry key="PyRAML" value="0.1.4" />
+        <entry key="PyRAML" value="0.1.6" />
         <entry key="PyRCC8" value="1.2.2" />
         <entry key="PyRDW" value="1.0" />
         <entry key="PyRECONSTRUCT" value="2.2.0" />
@@ -5394,7 +5400,7 @@
         <entry key="Python-Chart" value="1.39" />
         <entry key="Python-Computer-Graphics-Kit-cgkit" value="1.1.0" />
         <entry key="Python-Conio" value="1.1.0" />
-        <entry key="Python-Crest" value="0.1.0" />
+        <entry key="Python-Crest" value="0.1.6" />
         <entry key="Python-Database-Objects-PDO" value="1.3.1" />
         <entry key="Python-EPP" value="0.1.0" />
         <entry key="Python-ETL" value="1.01" />
@@ -5428,6 +5434,7 @@
         <entry key="PythonMessageBus" value="0.0.0" />
         <entry key="PythonNURBS" value="0.3" />
         <entry key="PythonPerl" value="0.9" />
+        <entry key="PythonPi" value="1.0.2" />
         <entry key="PythonProj" value="1.2.0" />
         <entry key="PythonReports" value="0.6.5" />
         <entry key="PythonScriptTranslator" value="0.7.4" />
@@ -6112,7 +6119,7 @@
         <entry key="Slushbox" value="0.2.1" />
         <entry key="SmallSettings" value="0.2.2" />
         <entry key="Smap" value="2.0.bcb1a7" />
-        <entry key="SmartCloud" value="1.0.0" />
+        <entry key="SmartCloud" value="1.1.0" />
         <entry key="SmartDrive" value="1.0" />
         <entry key="SmartFileSorter" value="0.4.0" />
         <entry key="SmartHTTP" value="0.5.289dev" />
@@ -6131,7 +6138,7 @@
         <entry key="SnakeSQL" value="0.5.2 Alpha" />
         <entry key="SnakeSkin" value="0.0.1" />
         <entry key="Snobol" value="1.0" />
-        <entry key="SoL" value="3.15" />
+        <entry key="SoL" value="3.16" />
         <entry key="Soapbox" value="0.3.7" />
         <entry key="SocketTornad.IO" value="0.1.3" />
         <entry key="SocksiPy" value="1.00" />
@@ -6155,6 +6162,7 @@
         <entry key="Sophia" value="0.1.1" />
         <entry key="Sophie" value="1.0" />
         <entry key="Sorrex" value="1.2.0" />
+        <entry key="SortAlgo" value="0.2.0b3" />
         <entry key="SortImports" value="0.1" />
         <entry key="Souch" value="0.0.5" />
         <entry key="Souma" value="0.2.1" />
@@ -6170,7 +6178,7 @@
         <entry key="Spamalot" value="0.0.3" />
         <entry key="SpammCan" value="0.2b" />
         <entry key="SpanishAcquisition" value="1.0.3" />
-        <entry key="Spans" value="0.1.2" />
+        <entry key="Spans" value="0.1.3" />
         <entry key="Sparked" value="0.15" />
         <entry key="SparrowSDK" value="1.0.1" />
         <entry key="SparseEdges" value="0.1" />
@@ -6312,7 +6320,7 @@
         <entry key="Sutekh" value="0.8.6" />
         <entry key="Sveetchies" value="1.8.9.4" />
         <entry key="SvnReporter" value="0.4" />
-        <entry key="SwampDragon" value="0.4.0.2" />
+        <entry key="SwampDragon" value="0.4.1.0" />
         <entry key="SwampDragon-auth" value="0.1.3" />
         <entry key="SwampDragon-fileupload" value="0.1.2" />
         <entry key="SwearJar" value="0.1.1" />
@@ -6523,6 +6531,7 @@
         <entry key="TinyUrl" value="0.1.0" />
         <entry key="Tippy" value="0.1" />
         <entry key="Titelouze" value="0.1.2" />
+        <entry key="Titley" value="1.0" />
         <entry key="TkLsystem" value="0.3.0" />
         <entry key="Tka11y" value="0.1.1" />
         <entry key="Toboso" value="0.6" />
@@ -6776,7 +6785,7 @@
         <entry key="Twistless" value="1.0.0" />
         <entry key="Twistr" value="1.0.0" />
         <entry key="Twitabit" value="1.0a1" />
-        <entry key="TwitterAPI" value="2.3.1" />
+        <entry key="TwitterAPI" value="2.3.2" />
         <entry key="TwitterCounter" value="2.1.3" />
         <entry key="TwitterDataMiner" value="0.3" />
         <entry key="TwitterFollowersGraph" value="1.0" />
@@ -6815,6 +6824,7 @@
         <entry key="USBArm" value="1.0" />
         <entry key="USBLock" value="0.2.2" />
         <entry key="USPP-Universal-Serial-Port-Python-Library" value="1.0" />
+        <entry key="UW-RestClients" value="1.0.4" />
         <entry key="UXBgtk" value="1.0" />
         <entry key="UbuntuAMI" value="0.1.0" />
         <entry key="UbuntuPaste" value="0.0.1" />
@@ -6961,7 +6971,7 @@
         <entry key="WTForms-Components" value="0.9.7" />
         <entry key="WTForms-Django" value="0.1" />
         <entry key="WTForms-Dynamic-Fields" value="0.1a3" />
-        <entry key="WTForms-JSON" value="0.2.8" />
+        <entry key="WTForms-JSON" value="0.2.9" />
         <entry key="WTForms-ParsleyJS" value="0.1.4" />
         <entry key="WTForms-SQLAlchemy" value="0.1" />
         <entry key="WTForms-Test" value="0.1.1" />
@@ -7058,6 +7068,7 @@
         <entry key="WikiUp" value="1.1" />
         <entry key="WikiUtils" value="1.0.0-rc1" />
         <entry key="WikibaseDataModel" value="0.0.1" />
+        <entry key="Wikicurses" value="1.1" />
         <entry key="Wikked" value="0.5.0" />
         <entry key="WikklyText" value="1.6.0" />
         <entry key="Willow" value="0.1.1" />
@@ -7141,7 +7152,7 @@
         <entry key="XStatic-JSEncrypt" value="2.0.0.2" />
         <entry key="XStatic-JSON-js" value="0.0.0.40f3377a63.1" />
         <entry key="XStatic-Jasmine" value="2.1.2.0" />
-        <entry key="XStatic-Magic-Search" value="0.1.5.10" />
+        <entry key="XStatic-Magic-Search" value="0.1.8.1" />
         <entry key="XStatic-MagicSearch" value="0.1.5.1" />
         <entry key="XStatic-MathJax" value="2.0.0" />
         <entry key="XStatic-Pygments" value="1.6.0.1" />
@@ -7294,7 +7305,7 @@
         <entry key="a2svm" value="0.0.4" />
         <entry key="a8" value="0.11" />
         <entry key="aDict2" value="0.1.1" />
-        <entry key="aTXT" value="v1.0.2" />
+        <entry key="aTXT" value="1.0.4" />
         <entry key="aa" value="aa" />
         <entry key="aaa" value="1.0.0" />
         <entry key="aaa103439" value="1.2.0" />
@@ -7359,6 +7370,7 @@
         <entry key="accessall" value="1.4" />
         <entry key="accessibility" value="0.4.0" />
         <entry key="accessible_output" value="0.7.5" />
+        <entry key="accio" value="0.1" />
         <entry key="accordion_presentation" value="1.0.1" />
         <entry key="accountingModules" value="0.1" />
         <entry key="accounts" value="0.1.3" />
@@ -7383,6 +7395,7 @@
         <entry key="acor" value="1.1.1" />
         <entry key="acora" value="1.8" />
         <entry key="acos-client" value="1.2.3" />
+        <entry key="acoular" value="15.02.10.post1" />
         <entry key="acoustics" value="0.0" />
         <entry key="acpi" value="1.0.0" />
         <entry key="acpr" value="0.0.3" />
@@ -7546,7 +7559,7 @@
         <entry key="agentx" value="0.7" />
         <entry key="agg2567" value="1.1.0" />
         <entry key="aggdraw" value="1.1-20051010" />
-        <entry key="aggregate6" value="0.5" />
+        <entry key="aggregate6" value="0.6" />
         <entry key="agha" value="0.1.0" />
         <entry key="agile" value="1.1.0" />
         <entry key="agilegeo" value="0.1.4" />
@@ -7646,7 +7659,7 @@
         <entry key="aiosc" value="0.1.1" />
         <entry key="aiotest" value="0.2" />
         <entry key="aiourlstatus" value="0.3.3" />
-        <entry key="aioutils" value="0.2.1" />
+        <entry key="aioutils" value="0.3.3" />
         <entry key="aiouv" value="0.0.1" />
         <entry key="aioweb" value="0.1" />
         <entry key="aiowsgi" value="0.3" />
@@ -7716,7 +7729,7 @@
         <entry key="akshell" value="0.2.0" />
         <entry key="aksy" value="0.3-SNAPSHOT-r1389" />
         <entry key="al_papi" value="0.0.6" />
-        <entry key="alabaster" value="0.6.3" />
+        <entry key="alabaster" value="0.7.1" />
         <entry key="alacarte" value="0.6.2" />
         <entry key="alamatic" value="0.0.1" />
         <entry key="alarm" value="1.6" />
@@ -7772,7 +7785,7 @@
         <entry key="alert-from-script" value="0.1.2" />
         <entry key="alert-grid" value="1.0.0" />
         <entry key="alerta" value="4.0.2" />
-        <entry key="alerta-server" value="4.1.1" />
+        <entry key="alerta-server" value="4.1.2" />
         <entry key="alertlogic" value="0.4.2" />
         <entry key="alex" value="0.1dev" />
         <entry key="alex_sayhi" value="1.0.0" />
@@ -7784,8 +7797,8 @@
         <entry key="alf" value="0.4.2" />
         <entry key="alfREST" value="0.9.3" />
         <entry key="alfajor" value="0.1" />
-        <entry key="alfanous" value="0.7.04" />
-        <entry key="alfanousDesktop" value="0.7.01" />
+        <entry key="alfanous" value="0.7.10" />
+        <entry key="alfanousDesktop" value="0.7.10" />
         <entry key="alfred" value="0.2" />
         <entry key="alfredo" value="0.2" />
         <entry key="algae" value="0.1.3" />
@@ -7811,7 +7824,7 @@
         <entry key="allfiles" value="1.0" />
         <entry key="alligator" value="0.9.0" />
         <entry key="allink_essentials" value="1.0.12" />
-        <entry key="allmychanges" value="0.6.0" />
+        <entry key="allmychanges" value="0.6.1" />
         <entry key="allmydata-tahoe" value="1.10.0" />
         <entry key="allocine-wrapper" value="0.3.0" />
         <entry key="allostery" value="0.0.0.a1" />
@@ -8039,6 +8052,7 @@
         <entry key="antiparser" value="2.0" />
         <entry key="antipathy" value="0.81.04" />
         <entry key="antiseptic" value="0.1.2" />
+        <entry key="antispoofing.clientspec" value="1.0.1" />
         <entry key="antispoofing.competition_icb2013" value="1.1.0" />
         <entry key="antispoofing.crossdatabase" value="1.0.1" />
         <entry key="antispoofing.dog" value="1.0.2" />
@@ -8048,7 +8062,7 @@
         <entry key="antispoofing.fusion_faceverif" value="3.0.0" />
         <entry key="antispoofing.lbp" value="2.0.2" />
         <entry key="antispoofing.lbptop" value="1.0.4" />
-        <entry key="antispoofing.motion" value="1.1.1" />
+        <entry key="antispoofing.motion" value="2.0.1" />
         <entry key="antispoofing.optflow" value="1.0.5" />
         <entry key="antispoofing.utils" value="2.0.1" />
         <entry key="antispoofing.verification.gmm" value="1.0.2" />
@@ -8408,7 +8422,7 @@
         <entry key="arista" value="0.9.7" />
         <entry key="aristoxenus" value="0.1.0" />
         <entry key="arithmetic" value="0.4" />
-        <entry key="ark" value="0.10.0" />
+        <entry key="ark" value="0.10.1" />
         <entry key="arkaiv" value="0.1.2dev" />
         <entry key="arklib" value="v0.2-r95" />
         <entry key="arkpy" value="0.6" />
@@ -8509,7 +8523,7 @@
         <entry key="asciipr0n" value="1.0.2" />
         <entry key="asciitable" value="0.8.0" />
         <entry key="asciitomathml" value=".89" />
-        <entry key="asciitree" value="0.2" />
+        <entry key="asciitree" value="0.3" />
         <entry key="asdoc2dash" value="0.1.1" />
         <entry key="ase" value="3.3.1" />
         <entry key="aserializer" value="0.6.8" />
@@ -8982,7 +8996,7 @@
         <entry key="avwx" value="0.2.1" />
         <entry key="aw.managersmanager" value="1.0.0a2" />
         <entry key="aw_nester" value="1.3.0" />
-        <entry key="awacs" value="0.4.2" />
+        <entry key="awacs" value="0.5.0" />
         <entry key="awake" value="1.0" />
         <entry key="aware" value="1.0" />
         <entry key="aware_api" value="0.0.1" />
@@ -9004,7 +9018,7 @@
         <entry key="aws-ec2-assign-elastic-ip" value="0.5.0" />
         <entry key="aws-hostname" value="0.0.2" />
         <entry key="aws-keyring" value="0.1.1" />
-        <entry key="aws-minion" value="0.62" />
+        <entry key="aws-minion" value="0.65" />
         <entry key="aws-sqs-alert" value="0.1.1" />
         <entry key="aws-status" value="0.0.13" />
         <entry key="aws-trade-in" value="0.1" />
@@ -9346,9 +9360,10 @@
         <entry key="bates" value="0.0.1" />
         <entry key="batfish" value="0.0.2" />
         <entry key="batinfo" value="0.2" />
-        <entry key="batou" value="1.0.1" />
+        <entry key="batou" value="1.0.2" />
         <entry key="batou_scm" value="0.1.2" />
         <entry key="batt" value="1.0" />
+        <entry key="battalion" value="0.0.4" />
         <entry key="battery-watchdog" value="1.0.1" />
         <entry key="batterystaple" value="0.1.0dev1" />
         <entry key="battlenet" value="0.2.6" />
@@ -9371,7 +9386,7 @@
         <entry key="bb-pytest" value="0.2" />
         <entry key="bbcflib" value="1.4.0" />
         <entry key="bbcli" value="0.1.6" />
-        <entry key="bbcode" value="1.0.20" />
+        <entry key="bbcode" value="1.0.21" />
         <entry key="bbdb.gmailfilter" value="0.5" />
         <entry key="bbfreeze" value="1.1.3" />
         <entry key="bbfreeze-loader" value="1.1.0" />
@@ -9395,7 +9410,7 @@
         <entry key="bcloud" value="3.6.1" />
         <entry key="bcode" value="0.6" />
         <entry key="bcoding" value="1.5" />
-        <entry key="bcolz" value="0.8.0" />
+        <entry key="bcolz" value="0.8.1" />
         <entry key="bcrypt" value="1.1.0" />
         <entry key="bctpy" value="0.3.3" />
         <entry key="bcx-basic-compile-tool" value="v 1.0" />
@@ -9551,7 +9566,7 @@
         <entry key="bertrpc" value="0.1.1" />
         <entry key="bes" value="0.3" />
         <entry key="besnappy" value="0.1.0" />
-        <entry key="bespin" value="0.5.1.7" />
+        <entry key="bespin" value="0.5.1.8" />
         <entry key="bessy" value="0.0.1" />
         <entry key="best-before" value="0.1.0" />
         <entry key="best_log_formatter" value="0.1" />
@@ -9605,6 +9620,7 @@
         <entry key="bgtunnel" value="0.3.8" />
         <entry key="bh" value="0.0.1b0" />
         <entry key="bhf" value="1.0" />
+        <entry key="bhfpython" value="1.0.0" />
         <entry key="bhyve" value="0.2.1" />
         <entry key="bib" value="e18a3b5" />
         <entry key="bib2bbl" value="v3" />
@@ -9653,7 +9669,7 @@
         <entry key="bigsignal" value="0.0.1" />
         <entry key="bigsky" value="0.0.0" />
         <entry key="bigtempo" value="0.38.9" />
-        <entry key="bika.health" value="3.1.5" />
+        <entry key="bika.health" value="3.1.6" />
         <entry key="bika.lims" value="3.1.7" />
         <entry key="bikeshares" value="0.0.0" />
         <entry key="bikesrv" value="0.2.0" />
@@ -9790,7 +9806,7 @@
         <entry key="bitfinex" value="0.2.6" />
         <entry key="bithex" value="1.0.4" />
         <entry key="bitis" value="0.12.3" />
-        <entry key="bitjet" value="0.2" />
+        <entry key="bitjet" value="0.2.1" />
         <entry key="bitlove" value="0.1" />
         <entry key="bitly_api" value="0.3" />
         <entry key="bitlyapi" value="0.1.1" />
@@ -9949,7 +9965,7 @@
         <entry key="bloop" value="0.2.0" />
         <entry key="blosc" value="1.2.4" />
         <entry key="bloscpack" value="0.7.1" />
-        <entry key="blowfish" value="0.6.0" />
+        <entry key="blowfish" value="0.6.1" />
         <entry key="bls" value="0.0.5" />
         <entry key="blt" value="0.2.1" />
         <entry key="blue-ribbon-plus" value="1.0" />
@@ -9991,10 +10007,10 @@
         <entry key="bob-ajax-selects" value="1.4.1" />
         <entry key="bob-build" value="0" />
         <entry key="bob-builder" value="0.0.6" />
-        <entry key="bob.ap" value="2.0.1" />
-        <entry key="bob.blitz" value="2.0.2" />
+        <entry key="bob.ap" value="2.0.2" />
+        <entry key="bob.blitz" value="2.0.3" />
         <entry key="bob.buildout" value="2.0.6" />
-        <entry key="bob.core" value="2.0.1" />
+        <entry key="bob.core" value="2.0.2" />
         <entry key="bob.db.arface" value="2.0.1" />
         <entry key="bob.db.atnt" value="2.0.1" />
         <entry key="bob.db.banca" value="2.0.1" />
@@ -10019,28 +10035,29 @@
         <entry key="bob.db.xm2vts" value="2.0.1" />
         <entry key="bob.db.youtube" value="2.0.1" />
         <entry key="bob.example.faceverify" value="2.0.1" />
-        <entry key="bob.extension" value="2.0.4" />
-        <entry key="bob.io.base" value="2.0.3" />
+        <entry key="bob.extension" value="2.0.5" />
+        <entry key="bob.io.base" value="2.0.4" />
         <entry key="bob.io.image" value="2.0.1" />
         <entry key="bob.io.matlab" value="2.0.2" />
         <entry key="bob.io.video" value="2.0.1" />
         <entry key="bob.ip.base" value="2.0.3" />
-        <entry key="bob.ip.color" value="2.0.1" />
+        <entry key="bob.ip.color" value="2.0.2" />
         <entry key="bob.ip.draw" value="2.0.1" />
+        <entry key="bob.ip.facedetect" value="2.0.0" />
         <entry key="bob.ip.flandmark" value="2.0.1" />
         <entry key="bob.ip.gabor" value="2.0.2" />
         <entry key="bob.ip.optflow.hornschunck" value="2.0.1" />
         <entry key="bob.ip.optflow.liu" value="2.0.1" />
-        <entry key="bob.learn.activation" value="2.0.1" />
+        <entry key="bob.learn.activation" value="2.0.2" />
         <entry key="bob.learn.boosting" value="2.0.1" />
         <entry key="bob.learn.em" value="2.0.0b4" />
         <entry key="bob.learn.libsvm" value="2.0.1" />
-        <entry key="bob.learn.linear" value="2.0.2" />
+        <entry key="bob.learn.linear" value="2.0.3" />
         <entry key="bob.learn.misc" value="2.0.1" />
-        <entry key="bob.learn.mlp" value="2.0.1" />
+        <entry key="bob.learn.mlp" value="2.0.2" />
         <entry key="bob.math" value="2.0.1" />
         <entry key="bob.measure" value="2.0.1" />
-        <entry key="bob.sp" value="2.0.1" />
+        <entry key="bob.sp" value="2.0.2" />
         <entry key="bob.spear" value="1.1.8" />
         <entry key="bobik_python_sdk" value="1.0" />
         <entry key="bobo" value="2.3.0" />
@@ -10177,7 +10194,7 @@
         <entry key="botocore-tornado" value="0.93.0" />
         <entry key="botool" value="0.1.1" />
         <entry key="botornado" value="0.0.3" />
-        <entry key="botoweb" value="1.5.4" />
+        <entry key="botoweb" value="1.5.5" />
         <entry key="botox" value="0.1.1" />
         <entry key="bots-open-source-edi-translator" value="version 3.0.0" />
         <entry key="bottle" value="0.12.8" />
@@ -10273,7 +10290,7 @@
         <entry key="boxv2" value="0.1.3.4" />
         <entry key="boxy" value="0.0.1" />
         <entry key="bp" value="0.0.4" />
-        <entry key="bpbroker" value="0.18" />
+        <entry key="bpbroker" value="0.20" />
         <entry key="bpch" value="1.0" />
         <entry key="bpdiag" value="0.5" />
         <entry key="bpext" value="0.1" />
@@ -10284,8 +10301,9 @@
         <entry key="bpm" value="0.1.1" />
         <entry key="bpmaapers_ok" value="0.1" />
         <entry key="bpmappers" value="0.8" />
+        <entry key="bpolicy" value="0.1.3" />
         <entry key="bpp" value="0.0.11" />
-        <entry key="bprofile" value="1.3.1" />
+        <entry key="bprofile" value="1.3.2" />
         <entry key="bpssl" value="1.0.3" />
         <entry key="bpt" value="0.5.2" />
         <entry key="bpython" value="0.14" />
@@ -10380,10 +10398,11 @@
         <entry key="broker" value="0.0.2" />
         <entry key="brokerest" value="0.1.14" />
         <entry key="bronto" value="0.0.0" />
-        <entry key="bronto-python" value="0.7.0" />
+        <entry key="bronto-python" value="0.8.0" />
         <entry key="brood-json-schemas" value="0.3.0" />
         <entry key="brooklynmuseumapi" value="0.1.0" />
         <entry key="brotherprint" value="0.1.1" />
+        <entry key="browler" value="0.1.2" />
         <entry key="brownant" value="0.1.5" />
         <entry key="brownfox" value="0.1.1" />
         <entry key="browse" value="1.0.1" />
@@ -10919,7 +10938,7 @@
         <entry key="capysule" value="0.5.1" />
         <entry key="car_wash_queueing" value="1.0.1" />
         <entry key="cara" value="0.9.1" />
-        <entry key="carafe" value="0.4.6" />
+        <entry key="carafe" value="0.4.7" />
         <entry key="caramel" value="1.0" />
         <entry key="carbon" value="0.9.13" />
         <entry key="carbonate" value="0.2.2" />
@@ -11046,7 +11065,7 @@
         <entry key="cc.gettext" value="0.7" />
         <entry key="cc.licenserdf" value="0.2.29" />
         <entry key="cc42" value="0.0.2" />
-        <entry key="ccarps" value="0.2.0" />
+        <entry key="ccarps" value="0.2.1" />
         <entry key="ccc-gistemp" value="0.6.1" />
         <entry key="cccp" value="0.1" />
         <entry key="ccdproc" value="0.2.2" />
@@ -11070,7 +11089,7 @@
         <entry key="cctagutils" value="0.5a2" />
         <entry key="cctrl" value="1.16.0" />
         <entry key="ccuapi" value="1.2.0" />
-        <entry key="ccxxv" value="0.1.3" />
+        <entry key="ccxxv" value="0.1.4" />
         <entry key="ccy" value="0.6.1" />
         <entry key="cdap-auth-client" value="1.0.2" />
         <entry key="cdap-stream-client" value="1.0.2" />
@@ -11084,14 +11103,14 @@
         <entry key="cdiff" value="0.9.6" />
         <entry key="cdifflib" value="1.0.0" />
         <entry key="cdisc_endtoend" value="0.2dev" />
-        <entry key="cdist" value="3.1.10" />
+        <entry key="cdist" value="3.1.11" />
         <entry key="cdk" value="1.0.10" />
         <entry key="cdl_convert" value="0.8" />
         <entry key="cdm" value="0" />
         <entry key="cdn" value="0.0.1" />
         <entry key="cdn-fastly" value="1.0.4" />
         <entry key="cdn77" value="0" />
-        <entry key="cdo" value="1.2.4" />
+        <entry key="cdo" value="1.2.5" />
         <entry key="cdproj" value="0.0.6" />
         <entry key="cds-indico" value="0.97.1" />
         <entry key="cdx.client" value="1.3.1" />
@@ -11139,7 +11158,7 @@
         <entry key="celery-with-redis" value="3.0" />
         <entry key="celery_geolocator" value="0.0.11" />
         <entry key="celery_mutex" value="0.1.0" />
-        <entry key="celery_once" value="0.1" />
+        <entry key="celery_once" value="0.1.1" />
         <entry key="celery_tasks_ctl" value="0.2.1" />
         <entry key="celery_tryton" value="0.2" />
         <entry key="celerybeat-mongo" value="0.0.8" />
@@ -11202,7 +11221,7 @@
         <entry key="cfchecker" value="2.0.6" />
         <entry key="cff_utily" value="1.1.0" />
         <entry key="cffi" value="0.8.6" />
-        <entry key="cffi_re2" value="0.1.3" />
+        <entry key="cffi_re2" value="0.1.4" />
         <entry key="cfflib" value="2.0.5" />
         <entry key="cfg" value="0.0.0" />
         <entry key="cfgparse" value="1.3" />
@@ -11286,10 +11305,10 @@
         <entry key="chardet" value="2.3.0" />
         <entry key="chardet2" value="2.0.3" />
         <entry key="chardetails" value="0.3" />
-        <entry key="chargebee" value="1.4.2" />
+        <entry key="chargebee" value="1.4.3" />
         <entry key="charimage" value="0.3" />
         <entry key="charitycheck" value="1.1" />
-        <entry key="charlatan" value="0.4.0" />
+        <entry key="charlatan" value="0.4.1" />
         <entry key="charlie" value="0.5" />
         <entry key="charlockholmes" value="0.0.2" />
         <entry key="charm" value="1.0b4" />
@@ -11546,7 +11565,7 @@
         <entry key="cirb.blog" value="1.0a3" />
         <entry key="circbuf" value="0.1b1" />
         <entry key="circle" value="1.1" />
-        <entry key="circle-asset" value="0.0.4" />
+        <entry key="circle-asset" value="0.1.0" />
         <entry key="circleclient" value="0.1.4" />
         <entry key="circonus" value="0.0.22" />
         <entry key="circonusapi" value="0.1.4" />
@@ -11572,6 +11591,7 @@
         <entry key="citeproc-py" value="0.3.0" />
         <entry key="citeulike_api" value="0.1.3dev" />
         <entry key="citibike" value="0.0.4" />
+        <entry key="citycloud" value="0.1" />
         <entry key="citylink-utils" value="0.8" />
         <entry key="ciutils" value="0.0.6" />
         <entry key="civet" value="1.1.1" />
@@ -11674,7 +11694,7 @@
         <entry key="cleverbot" value="0.1.3" />
         <entry key="cleverbot2" value="0.0.4" />
         <entry key="clewareampel" value="2014.11.20" />
-        <entry key="clf" value="0.2" />
+        <entry key="clf" value="0.3" />
         <entry key="clg" value="1.1.1" />
         <entry key="clhash" value="1.002" />
         <entry key="cli" value="1" />
@@ -11815,7 +11835,7 @@
         <entry key="cloudlib" value="0.3.0" />
         <entry key="cloudm" value="0.1.7" />
         <entry key="cloudmesh" value="1.3" />
-        <entry key="cloudmesh_base" value="2.1.2" />
+        <entry key="cloudmesh_base" value="2.1.5" />
         <entry key="cloudmetrics" value="0.0.1" />
         <entry key="cloudminer" value="0.2" />
         <entry key="cloudmonkey" value="5.3.0" />
@@ -11833,7 +11853,7 @@
         <entry key="cloudprint" value="0.11" />
         <entry key="cloudprinting" value="0.3.2" />
         <entry key="cloudpy" value="0.3.12" />
-        <entry key="cloudrunner" value="1.1.4" />
+        <entry key="cloudrunner" value="1.1.4-1" />
         <entry key="cloudsafe" value="0.0.1" />
         <entry key="cloudseed" value="0.0.1" />
         <entry key="cloudsigma" value="0.4" />
@@ -11889,7 +11909,7 @@
         <entry key="cmakelists_parsing" value="0.3" />
         <entry key="cmd-server" value="0.0.1" />
         <entry key="cmd2" value="0.6.8" />
-        <entry key="cmd3" value="1.2.0" />
+        <entry key="cmd3" value="1.2.2" />
         <entry key="cmdFunc" value="1.0.0" />
         <entry key="cmd_utils" value="0.4.1" />
         <entry key="cmdb" value="0.0.1" />
@@ -12110,7 +12130,7 @@
         <entry key="codedep" value="0.3" />
         <entry key="codeedu" value="0.21" />
         <entry key="codeforces_api" value="0.1a" />
-        <entry key="codefurther" value="0.1.0.dev7" />
+        <entry key="codefurther" value="0.1.0.dev9" />
         <entry key="codegen" value="1.0" />
         <entry key="codegenerator" value="0.0.1" />
         <entry key="codegenloader" value="0.1" />
@@ -12170,7 +12190,7 @@
         <entry key="coinbase" value="1.0.4" />
         <entry key="coinbase-python" value="0.0.0" />
         <entry key="coinbase4py" value="0.3.2" />
-        <entry key="coinbits" value="0.2" />
+        <entry key="coinbits" value="0.3" />
         <entry key="coinbridge" value="0.1.3" />
         <entry key="coinkit" value="0.7.7" />
         <entry key="coinkite-api" value="1.0.0" />
@@ -13608,7 +13628,7 @@
         <entry key="contactBox" value="0.1.5" />
         <entry key="contact_importer" value="0.0.1" />
         <entry key="contactpp" value="1.1" />
-        <entry key="container-transform" value="0.3" />
+        <entry key="container-transform" value="0.4" />
         <entry key="containerctl" value="v0.2.2" />
         <entry key="contender" value="0.2.2" />
         <entry key="content" value="0" />
@@ -13746,7 +13766,7 @@
         <entry key="corker" value="0.3" />
         <entry key="corkscrew" value="0.17" />
         <entry key="cormoran" value="0.1" />
-        <entry key="corne" value="0.0.3" />
+        <entry key="corne" value="1.0.0" />
         <entry key="cornerstone.browser" value="1.3.4" />
         <entry key="cornerstone.cssvar" value="1.0" />
         <entry key="cornerstone.soup" value="2.4.1.1" />
@@ -13920,6 +13940,7 @@
         <entry key="crayola" value="0.1.1" />
         <entry key="crazy-ball" value="0.0.1" />
         <entry key="crazyhash" value="0.0.2" />
+        <entry key="crc-nd.utils" value="0.2.0" />
         <entry key="crc16" value="0.1.1" />
         <entry key="crc32" value="0.1" />
         <entry key="crcache" value="0.0.1-next" />
@@ -14240,7 +14261,7 @@
         <entry key="ctler" value="0.0.2" />
         <entry key="ctlib" value="0.2" />
         <entry key="ctox" value="0.1.2" />
-        <entry key="ctree" value="0.1.5" />
+        <entry key="ctree" value="0.1.7" />
         <entry key="ctrie" value="0.1.0" />
         <entry key="ctrldaemon" value="0.2" />
         <entry key="ctrlk" value="0.1.4" />
@@ -14759,7 +14780,7 @@
         <entry key="dataplunger" value="0.1.0" />
         <entry key="datapoint" value="0.2.2" />
         <entry key="dataproxy" value="0.1.0" />
-        <entry key="datapusher" value="0.0.3" />
+        <entry key="datapusher" value="0.0.5" />
         <entry key="datapy" value="0.0" />
         <entry key="dataq" value="0.0.dev5" />
         <entry key="datarray" value="0.0.6" />
@@ -14924,6 +14945,7 @@
         <entry key="dctmpy" value="0.2.2" />
         <entry key="dcu.active-memory" value="0.1.7" />
         <entry key="dcupload" value="0.0.1" />
+        <entry key="dd" value="0.0.1" />
         <entry key="ddate" value="0.0.4" />
         <entry key="ddbmock" value="1.0.3" />
         <entry key="ddbscan" value="0.3.0" />
@@ -14984,7 +15006,7 @@
         <entry key="deckadance" value="1.4.0" />
         <entry key="declare" value="0.6.0" />
         <entry key="declare-amqp" value="0.0.4" />
-        <entry key="declared" value="0.1" />
+        <entry key="declared" value="0.2" />
         <entry key="declination_angle" value="1.0.0" />
         <entry key="decmoc" value="20130206" />
         <entry key="decocare" value="0.0.8" />
@@ -15077,7 +15099,7 @@
         <entry key="deltas" value="0.1.3" />
         <entry key="deltasigma" value="0.1-10" />
         <entry key="deluge-webapi" value="0.1.0" />
-        <entry key="delv" value="0.1.13" />
+        <entry key="delv" value="0.1.15" />
         <entry key="delxml2html" value="1.0.0" />
         <entry key="demain" value="0.9" />
         <entry key="demakein" value="0.16" />
@@ -15360,7 +15382,7 @@
         <entry key="dingo" value="0.2.1" />
         <entry key="dingus" value="0.3.4" />
         <entry key="dinospeak" value="0.1.1" />
-        <entry key="dio" value="0.3.4" />
+        <entry key="dio" value="0.3.5" />
         <entry key="dionepaas" value="0.0.2" />
         <entry key="dipc" value="0.4" />
         <entry key="dipole_error" value="1.1.3" />
@@ -15677,7 +15699,7 @@
         <entry key="django-admirarchy" value="0.2.0" />
         <entry key="django-adv-cache-tag" value="0.1.3" />
         <entry key="django-advanced-redirects" value="0.9.5" />
-        <entry key="django-advanced-reports" value="0.9.2" />
+        <entry key="django-advanced-reports" value="0.9.4" />
         <entry key="django-advancedsearchfilter" value="0.2.1" />
         <entry key="django-advert" value="1.0.0" />
         <entry key="django-adworks" value="0.1" />
@@ -15704,6 +15726,7 @@
         <entry key="django-ajax-loading-overlay" value="0.1.2" />
         <entry key="django-ajax-messages" value="0.2.0" />
         <entry key="django-ajax-model-listing" value="0.1.5" />
+        <entry key="django-ajax-redirection" value="1.0.0" />
         <entry key="django-ajax-search" value="1.5.1" />
         <entry key="django-ajax-selects" value="1.3.5" />
         <entry key="django-ajax-toolkit" value="0.3.0" />
@@ -15932,7 +15955,7 @@
         <entry key="django-baseline" value="0.2.2" />
         <entry key="django-baseviews" value="0.5" />
         <entry key="django-basic-apps" value="0.7" />
-        <entry key="django-basic-cms" value="0.2.4.1" />
+        <entry key="django-basic-cms" value="0.2.5" />
         <entry key="django-basic-email" value="0.0.2" />
         <entry key="django-basic-feedback" value="1.0.3" />
         <entry key="django-basic-models-behaviors" value="0.5.0" />
@@ -16201,6 +16224,7 @@
         <entry key="django-ccthumbs" value="0.0.4" />
         <entry key="django-celery" value="3.1.16" />
         <entry key="django-celery-admin" value="0.1" />
+        <entry key="django-celery-dbscheduler" value="3.2.0" />
         <entry key="django-celery-email" value="1.0.4" />
         <entry key="django-celery-email-with-retry" value="1.0.3" />
         <entry key="django-celery-model" value="0.0.3dev" />
@@ -16332,7 +16356,7 @@
         <entry key="django-cms-jplayer" value="0.1.10" />
         <entry key="django-cms-lite" value="2013.05.13.0" />
         <entry key="django-cms-mailchimp" value="0.1" />
-        <entry key="django-cms-named-menus" value="0.1.9" />
+        <entry key="django-cms-named-menus" value="0.1.10" />
         <entry key="django-cms-opencomparison" value="0.0.0" />
         <entry key="django-cms-pagetags" value="0.1.6" />
         <entry key="django-cms-patched" value="2.3.5" />
@@ -16677,7 +16701,7 @@
         <entry key="django-dcolumns" value="0.3.0" />
         <entry key="django-dcors" value="0.1" />
         <entry key="django-debian" value="0.10.2" />
-        <entry key="django-debreach" value="1.1.0" />
+        <entry key="django-debreach" value="1.2.1" />
         <entry key="django-debug" value="0.1.1" />
         <entry key="django-debug-error-logging" value="1.0.0" />
         <entry key="django-debug-logging" value="0.4" />
@@ -16743,6 +16767,7 @@
         <entry key="django-dict-response" value="0.0.3" />
         <entry key="django-dictionaries" value="0.1" />
         <entry key="django-dictionary-search" value="0.1" />
+        <entry key="django-dictmessages" value="1.0.0" />
         <entry key="django-dictpatterns" value="0.2.1" />
         <entry key="django-digest" value="1.13" />
         <entry key="django-digested" value="0.1.2" />
@@ -16782,6 +16807,7 @@
         <entry key="django-djobberbase" value="0.1.1" />
         <entry key="django-djregs" value="1.0.1c1" />
         <entry key="django-djurk" value="0.01.01-Alpha" />
+        <entry key="django-dmarc" value="0.1.0" />
         <entry key="django-dmcm" value="1.0.8" />
         <entry key="django-dnd" value="0.1.3" />
         <entry key="django-dnt" value="0.1.0" />
@@ -16834,7 +16860,7 @@
         <entry key="django-dumpdb" value="0.1" />
         <entry key="django-dumper" value="0.2.5" />
         <entry key="django-durationfield" value="0.5.1" />
-        <entry key="django-dynamic-choices" value="1.0.0" />
+        <entry key="django-dynamic-choices" value="1.1.0" />
         <entry key="django-dynamic-content" value="0.1" />
         <entry key="django-dynamic-db-router" value="0.1.1" />
         <entry key="django-dynamic-dns" value="0.1.3" />
@@ -16914,7 +16940,7 @@
         <entry key="django-edumetadata" value="0.7" />
         <entry key="django-eggnog" value="0.0.1" />
         <entry key="django-eggplant" value="0.8.0" />
-        <entry key="django-eighty-days" value="0.2.0" />
+        <entry key="django-eighty-days" value="0.3.0" />
         <entry key="django-eintopf" value="0.0.1-beta" />
         <entry key="django-elastic-transcoder" value="0.9.2" />
         <entry key="django-elasticache" value="0.0.3" />
@@ -16971,7 +16997,7 @@
         <entry key="django-emailtools" value="0.2.2" />
         <entry key="django-embed" value="0.2.1" />
         <entry key="django-embed-video" value="0.11" />
-        <entry key="django-embed9" value="0.1" />
+        <entry key="django-embed9" value="0.3" />
         <entry key="django-embedded-media" value="0.1.0" />
         <entry key="django-ember" value="0.3.1" />
         <entry key="django-ember-rest" value="0.1.5" />
@@ -17083,7 +17109,7 @@
         <entry key="django-fabric" value="2.0.1" />
         <entry key="django-fabtastic" value="1.1" />
         <entry key="django-facebook" value="6.0.2" />
-        <entry key="django-facebook-api" value="0.4.3" />
+        <entry key="django-facebook-api" value="0.4.4" />
         <entry key="django-facebook-applications" value="0.1.0" />
         <entry key="django-facebook-auth" value="3.7.5" />
         <entry key="django-facebook-comments" value="0.1.5" />
@@ -17195,7 +17221,7 @@
         <entry key="django-filter" value="0.9.2" />
         <entry key="django-filtered-form" value="1.0.3" />
         <entry key="django-filtered-mail" value="0.2" />
-        <entry key="django-filternaut" value="0.0.2" />
+        <entry key="django-filternaut" value="0.0.3" />
         <entry key="django-filters" value="0.1.0" />
         <entry key="django-filters-mixin" value="0.1.2" />
         <entry key="django-finalware" value="0.0.8" />
@@ -17251,11 +17277,11 @@
         <entry key="django-fluidinfo" value="0.2.1" />
         <entry key="django-flux" value="0.3.0" />
         <entry key="django-fm" value="0.1.9" />
-        <entry key="django-fobi" value="0.4.20" />
+        <entry key="django-fobi" value="0.4.21" />
         <entry key="django-fogbugz-gadget" value="0.1.1" />
         <entry key="django-follow" value="0.6.1" />
         <entry key="django-followit" value="0.0.6" />
-        <entry key="django-fontawesome" value="0.2.1" />
+        <entry key="django-fontawesome" value="0.2.2" />
         <entry key="django-football365" value="0.2" />
         <entry key="django-forceadminlanguage" value="0.0.1" />
         <entry key="django-forge" value="0.6.0" />
@@ -17276,7 +17302,7 @@
         <entry key="django-formrenderingtools" value="0.2.3" />
         <entry key="django-forms-ajaxified" value="0.1.3" />
         <entry key="django-forms-bootstrap" value="3.0.1" />
-        <entry key="django-forms-builder" value="0.12.1" />
+        <entry key="django-forms-builder" value="0.12.2" />
         <entry key="django-forms-ext" value="0.0.8" />
         <entry key="django-forms-smoq" value="0.1" />
         <entry key="django-formset-js" value="0.4.3" />
@@ -17322,6 +17348,7 @@
         <entry key="django-fs-email-helper" value="0.2.1" />
         <entry key="django-fs-livesettings" value="0.1" />
         <entry key="django-fs-smsaero" value="0.1" />
+        <entry key="django-fs-smsc" value="0.1" />
         <entry key="django-fs-trumbowyg" value="0.1.4" />
         <entry key="django-fsfield" value="0.5.3" />
         <entry key="django-fsm" value="2.2.0" />
@@ -17361,6 +17388,7 @@
         <entry key="django-gcframe" value="1.1" />
         <entry key="django-gcharts" value="1.3" />
         <entry key="django-gcm" value="1.0.5" />
+        <entry key="django-gdm" value="0.3" />
         <entry key="django-gearman" value="0.2" />
         <entry key="django-gearman-commands" value="0.6.1" />
         <entry key="django-gearman-jbox" value="0.1" />
@@ -17802,7 +17830,7 @@
         <entry key="django-jqueryfileupload" value="0.0.1" />
         <entry key="django-js-error-hook" value="0.3" />
         <entry key="django-js-error-logging" value="0.1.1" />
-        <entry key="django-js-reverse" value="0.4.4" />
+        <entry key="django-js-reverse" value="0.4.5" />
         <entry key="django-js-routing" value="1.0.4" />
         <entry key="django-js-utils" value="0.0.5dev" />
         <entry key="django-js-utils-ng" value="0.5.futu" />
@@ -17913,6 +17941,7 @@
         <entry key="django-ldap-groups" value="0.1.3" />
         <entry key="django-ldap-groups-bsc" value="0.1.5" />
         <entry key="django-ldap-sync" value="0.1.1" />
+        <entry key="django-ldap3-sync" value="0.1.3" />
         <entry key="django-ldapbackend" value="0.0.1.1" />
         <entry key="django-ldapdb" value="0.3.2" />
         <entry key="django-le-social" value="0.8" />
@@ -18034,6 +18063,7 @@
         <entry key="django-longliving" value="0.3" />
         <entry key="django-lot" value="0.0.5" />
         <entry key="django-loupe" value="0.1.0" />
+        <entry key="django-lumberjack" value="0.1" />
         <entry key="django-lutefisk" value="0.0.1" />
         <entry key="django-m2m-history" value="0.2.2" />
         <entry key="django-macaddress" value="1.3.0" />
@@ -18048,7 +18078,7 @@
         <entry key="django-mail-templated" value="0.2.1" />
         <entry key="django-mail-tester" value="0.0.1" />
         <entry key="django-mail-utils" value="0.3.1" />
-        <entry key="django-mail_confirmation" value="1.2.2" />
+        <entry key="django-mail_confirmation" value="1.2.3" />
         <entry key="django-mailbox" value="4.2.1" />
         <entry key="django-mailchimp" value="0.1.30" />
         <entry key="django-mailchimp-forms" value="0.2" />
@@ -18099,7 +18129,7 @@
         <entry key="django-marconi" value="0.1" />
         <entry key="django-marcus" value="0.5.6" />
         <entry key="django-marionette" value="0.0.2" />
-        <entry key="django-marionettejs" value="2.3.0.8" />
+        <entry key="django-marionettejs" value="2.4.0.1" />
         <entry key="django-mariposa" value="0.1" />
         <entry key="django-markdown" value="0.8.4" />
         <entry key="django-markdown-deux" value="1.0.5" />
@@ -18140,6 +18170,7 @@
         <entry key="django-mathjax" value="0.0.5" />
         <entry key="django-matome" value="0.0.1" />
         <entry key="django-matrix-field" value="0.2" />
+        <entry key="django-mav" value="0.1" />
         <entry key="django-maven" value="0.2" />
         <entry key="django-max-request-size" value="1.0.0" />
         <entry key="django-mbtiles" value="1.3" />
@@ -18228,6 +18259,7 @@
         <entry key="django-migreme" value="0.0.1" />
         <entry key="django-milcam" value="0.3.1" />
         <entry key="django-mimemail" value="0.1" />
+        <entry key="django-mindscape" value="0.1.2" />
         <entry key="django-mini" value="0.5.1" />
         <entry key="django-mini-cms" value="0.0.3" />
         <entry key="django-minifiedstorage" value="0.3" />
@@ -18502,7 +18534,7 @@
         <entry key="django-oauth-api" value="0.3.5" />
         <entry key="django-oauth-backend" value="0.2.3" />
         <entry key="django-oauth-plus" value="2.2.5" />
-        <entry key="django-oauth-tokens" value="0.4.12" />
+        <entry key="django-oauth-tokens" value="0.5.0" />
         <entry key="django-oauth-toolkit" value="0.7.2" />
         <entry key="django-oauth-twitter" value="1.11" />
         <entry key="django-oauth2-provider" value="0.2.6.1" />
@@ -18526,7 +18558,7 @@
         <entry key="django-observer" value="0.4.3" />
         <entry key="django-octocat" value="0.2.1" />
         <entry key="django-odesk-auth" value="0.1.0" />
-        <entry key="django-odnoklassniki-api" value="0.2.1" />
+        <entry key="django-odnoklassniki-api" value="0.2.2" />
         <entry key="django-odnoklassniki-discussions" value="0.1.2" />
         <entry key="django-odnoklassniki-groups" value="0.1.2" />
         <entry key="django-odnoklassniki-photos" value="0.1.3" />
@@ -18770,7 +18802,7 @@
         <entry key="django-pile" value="0.6.4" />
         <entry key="django-pimpmytheme" value="1.5" />
         <entry key="django-pin" value="1.4.8" />
-        <entry key="django-pin-passcode" value="0.1.2" />
+        <entry key="django-pin-passcode" value="0.1.3" />
         <entry key="django-pinba" value="1.0.1" />
         <entry key="django-pindb" value="0.1.12" />
         <entry key="django-ping" value="0.2.0" />
@@ -19176,7 +19208,7 @@
         <entry key="django-repose" value="0.2.3" />
         <entry key="django-repositories" value="0.1.1" />
         <entry key="django-representations" value="0.1" />
-        <entry key="django-request" value="1.1.0" />
+        <entry key="django-request" value="1.2.0" />
         <entry key="django-request-data" value="1.0a1.dev1" />
         <entry key="django-request-id" value="0.1.0" />
         <entry key="django-request-log" value="0.0.10" />
@@ -19249,7 +19281,7 @@
         <entry key="django-reverse-admin" value="0" />
         <entry key="django-reversetag" value="0.3.2" />
         <entry key="django-reversion" value="1.8.5" />
-        <entry key="django-reversion-compare" value="0.4.0" />
+        <entry key="django-reversion-compare" value="0.5.1" />
         <entry key="django-review" value="1.9.2" />
         <entry key="django-reviews" value="1.0" />
         <entry key="django-revisionfield" value="0.2.2" />
@@ -19534,6 +19566,7 @@
         <entry key="django-sillysignin" value="0.0.6" />
         <entry key="django-simanumer" value="0.1.3" />
         <entry key="django-simple-activity" value="0.1.1" />
+        <entry key="django-simple-admin-export" value="0.0.1" />
         <entry key="django-simple-ads" value="1.0.0" />
         <entry key="django-simple-aes-field" value="0.1.3" />
         <entry key="django-simple-amf-remoting" value="0.1.0b" />
@@ -19562,7 +19595,7 @@
         <entry key="django-simple-gravatar" value="1.0.1" />
         <entry key="django-simple-history" value="1.5.4" />
         <entry key="django-simple-import" value="1.19" />
-        <entry key="django-simple-invoice" value="0.3.4" />
+        <entry key="django-simple-invoice" value="0.3.5" />
         <entry key="django-simple-links" value="0.1.1" />
         <entry key="django-simple-math-captcha" value="1.0.5" />
         <entry key="django-simple-menu" value="1.0.9" />
@@ -19920,7 +19953,7 @@
         <entry key="django-sts" value="0.7.3" />
         <entry key="django-stub" value="0.1" />
         <entry key="django-stubtools" value="0.5.1" />
-        <entry key="django-studiogdo" value="0.2.31" />
+        <entry key="django-studiogdo" value="0.2.32" />
         <entry key="django-stw" value="0.3.0" />
         <entry key="django-style-guide" value="0.0.1" />
         <entry key="django-styleguide" value="0.1.20" />
@@ -20010,7 +20043,7 @@
         <entry key="django-taggit-live" value="0.0.6" />
         <entry key="django-taggit-machinetags" value="0.5.0" />
         <entry key="django-taggit-templatetags" value="0.4.6dev" />
-        <entry key="django-taggit-templatetags2" value="1.3.0" />
+        <entry key="django-taggit-templatetags2" value="1.4.0" />
         <entry key="django-tags" value="0.10d1" />
         <entry key="django-tags-input" value="2.0.0" />
         <entry key="django-tailordev-biblio" value="0.3" />
@@ -20181,10 +20214,11 @@
         <entry key="django-timelog" value="0.4" />
         <entry key="django-timepiece" value="0.9.4" />
         <entry key="django-timesickle" value="0.2" />
+        <entry key="django-timestamp-paginator" value="0.0.3" />
         <entry key="django-timetable" value="0.1.7" />
         <entry key="django-timezone-field" value="1.2" />
         <entry key="django-timezone-field-maintained" value="2.0" />
-        <entry key="django-timezone-utils" value="0.7" />
+        <entry key="django-timezone-utils" value="0.8" />
         <entry key="django-timezones" value="0.2" />
         <entry key="django-timezones-op" value="0.2.dev2" />
         <entry key="django-timezones2" value="1.0.4" />
@@ -20274,7 +20308,7 @@
         <entry key="django-twilio-sms-2" value="1.0.1" />
         <entry key="django-twisted" value="0.1.0" />
         <entry key="django-twitter" value="0.1.0" />
-        <entry key="django-twitter-api" value="0.2.3" />
+        <entry key="django-twitter-api" value="0.2.4" />
         <entry key="django-twitter-bootstrap" value="3.3.0" />
         <entry key="django-twitter-bootstrap-form" value="0.1.0" />
         <entry key="django-twitter-feed" value="0.2" />
@@ -20484,7 +20518,7 @@
         <entry key="django-visits" value="0.1.6" />
         <entry key="django-viter" value="0.0.1" />
         <entry key="django-vkontakte-ads" value="0.5.0" />
-        <entry key="django-vkontakte-api" value="0.7.9" />
+        <entry key="django-vkontakte-api" value="0.7.10" />
         <entry key="django-vkontakte-board" value="0.7.0" />
         <entry key="django-vkontakte-comments" value="0.7.0" />
         <entry key="django-vkontakte-groups" value="0.6.4" />
@@ -20642,7 +20676,7 @@
         <entry key="django-youtubeembedfield" value="0.1.3" />
         <entry key="django-yplaces" value="0.2.9" />
         <entry key="django-yubikey" value="0.0.0" />
-        <entry key="django-yubin" value="0.1.1" />
+        <entry key="django-yubin" value="0.1.5" />
         <entry key="django-yui-loader" value="0.3.2" />
         <entry key="django-yutils" value="0.2" />
         <entry key="django-zap" value="0.0.3" />
@@ -20782,6 +20816,7 @@
         <entry key="django_hstore_flattenfields" value="0.8" />
         <entry key="django_html_comments" value="0.1dev" />
         <entry key="django_i18n_attrhelpers" value="0.1.1-2" />
+        <entry key="django_image_proxy" value="0.0.6" />
         <entry key="django_informix" value="1.1" />
         <entry key="django_inlines" value="0.7.4" />
         <entry key="django_internal_urls" value="0.1.0-2" />
@@ -20920,6 +20955,7 @@
         <entry key="djangocms-accordion" value="1.0.4" />
         <entry key="djangocms-admin-style" value="0.2.5" />
         <entry key="djangocms-angular-compendium" value="0.1.0" />
+        <entry key="djangocms-blocks" value="0.1.0" />
         <entry key="djangocms-blog" value="0.3.2.a1" />
         <entry key="djangocms-blogit" value="0.2.0" />
         <entry key="djangocms-bootstrap" value="0.2.1" />
@@ -20931,6 +20967,7 @@
         <entry key="djangocms-css-background" value="1.0.4" />
         <entry key="djangocms-file" value="0.1" />
         <entry key="djangocms-flash" value="0.1" />
+        <entry key="djangocms-forms" value="0.1.0" />
         <entry key="djangocms-gallery" value="0.2a.2" />
         <entry key="djangocms-glyphicon-awesome" value="0.1.0" />
         <entry key="djangocms-gmaps" value="0.1.0" />
@@ -21268,6 +21305,7 @@
         <entry key="dmx" value="1.0" />
         <entry key="dna" value="0.0.7" />
         <entry key="dnasnout-client" value="0.2.0" />
+        <entry key="dnatools" value="0.1" />
         <entry key="dnd" value="1.7" />
         <entry key="dnet" value="1.12" />
         <entry key="dnet-real" value="1.12" />
@@ -21353,7 +21391,7 @@
         <entry key="docker-registry-driver-elliptics" value="0.1.1" />
         <entry key="docker-registry-driver-fds" value="1.1.0" />
         <entry key="docker-registry-driver-fdsstorage" value="1.0.1" />
-        <entry key="docker-registry-driver-git" value="0.0.1" />
+        <entry key="docker-registry-driver-git" value="0.8" />
         <entry key="docker-registry-driver-joyent_manta" value="0.0.19" />
         <entry key="docker-registry-driver-jss" value="0.2.4" />
         <entry key="docker-registry-driver-oss" value="0.1.3" />
@@ -21366,7 +21404,7 @@
         <entry key="docker-sync" value="1.2.3" />
         <entry key="docker-tunnel" value="0.1.2" />
         <entry key="docker-tutorial" value="0.2.1" />
-        <entry key="docker-zabbix-sender" value="0.3.1" />
+        <entry key="docker-zabbix-sender" value="0.3.2" />
         <entry key="docker_builder" value="0.2" />
         <entry key="docker_links" value="0.1.0" />
         <entry key="dockerfly" value="1.0.0" />
@@ -21375,7 +21413,7 @@
         <entry key="dockerspaniel" value="0.1.3" />
         <entry key="dockerstack_agent" value="0.1.0" />
         <entry key="dockertools" value="0.2.1" />
-        <entry key="dockerup" value="1.0.25" />
+        <entry key="dockerup" value="1.0.26" />
         <entry key="dockman" value="0.4.1" />
         <entry key="dockstrap" value="0.2" />
         <entry key="dockyard" value="0.2" />
@@ -21398,7 +21436,7 @@
         <entry key="docstamp" value="0.2.3" />
         <entry key="docstash" value="0.2.2" />
         <entry key="docstring" value="0.1.2.4" />
-        <entry key="docstring-coverage" value="0.3.3" />
+        <entry key="docstring-coverage" value="0.3.4" />
         <entry key="doctest-ignore-unicode" value="0.1.2" />
         <entry key="doctest-tools" value="1.0a3" />
         <entry key="doctest2" value="0.1" />
@@ -21693,6 +21731,7 @@
         <entry key="drf-json-api" value="0.1.1" />
         <entry key="drf-json-patch" value="0.1.0" />
         <entry key="drf-nested-routers" value="0.9.0" />
+        <entry key="drf-timestamp-pagination" value="0.0.3" />
         <entry key="drf-toolbox" value="0.1.7" />
         <entry key="drf-url-content-type-override" value="1.0.0" />
         <entry key="drf_angular_auth" value="0.0.1" />
@@ -21720,7 +21759,7 @@
         <entry key="droneCFD" value="0.1.3" />
         <entry key="droneapi" value="1.0.3" />
         <entry key="dronestore" value="0.2.8" />
-        <entry key="droopescan" value="1.19.1" />
+        <entry key="droopescan" value="1.20.0" />
         <entry key="droopy" value="0.0.3" />
         <entry key="drop" value="0.2.0" />
         <entry key="drop_privileges" value="0.1" />
@@ -21811,7 +21850,7 @@
         <entry key="dudac" value="0.26" />
         <entry key="dudebot" value="0.0.8" />
         <entry key="dudu" value="0.0.3" />
-        <entry key="duedil" value="0.2dev" />
+        <entry key="duedil" value="0.3" />
         <entry key="dugong" value="3.5" />
         <entry key="duh" value="1.03" />
         <entry key="duinobot" value="0.13-4" />
@@ -21901,7 +21940,7 @@
         <entry key="dyject" value="0.7.2" />
         <entry key="dylan_first" value="2.0" />
         <entry key="dylist" value="1.3.0" />
-        <entry key="dyn" value="1.3.7" />
+        <entry key="dyn" value="1.3.8" />
         <entry key="dyn-python" value="1.0" />
         <entry key="dynComLogin" value="0.1" />
         <entry key="dynadotpy" value="0.1.0" />
@@ -21971,7 +22010,7 @@
         <entry key="eagleeye_te" value="0.1.2" />
         <entry key="eaglepy" value="1.0.3" />
         <entry key="earth_distance" value="0.10.0" />
-        <entry key="earthengine-api" value="0.1.45" />
+        <entry key="earthengine-api" value="0.1.46" />
         <entry key="earthtools" value="0.0.4" />
         <entry key="earwigbot" value="0.1" />
         <entry key="ease" value="0.1.1" />
@@ -22144,7 +22183,7 @@
         <entry key="edf" value="1.0" />
         <entry key="edge" value="0.4.0" />
         <entry key="edgecast" value="1.0.2" />
-        <entry key="edgegrid-python" value="1.0.5" />
+        <entry key="edgegrid-python" value="1.0.6" />
         <entry key="edgesense" value="0.14.0" />
         <entry key="edi" value="0.3" />
         <entry key="ediarpc" value="0.3" />
@@ -22163,10 +22202,10 @@
         <entry key="edl" value="0.1.11" />
         <entry key="edmunds" value="0.1.4" />
         <entry key="edmunds_hdfs_load" value="4.0.1" />
-        <entry key="edn_format" value="0.5.3" />
+        <entry key="edn_format" value="0.5.4" />
         <entry key="edna2" value="0.7.1" />
         <entry key="ednester" value="1.0.0" />
-        <entry key="edo_client" value="0.9.1" />
+        <entry key="edo_client" value="0.9.2" />
         <entry key="edopkg" value="0.1.12" />
         <entry key="edost" value="0.1" />
         <entry key="edpath" value="0.1.4" />
@@ -22380,7 +22419,7 @@
         <entry key="email_reply_parser" value="0.3.0" />
         <entry key="emailcontent" value="0.0dev" />
         <entry key="emailfilter" value="0.6" />
-        <entry key="emails" value="0.3.6" />
+        <entry key="emails" value="0.3.8" />
         <entry key="emailtogo" value="0.0.1" />
         <entry key="emailvalid" value="1.0" />
         <entry key="emailvalidator" value="0.3" />
@@ -22414,7 +22453,7 @@
         <entry key="emencia.recipe.patch" value="0.1" />
         <entry key="emencia_django_admin" value="0.3dev-r2314" />
         <entry key="emencia_paste_djangocms_2" value="1.9.8" />
-        <entry key="emencia_paste_djangocms_3" value="1.3.7" />
+        <entry key="emencia_paste_djangocms_3" value="1.3.8" />
         <entry key="emeraldtree" value="0.9.2" />
         <entry key="emesene" value="2.12.9" />
         <entry key="emi-ucp" value="1.0" />
@@ -22577,6 +22616,7 @@
         <entry key="epic" value="0.1.0" />
         <entry key="epic2cf" value="0.0.1" />
         <entry key="epicode" value="1.0.2" />
+        <entry key="epicurus" value="0.0.4" />
         <entry key="epigen" value="0.3.0" />
         <entry key="epigrass" value="2.4.0" />
         <entry key="epio" value="0.3.1" />
@@ -22640,7 +22680,7 @@
         <entry key="erpdbcopy" value="0.0.4" />
         <entry key="err" value="2.2.0b0" />
         <entry key="errand-boy" value="0.3.7" />
-        <entry key="errbit" value="1.1.5" />
+        <entry key="errbit" value="1.2.0" />
         <entry key="errbit-reporter" value="0.0.3" />
         <entry key="errlib" value="0.0.0" />
         <entry key="errorcats" value="1.0.2" />
@@ -22832,7 +22872,7 @@
         <entry key="eww" value="1.0.0" />
         <entry key="ex" value="1.0.0" />
         <entry key="ex_loghandlers" value="0.1" />
-        <entry key="exabgp" value="3.4.7" />
+        <entry key="exabgp" value="3.4.8" />
         <entry key="exactfreqfinder" value="0.0" />
         <entry key="exam" value="0.10.5" />
         <entry key="example" value="0.1.0" />
@@ -22957,6 +22997,7 @@
         <entry key="extended_threading" value="0.2" />
         <entry key="extender" value="0.1.0" />
         <entry key="extensions" value="0.4" />
+        <entry key="extenum" value="0.5.0" />
         <entry key="externalator" value="0.7.0" />
         <entry key="extproc" value="0.0.3" />
         <entry key="extprot" value="0.2.4" />
@@ -22985,7 +23026,7 @@
         <entry key="ezboot" value="2.0.2" />
         <entry key="ezboot1" value="1.1.14" />
         <entry key="ezcomet" value="0.2" />
-        <entry key="ezdxf" value="0.6.3" />
+        <entry key="ezdxf" value="0.6.5" />
         <entry key="ezfacebook" value="0.87.0" />
         <entry key="ezhil" value="0.75-dev-update" />
         <entry key="ezjailremote" value="0.2.2" />
@@ -23066,7 +23107,7 @@
         <entry key="fabuild" value="0.0.21" />
         <entry key="fabula" value="0.8.4a" />
         <entry key="fabulatr" value="0.0.1" />
-        <entry key="fabulaws" value="0.2.11" />
+        <entry key="fabulaws" value="0.2.12" />
         <entry key="fabuloso" value="1.2" />
         <entry key="fabulous" value="0.1.5" />
         <entry key="fabutil" value="0.1.1" />
@@ -23112,7 +23153,7 @@
         <entry key="factuursturen" value="0.4" />
         <entry key="fadapa" value="0.3.1" />
         <entry key="faddsdata" value="1.0.0" />
-        <entry key="fades" value="1.0" />
+        <entry key="fades" value="2.1" />
         <entry key="faf_nester" value="1.2.0" />
         <entry key="fah" value="0.1.0" />
         <entry key="fahrplan" value="0.2.3" />
@@ -23260,13 +23301,14 @@
         <entry key="fc-thumbnail" value="11.15" />
         <entry key="fc.agent" value="1.6.1" />
         <entry key="fc.livemig" value="0.2.6" />
-        <entry key="fc.qemu" value="0.6.3" />
+        <entry key="fc.qemu" value="0.6.4" />
         <entry key="fcache" value="0.4.4" />
         <entry key="fcc" value="0.1.3" />
         <entry key="fccdata" value="1.0.0" />
         <entry key="fcdjangoutils" value="0.0.8" />
         <entry key="fcgi-python" value="0.5" />
         <entry key="fcgiapp" value="1.4" />
+        <entry key="fchart" value="0.3" />
         <entry key="fclist" value="1.1.1" />
         <entry key="fcm" value="0.9.1" />
         <entry key="fcompop" value="0.3" />
@@ -23274,7 +23316,7 @@
         <entry key="fcrypt" value="1.3.1" />
         <entry key="fcs_simulation" value="0.1.1f" />
         <entry key="fdasrsf" value="1.0.1" />
-        <entry key="fdb" value="1.4.3" />
+        <entry key="fdb" value="1.4.4" />
         <entry key="fdedup" value="0.0.8" />
         <entry key="fdfgen" value="0.11.0" />
         <entry key="fdleakfinder" value="0.0.3" />
@@ -23420,7 +23462,7 @@
         <entry key="figgler" value="1.1.4" />
         <entry key="figit" value="1.1.1" />
         <entry key="figleaf" value="0.6.1" />
-        <entry key="figplotter" value="0.0.1" />
+        <entry key="figplotter" value="0.0.2" />
         <entry key="figpy" value="0.2.5" />
         <entry key="figs" value="0.1.2" />
         <entry key="figshare" value="0.1.2" />
@@ -23431,6 +23473,7 @@
         <entry key="file-comparison-panda" value="0.4.0" />
         <entry key="file-finder" value="0.2.1" />
         <entry key="file-workflow" value="0.1" />
+        <entry key="file2db" value="0.1.0" />
         <entry key="file2dna" value="0.3" />
         <entry key="file2ool" value="0.1" />
         <entry key="file2py" value="0.2.2" />
@@ -23608,6 +23651,7 @@
         <entry key="fiveruns.dash.django" value="0.2.1" />
         <entry key="fivoo" value="2.3.1" />
         <entry key="fiware-cloto" value="1.2.0" />
+        <entry key="fiware-facts" value="1.0.0" />
         <entry key="fix" value="1.0.1" />
         <entry key="fixYabinary" value="0.2.2" />
         <entry key="fixed" value="1.0dev" />
@@ -23665,7 +23709,7 @@
         <entry key="flamel" value="0.0.4" />
         <entry key="flanker" value="0.4.27" />
         <entry key="flarmnet" value="0.1" />
-        <entry key="flasfka" value="1.1.5" />
+        <entry key="flasfka" value="1.1.6" />
         <entry key="flashCardStudy" value="1.0.6" />
         <entry key="flashbake" value="0.27" />
         <entry key="flashcachegroup" value="0.6.7" />
@@ -23682,7 +23726,7 @@
         <entry key="flask-blitzdb" value="0.1" />
         <entry key="flask-block" value="0.0.1" />
         <entry key="flask-boilerplate-buildutils" value="0.2.7" />
-        <entry key="flask-boilerplate-utils" value="0.1.52" />
+        <entry key="flask-boilerplate-utils" value="0.1.53" />
         <entry key="flask-bouncer" value="0.1.13" />
         <entry key="flask-braintree" value="0.01" />
         <entry key="flask-buckets" value="0.1.dev" />
@@ -23713,7 +23757,7 @@
         <entry key="flask-hookserver" value="0.1.3" />
         <entry key="flask-hype" value="0.1.4" />
         <entry key="flask-id" value="0.0.1" />
-        <entry key="flask-init" value="0.2.1" />
+        <entry key="flask-init" value="0.2.2" />
         <entry key="flask-itemshop" value="0.2" />
         <entry key="flask-jade2underscore" value="0.1" />
         <entry key="flask-jsonify-emidln" value="0.1" />
@@ -23855,6 +23899,7 @@
         <entry key="flo" value="1.0.0" />
         <entry key="flo-check-homework" value="0.11.0" />
         <entry key="float" value="0.1-alpha" />
+        <entry key="float2png" value="0.1" />
         <entry key="floatextras" value="0.0.3" />
         <entry key="flock" value="0.1" />
         <entry key="flockdoc" value="0.0.4" />
@@ -24143,7 +24188,7 @@
         <entry key="fresnel" value="0.1.1" />
         <entry key="fretbursts" value="0.4rc5" />
         <entry key="frexp" value="0.1.0" />
-        <entry key="frida" value="1.8.0" />
+        <entry key="frida" value="2.0.1" />
         <entry key="friendlists" value="0.1.3" />
         <entry key="friendly_brief" value="0.0.5" />
         <entry key="friendly_curl" value="0.9.3" />
@@ -24159,7 +24204,7 @@
         <entry key="fritzcollectd" value="0.1.0" />
         <entry key="fritzconnection" value="0.4.6" />
         <entry key="fritzcontrol" value="1.0" />
-        <entry key="frl" value="0.0.1" />
+        <entry key="frl" value="0.0.4" />
         <entry key="frla" value="0.0.1dev-r2" />
         <entry key="fro_lst" value="1.1.0" />
         <entry key="frobozz" value="0.1" />
@@ -24208,7 +24253,7 @@
         <entry key="fstab" value="1.4" />
         <entry key="fsutils" value="0.2.2" />
         <entry key="fswrap" value="0.1.2" />
-        <entry key="ftcbz" value="1.1.2" />
+        <entry key="ftcbz" value="2.0.1" />
         <entry key="ftd2xx" value="git1" />
         <entry key="ftdetect" value="1.0.0" />
         <entry key="ftdi_vinculum-II_ate" value="1.3.0" />
@@ -24264,7 +24309,7 @@
         <entry key="ftw.mail" value="2.2.3" />
         <entry key="ftw.maintenanceserver" value="1.0.2" />
         <entry key="ftw.meeting" value="1.5.3" />
-        <entry key="ftw.mobilenavigation" value="1.4.0" />
+        <entry key="ftw.mobilenavigation" value="1.4.1" />
         <entry key="ftw.notification.base" value="1.2.6" />
         <entry key="ftw.notification.email" value="2.0.9" />
         <entry key="ftw.participation" value="1.3.7" />
@@ -24283,7 +24328,7 @@
         <entry key="ftw.slider" value="2.1.4" />
         <entry key="ftw.solr" value="1.4.0" />
         <entry key="ftw.statusmap" value="1.1.1" />
-        <entry key="ftw.subsite" value="1.4.1" />
+        <entry key="ftw.subsite" value="1.4.2" />
         <entry key="ftw.tabbedview" value="3.3.13" />
         <entry key="ftw.table" value="1.15.2" />
         <entry key="ftw.tagging" value="1.1.1" />
@@ -24350,6 +24395,7 @@
         <entry key="funcsigs" value="0.4" />
         <entry key="functable" value="0.2.dev1" />
         <entry key="functest" value="0.8.8" />
+        <entry key="function" value="1.0.0" />
         <entry key="function1" value="1.0.0" />
         <entry key="function_trace" value="1.1.4" />
         <entry key="functional" value="0.7.0" />
@@ -24434,7 +24480,7 @@
         <entry key="fysom" value="2.0.1" />
         <entry key="fytran" value="0.2.1" />
         <entry key="fyzz" value="0.1.0" />
-        <entry key="fzsl" value="0.1" />
+        <entry key="fzsl" value="0.2" />
         <entry key="g" value="0.0" />
         <entry key="g-pypi" value="0.3" />
         <entry key="g-pypi2" value="0.1" />
@@ -24500,7 +24546,7 @@
         <entry key="galapagos-assembler" value="0.23" />
         <entry key="galaxy" value="1.9.9" />
         <entry key="galaxy-api-tools" value="0.1.0" />
-        <entry key="galaxy-fds-sdk" value="1.0.6" />
+        <entry key="galaxy-fds-sdk" value="1.1.0" />
         <entry key="galaxygetopt" value="0.9.8" />
         <entry key="galaxyservers" value="0.1.1" />
         <entry key="galaxyxml" value="0.1.15" />
@@ -24769,7 +24815,7 @@
         <entry key="geocamUtil" value="0.1" />
         <entry key="geocluster" value="1.0.1" />
         <entry key="geocode" value="0.1.0" />
-        <entry key="geocoder" value="1.1.3" />
+        <entry key="geocoder" value="1.1.5" />
         <entry key="geocodio" value="1.0.1" />
         <entry key="geocommit" value="0.9.3beta1" />
         <entry key="geocoon" value="0.2.0" />
@@ -25041,7 +25087,7 @@
         <entry key="giotto" value="0.10.5" />
         <entry key="gipc" value="0.5.0" />
         <entry key="gipcrpc" value="0.1.1" />
-        <entry key="giphy-ipython-magic" value="0.0.1" />
+        <entry key="giphy-ipython-magic" value="0.0.2" />
         <entry key="giphypop" value="0.2" />
         <entry key="gippy" value="0.3.0b3" />
         <entry key="gipsy" value="1.1.1" />
@@ -25162,6 +25208,7 @@
         <entry key="gitgety" value="0.1d" />
         <entry key="gitgity" value="0.1d" />
         <entry key="gitgrepper" value="0.1.0" />
+        <entry key="gitgud" value="1.1" />
         <entry key="githome" value="0.2" />
         <entry key="githook" value="0.2.1dev" />
         <entry key="githooks" value="0.5" />
@@ -25266,7 +25313,7 @@
         <entry key="gitzilla" value="1.9.1" />
         <entry key="giza" value="0.5.1" />
         <entry key="gizeh" value="0.1.10" />
-        <entry key="gizmo" value="0.1.3" />
+        <entry key="gizmo" value="0.1.5" />
         <entry key="gkeeper" value="0.1" />
         <entry key="gkeyring" value="0.3" />
         <entry key="gkola" value="0.1.51" />
@@ -25747,8 +25794,9 @@
         <entry key="graphite-opentsdb" value="0.3.0" />
         <entry key="graphite-pymetrics" value="0.1.1" />
         <entry key="graphite-query" value="0.11.3" />
+        <entry key="graphite-to-zabbix" value="0.1" />
         <entry key="graphite-web" value="0.9.13" />
-        <entry key="graphite.theme" value="1.1" />
+        <entry key="graphite.theme" value="1.1.1" />
         <entry key="graphite_anomaly_detector" value="0.2.1" />
         <entry key="graphite_aws_cleaner" value="0.0.3" />
         <entry key="graphite_beacon" value="0.21.0" />
@@ -25955,7 +26003,7 @@
         <entry key="gtdzen" value="0.1.3" />
         <entry key="gtf_to_genes" value="1.40" />
         <entry key="gtfs" value="0.1.1" />
-        <entry key="gtfs-realtime-bindings" value="0.0.3" />
+        <entry key="gtfs-realtime-bindings" value="0.0.4" />
         <entry key="gtfs-toolkit" value="0.11.2" />
         <entry key="gtfsdb" value="0.1.5" />
         <entry key="gtfsni" value="0.0.4" />
@@ -26175,7 +26223,7 @@
         <entry key="hanja" value="0.10.2" />
         <entry key="hanjq" value="1.1.0" />
         <entry key="hankel" value="0.2.0" />
-        <entry key="hanoi" value="0.0.2" />
+        <entry key="hanoi" value="0.0.3" />
         <entry key="hanotify" value="0.1.0" />
         <entry key="hanshu" value="1.2.0" />
         <entry key="hany" value="1.0.0" />
@@ -26324,7 +26372,7 @@
         <entry key="hcl_exception.py" value="1.0.0" />
         <entry key="hcluster" value="0.2.0" />
         <entry key="hcpre" value="0.5.5" />
-        <entry key="hcpsdk" value="0.9.1-6" />
+        <entry key="hcpsdk" value="0.9.1-7" />
         <entry key="hcpy" value="5" />
         <entry key="hcs-storage" value="1.1" />
         <entry key="hcs_utils" value="1.5" />
@@ -26338,6 +26386,7 @@
         <entry key="hdf5able" value="0.3.0" />
         <entry key="hdf5pickle" value="0.3" />
         <entry key="hdf5storage" value="0.1.4" />
+        <entry key="hdfdict" value="0.1.1alpha" />
         <entry key="hdfqs" value="1.1.0" />
         <entry key="hdfs" value="0.4.0" />
         <entry key="hdhomerun" value="0.2" />
@@ -26548,6 +26597,7 @@
         <entry key="hgwebcommit" value="0.2" />
         <entry key="hgwebinit" value="0.1.0" />
         <entry key="hgwin" value="1.0d" />
+        <entry key="hi_stranger_v1" value="1.4.0" />
         <entry key="hiatus" value="0.0.1" />
         <entry key="hibget" value="0.0.2" />
         <entry key="hic" value="0.1.dev0" />
@@ -26589,6 +26639,7 @@
         <entry key="hiredis" value="0.1.6" />
         <entry key="hires" value="0.0.11" />
         <entry key="hiringpond" value="0.1dev" />
+        <entry key="hirlite" value="0.0.1.2" />
         <entry key="hiro" value="0.1.7" />
         <entry key="his2h5" value="0.1dev" />
         <entry key="hiscore" value="1.1.0" />
@@ -27655,6 +27706,7 @@
         <entry key="inkpy" value="0.1.0-alpha" />
         <entry key="inkwave" value="0.3" />
         <entry key="inlines" value="0.0.4-r2" />
+        <entry key="inlinesas" value="0.0.3" />
         <entry key="inlinestyle" value="0.3" />
         <entry key="inlinestyler" value="0.2.0" />
         <entry key="inlist" value="1.0.1" />
@@ -27922,7 +27974,7 @@
         <entry key="ipynb2viewer" value="0.2.2" />
         <entry key="ipynbviewer" value="0.3" />
         <entry key="ipyroute" value="0.0.24" />
-        <entry key="ipython" value="3.0.0rc1" />
+        <entry key="ipython" value="3.0.0" />
         <entry key="ipython-beautifulsoup" value="0.3" />
         <entry key="ipython-cluster-helper" value="0.4.0" />
         <entry key="ipython-cql" value="0.5" />
@@ -27989,8 +28041,8 @@
         <entry key="isbn" value="1.0" />
         <entry key="isbn_hyphenate" value="1.0.3" />
         <entry key="isbnid" value="0.4.0" />
-        <entry key="isbnlib" value="3.4.8" />
-        <entry key="isbntools" value="4.1.3" />
+        <entry key="isbnlib" value="3.4.9" />
+        <entry key="isbntools" value="4.2.1" />
         <entry key="isbntools.contrib.apps.doi2tex" value="0.0.5" />
         <entry key="isbnutils" value="1.0.1" />
         <entry key="isc_dhcp_leases" value="0.2.1" />
@@ -28175,6 +28227,7 @@
         <entry key="iwm.recipe.svncheckout" value="0.0.1" />
         <entry key="iwwb.eventlist" value="0.2.2" />
         <entry key="ixml" value="0.1.0" />
+        <entry key="iyi" value="0.1.0" />
         <entry key="izdvd" value="0.1.2" />
         <entry key="izug.seantis.dir.events" value="1.0rc2" />
         <entry key="izug.seantis.reservation" value="0.7" />
@@ -28253,7 +28306,7 @@
         <entry key="jaraco.crypto" value="1.0" />
         <entry key="jaraco.develop" value="2.9" />
         <entry key="jaraco.fabric" value="1.3" />
-        <entry key="jaraco.financial" value="1.8" />
+        <entry key="jaraco.financial" value="1.9" />
         <entry key="jaraco.functools" value="1.1" />
         <entry key="jaraco.geo" value="1.1" />
         <entry key="jaraco.httplib2" value="1.0b2" />
@@ -28294,7 +28347,7 @@
         <entry key="jaro_winkler" value="1.0.2" />
         <entry key="jarvis" value="0.1.9" />
         <entry key="jasinja" value="0.8.0" />
-        <entry key="jasmin" value="0.6b3" />
+        <entry key="jasmin" value="0.6b4" />
         <entry key="jasmin_cis" value="0.7.5" />
         <entry key="jasmine" value="2.2.0" />
         <entry key="jasmine-core" value="2.2.0" />
@@ -28404,7 +28457,7 @@
         <entry key="jieba3k" value="0.35.1" />
         <entry key="jiffy" value="0.1" />
         <entry key="jiffybox" value="0.9.1" />
-        <entry key="jig" value="0.1.10" />
+        <entry key="jig" value="0.1.11" />
         <entry key="jihad" value="0.2.3" />
         <entry key="jimlib" value="0.0.1" />
         <entry key="jin2cli" value="0.2" />
@@ -28474,6 +28527,7 @@
         <entry key="jldaws" value="0.4.27" />
         <entry key="jlddk" value="0.7.37" />
         <entry key="jldesmear" value="2014.03.14" />
+        <entry key="jldssdp" value="0.1" />
         <entry key="jldzeromq" value="0.3.9" />
         <entry key="jlib" value="0.1.0" />
         <entry key="jlle" value="0.1.4" />
@@ -28865,7 +28919,7 @@
         <entry key="json_utils" value="0.2" />
         <entry key="jsonable" value="0.1.1" />
         <entry key="jsonalchemy" value="0.0.0" />
-        <entry key="jsonapi" value="0.6.12" />
+        <entry key="jsonapi" value="0.7.0" />
         <entry key="jsonapp" value="0.0.3" />
         <entry key="jsonate" value="0.3.2" />
         <entry key="jsonbot" value="1.0.4" />
@@ -28938,7 +28992,7 @@
         <entry key="jsonrpcclient" value="1.1.2" />
         <entry key="jsonrpclib" value="0.1.3" />
         <entry key="jsonrpclib-ned14" value="0.1.4-ned14" />
-        <entry key="jsonrpclib-pelix" value="0.2.4" />
+        <entry key="jsonrpclib-pelix" value="0.2.5" />
         <entry key="jsonrpcparts" value="0.3.4" />
         <entry key="jsonrpcproxy" value="0.1" />
         <entry key="jsonrpcserver" value="1.0.11" />
@@ -29003,7 +29057,7 @@
         <entry key="juju-quickstart" value="1.6.0" />
         <entry key="juju-slayer" value="0.1.0" />
         <entry key="juju_suspend" value="0.0.2" />
-        <entry key="jujuclient" value="0.5.0" />
+        <entry key="jujuclient" value="0.50.1" />
         <entry key="jujuresources" value="0.2.4" />
         <entry key="jukebox" value="0.4.1" />
         <entry key="jukebox-core" value="3.0.1" />
@@ -29166,7 +29220,7 @@
         <entry key="kanc" value="0.1.3" />
         <entry key="kandilli" value="0.1.1" />
         <entry key="kando" value="0.1.0" />
-        <entry key="kangwon" value="1.2.0" />
+        <entry key="kangwon" value="1.3.0" />
         <entry key="kanit" value="0.7" />
         <entry key="kanone" value="0.4.1" />
         <entry key="kansas" value="0.0.0" />
@@ -29465,7 +29519,7 @@
         <entry key="konfig" value="0.9" />
         <entry key="kong" value="0.2.1" />
         <entry key="konira" value="0.3.2" />
-        <entry key="konlpy" value="0.4.2" />
+        <entry key="konlpy" value="0.4.3" />
         <entry key="konstrukteur" value="0.1.14" />
         <entry key="kontocheck" value="5.5.10" />
         <entry key="konval" value="0.3dev" />
@@ -29875,7 +29929,7 @@
         <entry key="lda" value="0.3.2" />
         <entry key="ldap-groups" value="4.0.0" />
         <entry key="ldap-notify" value="0.9.6" />
-        <entry key="ldap3" value="0.9.7.5" />
+        <entry key="ldap3" value="0.9.7.10" />
         <entry key="ldap_paged_search" value="0.4.2" />
         <entry key="ldapadapter" value="0.8" />
         <entry key="ldapalchemy" value="0" />
@@ -30032,6 +30086,7 @@
         <entry key="lggr" value="0.2.0" />
         <entry key="lgh_nester" value="1.1.0" />
         <entry key="lglass" value="1.0.0b3" />
+        <entry key="lgschachtler" value="1.3.0" />
         <entry key="lhj-django-shorturls" value="1.0" />
         <entry key="li-autenticador" value="0.0.5" />
         <entry key="li-common" value="0.0.5" />
@@ -30215,7 +30270,7 @@
         <entry key="lillebror" value="0.2.6" />
         <entry key="lilydjwg.Path" value="0.2" />
         <entry key="lima" value="0.4" />
-        <entry key="limbo" value="3.0.0a3" />
+        <entry key="limbo" value="3.0.0" />
         <entry key="limecc" value="0.2" />
         <entry key="limeclient" value="1.0.3" />
         <entry key="limespy" value="0.0.1" />
@@ -30347,6 +30402,7 @@
         <entry key="list2d" value="1.1.0" />
         <entry key="listElement_in_list" value="1.0.0" />
         <entry key="list_Style_Dict" value="0.00" />
+        <entry key="list_all_items_57" value="1.1.0" />
         <entry key="list_fn" value="1.0.0" />
         <entry key="list_fun" value="1.0.3" />
         <entry key="list_iterator" value="1.0.0" />
@@ -30417,8 +30473,9 @@
         <entry key="live_thumb" value="0.1.6" />
         <entry key="liveandletdie" value="0.0.5" />
         <entry key="liveblog" value="1.5.0" />
-        <entry key="livechart" value="0.0.2" />
+        <entry key="livechart" value="0.0.7" />
         <entry key="livecoding" value="2.02" />
+        <entry key="livecodingtv-publisher" value="0.0.2" />
         <entry key="liveconnect" value="0.1.113" />
         <entry key="livedesktop" value="0.1.0" />
         <entry key="livedoor-auth" value="0.0.2" />
@@ -30586,7 +30643,7 @@
         <entry key="logging_subprocess" value="0.0.1" />
         <entry key="logging_tree" value="1.6" />
         <entry key="logging_unterpolation" value="0.2.0" />
-        <entry key="logging_yamlconfig" value="0.1.3" />
+        <entry key="logging_yamlconfig" value="0.1.4" />
         <entry key="loggingd" value="1.2.0" />
         <entry key="logginggoodies" value="0.0.1" />
         <entry key="loggly" value="0.1.5" />
@@ -30811,7 +30868,7 @@
         <entry key="luigi-td" value="0.6.3.dev4" />
         <entry key="luiti" value="0.0.2" />
         <entry key="lulz" value="0.0.0" />
-        <entry key="lumberjack_formatter" value="0.1.2" />
+        <entry key="lumberjack_formatter" value="0.1.4" />
         <entry key="lumberjackcontroller" value="0.1" />
         <entry key="lumberyard" value="0.1.0" />
         <entry key="lumen" value="0.0.0" />
@@ -30897,6 +30954,7 @@
         <entry key="m01.stub" value="0.5.7" />
         <entry key="m01.zfs" value="0.5.0" />
         <entry key="m209" value="0.1.0" />
+        <entry key="m2bk" value="0.3.1" />
         <entry key="m2ext" value="0.1" />
         <entry key="m2secret" value="0.1.1" />
         <entry key="m2tool" value="0.1" />
@@ -30974,7 +31032,7 @@
         <entry key="macholib" value="1.7" />
         <entry key="machotools" value="0.0.2" />
         <entry key="macht" value="0.1.5" />
-        <entry key="mackup" value="0.8.3" />
+        <entry key="mackup" value="0.8.4" />
         <entry key="maclocate" value="0.1.5" />
         <entry key="macro-of-inline" value="0.9" />
         <entry key="macroeco" value="0.3" />
@@ -31124,7 +31182,7 @@
         <entry key="makesense" value="0.1.0" />
         <entry key="makesetup" value="0.0.4" />
         <entry key="makesite" value="0.9.83" />
-        <entry key="makesurface" value="0.2.13dev" />
+        <entry key="makesurface" value="0.2.14dev" />
         <entry key="maketools" value="0.1.4" />
         <entry key="makeup" value="0.0.1" />
         <entry key="makina.recipe.postgres" value="0.1" />
@@ -31202,7 +31260,7 @@
         <entry key="mapit" value="1.0" />
         <entry key="mapkit" value="1.1.0" />
         <entry key="maple" value="0.1.60" />
-        <entry key="mapletree" value="0.4" />
+        <entry key="mapletree" value="0.5" />
         <entry key="maplot" value="1.0.3" />
         <entry key="mapmyfitness" value="0.1.2" />
         <entry key="mapnik" value="0.0.0" />
@@ -31215,7 +31273,7 @@
         <entry key="mar" value="1.2" />
         <entry key="maraithal" value="0.5" />
         <entry key="marathon" value="0.6.10" />
-        <entry key="marathoner" value="1.2.5" />
+        <entry key="marathoner" value="1.2.6" />
         <entry key="marbl-python" value="2.0.3" />
         <entry key="marblerun" value="0.1" />
         <entry key="marcdb" value="0.92" />
@@ -31370,7 +31428,7 @@
         <entry key="mathutils" value="2.73" />
         <entry key="matip" value="0.1.2" />
         <entry key="matlab" value="0.1" />
-        <entry key="matlab_kernel" value="0.3.1" />
+        <entry key="matlab_kernel" value="0.4" />
         <entry key="matlab_wrapper" value="0.9.6" />
         <entry key="matop" value="1.1.0" />
         <entry key="matphys" value="1.1.27" />
@@ -31402,6 +31460,7 @@
         <entry key="maxims" value="0.0.2" />
         <entry key="maxixe" value="0.1.0.alpha.0" />
         <entry key="maxminddb" value="1.1.1" />
+        <entry key="maxminddb-geolite2" value="2015.0206" />
         <entry key="maxxn" value="1.1.0" />
         <entry key="mayan-edms" value="1.1.0" />
         <entry key="mayavi" value="4.4.0" />
@@ -31437,7 +31496,7 @@
         <entry key="mcgrep" value="0.1" />
         <entry key="mcider" value="0.3.0" />
         <entry key="mcint" value="0.1dev5" />
-        <entry key="mcloud" value="0.9.6" />
+        <entry key="mcloud" value="0.9.7" />
         <entry key="mclp" value="1.0" />
         <entry key="mcm" value="0.0.1" />
         <entry key="mcollective" value="0.4" />
@@ -31739,6 +31798,7 @@
         <entry key="meta_func" value="0.1.0" />
         <entry key="metabohunter" value="0.1.0" />
         <entry key="metachao" value="0" />
+        <entry key="metaclass" value="1.0" />
         <entry key="metaconf" value="1.2" />
         <entry key="metaconfig" value="0.1.4" />
         <entry key="metacontext" value="0.2.2" />
@@ -31767,11 +31827,11 @@
         <entry key="metaopt" value="0.1.0" />
         <entry key="metaparser" value="0.0.3" />
         <entry key="metapdf" value="0.3.2" />
-        <entry key="metapensiero.extjs.desktop" value="1.28" />
+        <entry key="metapensiero.extjs.desktop" value="1.29" />
         <entry key="metapensiero.recipe.script" value="1.2" />
         <entry key="metapensiero.sphinx.patchdb" value="1.2.1" />
         <entry key="metapensiero.sqlalchemy.proxy" value="2.6" />
-        <entry key="metapub" value="0.3.4.5" />
+        <entry key="metapub" value="0.3.4.6" />
         <entry key="metaq" value="0.1" />
         <entry key="metar" value="1.4.0" />
         <entry key="metarace" value="1.6.64" />
@@ -32062,6 +32122,7 @@
         <entry key="mimes" value="0.3" />
         <entry key="mimey3000" value="0.1.6" />
         <entry key="mimic" value="1.3.0" />
+        <entry key="mimicry" value="0.2.0" />
         <entry key="mimimongo" value="0.1.2" />
         <entry key="mimir" value="0.6.3" />
         <entry key="min" value="1.3.0" />
@@ -32119,7 +32180,7 @@
         <entry key="minirc" value="0.0.1dev" />
         <entry key="miniredis" value="0.1" />
         <entry key="minishift-python" value="0.1.4" />
-        <entry key="minister" value="11" />
+        <entry key="minister" value="12" />
         <entry key="minisync" value="0.01" />
         <entry key="minitage" value="2.0.67" />
         <entry key="minitage.core" value="2.0.57" />
@@ -32150,7 +32211,7 @@
         <entry key="minsol" value="0.2.2" />
         <entry key="minspan" value="0.1.0" />
         <entry key="mint" value="0.5" />
-        <entry key="mintapi" value="1.7" />
+        <entry key="mintapi" value="1.8" />
         <entry key="mintr" value="0.0.7" />
         <entry key="minus" value="1.2" />
         <entry key="mio-lang" value="0.1.8" />
@@ -32196,6 +32257,7 @@
         <entry key="mistune" value="0.5" />
         <entry key="mistune-contrib" value="0.1" />
         <entry key="mistune-renderers" value="0.1" />
+        <entry key="misu" value="0.1.0" />
         <entry key="mitmproxy" value="0.11.3" />
         <entry key="mitter" value="0.4.5" />
         <entry key="mittun" value="0.1.2.8" />
@@ -32553,6 +32615,7 @@
         <entry key="mongotron" value="0.3" />
         <entry key="mongowatch" value="0.1.2dev" />
         <entry key="mongowriter" value="0.1.3" />
+        <entry key="mongrel2-transceiver" value="0.2.0" />
         <entry key="mongrel2_wsgi" value="0.3dev" />
         <entry key="mongu" value="0.4.2" />
         <entry key="monguo" value="0.2.2" />
@@ -32589,6 +32652,7 @@
         <entry key="montage-wrapper" value="0.9.8" />
         <entry key="montageclient" value="0.1.0" />
         <entry key="montague" value="0.1.0" />
+        <entry key="montecarlino" value="0.1" />
         <entry key="montecarlo" value="0.1.17" />
         <entry key="montepetro" value="0.3.6" />
         <entry key="montepylib" value="0.1.0" />
@@ -32699,7 +32763,7 @@
         <entry key="moves" value="0.1" />
         <entry key="moves-event" value="0.1.0" />
         <entry key="movespy" value="0.1.5" />
-        <entry key="movie_lists" value="1.1.0" />
+        <entry key="movie_lists" value="1.3.0" />
         <entry key="moviepy" value="0.2.2.11" />
         <entry key="movies" value="1.0.0" />
         <entry key="moving_pictures" value="0.1" />
@@ -32707,7 +32771,7 @@
         <entry key="mox" value="0.5.3" />
         <entry key="mox3" value="0.7.0" />
         <entry key="moxie" value="8.12.1" />
-        <entry key="moya" value="0.5.5" />
+        <entry key="moya" value="0.5.6" />
         <entry key="moz-addon-packager" value="1.0.1" />
         <entry key="mozInstall" value="1.11" />
         <entry key="moz_inapp_pay" value="2.0.0" />
@@ -32870,7 +32934,7 @@
         <entry key="msisdn-cli" value="1.0" />
         <entry key="msjson" value="0.2.2" />
         <entry key="msmb_theme" value="0.2" />
-        <entry key="msmbuilder" value="3.0.1" />
+        <entry key="msmbuilder" value="3.1.0" />
         <entry key="msniper" value="1.0.3" />
         <entry key="msnoise" value="1.2.5" />
         <entry key="msnp.py" value="0.4.1" />
@@ -33053,6 +33117,7 @@
         <entry key="mutornadomon" value="0.1.9" />
         <entry key="mutt-ldap" value="0.1" />
         <entry key="mutt-notmuch" value="1.0.0" />
+        <entry key="mutt_ics" value="0.2" />
         <entry key="mutter" value="0.0.2" />
         <entry key="mvc" value="0.83dev" />
         <entry key="mviz" value="0.0.1" />
@@ -33257,7 +33322,7 @@
         <entry key="nagios-filecount-plugin" value="0.1" />
         <entry key="nagios-gearman-plugin" value="0.1" />
         <entry key="nagios-mesos" value="0.2.3" />
-        <entry key="nagios-mesos-service-check" value="0.2.3" />
+        <entry key="nagios-mesos-service-check" value="0.3.1" />
         <entry key="nagios-notification-google-calendar" value="0.2.1" />
         <entry key="nagios-notification-jabber" value="0.6.8" />
         <entry key="nagios-nsca" value="1.1.0" />
@@ -33274,7 +33339,7 @@
         <entry key="nagiosplugin" value="1.2.2" />
         <entry key="nago" value="1.7" />
         <entry key="nagplug" value="1.0.2" />
-        <entry key="nailgun" value="0.3.0" />
+        <entry key="nailgun" value="0.4.0" />
         <entry key="naima" value="0.3" />
         <entry key="naive" value="0.0.3" />
         <entry key="naiveBayesClassifier" value="0.1.3" />
@@ -34067,7 +34132,7 @@
         <entry key="nicedice" value="1.0.1" />
         <entry key="nicedjango" value="1.2.0" />
         <entry key="nicelog" value="0.1.9" />
-        <entry key="nickmab.async_util" value="0.1" />
+        <entry key="nickmab.async_util" value="0.2" />
         <entry key="nicknester" value="1.3.0" />
         <entry key="nicnames" value="0.1.2" />
         <entry key="nicoerenkuk" value="1.0" />
@@ -34106,7 +34171,7 @@
         <entry key="ninjaturtle" value="0.1" />
         <entry key="ninka" value="0.1.4" />
         <entry key="nip" value="0.1a1" />
-        <entry key="niprov" value="0.1.post1" />
+        <entry key="niprov" value="0.1.post2" />
         <entry key="nipy" value="0.3.0" />
         <entry key="nipype" value="0.10.0" />
         <entry key="niquery" value="0.0.1" />
@@ -34149,6 +34214,7 @@
         <entry key="nlpkit" value="0.35" />
         <entry key="nlpnet" value="1.1.6" />
         <entry key="nlptool" value="0.0.2" />
+        <entry key="nlptoolkit" value="0.1" />
         <entry key="nlpy" value="0.0.9" />
         <entry key="nltk" value="3.0.1" />
         <entry key="nltk_tgrep" value="1.0.2" />
@@ -34194,7 +34260,7 @@
         <entry key="node.ext.zodb" value="1.0.1" />
         <entry key="nodebox-color" value="2.0.1" />
         <entry key="nodebox-opengl" value="1.6.1" />
-        <entry key="nodeconductor" value="0.39.0" />
+        <entry key="nodeconductor" value="0.40.0" />
         <entry key="nodeenv" value="0.12.3" />
         <entry key="nodepool" value="0.0.1" />
         <entry key="nodepy" value="0.6" />
@@ -34206,7 +34272,7 @@
         <entry key="nodules" value="0.1.0" />
         <entry key="noeq" value="1.0" />
         <entry key="noipy" value="1.3.1" />
-        <entry key="noirogbptests" value="0.0.2" />
+        <entry key="noirogbptests" value="1.0.1" />
         <entry key="noise" value="1.2.1" />
         <entry key="noiselib" value="1.5.1" />
         <entry key="nolearn" value="0.5" />
@@ -34238,7 +34304,7 @@
         <entry key="norm" value="1.1.3" />
         <entry key="normal" value="1.2.0" />
         <entry key="normality" value="0.2.2" />
-        <entry key="normalize" value="0.7.0" />
+        <entry key="normalize" value="0.7.2" />
         <entry key="normalizer" value="0.2.1" />
         <entry key="norman" value="0.7.2" />
         <entry key="normpath" value="1.0.0" />
@@ -34381,7 +34447,7 @@
         <entry key="nostrain" value="0.1.3" />
         <entry key="nosy" value="1.1.2" />
         <entry key="not-so-tuf" value="0.5.5" />
-        <entry key="nota" value="0.5.8" />
+        <entry key="nota" value="0.5.10" />
         <entry key="notabene" value="0.2.dev29" />
         <entry key="notario" value="0.0.8" />
         <entry key="notch.agent" value="0.5" />
@@ -34431,7 +34497,7 @@
         <entry key="nowandnext" value="0.2.5.dev-r493" />
         <entry key="nowertis" value="1.7.0" />
         <entry key="nowfm" value="0.0.21" />
-        <entry key="noworkflow" value="0.7.0" />
+        <entry key="noworkflow" value="0.7.2" />
         <entry key="nowplaying" value="0.2.62" />
         <entry key="nowsync" value="0.3b3.dev30" />
         <entry key="nox" value="0.2.1" />
@@ -34605,6 +34671,7 @@
         <entry key="nymms" value="0.4.1" />
         <entry key="nymp" value="0.0.2" />
         <entry key="nymphemeral" value="1.2.2.1" />
+        <entry key="nyplcollections" value="1.1" />
         <entry key="nysa" value="0.8.03" />
         <entry key="nysa-dionysus-platform" value="0.5.0" />
         <entry key="nysa-sim-platform" value="0.1.0" />
@@ -34721,7 +34788,7 @@
         <entry key="occiput" value="0.2.1" />
         <entry key="occmodel" value="0.1.0" />
         <entry key="occult" value="0.1" />
-        <entry key="ocdev" value="0.1.0" />
+        <entry key="ocdev" value="0.1.2" />
         <entry key="oceans" value="0.2.3" />
         <entry key="ocflib" value="20" />
         <entry key="ocl" value="0.12" />
@@ -34801,7 +34868,7 @@
         <entry key="ofxstatement-czech" value="1.2.5" />
         <entry key="ofxstatement-lithuanian" value="1.0.2" />
         <entry key="ofxstatement-postfinance" value="0.0.1" />
-        <entry key="ofxtools" value="0.3.6" />
+        <entry key="ofxtools" value="0.3.7.1" />
         <entry key="ogame" value="0.10" />
         <entry key="ogg-theora-vorbis" value="0.0.1" />
         <entry key="oggpy" value="0.5" />
@@ -34912,6 +34979,7 @@
         <entry key="onespacemedia-cms-jobs" value="0.1.5" />
         <entry key="onespacemedia-cms-people" value="0.1.5" />
         <entry key="onespacemedia-cms-redirects" value="0.0.1" />
+        <entry key="onespacemedia-server-management" value="0.1.5" />
         <entry key="onetimepad" value="1.4" />
         <entry key="onetimepass" value="0.3.0" />
         <entry key="oneto" value="1.0.0" />
@@ -34929,7 +34997,7 @@
         <entry key="onslaught" value="0.1.dev0" />
         <entry key="ontic" value="0.0.4" />
         <entry key="ontopy" value="0.1.1" />
-        <entry key="ontospy" value="1.0.0b2" />
+        <entry key="ontospy" value="1.1.0" />
         <entry key="ontosrv" value="0.8" />
         <entry key="ontv" value="0.10.2" />
         <entry key="onty" value="0.0" />
@@ -35263,7 +35331,7 @@
         <entry key="openjub_py" value="0.1" />
         <entry key="openkremlin" value="0.2" />
         <entry key="openlabs_account_ca" value="3.0.2.0" />
-        <entry key="openlabs_account_check" value="3.2.1.2" />
+        <entry key="openlabs_account_check" value="3.2.1.3" />
         <entry key="openlabs_address_autocomplete_au" value="3.0.1.0" />
         <entry key="openlabs_amazon_mws" value="3.2.1.1" />
         <entry key="openlabs_carrier_pricelist" value="3.2.1.0" />
@@ -35283,7 +35351,7 @@
         <entry key="openlabs_nereid_payment_gateway" value="3.4.0.1" />
         <entry key="openlabs_nereid_rest" value="3.0.1.0dev1" />
         <entry key="openlabs_nereid_s3" value="3.2.0.3" />
-        <entry key="openlabs_nereid_webshop" value="3.2.2.20" />
+        <entry key="openlabs_nereid_webshop" value="3.2.2.23" />
         <entry key="openlabs_nereid_webshop_elastic_search" value="3.2.0.7" />
         <entry key="openlabs_nereid_wishlist" value="3.4.0.1" />
         <entry key="openlabs_party_merge" value="3.2.1.0" />
@@ -35332,7 +35400,7 @@
         <entry key="openobject-library" value="2.0.3" />
         <entry key="openoffice-python" value="0.1-20110209" />
         <entry key="openomy" value="0.6.0" />
-        <entry key="openopt" value="0.5410" />
+        <entry key="openopt" value="0.5411" />
         <entry key="openorg-timeseries" value="0.1.1" />
         <entry key="openpack" value="1.1.2" />
         <entry key="openpay" value="0.2" />
@@ -35893,7 +35961,7 @@
         <entry key="pandarus" value="0.4" />
         <entry key="pandas" value="0.15.2" />
         <entry key="pandas-bamboo" value="0.1" />
-        <entry key="pandas-highcharts" value="0.1.2" />
+        <entry key="pandas-highcharts" value="0.3.0" />
         <entry key="pandas-ply" value="0.1.2" />
         <entry key="pandas-qt" value="0.1.2" />
         <entry key="pandas_datareaders" value="0.0.2" />
@@ -35906,7 +35974,7 @@
         <entry key="pandoc-attributes" value="0.1.6" />
         <entry key="pandoc-gpp" value="0.2.5" />
         <entry key="pandoc-internal-references" value="0.4" />
-        <entry key="pandoc-zotxt" value="0.1.25" />
+        <entry key="pandoc-zotxt" value="0.1.26" />
         <entry key="pandocfilters" value="1.2.3" />
         <entry key="pandokia" value="1.3.10" />
         <entry key="pandora-cli" value="0.1.0" />
@@ -35970,7 +36038,7 @@
         <entry key="par" value="1.3.2" />
         <entry key="par2ools" value="0.1" />
         <entry key="par_parallel" value="1.0" />
-        <entry key="parabam" value="0.2.dev4" />
+        <entry key="parabam" value="0.2.dev5" />
         <entry key="paradocx" value="1.1" />
         <entry key="paragram" value="0.1.2" />
         <entry key="paragrep" value="3.1.1" />
@@ -35978,6 +36046,7 @@
         <entry key="parakeet" value="0.23.2" />
         <entry key="parallax" value="1.0.0a3" />
         <entry key="parallel" value="0.2.5 (deprecated - see pprocess)" />
+        <entry key="parallel-phpunit" value="1.0.0" />
         <entry key="parallel-queue" value="0.5" />
         <entry key="parallel-ssh" value="0.70.1" />
         <entry key="parallel_run" value="1.3.0" />
@@ -36028,7 +36097,7 @@
         <entry key="parsedom" value="1.0.0" />
         <entry key="parsegen" value="2.0.0a4" />
         <entry key="parseidf" value="1.0.0" />
-        <entry key="parseli" value="0.0.48" />
+        <entry key="parseli" value="0.0.5" />
         <entry key="parseltongue" value="0.0.2" />
         <entry key="parser" value="0.1" />
         <entry key="parserator" value="0.3.2" />
@@ -36320,7 +36389,7 @@
         <entry key="pdfsplit" value="0.4.2" />
         <entry key="pdftable" value="1.0" />
         <entry key="pdftables" value="0.0.4" />
-        <entry key="pdftools" value="1.0.3" />
+        <entry key="pdftools" value="1.0.6" />
         <entry key="pdftools.pdfjoin" value="0.1dev" />
         <entry key="pdftools.pdfposter" value="0.6.0" />
         <entry key="pdftrick" value="0.0.2" />
@@ -36363,7 +36432,7 @@
         <entry key="pedemath" value="0.0.7" />
         <entry key="pedigree_matrix" value="0.2.1" />
         <entry key="peek" value="0.1.0" />
-        <entry key="peekaboo" value="0.6-6" />
+        <entry key="peekaboo" value="0.7-1" />
         <entry key="peel" value="1.0" />
         <entry key="peep" value="2.2" />
         <entry key="peepin" value="0.10" />
@@ -36527,7 +36596,7 @@
         <entry key="pesto" value="25" />
         <entry key="pestotools.genshi" value="0.2.3" />
         <entry key="petfinder" value="0.3" />
-        <entry key="petitioners" value="0.0.1" />
+        <entry key="petitioners" value="0.0.7" />
         <entry key="petl" value="1.0.4" />
         <entry key="petlib" value="0.0.25" />
         <entry key="petlink" value="0.2.1" />
@@ -37046,7 +37115,7 @@
         <entry key="planemo" value="0.5.0" />
         <entry key="planes" value="0.6.1a" />
         <entry key="planeta" value="0.1.1" />
-        <entry key="planetfilter" value="0.3.2" />
+        <entry key="planetfilter" value="0.3.3" />
         <entry key="planetoid" value="0.0.1dev" />
         <entry key="plannet" value="0.0.0.1" />
         <entry key="plant" value="0.1.1" />
@@ -37083,7 +37152,7 @@
         <entry key="playwork" value="0.0.1dev" />
         <entry key="please" value="0.0.2" />
         <entry key="pleaseshare" value="0.5" />
-        <entry key="plecost" value="1.0.0" />
+        <entry key="plecost" value="1.0.0-2" />
         <entry key="pledge" value="1.0.2" />
         <entry key="pleiades.transliteration" value="0.5" />
         <entry key="plemp" value="0.4" />
@@ -37465,8 +37534,8 @@
         <entry key="plover" value="2.2.0" />
         <entry key="plow-blueprint" value="0.1.3" />
         <entry key="plowshare" value="0.3.6" />
-        <entry key="ploy" value="1.0.3" />
-        <entry key="ploy_ansible" value="1.2.2" />
+        <entry key="ploy" value="1.1.0" />
+        <entry key="ploy_ansible" value="1.2.4" />
         <entry key="ploy_ec2" value="1.1.1" />
         <entry key="ploy_ezjail" value="1.1.1dev" />
         <entry key="ploy_fabric" value="1.1.0" />
@@ -37480,7 +37549,7 @@
         <entry key="pltool" value="1.1" />
         <entry key="plublog" value="0.1.130318" />
         <entry key="pluck" value="0.2" />
-        <entry key="pluckr" value="0.0.8" />
+        <entry key="pluckr" value="0.0.9" />
         <entry key="pluct" value="1.2.1" />
         <entry key="plug" value="0.1.3" />
         <entry key="plugable-btaps" value="0.8.3" />
@@ -37580,7 +37649,7 @@
         <entry key="pocket2pinboard" value="0.1.0" />
         <entry key="pocketmiku" value="0.2.1" />
         <entry key="pockets" value="0.2.3" />
-        <entry key="pocketsphinx" value="0.0.2" />
+        <entry key="pocketsphinx" value="0.0.4" />
         <entry key="pocketwsgi" value="0.2.1" />
         <entry key="pockyt" value="0.7" />
         <entry key="pod" value="0.54.2" />
@@ -37718,7 +37787,7 @@
         <entry key="portal" value="0.3.1" />
         <entry key="portalocker" value="0.5.4" />
         <entry key="porteira" value="0.5" />
-        <entry key="portend" value="1.2" />
+        <entry key="portend" value="1.3" />
         <entry key="porter" value="0.1.5" />
         <entry key="portfolio-analytics" value="0.0.1" />
         <entry key="porticus" value="0.9.6" />
@@ -37741,7 +37810,7 @@
         <entry key="posort" value="0.1" />
         <entry key="possel-server" value="0.2.2" />
         <entry key="post" value="0.0.1" />
-        <entry key="postage" value="1.1.0" />
+        <entry key="postage" value="1.2.1" />
         <entry key="postal-address" value="0.2.1" />
         <entry key="postbox" value="0.1" />
         <entry key="postboy" value="0.3.5" />
@@ -37775,7 +37844,7 @@
         <entry key="poultry" value="1.4.0" />
         <entry key="pout" value="0.5.6" />
         <entry key="pov-fabric-helpers" value="0.1" />
-        <entry key="powa-web" value="0.0.7" />
+        <entry key="powa-web" value="2.0.0" />
         <entry key="powder" value="0.9.1" />
         <entry key="power" value="1.4" />
         <entry key="powerdnsclient" value="1.0" />
@@ -37783,7 +37852,7 @@
         <entry key="powerglove-dns" value="2.0.0" />
         <entry key="powerhose" value="0.7" />
         <entry key="powerindex" value="0.0.4" />
-        <entry key="powerlaw" value="1.3.1" />
+        <entry key="powerlaw" value="1.3.2" />
         <entry key="powerline" value="0.2.4" />
         <entry key="powerline-gitstatus" value="1.0.2" />
         <entry key="powerline-status" value="2.1" />
@@ -37872,7 +37941,7 @@
         <entry key="pre" value="1.3.0" />
         <entry key="pre-commit-mirror-maker" value="0.1.2" />
         <entry key="preTeX" value="0.5.3" />
-        <entry key="pre_commit" value="0.3.6" />
+        <entry key="pre_commit" value="0.4.2" />
         <entry key="pre_commit_hooks" value="0.4.0" />
         <entry key="prebuild.me" value="0.0.1" />
         <entry key="prebuild.py" value="0.0.1" />
@@ -38105,6 +38174,7 @@
         <entry key="project_generator" value="0.3" />
         <entry key="project_runpy" value="0.3.1" />
         <entry key="projectenv" value="0.0.9" />
+        <entry key="projectkey" value="0.1" />
         <entry key="projectname" value="0.1.1" />
         <entry key="projex" value="3.1" />
         <entry key="projex_envy" value="1.2" />
@@ -38182,7 +38252,7 @@
         <entry key="protoweb" value="0.1.0-alpha" />
         <entry key="protowrapper" value="0.0.1" />
         <entry key="protxml2csv" value="0.9" />
-        <entry key="prov" value="1.3.0" />
+        <entry key="prov" value="1.3.1" />
         <entry key="prove" value="0.0.1" />
         <entry key="proveit" value="0.0.6" />
         <entry key="proverbs" value="1.1" />
@@ -38311,7 +38381,7 @@
         <entry key="ptwit" value="0.0.9" />
         <entry key="ptypes" value="0.5.0" />
         <entry key="ptyprocess" value="0.4" />
-        <entry key="pu" value="0.15.0" />
+        <entry key="pu" value="0.16.1" />
         <entry key="pu_in_content" value="1.0.2" />
         <entry key="pu_in_core" value="1.0.4" />
         <entry key="pub" value="0.0.4" />
@@ -38371,7 +38441,7 @@
         <entry key="punc" value="0.2" />
         <entry key="punchcard.py" value="0.2" />
         <entry key="punctuation" value="0.0.1" />
-        <entry key="pundle" value="0.2.1" />
+        <entry key="pundle" value="0.2.2" />
         <entry key="pungi" value="0.1.4" />
         <entry key="punjab" value="0.15" />
         <entry key="punt" value="v1.8.2" />
@@ -38449,7 +38519,7 @@
         <entry key="pwho" value="0.1.0" />
         <entry key="pwilang" value="0.11.3" />
         <entry key="pwinty" value="0.3" />
-        <entry key="pwkit" value="0.4.0" />
+        <entry key="pwkit" value="0.4.1" />
         <entry key="pwl_maker" value="0.1.0" />
         <entry key="pwm" value="0.1.6" />
         <entry key="pwm_calibrate" value="0.4" />
@@ -38629,7 +38699,7 @@
         <entry key="py.test" value="0.0" />
         <entry key="py1cmd" value="0.1" />
         <entry key="py2-ipaddress" value="2.0.1" />
-        <entry key="py211mm" value="0.0.1" />
+        <entry key="py211mm" value="0.0.2" />
         <entry key="py2FaceR" value="0.1.1" />
         <entry key="py2app" value="0.9" />
         <entry key="py2ch" value="0.0.3" />
@@ -38735,7 +38805,7 @@
         <entry key="pyCore" value="0.8.2" />
         <entry key="pyCountdownTimer" value="1.0" />
         <entry key="pyCydia" value="1.0.3-1" />
-        <entry key="pyDAL" value="15.02" />
+        <entry key="pyDAL" value="15.02.27" />
         <entry key="pyDATR" value="0.2" />
         <entry key="pyDAWG" value="1.0.0" />
         <entry key="pyDB2" value="0.996a" />
@@ -38834,7 +38904,7 @@
         <entry key="pyLisp-NG" value="2.0.0" />
         <entry key="pyLruCache" value="0.1.1" />
         <entry key="pyLuminous" value="0.7" />
-        <entry key="pyMOR" value="0.2.2" />
+        <entry key="pyMOR" value="0.3.0" />
         <entry key="pyMPI" value="2.0b0" />
         <entry key="pyMbus" value="0.9.1" />
         <entry key="pyMdfParser" value="0.0.7" />
@@ -38849,7 +38919,7 @@
         <entry key="pyNES" value="0.1.1" />
         <entry key="pyNFFT" value="1.3.2" />
         <entry key="pyNN-spiNNaker" value="2015.004-alpha-01" />
-        <entry key="pyNmonAnalyzer" value="1.0.2" />
+        <entry key="pyNmonAnalyzer" value="1.0.3" />
         <entry key="pyOCD" value="0.3" />
         <entry key="pyOSC" value="0.3.5b-5294" />
         <entry key="pyOURSE" value="0.1" />
@@ -38867,7 +38937,7 @@
         <entry key="pyPgSQL" value="2.5" />
         <entry key="pyPortMidi" value="0.0.3" />
         <entry key="pyPostal" value="1.1d" />
-        <entry key="pyProCT" value="1.7.1" />
+        <entry key="pyProCT" value="1.7.2" />
         <entry key="pyProCT-GUI" value="0.4.1" />
         <entry key="pyQCDH" value="0.0.7" />
         <entry key="pyQPCR" value="0.7" />
@@ -38876,6 +38946,7 @@
         <entry key="pyRFC3339" value="0.2" />
         <entry key="pyRMChart" value="0.0.1" />
         <entry key="pyRMSD" value="4.2.1" />
+        <entry key="pyRVT" value="0.2" />
         <entry key="pyRXP" value="2.1.0" />
         <entry key="pyRadKDE" value="0.6.2" />
         <entry key="pyRdfa" value="2.3.7" />
@@ -39049,7 +39120,7 @@
         <entry key="pyannote" value="0.1.1" />
         <entry key="pyannote-banyan" value="0.1.6" />
         <entry key="pyannote.algorithms" value="0.4.1" />
-        <entry key="pyannote.core" value="0.3.2" />
+        <entry key="pyannote.core" value="0.3.3" />
         <entry key="pyannote.features" value="0.2.1" />
         <entry key="pyannote.metrics" value="0.4.1" />
         <entry key="pyannote.parser" value="0.3" />
@@ -39116,6 +39187,7 @@
         <entry key="pybars" value="0.0.4" />
         <entry key="pybars3" value="0.8.0" />
         <entry key="pybase62" value="0.1.3" />
+        <entry key="pybasicbayes" value="0.1.2" />
         <entry key="pybasis" value="1.3" />
         <entry key="pybass" value="0.5.5" />
         <entry key="pybb" value="0.1.10" />
@@ -39317,7 +39389,7 @@
         <entry key="pycleartool" value="2007.01" />
         <entry key="pyclewn" value="2.0" />
         <entry key="pycli_tools" value="2.0.1" />
-        <entry key="pyclictk" value="0.1" />
+        <entry key="pyclictk" value="0.2.1" />
         <entry key="pyclip" value="0.1" />
         <entry key="pyclip-copycat" value="1.0" />
         <entry key="pycliweather" value="0.3" />
@@ -39374,7 +39446,7 @@
         <entry key="pyconnie" value="1.0" />
         <entry key="pyconnman" value="0.1.0" />
         <entry key="pyconomic" value="0.1.2" />
-        <entry key="pyconsensus" value="0.4.1" />
+        <entry key="pyconsensus" value="0.5" />
         <entry key="pyconstraints" value="1.0.1" />
         <entry key="pyconstring" value="0.4.0" />
         <entry key="pyconsul" value="0.0.3" />
@@ -39383,13 +39455,13 @@
         <entry key="pyconv" value="0.2" />
         <entry key="pyconvert" value="0.4.alpha" />
         <entry key="pyconza2014" value="0.2.10" />
-        <entry key="pycookiecheat" value="0.1.3" />
+        <entry key="pycookiecheat" value="0.1.4" />
         <entry key="pycoon" value="0.2a5" />
         <entry key="pycopine" value="0.1.dev1" />
         <entry key="pycoram" value="0.9.1" />
         <entry key="pycoreutils" value="0.0.6a" />
         <entry key="pycorreios" value="0.1.1" />
-        <entry key="pycorrfit" value="0.8.5" />
+        <entry key="pycorrfit" value="0.8.6" />
         <entry key="pycortex" value="0.1.1" />
         <entry key="pycosat" value="0.6.0" />
         <entry key="pycosmicstar" value="1.0" />
@@ -39407,6 +39479,7 @@
         <entry key="pycparser" value="2.10" />
         <entry key="pycparserext" value="2013.2" />
         <entry key="pycpf" value="0.1" />
+        <entry key="pycpfcnpj" value="1.0.1" />
         <entry key="pycpmc" value="0.1.1" />
         <entry key="pycpptraj" value="0.1.1.5" />
         <entry key="pycps" value="0.2.5" />
@@ -39431,7 +39504,7 @@
         <entry key="pycryptodome" value="3.0" />
         <entry key="pycryptopan" value="0.01d" />
         <entry key="pycryptopp" value="0.6.0.1206569328141510525648634803928199668821045408958" />
-        <entry key="pycsco" value="0.1.7" />
+        <entry key="pycsco" value="0.1.8" />
         <entry key="pycscope" value="1.2.1" />
         <entry key="pycse" value="1.51" />
         <entry key="pycsg" value="0.2" />
@@ -39488,7 +39561,7 @@
         <entry key="pydarner" value="0.0.5" />
         <entry key="pydaruma" value="0.1.9" />
         <entry key="pydas" value="0.3.0" />
-        <entry key="pydash" value="3.0.1" />
+        <entry key="pydash" value="3.1.0" />
         <entry key="pydass_vasp" value="0.1" />
         <entry key="pydataframe" value="0.1.6.180" />
         <entry key="pydatagovph" value="1.4" />
@@ -39514,6 +39587,7 @@
         <entry key="pyddp" value="0.3.1" />
         <entry key="pydealer" value="1.4.0" />
         <entry key="pydeathray" value="0.0.1" />
+        <entry key="pydebrid" value="1.0.0" />
         <entry key="pydebsign" value="0.1.4" />
         <entry key="pydebug" value="1.0.3" />
         <entry key="pydeckout" value="0.0.2" />
@@ -39650,7 +39724,7 @@
         <entry key="pyelasticsearch" value="1.1" />
         <entry key="pyelastictest" value="0.3" />
         <entry key="pyelftools" value="0.23" />
-        <entry key="pyelliptic" value="1.5.5" />
+        <entry key="pyelliptic" value="1.5.6" />
         <entry key="pyembed" value="1.1.2" />
         <entry key="pyembed-jinja2" value="1.1.0" />
         <entry key="pyembed-markdown" value="1.1.0" />
@@ -39682,7 +39756,7 @@
         <entry key="pyepix" value="6-1.0.4" />
         <entry key="pyepm" value="0.8.9" />
         <entry key="pyepoll" value="0.2" />
-        <entry key="pyepr" value="0.8.2" />
+        <entry key="pyepr" value="0.9.1" />
         <entry key="pyepsg" value="0.1.0" />
         <entry key="pyepw" value="0.1" />
         <entry key="pyeq2" value="11.6.11" />
@@ -39770,7 +39844,7 @@
         <entry key="pyfav" value="0.1" />
         <entry key="pyfaze" value="0.1.3dev" />
         <entry key="pyfb" value="0.4.2" />
-        <entry key="pyfbp" value="0.1.22" />
+        <entry key="pyfbp" value="0.1.24" />
         <entry key="pyfdt" value="0.3" />
         <entry key="pyfeat" value="0.2.3" />
         <entry key="pyfeddic" value="0.1" />
@@ -39822,7 +39896,7 @@
         <entry key="pyfmodex" value="0.3.2" />
         <entry key="pyfmt" value="0.1" />
         <entry key="pyfnc" value="0.1.2" />
-        <entry key="pyfnnd" value="0.2" />
+        <entry key="pyfnnd" value="0.3" />
         <entry key="pyfnordmetric" value="0.0.2" />
         <entry key="pyfo" value="0.6" />
         <entry key="pyforce" value="1.5" />
@@ -39837,7 +39911,7 @@
         <entry key="pyfpds" value="0.1.0" />
         <entry key="pyfpm" value="0.1.3" />
         <entry key="pyfrank" value="0.2.8" />
-        <entry key="pyfrc" value="2015.2.7" />
+        <entry key="pyfrc" value="2015.3.2" />
         <entry key="pyfreelan" value="0.0.2" />
         <entry key="pyfribidi" value="0.11.0" />
         <entry key="pyfscache" value="0.9.12" />
@@ -39965,7 +40039,7 @@
         <entry key="pygnetic" value="1.0" />
         <entry key="pygnip-allapis" value="0.5" />
         <entry key="pygnm" value="0.1" />
-        <entry key="pygodaddy" value="0.1.7" />
+        <entry key="pygodaddy" value="0.1.8" />
         <entry key="pygold" value="0.9.1" />
         <entry key="pygoo" value="0.1.4" />
         <entry key="pygoogle" value="0.6" />
@@ -40075,6 +40149,7 @@
         <entry key="pyhppbikz05" value="0.1" />
         <entry key="pyhs2" value="0.6.0" />
         <entry key="pyhsm" value="1.0.4h" />
+        <entry key="pyhsmm" value="0.1.3" />
         <entry key="pyhspf" value="0.1.12" />
         <entry key="pyhtmloo" value="0.7" />
         <entry key="pyhttp" value="1.0.0" />
@@ -40120,7 +40195,7 @@
         <entry key="pyinklevel" value="0.2" />
         <entry key="pyinotify" value="0.9.5" />
         <entry key="pyinputstats" value="0.2.1.3" />
-        <entry key="pyinsales" value="0.7.2" />
+        <entry key="pyinsales" value="0.7.3" />
         <entry key="pyinsane" value="1.3.8" />
         <entry key="pyinspire" value="0.2.0" />
         <entry key="pyinstall" value="0.1.4" />
@@ -40146,7 +40221,7 @@
         <entry key="pyiqe" value="1.2.2" />
         <entry key="pyirrlicht" value="1.1.7" />
         <entry key="pyirsdk" value="1.1.2" />
-        <entry key="pyirt" value="0.1.2" />
+        <entry key="pyirt" value="0.1.3" />
         <entry key="pyirtoy" value="0.2.6" />
         <entry key="pyisbn" value="1.0.0" />
         <entry key="pyislands" value="0.1.3" />
@@ -40192,7 +40267,7 @@
         <entry key="pyjsmn" value="0.2.1" />
         <entry key="pyjsonrpc" value="0.0.2" />
         <entry key="pyjsonselect" value="0.2.1" />
-        <entry key="pyjstat" value="0.1.6" />
+        <entry key="pyjstat" value="0.1.7" />
         <entry key="pyjulius" value="0.3" />
         <entry key="pyjwkest" value="0.6.1" />
         <entry key="pyjx" value="0.1.3" />
@@ -40243,6 +40318,7 @@
         <entry key="pykt" value="0.0.2" />
         <entry key="pykt-alt" value="0.0.1" />
         <entry key="pykuler" value="1.2" />
+        <entry key="pykurento" value="0.0.1" />
         <entry key="pykwalify" value="15.01" />
         <entry key="pykwallet" value="0.7" />
         <entry key="pykwic" value="0.03" />
@@ -40511,7 +40587,7 @@
         <entry key="pymongogo" value="0.5" />
         <entry key="pymongohandler" value="0.1" />
         <entry key="pymongolab" value="1.2" />
-        <entry key="pymonome" value="0.8.1" />
+        <entry key="pymonome" value="0.8.2" />
         <entry key="pymonon" value="0.0.1-dev" />
         <entry key="pymoonshot" value="0.1.0-1" />
         <entry key="pymorph" value="0.96" />
@@ -40566,6 +40642,7 @@
         <entry key="pynagram" value="1.0.1" />
         <entry key="pynakotheka" value="1.1.0" />
         <entry key="pynamodb" value="1.3.5" />
+        <entry key="pynance" value="0.1.1" />
         <entry key="pynast" value="1.2.2" />
         <entry key="pynationalrail" value="1.0" />
         <entry key="pynaut" value="0.2.13" />
@@ -40634,7 +40711,7 @@
         <entry key="pynsist" value="1.5" />
         <entry key="pynsive" value="0.2.7" />
         <entry key="pynsot" value="0.0.1" />
-        <entry key="pynsq" value="0.6.5" />
+        <entry key="pynsq" value="0.6.6" />
         <entry key="pynt" value="0.8.1" />
         <entry key="pynt-contrib" value="0.0.2" />
         <entry key="pynt-of-django" value="0.2.0" />
@@ -40827,7 +40904,7 @@
         <entry key="pypepa" value="0.4.13" />
         <entry key="pyperclip" value="1.5.9" />
         <entry key="pypercube" value="0.1.3" />
-        <entry key="pyperform" value="1.5" />
+        <entry key="pyperform" value="1.51" />
         <entry key="pyperry" value="1.2.11" />
         <entry key="pypes" value="1.1.0" />
         <entry key="pypet" value="0.1b.9" />
@@ -40874,7 +40951,7 @@
         <entry key="pypi_redirect" value="1.0.12" />
         <entry key="pypi_switcher" value="0.1" />
         <entry key="pypicache" value="0.2" />
-        <entry key="pypicloud" value="0.2.9" />
+        <entry key="pypicloud" value="0.2.10" />
         <entry key="pypico" value="3.3.0" />
         <entry key="pypicount" value="0.0dev" />
         <entry key="pypid" value="0.4" />
@@ -40890,7 +40967,7 @@
         <entry key="pypipegraph" value="0.157" />
         <entry key="pypipes" value="0.0.1" />
         <entry key="pypirc" value="1.0.4" />
-        <entry key="pypiserver" value="1.1.6" />
+        <entry key="pypiserver" value="1.1.7-rc.1" />
         <entry key="pypispy" value="0.1.3" />
         <entry key="pypispy-pypi-test" value="0.1" />
         <entry key="pypisql" value="0.0.1" />
@@ -41002,6 +41079,7 @@
         <entry key="pypwrctrl" value="0.1.4" />
         <entry key="pypwsafe" value="0.0.2" />
         <entry key="pypwt" value="0.1.1" />
+        <entry key="pypybox" value="0.1" />
         <entry key="pypybox2d" value="2.1-r331" />
         <entry key="pypyenv" value="0.1.3" />
         <entry key="pypygo" value="0.1.1" />
@@ -41011,7 +41089,7 @@
         <entry key="pyqcy" value="0.4.5" />
         <entry key="pyqg" value="0.1" />
         <entry key="pyqi" value="0.3.2" />
-        <entry key="pyql-weather" value="0.1" />
+        <entry key="pyql-weather" value="0.2.1" />
         <entry key="pyqode-uic" value="0.1.1" />
         <entry key="pyqode.cobol" value="2.4.1" />
         <entry key="pyqode.core" value="2.4.2" />
@@ -41382,7 +41460,7 @@
         <entry key="pyrotorque" value="0.1.1dev-r316" />
         <entry key="pyrouette" value="0.6.0" />
         <entry key="pyrouge" value="0.1.2" />
-        <entry key="pyroute2" value="0.3.4" />
+        <entry key="pyroute2" value="0.3.5" />
         <entry key="pyrouter" value="1.0.0" />
         <entry key="pyroutes" value="0.5.0" />
         <entry key="pyroutes.js" value="0.1.0" />
@@ -41436,10 +41514,11 @@
         <entry key="pysberbps" value="0.0.1.dev1" />
         <entry key="pysbf" value="0.6.1" />
         <entry key="pysca" value="0.1.2" />
-        <entry key="pyscaffold" value="2.0.1c1" />
+        <entry key="pyscaffold" value="2.0.1" />
         <entry key="pyscale" value="0.1.1" />
         <entry key="pyscanfcs" value="0.2.3" />
         <entry key="pyscape" value="1.3.1" />
+        <entry key="pyscape-client" value="2015.02b2" />
         <entry key="pyscarab" value="0.1.1" />
         <entry key="pyscard" value="1.6.12" />
         <entry key="pyscash" value="0.1.1" />
@@ -41504,7 +41583,7 @@
         <entry key="pysha3" value="0.3" />
         <entry key="pyshanb" value="0.6.3" />
         <entry key="pyshapefile" value="0.1" />
-        <entry key="pyshark" value="0.3.3" />
+        <entry key="pyshark" value="0.3.4" />
         <entry key="pysheet" value="0.3.8" />
         <entry key="pyshell" value="1.41b" />
         <entry key="pyshield" value="1.8.0a2" />
@@ -41632,7 +41711,7 @@
         <entry key="pysqes" value="0.2.1" />
         <entry key="pysql" value="0.16" />
         <entry key="pysqlcipher" value="2.6.4" />
-        <entry key="pysqlcipher3" value="1.0.1" />
+        <entry key="pysqlcipher3" value="1.0.2" />
         <entry key="pysqlite" value="2.6.3" />
         <entry key="pysqlw" value="1.3.0" />
         <entry key="pysqueezecenter" value="0.95" />
@@ -41675,6 +41754,7 @@
         <entry key="pystatsd" value="0.1.10" />
         <entry key="pystdf" value="1.0.0" />
         <entry key="pysteam" value="0.1.3" />
+        <entry key="pysteamkit" value="0.0.1" />
         <entry key="pysteim" value="0.4" />
         <entry key="pysteinn" value="1.0" />
         <entry key="pysteroids" value="1.0.1" />
@@ -42074,7 +42154,7 @@
         <entry key="python-dateconv" value="0.0.8" />
         <entry key="python-datetime-tz" value="0.2" />
         <entry key="python-dateutil" value="2.4.0" />
-        <entry key="python-dbusmock" value="0.12" />
+        <entry key="python-dbusmock" value="0.13" />
         <entry key="python-dbusx" value="0.9" />
         <entry key="python-ddd" value="0.1.2" />
         <entry key="python-ddp" value="0.1.4" />
@@ -42105,7 +42185,7 @@
         <entry key="python-dogeapi" value="0.0" />
         <entry key="python-domains" value="0.1.1" />
         <entry key="python-donecal" value="0.3.2" />
-        <entry key="python-dotenv" value="0.1.0" />
+        <entry key="python-dotenv" value="0.1.2" />
         <entry key="python-double" value="0.1" />
         <entry key="python-drift" value="0.0.1" />
         <entry key="python-dsl-tools" value="0.2.0" />
@@ -42527,7 +42607,7 @@
         <entry key="python-plinkio" value="0.1.1" />
         <entry key="python-poco" value="0.1.0" />
         <entry key="python-poppler-qt4" value="0.24.0" />
-        <entry key="python-poppler-qt5" value="0.24.1" />
+        <entry key="python-poppler-qt5" value="0.24.2" />
         <entry key="python-port25" value="0.0.3" />
         <entry key="python-postmark" value="0.4.7" />
         <entry key="python-postmark-inbound" value="1.0.0" />
@@ -42606,7 +42686,7 @@
         <entry key="python-scribd" value="1.2.0" />
         <entry key="python-scriptures" value="2.1.0" />
         <entry key="python-sdist-maemo" value="0.1.1" />
-        <entry key="python-seamicroclient" value="0.3.0" />
+        <entry key="python-seamicroclient" value="0.4.0" />
         <entry key="python-serpente" value="1.0.0" />
         <entry key="python-server-metrics" value="0.1.8" />
         <entry key="python-seth" value="0.6" />
@@ -42782,7 +42862,7 @@
         <entry key="python-wellrested" value="0.1.3" />
         <entry key="python-wepay" value="1.4.3" />
         <entry key="python-whois" value="0.2" />
-        <entry key="python-whois-extended" value="0.6.9" />
+        <entry key="python-whois-extended" value="0.6.10" />
         <entry key="python-wialon" value="1.0.6" />
         <entry key="python-wifi" value="0.5.0" />
         <entry key="python-wikiware" value="0.0.2" />
@@ -43118,7 +43198,7 @@
         <entry key="pywatch_client" value="0.0.2" />
         <entry key="pywatson" value="0.1.0a2" />
         <entry key="pywaveclus" value="1.0.1" />
-        <entry key="pywb" value="0.8.1" />
+        <entry key="pywb" value="0.8.2" />
         <entry key="pywbem" value="0.7.0" />
         <entry key="pywcs" value="1.12" />
         <entry key="pywcsgrid2" value="1.0-b3" />
@@ -43563,7 +43643,7 @@
         <entry key="quizzer" value="0.4" />
         <entry key="quodlibet" value="2.5.1" />
         <entry key="quokka" value="0.2.0" />
-        <entry key="quora" value="0.1.20.7" />
+        <entry key="quora" value="0.1.21" />
         <entry key="quorabackup" value="0.1.8" />
         <entry key="quorum" value="0.3.5" />
         <entry key="quotachecker" value="1.7" />
@@ -43871,7 +43951,7 @@
         <entry key="ratchetapi" value="0.6" />
         <entry key="rate_limited_queue" value="0.0.6" />
         <entry key="ratebeer" value="1.4" />
-        <entry key="ratelim" value="0.1.5" />
+        <entry key="ratelim" value="0.1.6" />
         <entry key="ratelimiter" value="0.2.3" />
         <entry key="ratesetterClient" value="0.1.0" />
         <entry key="ratfun" value="2.6" />
@@ -43970,7 +44050,7 @@
         <entry key="rcount" value="0.0.1" />
         <entry key="rcs4cvs2svn" value="1.2" />
         <entry key="rcsb_browser" value="0.1.0" />
-        <entry key="rcsdk" value="0.2.0" />
+        <entry key="rcsdk" value="0.2.3" />
         <entry key="rcssmin" value="1.0.5" />
         <entry key="rctl" value="0.1.1" />
         <entry key="rd-celery-email" value="0.1.6" />
@@ -44156,7 +44236,7 @@
         <entry key="reddrip" value="1.2.2" />
         <entry key="reddwarf" value="2012.1" />
         <entry key="redef" value="1.7" />
-        <entry key="redelvlib" value="0.1.19" />
+        <entry key="redelvlib" value="0.1.22" />
         <entry key="redflyingbaron" value="0.1.1" />
         <entry key="redfocus" value="0.5" />
         <entry key="redfoot" value="2.7.0" />
@@ -44197,7 +44277,7 @@
         <entry key="redis-simple-cache" value="0.0.7" />
         <entry key="redis-taxon" value="0.3.0" />
         <entry key="redis-tornado" value="0.2" />
-        <entry key="redis-trib" value="0.1.9" />
+        <entry key="redis-trib" value="0.1.11" />
         <entry key="redis-utils" value="1.0.5" />
         <entry key="redis2hdfs" value="0.0.2" />
         <entry key="redis_dashboard" value="0.0.3" />
@@ -44232,7 +44312,7 @@
         <entry key="redline" value="0.1dev-20111022" />
         <entry key="redlink" value="1.0-ALPHA" />
         <entry key="redlock" value="1.0.0" />
-        <entry key="redlock-py" value="1.0.2" />
+        <entry key="redlock-py" value="1.0.4" />
         <entry key="redmine-auth" value="0.3.0" />
         <entry key="redmine-cmd" value="0.10.4" />
         <entry key="redmine-releasedate" value="0.1.2" />
@@ -44396,7 +44476,7 @@
         <entry key="relay" value="0.0.8" />
         <entry key="relay.mesos" value="0.0.10" />
         <entry key="relay.runner" value="0.1.7" />
-        <entry key="relayr" value="0.2.3" />
+        <entry key="relayr" value="0.2.4" />
         <entry key="relayserver" value="1.1.2" />
         <entry key="release_path" value="0.1" />
         <entry key="releaselog" value="0.2" />
@@ -44476,7 +44556,7 @@
         <entry key="repi-client" value="0.4" />
         <entry key="repi-server" value="0.2" />
         <entry key="replace" value="0" />
-        <entry key="replayer" value="0.3.6" />
+        <entry key="replayer" value="0.3.7" />
         <entry key="replaylib" value="0.1" />
         <entry key="replica" value="0.1.1" />
         <entry key="replicator" value="0.0.1" />
@@ -44839,7 +44919,7 @@
         <entry key="rewind-client" value="0.3.0" />
         <entry key="rex" value="0.9.0" />
         <entry key="rexlex" value="0.02" />
-        <entry key="rexpro" value="0.4.0" />
+        <entry key="rexpro" value="0.4.1" />
         <entry key="rexster" value="0.1a" />
         <entry key="rexster.py" value="0.1a" />
         <entry key="reyaml" value="0.2" />
@@ -44966,6 +45046,8 @@
         <entry key="rivr" value="0.6.0" />
         <entry key="rivr-jinja" value="0.1.1" />
         <entry key="rivr-peewee" value="0.1.2" />
+        <entry key="rivr-rest" value="0.1.0" />
+        <entry key="rivr-rest-peewee" value="0.1.0" />
         <entry key="rjm.recipe.venv" value="0.8" />
         <entry key="rjmetrics" value="0.0.2" />
         <entry key="rjsmin" value="1.0.10" />
@@ -44992,10 +45074,11 @@
         <entry key="rmtree" value="1.0" />
         <entry key="rmw" value="0.0.dev1" />
         <entry key="rn_nester" value="1.3.0" />
-        <entry key="rnacounter" value="1.5" />
+        <entry key="rnacounter" value="1.5.2" />
         <entry key="rnaseqlib" value="0.1" />
         <entry key="rnaspace" value="1.0" />
         <entry key="rnc2rng" value="1.0" />
+        <entry key="rnftools" value="0.0.1" />
         <entry key="ro-manager" value="0.2.20" />
         <entry key="ro.bdb.cmmi" value="1.0.5" />
         <entry key="ro_nester" value="1.3.0" />
@@ -45041,6 +45124,7 @@
         <entry key="robotframework-anywherelibrary" value="1.1.0" />
         <entry key="robotframework-appiumlibrary" value="1.2.5" />
         <entry key="robotframework-archivelibrary" value="0.3.1" />
+        <entry key="robotframework-aristalibrary" value="1.0" />
         <entry key="robotframework-async" value="1.0.3" />
         <entry key="robotframework-databaselibrary" value="0.6" />
         <entry key="robotframework-debuglibrary" value="0.3" />
@@ -45086,6 +45170,7 @@
         <entry key="robotframeworklexer" value="0.2" />
         <entry key="robotframeworkplus" value="0.2" />
         <entry key="robotice" value="0.0.1" />
+        <entry key="robotice-cc2541-device" value="0.0.2a" />
         <entry key="robotnik" value="0.2" />
         <entry key="robotpy-frcsim" value="0.0.0-345-g4c5d1a1" />
         <entry key="robotpy-hal-base" value="2015.0.14" />
@@ -45185,7 +45270,7 @@
         <entry key="ros_buildfarm" value="0.1.2" />
         <entry key="rosa" value="0.1.3" />
         <entry key="rosapi" value="0.2.4" />
-        <entry key="rosbag_pandas" value="0.3.7.1" />
+        <entry key="rosbag_pandas" value="0.3.7.2" />
         <entry key="rosci" value="0.1.3" />
         <entry key="roscraco" value="0.3.2" />
         <entry key="roscreate" value="0.1.10" />
@@ -45465,7 +45550,7 @@
         <entry key="run-stack" value="0.2.0" />
         <entry key="run-watch" value="0.2.0" />
         <entry key="runFBTests" value="2.0.1" />
-        <entry key="runHiC" value="0.2.4" />
+        <entry key="runHiC" value="0.3.5" />
         <entry key="run_doctest" value="0.5" />
         <entry key="runcython" value="0.2.1" />
         <entry key="rundeckrun" value="0.1.12" />
@@ -45842,7 +45927,7 @@
         <entry key="scalarTransportFlux" value="2.1" />
         <entry key="scale" value="0.1.0" />
         <entry key="scalepot" value="0.1" />
-        <entry key="scales" value="1.0.8" />
+        <entry key="scales" value="1.0.9" />
         <entry key="scales_datadog" value="0.5.6" />
         <entry key="scalpel" value="0.8.2" />
         <entry key="scalpyr" value="0.0.1" />
@@ -46044,6 +46129,7 @@
         <entry key="scrapyapperyio" value="0.1.2" />
         <entry key="scrapyd" value="1.0.1" />
         <entry key="scrapyd-subspider" value="0.0.2" />
+        <entry key="scrapyjs" value="0.1" />
         <entry key="scrapylib" value="1.5.0" />
         <entry key="scrapymongocache" value="0.1.0" />
         <entry key="scrapyrwiki" value="0.2" />
@@ -46085,7 +46171,7 @@
         <entry key="scription" value="0.74.02" />
         <entry key="scriptloader" value="0.2.0" />
         <entry key="scriptmutex" value="0.2dev" />
-        <entry key="scriptnado" value="2.0.2" />
+        <entry key="scriptnado" value="2.0.4" />
         <entry key="scriptnado-cli" value="0.0.10" />
         <entry key="scriptnado-common" value="0.0.10" />
         <entry key="scriptrender" value="0.2.1" />
@@ -46147,7 +46233,7 @@
         <entry key="seal2" value="1.0" />
         <entry key="seam" value="0.0" />
         <entry key="seamcarver" value="0.1" />
-        <entry key="seamicro-ml2" value="0.1.0" />
+        <entry key="seamicro-ml2" value="0.1.1" />
         <entry key="seantis.agencies" value="0.5" />
         <entry key="seantis.cover.people" value="0.1" />
         <entry key="seantis.dir.base" value="1.8.0" />
@@ -46379,7 +46465,7 @@
         <entry key="seqPlot" value="0.1.0" />
         <entry key="seqSieve" value="0.9.1" />
         <entry key="seqansphinx" value="0.3.0" />
-        <entry key="seqcluster" value="0.99.8" />
+        <entry key="seqcluster" value="0.99.9" />
         <entry key="seqdiag" value="0.9.5" />
         <entry key="seqenv" value="0.9.0" />
         <entry key="seqmagick" value="0.5.0" />
@@ -46772,7 +46858,7 @@
         <entry key="signupto" value="0.1" />
         <entry key="signxml" value="0.3.9" />
         <entry key="sigopt" value="0.1.1" />
-        <entry key="sigopt-python" value="0.2.2" />
+        <entry key="sigopt-python" value="0.3.0" />
         <entry key="sigprocge" value="0.2.0" />
         <entry key="sigprofiler" value="0.0.3" />
         <entry key="sigtools" value="0.1b3" />
@@ -47028,7 +47114,7 @@
         <entry key="simplesvg" value="0.1.1" />
         <entry key="simpletable" value="0.2.2" />
         <entry key="simpletail" value="0.1.2" />
-        <entry key="simpletcd" value="0.1.1" />
+        <entry key="simpletcd" value="0.1.3" />
         <entry key="simpletest" value="0.0" />
         <entry key="simpletestaaa123" value="0.0.1" />
         <entry key="simpletq" value="0.1.dev2" />
@@ -47108,7 +47194,7 @@
         <entry key="sisyphus" value="0.0.1.4" />
         <entry key="sit" value="0" />
         <entry key="site-auditor" value="1.4.1" />
-        <entry key="site_config" value="0.0.13" />
+        <entry key="site_config" value="0.0.14" />
         <entry key="siteadm" value="0.2.2" />
         <entry key="siteconfig" value="0.1.0" />
         <entry key="sitedeploy" value="1.0" />
@@ -47225,7 +47311,7 @@
         <entry key="slack" value="0.0.3" />
         <entry key="slack_log_handler" value="0.1.0" />
         <entry key="slackard" value="1.0.8" />
-        <entry key="slackbot" value="0.1.2" />
+        <entry key="slackbot" value="0.1.3" />
         <entry key="slackclient" value="0.14" />
         <entry key="slacken" value="0.1.4" />
         <entry key="slacker" value="0.5.5" />
@@ -47235,7 +47321,7 @@
         <entry key="slackpy" value="0.2.0" />
         <entry key="slackrealtime" value="0.1" />
         <entry key="slacksend" value="0.1" />
-        <entry key="slacksocket" value="0.2.0" />
+        <entry key="slacksocket" value="0.3.0" />
         <entry key="slackup" value="0.0" />
         <entry key="slacky" value="0.1.32" />
         <entry key="slaney" value="0" />
@@ -47291,7 +47377,7 @@
         <entry key="slc.shoppinglist" value="1.5" />
         <entry key="slc.stickystatusmessages" value="0.4" />
         <entry key="slc.xliff" value="2.0b2" />
-        <entry key="sldap3" value="0.0.1a1" />
+        <entry key="sldap3" value="0.0.1a4.post1" />
         <entry key="sleekdigda" value="0.2.0" />
         <entry key="sleekxmpp" value="1.3.1" />
         <entry key="sleep" value="0" />
@@ -47708,9 +47794,11 @@
         <entry key="soscleaner" value="0.2.2" />
         <entry key="sosreport" value="3.2" />
         <entry key="sostore" value="0.6" />
+        <entry key="sotaee1" value="1.0.0" />
         <entry key="sotlogger" value="1.0" />
         <entry key="sotong" value="0.1.6" />
         <entry key="sound_hash" value="0.2" />
+        <entry key="sound_server" value="0.1.1" />
         <entry key="soundcloud" value="0.4.1" />
         <entry key="soundcloud-cli" value="0.2.5" />
         <entry key="soundcloud-syncer" value="0.3.1" />
@@ -47726,7 +47814,7 @@
         <entry key="sourcecodegen" value="0.6.14" />
         <entry key="sourcemap" value="0.1.8" />
         <entry key="sourceparse" value="0.1" />
-        <entry key="sourcer" value="0.1.2" />
+        <entry key="sourcer" value="0.1.3" />
         <entry key="sources" value="1.1.0" />
         <entry key="sourcestamp" value="0.1" />
         <entry key="sourpy" value="0.2.1" />
@@ -47745,7 +47833,7 @@
         <entry key="spacemouse" value="0.1" />
         <entry key="spack" value="0.3.1" />
         <entry key="spackager" value="0.5.5" />
-        <entry key="spacy" value="0.67" />
+        <entry key="spacy" value="0.68" />
         <entry key="spadl" value="0.2" />
         <entry key="spake2" value="0.1" />
         <entry key="spalter" value="0.2" />
@@ -47761,7 +47849,7 @@
         <entry key="spanner" value="0.1.0" />
         <entry key="spark" value="0.2.1" />
         <entry key="spark-ml-streaming" value="0.1.0" />
-        <entry key="spark-package" value="0.1" />
+        <entry key="spark-package" value="0.2" />
         <entry key="sparkl" value="0.0.2" />
         <entry key="sparklingpandas" value="0.0.1" />
         <entry key="sparkplug" value="1.6.1" />
@@ -48217,7 +48305,7 @@
         <entry key="sqla_mixins" value="0.6" />
         <entry key="sqlabstr" value="0.5" />
         <entry key="sqlacodegen" value="1.1.5" />
-        <entry key="sqlagg" value="0.2.2" />
+        <entry key="sqlagg" value="0.2.3" />
         <entry key="sqlalchemy-batteries" value="0.4.5" />
         <entry key="sqlalchemy-bitcoin" value="0.0.2" />
         <entry key="sqlalchemy-citext" value="1.3-0" />
@@ -48263,7 +48351,7 @@
         <entry key="sqlcmd" value="0.7.1" />
         <entry key="sqlcop" value="0.9.3" />
         <entry key="sqldict" value="0.5.2" />
-        <entry key="sqlew" value="0.1" />
+        <entry key="sqlew" value="0.2" />
         <entry key="sqlexecutor" value="0.1.1" />
         <entry key="sqlformatter" value="1.0" />
         <entry key="sqlinspect" value="0.0.1" />
@@ -48294,7 +48382,7 @@
         <entry key="sqlpython" value="1.7.3" />
         <entry key="sqlpython_my" value="1.7.3" />
         <entry key="sqlquery" value="1.0.0" />
-        <entry key="sqlquerybuilder" value="0.0.10" />
+        <entry key="sqlquerybuilder" value="0.0.11" />
         <entry key="sqlrest" value="0.3.0" />
         <entry key="sqlsoup" value="0.9.0" />
         <entry key="sqlsplit" value="0.1.0" />
@@ -48341,6 +48429,7 @@
         <entry key="srmqt4" value="0.3" />
         <entry key="srp" value="1.0.5" />
         <entry key="srq" value="0.9.0" />
+        <entry key="srt" value="0.0.3" />
         <entry key="srt-shift" value="0.2" />
         <entry key="srtmerge" value="1.0" />
         <entry key="srvlookup" value="0.1.0" />
@@ -48431,7 +48520,7 @@
         <entry key="stacked" value="0.1.4" />
         <entry key="stacker" value="0.01" />
         <entry key="stackfull" value="0.8" />
-        <entry key="stackinabox" value="0.3" />
+        <entry key="stackinabox" value="0.4" />
         <entry key="stackit" value="0.1.7" />
         <entry key="stackless-python" value="10.0" />
         <entry key="stacklesslib" value="1.0.3" />
@@ -48448,6 +48537,7 @@
         <entry key="stagecoach-apy" value="1.1.4" />
         <entry key="stagger" value="0.4.2" />
         <entry key="staggregator" value="0.2.3" />
+        <entry key="stak" value="0.1.0a1" />
         <entry key="stalker" value="0.2.13.3" />
         <entry key="stalker42" value="0.3.3" />
         <entry key="stalker_pyramid" value="0.1.0.b1" />
@@ -48667,7 +48757,7 @@
         <entry key="storm_oracle" value="0.1.3" />
         <entry key="stormed-amqp" value="0.2" />
         <entry key="stormloader" value="1.5.2" />
-        <entry key="stormpath" value="1.3.5" />
+        <entry key="stormpath" value="1.3.6" />
         <entry key="stormpath-cli" value="0.0.2" />
         <entry key="stormpath-export" value="0.0.3" />
         <entry key="stormpath-sdk" value="1.0.0.beta" />
@@ -48709,7 +48799,7 @@
         <entry key="stream" value="0.8" />
         <entry key="stream-django" value="1.2.0" />
         <entry key="stream-python" value="2.2.0" />
-        <entry key="stream_framework" value="1.1.2" />
+        <entry key="stream_framework" value="1.1.4" />
         <entry key="stream_tap" value="0.9.3" />
         <entry key="streamcorpus" value="0.3.43.dev4" />
         <entry key="streamcorpus_elasticsearch" value="0.1.1.dev1" />
@@ -48848,7 +48938,7 @@
         <entry key="submodal" value="1.5" />
         <entry key="submodfix" value="1.0" />
         <entry key="subnets-resolver" value="1.0.0" />
-        <entry key="subnuker" value="0.2" />
+        <entry key="subnuker" value="0.3" />
         <entry key="subparse" value="0.3.3" />
         <entry key="subprocess.run" value="0.0.8" />
         <entry key="subprocess32" value="3.2.6" />
@@ -48861,6 +48951,7 @@
         <entry key="substitute" value="1.1.2" />
         <entry key="substrate" value="0.7.2" />
         <entry key="substratestack" value="0.3" />
+        <entry key="subsystem" value="0.3" />
         <entry key="subterrex" value="0.3" />
         <entry key="subtitle-downloader" value="v1" />
         <entry key="subtitle_translator" value="0.1" />
@@ -48895,6 +48986,7 @@
         <entry key="suds_marketo" value="0.1.5" />
         <entry key="suds_passworddigest" value="0.1.2" />
         <entry key="suds_requests" value="0.1" />
+        <entry key="sudsdict" value="0.1" />
         <entry key="sufartest" value="0.0.2" />
         <entry key="suffix_array" value="0.9.81" />
         <entry key="sugar" value="1.0.0" />
@@ -49051,8 +49143,8 @@
         <entry key="svnpublish" value="2.12" />
         <entry key="svnpuppy" value="0.0.1" />
         <entry key="svnrepo" value="0.1" />
-        <entry key="svvamp" value="0.0.2" />
-        <entry key="svviz" value="1.0.4" />
+        <entry key="svvamp" value="0.0.3" />
+        <entry key="svviz" value="1.0.5" />
         <entry key="sw.grokcore.jsonp" value="0.1" />
         <entry key="sw.nikeplus" value="0.1" />
         <entry key="sw.objectinspection" value="1.0.1" />
@@ -49065,7 +49157,7 @@
         <entry key="swalign" value="0.3.3" />
         <entry key="swall_pyzk" value="0.5.0" />
         <entry key="swallow" value="1.0.0" />
-        <entry key="swampdragon-notifications" value="0.1.2" />
+        <entry key="swampdragon-notifications" value="0.1.3" />
         <entry key="swampy" value="2.1.7" />
         <entry key="swan" value="0.6.7" />
         <entry key="swanson" value="0.1.2" />
@@ -49202,7 +49294,7 @@
         <entry key="syncstomp" value="0.5.1" />
         <entry key="syndicate" value="1.0.0" />
         <entry key="syneplayer" value="0.5" />
-        <entry key="synergy_odm" value="0.4" />
+        <entry key="synergy_odm" value="0.5" />
         <entry key="synergy_scheduler" value="1.6" />
         <entry key="synkie" value="0.2.4" />
         <entry key="synolopy" value="0.1.1" />
@@ -49231,7 +49323,7 @@
         <entry key="sysmodel" value="0.1" />
         <entry key="sysscope" value="1.0.7a1" />
         <entry key="system_cmd" value="1.1" />
-        <entry key="systematic" value="4.2.4" />
+        <entry key="systematic" value="4.2.5" />
         <entry key="systemlookup" value="0.0.3" />
         <entry key="systempay" value="0.0.10" />
         <entry key="systemwatch" value="0.1.0" />
@@ -49262,7 +49354,7 @@
         <entry key="tableau" value="0.0.3" />
         <entry key="tabledown" value="0.1" />
         <entry key="tableh" value="0.0.01" />
-        <entry key="tableprint" value="0.1.1" />
+        <entry key="tableprint" value="0.1.2" />
         <entry key="tables" value="3.1.1" />
         <entry key="tablet" value="0.9.3" />
         <entry key="tabletext" value="0.1" />
@@ -49280,6 +49372,7 @@
         <entry key="tabular-validator" value="0.2.1" />
         <entry key="tabulate" value="0.7.4" />
         <entry key="tabview" value="1.4.0" />
+        <entry key="taca" value="0.1.1" />
         <entry key="tacit" value="0.3" />
         <entry key="tackpy" value="0.9.9a" />
         <entry key="tacl" value="1.1.0" />
@@ -49335,7 +49428,7 @@
         <entry key="tailor" value="0.1" />
         <entry key="taintedSwallow" value="0.0.1" />
         <entry key="taipan" value="0.0.3" />
-        <entry key="tajo-client" value="0.0.3" />
+        <entry key="tajo-client" value="0.0.6" />
         <entry key="takai" value="0.1.1" />
         <entry key="takenote" value="0.4.5" />
         <entry key="tako" value="0.0.26" />
@@ -49492,7 +49585,7 @@
         <entry key="tavernaPlayerClient" value="0.06" />
         <entry key="tavutil" value="1.0.3" />
         <entry key="tawq" value="0.3.0" />
-        <entry key="taxcalc" value="0.3" />
+        <entry key="taxcalc" value="0.4" />
         <entry key="taxi" value="3.2.1" />
         <entry key="taxii-services" value="0.3" />
         <entry key="taxon" value="0.2.1" />
@@ -49737,7 +49830,7 @@
         <entry key="tesdat" value="1.6.0" />
         <entry key="tess" value="0.1.5" />
         <entry key="tessera" value="0.5.0" />
-        <entry key="tessera-client" value="0.4.1" />
+        <entry key="tessera-client" value="0.4.2" />
         <entry key="tesseract_sip" value="0.1.1" />
         <entry key="tesserpy" value="1.1.2" />
         <entry key="tesserwrap" value="0.1.6" />
@@ -49926,6 +50019,7 @@
         <entry key="tgapp-smallpress" value="0.6.2" />
         <entry key="tgapp-tgcomments" value="0.0.7" />
         <entry key="tgapp-tgpolls" value="0.0.6" />
+        <entry key="tgapp-turbopress" value="0.0.1" />
         <entry key="tgapp-userprofile" value="0.0.5" />
         <entry key="tgapp-youtubevideo" value="0.0.3" />
         <entry key="tgcrud" value="1.0.2" />
@@ -50081,6 +50175,7 @@
         <entry key="threespace" value="2.0.1.0" />
         <entry key="threetaps" value="0.2.2" />
         <entry key="thrift" value="0.9.2" />
+        <entry key="thrift_amqp_tornado" value="0.0.1" />
         <entry key="thrift_connector" value="0.7" />
         <entry key="thrift_medusa" value="0.0.1" />
         <entry key="thriftasyncioserver" value="0.1.7" />
@@ -50097,7 +50192,7 @@
         <entry key="thrust" value="0.1.0.dev" />
         <entry key="thumbS3" value="0.1.3" />
         <entry key="thumbnail" value="0" />
-        <entry key="thumbor" value="4.10.1" />
+        <entry key="thumbor" value="4.10.2" />
         <entry key="thumbor-pexif" value="0.14.1" />
         <entry key="thumbor-web" value="0.3.1" />
         <entry key="thumbor_ceph" value="1" />
@@ -50235,7 +50330,7 @@
         <entry key="tidytex" value="0.1" />
         <entry key="tidytree" value="0.1.1" />
         <entry key="tiedye" value="0.0.1" />
-        <entry key="tiempo" value="0.0.7a" />
+        <entry key="tiempo" value="0.0.9" />
         <entry key="tiendanube" value="1.1" />
         <entry key="tif2geojson" value="0.1.3" />
         <entry key="tiff2sth" value="0.2" />
@@ -50643,6 +50738,7 @@
         <entry key="torgen" value="0.2.5" />
         <entry key="tori" value="3.0.3" />
         <entry key="torminify" value="0.1.3" />
+        <entry key="tornadis" value="0.1.0" />
         <entry key="tornado" value="4.1" />
         <entry key="tornado-alf" value="0.4.1" />
         <entry key="tornado-api-kit" value="0.0.1" />
@@ -50757,7 +50853,7 @@
         <entry key="touchdown" value="0.0.4" />
         <entry key="touchpaper" value="0.2.8" />
         <entry key="touchtechnology-public" value="0.0.3" />
-        <entry key="toughradius" value="0.9.3" />
+        <entry key="toughradius" value="0.9.5" />
         <entry key="tourcms" value="0.3" />
         <entry key="toureditor" value="1.3.1" />
         <entry key="toursst" value="0.0.3" />
@@ -50844,7 +50940,7 @@
         <entry key="traity" value="0.0.1" />
         <entry key="traject" value="0.10.1" />
         <entry key="trakio" value="1.0.1dev" />
-        <entry key="trakt" value="1.0.2" />
+        <entry key="trakt" value="1.0.3" />
         <entry key="trakt.py" value="2.1.1" />
         <entry key="tral" value="0.3.0" />
         <entry key="tramline" value="0.5.1" />
@@ -50890,7 +50986,7 @@
         <entry key="transmission-fluid" value="0.6" />
         <entry key="transmission-helper" value="0.4" />
         <entry key="transmissionrpc" value="0.11" />
-        <entry key="transmogrify" value="1.0.1b2" />
+        <entry key="transmogrify" value="1.0.1b6" />
         <entry key="transmogrify.dexterity" value="1.4" />
         <entry key="transmogrify.extract" value="0.4.0" />
         <entry key="transmogrify.filesystem" value="1.0b6" />
@@ -51080,20 +51176,20 @@
         <entry key="trytond_analytic_invoice" value="3.4.0" />
         <entry key="trytond_analytic_purchase" value="3.4.0" />
         <entry key="trytond_analytic_sale" value="3.4.0" />
-        <entry key="trytond_attachment_s3" value="3.2.0.4" />
+        <entry key="trytond_attachment_s3" value="3.4.0.1" />
         <entry key="trytond_bank" value="3.4.0" />
         <entry key="trytond_calendar" value="3.4.0" />
         <entry key="trytond_calendar_classification" value="3.4.0" />
         <entry key="trytond_calendar_scheduling" value="3.4.0" />
         <entry key="trytond_calendar_todo" value="3.4.0" />
-        <entry key="trytond_carrier" value="3.4.0" />
-        <entry key="trytond_carrier_percentage" value="3.4.0" />
-        <entry key="trytond_carrier_weight" value="2.4.1" />
-        <entry key="trytond_company" value="3.4.0" />
-        <entry key="trytond_company_work_time" value="3.4.0" />
+        <entry key="trytond_carrier" value="2.6.1" />
+        <entry key="trytond_carrier_percentage" value="3.4.1" />
+        <entry key="trytond_carrier_weight" value="2.6.3" />
+        <entry key="trytond_company" value="3.4.1" />
+        <entry key="trytond_company_work_time" value="3.4.1" />
         <entry key="trytond_contract" value="2.2.2" />
-        <entry key="trytond_country" value="3.4.0" />
-        <entry key="trytond_currency" value="3.4.0" />
+        <entry key="trytond_country" value="3.4.1" />
+        <entry key="trytond_currency" value="3.4.1" />
         <entry key="trytond_dashboard" value="3.4.1" />
         <entry key="trytond_elastic_search" value="3.2.0.8" />
         <entry key="trytond_electronic_mail" value="2.6.1.0" />
@@ -52029,7 +52125,7 @@
         <entry key="unicore-cms-django" value="1.0.0" />
         <entry key="unicore-gitmodels" value="1.7.0" />
         <entry key="unicore.content" value="1.0.4" />
-        <entry key="unicore.distribute" value="0.0.2" />
+        <entry key="unicore.distribute" value="0.0.3" />
         <entry key="unicore.google" value="0.0.1" />
         <entry key="unicornhat" value="2.0.4" />
         <entry key="unicornherder" value="0.0.11" />
@@ -52058,7 +52154,7 @@
         <entry key="unique-sam" value="0.1.6" />
         <entry key="uniquepath" value="1.0" />
         <entry key="uniquify" value="0.0.1" />
-        <entry key="uniseg" value="0.6.4" />
+        <entry key="uniseg" value="0.7.0" />
         <entry key="unison" value="0.0.0" />
         <entry key="unit_test" value="0" />
         <entry key="unitbench" value="0.1" />
@@ -52235,7 +52331,7 @@
         <entry key="urltools" value="0.3.2" />
         <entry key="urltree" value="0.1.0" />
         <entry key="urlunshort" value="0.2.4" />
-        <entry key="urlwatch" value="1.17" />
+        <entry key="urlwatch" value="1.18" />
         <entry key="urp" value="0.1.1" />
         <entry key="ursa" value="0.1" />
         <entry key="ursa2" value="0.0.12" />
@@ -52276,6 +52372,7 @@
         <entry key="userdefaults" value="1" />
         <entry key="userschema" value="0.8.1" />
         <entry key="usersettings" value="1.0.7" />
+        <entry key="usersgithub" value="0.1" />
         <entry key="usertmpl" value="0.0.1" />
         <entry key="uservoice" value="0.0.20" />
         <entry key="usethis-django-bootstrap" value="3.3.0" />
@@ -52475,7 +52572,7 @@
         <entry key="vcf2networks" value="1.0.9g" />
         <entry key="vcf_parser" value="1.2" />
         <entry key="vcfarray" value="1.0" />
-        <entry key="vcfnp" value="2.0.1" />
+        <entry key="vcfnp" value="2.1.0" />
         <entry key="vcfplt" value="0.8" />
         <entry key="vcloudtools" value="0.0.1" />
         <entry key="vconnector" value="0.3.7" />
@@ -52553,7 +52650,7 @@
         <entry key="verboselogs" value="1.0.1" />
         <entry key="verdigris.mu-splat" value="1.5.0" />
         <entry key="verge" value="0.1.0" />
-        <entry key="verhaal" value="19" />
+        <entry key="verhaal" value="20" />
         <entry key="verifi" value="0.1.0" />
         <entry key="verify_version_spec" value="0.0.2" />
         <entry key="verifyemail" value="0.1.1" />
@@ -52894,7 +52991,7 @@
         <entry key="vulcan" value="0.1.1" />
         <entry key="vulcanize" value="0.2" />
         <entry key="vulture" value="0.6" />
-        <entry key="vumi" value="0.5.14" />
+        <entry key="vumi" value="0.5.15" />
         <entry key="vumi-go" value="0.5.0" />
         <entry key="vumi-wikipedia" value="0.1.2" />
         <entry key="vunit" value="0.1.3" />
@@ -52958,6 +53055,7 @@
         <entry key="wafw00f" value="0.9.3" />
         <entry key="wag" value="0.4" />
         <entry key="wagtail" value="0.8.5" />
+        <entry key="wagtail-blog" value="0.1" />
         <entry key="wagtail-carousel" value="0.0.1" />
         <entry key="wagtail-model-utils" value="0.0.1" />
         <entry key="wagtailapi" value="1.0c3" />
@@ -53272,7 +53370,7 @@
         <entry key="webveripy" value="0.3" />
         <entry key="webvirtmgr" value="4.8.9" />
         <entry key="wechat" value="0.4.12" />
-        <entry key="wechat-sdk" value="0.5.2" />
+        <entry key="wechat-sdk" value="0.5.3" />
         <entry key="wechatpy" value="0.7.5" />
         <entry key="wedoistapi" value="0.2" />
         <entry key="wee" value="0.1.1" />
@@ -53299,6 +53397,7 @@
         <entry key="wellrng" value="0.1" />
         <entry key="wempy" value="0.1.5" />
         <entry key="wendellup_nester" value="1.0.0" />
+        <entry key="went" value="0.0.5" />
         <entry key="wepay" value="0.3.0" />
         <entry key="weppy" value="0.2" />
         <entry key="weppy-Assets" value="0.1" />
@@ -53376,16 +53475,16 @@
         <entry key="wheels2dmg" value="0.2.0" />
         <entry key="wheelshop" value="0.1" />
         <entry key="wheelwright" value="0.1.3" />
-        <entry key="wheezy.caching" value="0.1.112" />
-        <entry key="wheezy.captcha" value="0.1.29" />
-        <entry key="wheezy.core" value="0.1.136" />
-        <entry key="wheezy.html" value="0.1.145" />
-        <entry key="wheezy.http" value="0.1.332" />
-        <entry key="wheezy.routing" value="0.1.153" />
-        <entry key="wheezy.security" value="0.1.61" />
-        <entry key="wheezy.template" value="0.1.155" />
-        <entry key="wheezy.validation" value="0.1.130" />
-        <entry key="wheezy.web" value="0.1.450" />
+        <entry key="wheezy.caching" value="0.1.114" />
+        <entry key="wheezy.captcha" value="0.1.44" />
+        <entry key="wheezy.core" value="0.1.138" />
+        <entry key="wheezy.html" value="0.1.147" />
+        <entry key="wheezy.http" value="0.1.340" />
+        <entry key="wheezy.routing" value="0.1.157" />
+        <entry key="wheezy.security" value="0.1.64" />
+        <entry key="wheezy.template" value="0.1.159" />
+        <entry key="wheezy.validation" value="0.1.132" />
+        <entry key="wheezy.web" value="0.1.469" />
         <entry key="whelk" value="2.4" />
         <entry key="when" value="1" />
         <entry key="when-changed" value="0.2.1" />
@@ -53489,7 +53588,7 @@
         <entry key="wildcard.tinymceplugins.youtube" value="1.0b1" />
         <entry key="wildcard.uberoverride" value="1.0a1" />
         <entry key="wildcards" value="0.0.1" />
-        <entry key="will" value="0.7.1" />
+        <entry key="will" value="0.7.2" />
         <entry key="willdo" value="0.2" />
         <entry key="wille" value="2.3" />
         <entry key="willie" value="5.1.1" />
@@ -53888,7 +53987,7 @@
         <entry key="wzmsgpackrpc" value="0.2.3" />
         <entry key="x" value="0.0.0" />
         <entry key="x256" value="0.0.3" />
-        <entry key="x84" value="2.0.7" />
+        <entry key="x84" value="2.0.8" />
         <entry key="xDict" value="0.00" />
         <entry key="xGitGitlab" value="1.0" />
         <entry key="xNormal" value="1.0.1" />
@@ -54075,7 +54174,7 @@
         <entry key="xml2ddl" value="0.3.1" />
         <entry key="xml2dictnitrate" value="0.2.2" />
         <entry key="xml2obj" value="0.1" />
-        <entry key="xml2rfc" value="2.4.8" />
+        <entry key="xml2rfc" value="2.4.9" />
         <entry key="xml4h" value="0.2.0" />
         <entry key="xmlComparator" value="1.0.3" />
         <entry key="xml_compare" value="1.0.5" />
@@ -54290,7 +54389,7 @@
         <entry key="yahoo" value="0.1" />
         <entry key="yahoo-finance" value="1.1.4" />
         <entry key="yahoofantasyfootball" value="0.4" />
-        <entry key="yahooscraper" value="0.1.1" />
+        <entry key="yahooscraper" value="0.2.3" />
         <entry key="yajl" value="0.3.5" />
         <entry key="yajl-py" value="2.1.1" />
         <entry key="yakc" value="0.1.5" />
@@ -54327,7 +54426,7 @@
         <entry key="yandex-hotspots" value="0.1" />
         <entry key="yandex-maps" value="0.7" />
         <entry key="yandex-money-sdk" value="0.1.3" />
-        <entry key="yandex-tank-api" value="0.0.5" />
+        <entry key="yandex-tank-api" value="0.0.6" />
         <entry key="yandex.translate" value="0.3.5" />
         <entry key="yandexdirect" value="1.14" />
         <entry key="yandextank" value="1.7.8" />
@@ -54337,7 +54436,7 @@
         <entry key="yangtestlist" value="1.0.2" />
         <entry key="yanktv" value="0.3" />
         <entry key="yanyingchao_nester" value="1.4.0" />
-        <entry key="yap" value="0.5.5" />
+        <entry key="yap" value="0.5.7" />
         <entry key="yapbl" value="0.4" />
         <entry key="yapgvb" value="1.2.0" />
         <entry key="yapocis" value="0.2.4" />
@@ -54345,7 +54444,7 @@
         <entry key="yapot" value="0.1.0" />
         <entry key="yapp" value="0.1" />
         <entry key="yappi" value="0.94" />
-        <entry key="yaprt" value="0.0.8" />
+        <entry key="yaprt" value="0.0.11" />
         <entry key="yapsnmp" value="0.7.8" />
         <entry key="yaptoo" value="0.1" />
         <entry key="yapybot" value="0.7.3.4" />
@@ -54377,7 +54476,7 @@
         <entry key="yatxmilter" value="0.1.1" />
         <entry key="yaubot" value="1.0" />
         <entry key="yaubot-fun-scripts" value="1.0" />
-        <entry key="yaul" value="0.3" />
+        <entry key="yaul" value="0.4.1" />
         <entry key="yaurtww" value="0.0.1" />
         <entry key="yawPyCrypto" value="0.1" />
         <entry key="yawd-admin" value="0.7.0" />
@@ -54494,7 +54593,7 @@
         <entry key="youtube-cli" value="Beta.2" />
         <entry key="youtube-upload" value="0.7" />
         <entry key="youtube_api" value="0.1" />
-        <entry key="youtube_dl" value="2015.02.26.2" />
+        <entry key="youtube_dl" value="2015.02.28" />
         <entry key="youtube_dl_server" value="0.1.2" />
         <entry key="youtube_to_mpd" value="0.2" />
         <entry key="youtubegen" value="0.9.2" />
@@ -55319,7 +55418,7 @@
         <entry key="zopeskel.niteoweb" value="0.2b1" />
         <entry key="zopeskel.unis" value="1.14" />
         <entry key="zopfli" value="0.0.3" />
-        <entry key="zopkio" value="0.1.14" />
+        <entry key="zopkio" value="0.1.15" />
         <entry key="zopyx.authoring" value="2.4.0" />
         <entry key="zopyx.convert" value="1.1.11" />
         <entry key="zopyx.convert2" value="2.4.5" />
@@ -55463,6 +55562,6 @@
         <entry key="zzzfs" value="0.1" />
       </map>
     </option>
-    <option name="LAST_TIME_CHECKED" value="1425001809106" />
+    <option name="LAST_TIME_CHECKED" value="1425181110777" />
   </component>
 </application>
