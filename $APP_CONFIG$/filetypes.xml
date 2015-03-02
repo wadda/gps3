@@ -9,6 +9,6 @@
       <mapping pattern=".conkyrc*" type="conky" />
       <mapping pattern=".conkyrc*" type="conky" />
     </extensionMap>
-    <setting name="fileTypeChangedCounter" value="61" />
+    <setting name="fileTypeChangedCounter" value="62" />
   </component>
 </application>
