@@ -60,7 +60,6 @@
     </entry>
   </component>
   <component name="BaseRefactoringSettings">
-    <option name="SAFE_DELETE_WHEN_DELETE" value="false" />
     <option name="SAFE_DELETE_SEARCH_IN_COMMENTS" value="false" />
   </component>
   <component name="CvsApplicationLevelConfiguration">
