@@ -55,7 +55,7 @@ Presently, when placed in same directory as gps3.py, creates a keyhole (.kml) fi
 Open the generated file (/tmp/gps3_live.kml) with Google Earth and watch the jitter and track scratch that way, all day.
 ```
 #!bash
-python3 demo_gpx3logger.py  # python gpx3logger.py
+python3 gpx3logger.py  # python gpx3logger.py
 ```
 **gpx3logger.py** creates appendable gpx log in `/tmp/gpx3.gpx`
 
