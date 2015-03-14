@@ -126,7 +126,6 @@
     <option name="MAKE_NEW_FILES_READ_ONLY" value="false" />
   </component>
   <component name="PyCodeInsightSettings">
-    <option name="SHOW_IMPORT_POPUP" value="true" />
     <option name="RENAME_SEARCH_IN_COMMENTS_FOR_FUNCTION" value="true" />
     <option name="RENAME_SEARCH_NON_CODE_FOR_FUNCTION" value="true" />
     <option name="RENAME_SEARCH_IN_COMMENTS_FOR_CLASS" value="true" />
@@ -166,7 +165,7 @@
     </option>
     <option name="openPaths">
       <list>
-        <option value="$USER_HOME$/projects/NxGPS" />
+        <option value="$USER_HOME$/projects/gps3" />
       </list>
     </option>
     <option name="names">

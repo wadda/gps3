@@ -1,0 +1,68 @@
+<application>
+  <component name="SmarterEditorSettings">
+    <option name="configuredClasses">
+      <list>
+        <PsiClassname>
+          <option name="className" value="com.intellij.psi.PsiClass" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.intellij.psi.PsiMethod" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.intellij.psi.PsiIfStatement" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.intellij.psi.PsiLoopStatement" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.intellij.lang.javascript.psi.JSFunction" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.intellij.lang.javascript.psi.JSLoopStatement" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.jetbrains.php.lang.psi.elements.PhpClass" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.jetbrains.php.lang.psi.elements.Method" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.jetbrains.php.lang.psi.elements.If" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.jetbrains.php.lang.psi.elements.While" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.jetbrains.php.lang.psi.elements.For" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.jetbrains.php.lang.psi.elements.Foreach" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.intellij.psi.css.impl.CssMediaImpl" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.intellij.psi.css.CssRuleset" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.intellij.psi.css.CssRulesetList" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.ansorgit.plugins.bash.lang.psi.api.function.BashFunctionDef" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.ansorgit.plugins.bash.lang.psi.api.shell.BashIf" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.ansorgit.plugins.bash.lang.psi.api.loops.BashLoop" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.intellij.sql.psi.SqlStatement" />
+        </PsiClassname>
+        <PsiClassname>
+          <option name="className" value="com.intellij.psi.xml.XmlTag" />
+        </PsiClassname>
+      </list>
+    </option>
+  </component>
+</application>
