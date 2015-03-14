@@ -1,5 +1,0 @@
-<application>
-  <component name="LafManager">
-    <laf class-name="com.sun.java.swing.plaf.gtk.GTKLookAndFeel" />
-  </component>
-</application>
