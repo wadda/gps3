@@ -31,7 +31,7 @@ optional arguments:
   -rare               /* output of packets in hex */
   -raw                /* output of raw packets */
   -scaled             /* scale output to floats */
-  -timimg             /* timing information */
+  -timing             /* timing information */
   -split24            /* split AIS Type 24s */
   -pps                /* enable PPS JSON */
 me@work:~/projects/gps3$
@@ -39,12 +39,12 @@ me@work:~/projects/gps3$
 Currently not all options are implemented or fully  functional.
 Commandline execution without options is the same as using the DEFAULT option flags.
 
-Don't have a gps to experiment?  Try
+Don't have a gps to experiment?   Try
 ```
 #!bash
 python3 gps3.py -host wadda.ddns.net  # python gps3.py -host wadda.ddns.net
 ```
-While it's not moving, you will have the gps jitter.
+See if the gps server is running.  While it's not moving, you will have the gps jitter.
 
 A trivial demonstration of functionality found in
 ```
