@@ -58,7 +58,7 @@ try:
 
                            "    <Placemark id = \"point\">\n"
                            "        <name>{0:.2f} m/s {4}°</name>\n"
-                           "        <description>Current gps reading\nAltitude: {3} Metres</description>\n"
+                           "        <description>Current gps location\nAltitude: {3} Metres</description>\n"
                            "        <LookAt>\n"
                            "            <longitude>{1}</longitude>\n"
                            "            <latitude>{2}</latitude>\n"
@@ -75,6 +75,8 @@ try:
                            "        <name>Pin Scratches</name>\n"
                            "        <description>GPS Trail of Tears</description>\n"
                            "        <LineString>\n"
+                           "        <color>7f0000ff</color>\n"
+                           "        <width>20</width>\n"
                            "			<tessellate>1</tessellate>\n"
                            "            <coordinates>{5}</coordinates>\n"
                            "        </LineString>\n"
