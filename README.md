@@ -25,14 +25,14 @@ optional arguments:
   -verbose            increases verbosity, but not that much
   -device DEVICEPATH  alternate devicepath e.g.,"/dev/ttyUSB0"
   -json               /* output as JSON objects */
-  -nautical           /* output in NAUTICAL units */
-  -imperial           /* output in IMPERIAL units */
+  -nautical (WIP)     /* output in NAUTICAL units */
+  -imperial (WIP)     /* output in IMPERIAL units */
   -nmea               /* output in NMEA */
   -rare               /* output of packets in hex */
   -raw                /* output of raw packets */
   -scaled             /* scale output to floats */
   -timing             /* timing information */
-  -split24            /* split AIS Type 24s */
+  -split24 (WIP)      /* split AIS Type 24s */
   -pps                /* enable PPS JSON */
 me@work:~/projects/gps3$
 ```
@@ -53,5 +53,11 @@ python3 demo_gegps3.py  # python demo_gegps3.py
 ```
 Presently, when placed in same directory as gps3.py, creates a keyhole (.kml) file for Google Earth (GE defaults 4 second refreshing) with age < 1 sec from refresh.
 Open the generated file (/tmp/gps3_live.kml) with Google Earth and watch the jitter and track scratch that way, all day.
+```
+#!bash
+python3 demo_gpx3logger.py  # python gpx3logger.py
+```
+**gpx3logger.py** creates appendable gpx log in `/tmp/gpx3.gpx`
 
-Try them both in Python 2.7, add your improvements, send your demo applications.
+
+Try them in Python 3.4 or 2.7, add your improvements, send your demo applications.
