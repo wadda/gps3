@@ -2,7 +2,7 @@
 # coding=utf-8
 """Python( 2.7 - 3.4 ) interface to gpsd """
 from __future__ import print_function
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import socket
 import select
 import time
@@ -10,7 +10,7 @@ import sys
 import json
 
 __author__ = 'Moe'
-__copyright__ = "Copyright 2015  Maurice Wick"  # nihil sub sole novum.  Everything learned/adapted from somewhere else.
+__copyright__ = "Copyright 2015  Moe"  # nihil sub sole novum.  Everything learned/adapted from somewhere else.
 __license__ = "MIT"  # Don't forget. Don't abused. Pass it along. TODO: figure the rest out, jot and tittle.
 __version__ = "0.1a"
 
@@ -130,7 +130,8 @@ class Fix(object):
         tpv = {"alt",
                "climb",
                "device",
-               "epc", "epd", "eps", "ept", "epv", "epx", "epy",
+               "epc", "epd", "eps", "ept",
+               "epv", "epx", "epy",
                "lat", "lon",
                "mode",
                "tag",
@@ -139,7 +140,8 @@ class Fix(object):
                "speed"}
 
         sky = {"satellites",
-               "gdop", "hdop", "pdop", "tdop", "vdop", "xdop", "ydop"}
+               "gdop", "hdop", "pdop", "tdop",
+               "vdop", "xdop", "ydop"}
 
         gst = {"alt",
                "device",
@@ -161,7 +163,9 @@ class Fix(object):
                "time",
                "yaw", "yaw_st"}  # TODO: Check Device flags
 
-        pps = {"device", "real_sec", "real_nsec", "clock_sec", "clock_nsec"}
+        pps = {"device",
+               "clock_sec", "clock_nsec",
+               "real_sec", "real_nsec"}
 
         device = {"activated",
                   "bps",
@@ -185,12 +189,19 @@ class Fix(object):
         error = {"message"}
 
         # The thought was a quick repository for stripped down versions, to add/subtract' module data packets'
-        packages = {"VERSION": version, "TPV": tpv, "SKY": sky, "ERROR": error}  # "DEVICES": devices, "GST": gst, etc.
+        packages = {"VERSION": version,
+                    "TPV": tpv,
+                    "SKY": sky,
+                    "ERROR": error}  # "DEVICES": devices, "GST": gst, etc.
         # TODO: Create the full suite of possible JSON objects and a better way for deal with subsets
         for package_name, datalist in packages.items():
             _emptydict = {key: 'n/a' for (key) in datalist}  # There is a case for using None instead of 'n/a'
             setattr(self, package_name, _emptydict)
-        self.SKY['satellites'] = [{'PRN': 'n/a', 'ss': 'n/a', 'el': 'n/a', 'az': 'n/a', 'used': 'n/a'}]
+        self.SKY['satellites'] = [{'PRN': 'n/a',
+                                   'ss': 'n/a',
+                                   'el': 'n/a',
+                                   'az': 'n/a',
+                                   'used': 'n/a'}]
 
     def refresh(self, gpsd_data_package):
         """Sets new socket data as Fix attributes"""
@@ -220,11 +231,12 @@ class Fix(object):
         return total_satellites, used_satellites
 
     def make_datetime(self):  # Should this be ancillary to this class, or even included?
-        """Creates timezone -naive- datetime object from gpsd data"""
+        """Creates timezone aware datetime object from gpsd data"""
+        timeformat = '%Y-%m-%dT%H:%M:%S.000Z'  # ISO8601
         if 'n/a' not in self.TPV['time']:
-            gps_datetime_object = (datetime.strptime(self.TPV['time'], "%Y-%m-%dT%H:%M:%S.%fZ"))
+            gps_datetime_object = datetime.strptime(self.TPV['time'], timeformat).replace(tzinfo=(timezone(timedelta(0))))
         else:  # shouldn't break anything, but return wrong Time, when IT, PO, ES, and PT switch to gregorian calendar
-            gps_datetime_object = datetime.strptime('1582-10-04T12:00:00.000Z', "%Y-%m-%dT%H:%M:%S.%fZ")  # to the sec.
+            gps_datetime_object = datetime.strptime('1582-10-04T12:00:00.000Z', timeformat).replace(tzinfo=(timezone(timedelta(0))))
 
         return gps_datetime_object
 
@@ -237,17 +249,17 @@ if __name__ == '__main__':
     parser.add_argument('-human', dest='gpsd_protocol', const='human', action='store_const', default='human', help='DEFAULT Human Friendlier ')
     parser.add_argument('-host', action='store', dest='host', default='127.0.0.1', help='DEFAULT "127.0.0.1"')
     parser.add_argument('-port', action='store', dest='port', default='2947', help='DEFAULT 2947', type=int)
-    parser.add_argument('-metric', dest='units', const='metric', action='store_const', default='metric', help='DEFAULT METRIC units')
-    parser.add_argument('-ddd', dest='latlon_format', const='ddd', action='store_const', default=None, help='Degree decimal')
-    parser.add_argument('-dmm', dest='latlon_format', const='dmm', action='store_const', default=None, help='Degree, Minute decimal')
-    parser.add_argument('-dms', dest='latlon_format', const='dms', action='store_const', default=None, help='Degree, Minute, Second decimal')
+    # parser.add_argument('-metric', dest='units', const='metric', action='store_const', default='metric', help='DEFAULT METRIC units')
+    # parser.add_argument('-ddd', dest='latlon_format', const='ddd', action='store_const', default=None, help='Degree decimal')
+    # parser.add_argument('-dmm', dest='latlon_format', const='dmm', action='store_const', default=None, help='Degree, Minute decimal')
+    # parser.add_argument('-dms', dest='latlon_format', const='dms', action='store_const', default=None, help='Degree, Minute, Second decimal')
     # Verbose
     parser.add_argument("-verbose", action="store_true", default=False, help="increases verbosity, but not that much")
     # Alternate devicepath
     parser.add_argument('-device', dest='devicepath', action='store', help='alternate devicepath e.g.,"/dev/ttyUSB4"')
     parser.add_argument('-json', dest='gpsd_protocol', const='json', action='store_const', help='/* output as JSON objects */')
-    parser.add_argument('-nautical', dest='units', const='nautical', action='store_const', help='/* output in NAUTICAL units */')
-    parser.add_argument('-imperial', dest='units', const='imperial', action='store_const', help='/* output in IMPERIAL units */')
+    # parser.add_argument('-nautical', dest='units', const='nautical', action='store_const', help='/* output in NAUTICAL units */')
+    # parser.add_argument('-imperial', dest='units', const='imperial', action='store_const', help='/* output in IMPERIAL units */')
     # Work/storage shed, and heap.
     parser.add_argument('-nmea', dest='gpsd_protocol', const='nmea', action='store_const', help='/* output in NMEA */')
     parser.add_argument('-rare', dest='gpsd_protocol', const='rare', action='store_const', help='/* output of packets in hex */')
@@ -288,7 +300,7 @@ if __name__ == '__main__':
                 print('Speed: {speed} metres/second tracking {track} degrees from True North'.format(**fix.TPV))
                 print('Altitude: {} metres; etc.  All data is the respective gpsd \'class\'[key]'.format(fix.TPV['alt']))
                 print('Via: session = GPSDSocket() and fix =  Fix() e.g., fix.TPV[\'time\'], yielding')
-                print(fix.make_datetime(), 'UTC, a naive Datetime Object derived from that time string')
+                print(fix.make_datetime(), 'UTC timezone aware Datetime Object derived from that time string')
 
             else:
                 print('Socket Response is:', socket_response)  # Output Nones and other protocols
