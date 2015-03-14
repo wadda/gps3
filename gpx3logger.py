@@ -27,7 +27,7 @@ if not os.path.isfile(the_log):
     header = ('<?xml version = "1.0" encoding = "utf-8"?>\n'
               '<gpx version = "1.1" '
               'creator = "GPSD 3.9 - http://catb.org/gpsd" '
-              'client = "gps3.py - http://github.com/wadda/gps3"'
+              'clients = "gps3.py and gpx3logger.py - http://github.com/wadda/gps3"'
               'xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"'
               'xmlns = "http://www.topografix.com/GPX/1/1"'
               'xsi:schemaLocation = "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">\n '
@@ -42,8 +42,7 @@ try:
     for new_data in the_connection:
         if new_data:
             the_fix.refresh(new_data)
-            if not isinstance(the_fix.TPV['lat'], str):  # lat/lon might be a better determinate of when data is 'valid'
-                speed = the_fix.TPV['speed']
+            if not isinstance(the_fix.TPV['lat'], str):  # lat used as determinate when data is 'valid'
                 latitude = the_fix.TPV['lat']
                 longitude = the_fix.TPV['lon']
                 altitude = the_fix.TPV['alt']
@@ -65,7 +64,14 @@ try:
                               '    <hdop>{}</hdop>\n'
                               '    <vdop>{}</vdop>\n'
                               '    <pdop>{}</pdop>\n'
-                              '</trkpt>\n').format(latitude, longitude, altitude, time, tag, mode, sats[1], hdop, vdop,
+                              '</trkpt>\n').format(latitude, longitude,
+                                                   altitude,
+                                                   time,
+                                                   tag,
+                                                   mode,
+                                                   sats[1],
+                                                   hdop,
+                                                   vdop,
                                                    pdop)
                 addendum = open(the_log, 'a')
                 addendum.write(trackpoint)
