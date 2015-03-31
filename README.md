@@ -57,7 +57,7 @@ Open the generated file (/tmp/gps3_live.kml) with Google Earth and watch the jit
 #!bash
 python3 gpx3logger.py  # python gpx3logger.py
 ```
-**gpx3logger.py** creates appendable gpx log in `/tmp/gpx3.gpx`
+**gpx3logger.py** Not ready for prime time.
 
 
 Try them in Python 3.4 or 2.7, add your improvements, send your demo applications.
