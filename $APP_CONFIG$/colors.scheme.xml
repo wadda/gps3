@@ -1,6 +1,6 @@
 <application>
   <component name="EditorColorsManagerImpl">
     <option name="USE_ONLY_MONOSPACED_FONTS" value="true" />
-    <global_color_scheme name="Github copy" />
+    <global_color_scheme name="Darcula" />
   </component>
 </application>

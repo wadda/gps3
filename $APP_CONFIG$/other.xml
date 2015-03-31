@@ -205,15 +205,15 @@
   </component>
   <component name="TodoConfiguration">
     <pattern icon="default" useCustomColors="false" case-sensitive="false" pattern="\btodo\b.*">
-      <option name="FOREGROUND" value="ff" />
-      <option name="FONT_TYPE" value="3" />
-      <option name="ERROR_STRIPE_COLOR" value="ff" />
+      <option name="FOREGROUND" value="a8c023" />
+      <option name="FONT_TYPE" value="2" />
+      <option name="ERROR_STRIPE_COLOR" value="a74c0" />
       <option name="EFFECT_TYPE" value="0" />
     </pattern>
     <pattern icon="default" useCustomColors="false" case-sensitive="false" pattern="\bfixme\b.*">
-      <option name="FOREGROUND" value="ff" />
-      <option name="FONT_TYPE" value="3" />
-      <option name="ERROR_STRIPE_COLOR" value="ff" />
+      <option name="FOREGROUND" value="a8c023" />
+      <option name="FONT_TYPE" value="2" />
+      <option name="ERROR_STRIPE_COLOR" value="a74c0" />
       <option name="EFFECT_TYPE" value="0" />
     </pattern>
   </component>
