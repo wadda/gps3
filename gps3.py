@@ -35,7 +35,7 @@ class GPSDSocket(object):
 
     def connect(self, host, port):
         """Connect to a host on a given port. """
-        for alotta_stuff in socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM):  # Default parameters
+        for alotta_stuff in socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM):
             family, socktype, proto, _canonname, host_port = alotta_stuff
             try:
                 self.streamSock = socket.socket(family, socktype, proto)
@@ -58,8 +58,8 @@ class GPSDSocket(object):
     def watch(self, enable=True, gpsd_protocol='json', devicepath=None):
         """watch gpsd in various gpsd_protocols or devices.  The gpsd_protocols could be: 'json', 'nmea', 'rare', 'raw',
         'scaled', 'split24', and 'pps'; with option for non-default device path"""
-        # TODO: add scaled, split24, pps, ais, and rtcm2/3, etc...'timing' requires special attention.
-        # "timing" attribute is undocumented and lives with dragons
+        # TODO: add scaled, split24, pps, ais, and rtcm2/3, etc...
+        # TODO: 'timing' requires special attention, as it is undocumented and lives with dragons
         command = '?WATCH={{"enable":true,"{0}":true}}'.format(gpsd_protocol)
         if gpsd_protocol == 'human':  # human is the only imitation protocol
             command = command.replace('human', 'json')
@@ -68,7 +68,7 @@ class GPSDSocket(object):
         if gpsd_protocol == 'raw':  # 2 channel that processes binary data, received data verbatim without hex-dumping.
             command = command.replace('"raw":true', '"raw",2')
         if not enable:
-            command = command.replace('true', 'false')  # 3 Musketeers, all for one.
+            command = command.replace('true', 'false')  # sets -all- command values false .
         if devicepath:
             command = command.replace('}', ',"device":"') + devicepath + '"}'  # TODO: can it handle multiple?
 
@@ -149,7 +149,7 @@ class Fix(object):
                "major", "minor",
                "orient"
                "rms",
-               "time",}
+               "time"}
         att = {"acc_len", "acc_x", "acc_y", "acc_z",
                "depth",
                "device",
@@ -208,10 +208,13 @@ class Fix(object):
         try:  # 'class', a reserved word is popped to allow, if desired, 'setattr(package_name, key, a_package[key])'
             fresh_data = json.loads(gpsd_data_package)  # error is named "ERROR" the same as the gpsd data package
             package_name = fresh_data.pop('class', 'ERROR')  # If error, return 'ERROR' except if it happened, it
-            a_package = getattr(self, package_name, package_name)  # should have been too broken to get to this point.
-            for key in a_package.keys():  # Iterate attribute package  TODO: It craps out here when device disappears
-                a_package[key] = fresh_data.get(key, 'n/a')  # that is, update it, and if key is absent in the socket
+            package = getattr(self, package_name, package_name)  # should have been too broken to get to this point.
+            for key in package.keys():  # Iterate attribute package  TODO: It craps out here when device disappears
+                package[key] = fresh_data.get(key, 'n/a')  # that is, update it, and if key is absent in the socket
                 # response, present --> "key: 'n/a'" instead.'
+        except AttributeError: # 'str' object has no attribute 'keys'  TODO: Figure out if returning 'None' is a good idea
+            print("No Data")
+            return None
         except (ValueError, KeyError) as error:  # This should not happen, most likely why it's an exception.  But, it
             sys.stderr.write('There was a Value/KeyError at GPSDSocket.refresh: ', error,
                              '\nThis should never happen.')  # happened once.  But I've no idea aside from it broke.

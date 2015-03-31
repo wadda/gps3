@@ -58,7 +58,7 @@ try:
             static_file = ("<?xml version = \"1.0\" encoding = \"UTF-8\"?>\n"
                            "<kml xmlns = \"http://www.opengis.net/kml/2.2\" xmlns:gx = \"http://www.google.com/kml/ext/2.2\" xmlns:kml = \"http://www.opengis.net/kml/2.2\" xmlns:atom = \"http://www.w3.org/2005/Atom\">\n"
                            "<Folder>\n"
-                           "    <description> Frankie likes walking and stopping </description>\n"
+                           "    <description> Frankie likes walking and stopping </description>\n"  # http://stackoverflow.com/questions/5492939/how-to-draw-path-between-placemark
 
                            "    <Placemark id = \"point\">\n"
                            "        <name>{6}</name>\n"
@@ -123,7 +123,7 @@ try:
                            "            <colorMode>random</colorMode>\n"
                            "            <scale>0.5</scale>\n"
                            "        <Icon>\n"
-                           "            <href>/home/moe/.googleearth/Cache/icons/kh.google.com_icons_city_capital_star.png</href>\n"
+                           "            <href>~/.googleearth/Cache/icons/kh.google.com_icons_city_capital_star.png</href>\n"
                            "        </Icon>"
                            "        </IconStyle>"
                            "        <Point>\n"
