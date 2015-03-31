@@ -1,0 +1,7 @@
+<application>
+  <component name="XStructureSettings">
+    <option name="mappingsStorageDir" value="$APPLICATION_CONFIG_DIR$/xstructure" />
+    <option name="overwriteWhenSyncMappings" value="true" />
+    <option name="syncMappingsAtStartup" value="true" />
+  </component>
+</application>
