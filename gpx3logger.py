@@ -1,81 +1,142 @@
-#!/usr/bin/env python
 # coding=utf-8
-""" gpx logger to create and append a gpx formatted log of gpsd data """  # <--for scale
+"""gpx logger"""
+from xml.dom import minidom
 import os
-import time
+from datetime import datetime, timezone, timedelta
+import sys
+
 import gps3
-from datetime import datetime
 
-__author__ = 'Moe'
-__copyright__ = "Copyright 2015, Moe"
-__license__ = "MIT"
-__version__ = "0.1a"
-__maintainer__ = "HA!"
-__email__ = "waddagit@wadda.org"
-__status__ = "Flammable"
-__created__ = '11 / 03 / 2015'  # TODO: fix template generator
-
-the_connection = gps3.GPSDSocket()
-the_fix = gps3.Fix()
 the_log = '/tmp/gpx3.gpx'
 
-creation = datetime.utcnow()
-fmt = '%Y-%m-%d %H:%M:%S %Z%z'
-genesis = creation.strftime(fmt)
+trk = None
+utc = alt = hdop = vdop = pdop = mode = sats = nmeatag = 'n/a'
+# trackpoint_string = '<{0}>value</{0}>'.format(key)
 
-if not os.path.isfile(the_log):
-    header = ('<?xml version = "1.0" encoding = "utf-8"?>\n'
-              '<gpx version = "1.1" '
-              'creator = "GPSD 3.9 - http://catb.org/gpsd" '
-              'clients = "gps3.py and gpx3logger.py - http://github.com/wadda/gps3"'
-              'xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"'
-              'xmlns = "http://www.topografix.com/GPX/1/1"'
-              'xsi:schemaLocation = "http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">\n '
-              '<metadata>\n '
-              '     <time>{}\n'
-              '</metadata>\n').format(genesis)
-    log = open(the_log, 'w')
-    log.write(header)
-    log.close()
+# trackpointdict = {'time', 'ele', 'hdop', 'vdop', 'pdop', 'mode', 'sat', 'tag', }
 
-try:
-    for new_data in the_connection:
-        if new_data:
-            the_fix.refresh(new_data)
-            if not isinstance(the_fix.TPV['lat'], str):  # lat used as determinate when data is 'valid'
-                latitude = the_fix.TPV['lat']
-                longitude = the_fix.TPV['lon']
-                altitude = the_fix.TPV['alt']
-                time = the_fix.TPV['time']
-                mode = the_fix.TPV['mode']
-                tag = the_fix.TPV['tag']
+# gpx3 = minidom.parse(the_log)
 
-                sats = the_fix.satellites_used()
-                hdop = the_fix.SKY['hdop']
-                vdop = the_fix.SKY['vdop']
-                pdop = the_fix.SKY['pdop']
 
-                trackpoint = ('<trkpt lat = {} lon = {}>\n'
-                              '    <ele>{}</ele>\n'
-                              '    <time>{}</time>\n'
-                              '    <src>GPSD tag ="{}"</src>\n'
-                              '    <fix>{}</fix >\n'
-                              '    <sat>{}</sat>\n'
-                              '    <hdop>{}</hdop>\n'
-                              '    <vdop>{}</vdop>\n'
-                              '    <pdop>{}</pdop>\n'
-                              '</trkpt>\n').format(latitude, longitude,
-                                                   altitude,
-                                                   time,
-                                                   tag,
-                                                   mode,
-                                                   sats[1],
-                                                   hdop,
-                                                   vdop,
-                                                   pdop)
-                addendum = open(the_log, 'a')
-                addendum.write(trackpoint)
-                addendum.close()
+def main():
+    """pen and read"""
+    trackpoint_list = ['time', 'ele', 'hdop', 'vdop', 'pdop', 'mode', 'sat', 'tag']
+    try:
+        gpx3 = minidom.parse(the_log)  # opens the pre-existing
+        root = gpx3.firstChild
+        # create_element(trk)
+        track = gpx3.createElementNS(None, 'trk')
+        track.setAttribute('began', create_time())
+        root.appendChild(track)
+        for key in trackpoint_list:
+            keystring = '"{}"'.format(key)
+            gpx3.createElement(keystring)
+            trackpoint_data(gpx3, track)
+            trackpoint.firstChild.replaceWholeText()
 
-except Exception as error:
-    print('Danger-Danger', error)
+
+    except FileNotFoundError:
+        create_file()
+        main()  # What could possibly go wrong?
+
+
+def create_time():
+    """time in the beginning"""
+    timestart = str(datetime.utcnow().replace(tzinfo=(timezone(timedelta(0)))))
+    return timestart
+
+
+def create_file():
+    """created file if one does not exist"""
+    if not os.path.isfile(the_log):
+        root = minidom.parseString(HEADER)
+        log_write = open(the_log, "w")
+        root.writexml(log_write)
+        log_write.close()
+    return
+
+
+HEADER = ('<gpx xmlns="http://www.topografix.com/GPX/1/1" '
+          'xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" '
+          'xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" '
+          'creator="gpx3logger.py" version="0.1" '
+          'xmlns:xsi="http://www.w3.org/2001/XMLSchema-" xsi:schemaLocation="http://www.topografix.com/GPX/1/1\n '
+          'http://www.topografix.com/GPX/1/1/gpx.xsd \n'
+          'http://www.garmin.com/xmlschemas/GpxExtensions/v3 \n'
+          'http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd \n'
+          'http://www.garmin.com/xmlschemas/TrackPointExtension/v1 \n'
+          'http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd">\n'
+          '     <metadata>\n'
+          '         <link href="https://github.com/wadda/gps3">\n'
+          '         <text>"gps3.py and gpx3logger.py"</text>\n'
+          '         </link>\n'
+          '         <time>{}</time>\n'
+          '         </metadata>\n'
+          '</gpx>').format(create_time())
+
+
+def trackpoint_data(gpx3, track):
+    """get new data
+    :param track:
+    :param gpx3:
+    """
+    trackpoint_list = ['time', 'ele', 'hdop', 'vdop', 'pdop', 'mode', 'sat', 'tag']
+    try:
+        the_connection = gps3.GPSDSocket(host="127.0.0.1")
+        the_fix = gps3.Fix()
+        for new_data in the_connection:
+            if new_data:
+                the_fix.refresh(new_data)
+
+                trackpoint = gpx3.createElementNS(None, 'trkpt')
+                trackpoint.setAttribute('lat', the_fix.TPV['lat'])
+                trackpoint.setAttribute('lon', the_fix.TPV['lon'])
+                track.appendChild(trackpoint)
+                print(the_fix.TPV['lat'])
+                for key in trackpoint_list:
+                    keystring = '"{}"'.format(key)
+                    gpx3.createElement(keystring)  # I still don't know what this does.
+                    print(keystring)
+
+                    nodestring = '<{0}>value</{0}>'.format(key)  #, value=the_fix.TPV[key]
+                    print(nodestring)
+
+                    doc = minidom.parseString(nodestring)  # You tell me the difference between node/element
+
+                    node = doc.getElementsByTagName(keystring)
+                    trackpoint.firstChild.replaceWholeText(the_fix.TPV[key])
+
+                                        # trackpoint.appendChild(node)
+                close(gpx3)
+
+    except Exception as error:
+        print('Danger-Danger', error)
+
+
+def close(gpx3):
+    """closed"""
+    log_write = open(the_log, "w")
+    gpx3.writexml(log_write)
+    log_write.close()
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        close(the_log)
+        print("Keyboard interrupt received\nTerminated by user\nGood Bye.\n")
+        sys.exit(1)
+
+trackpoint = ('<trkpt lat={lat} lon={lon}>\n'
+              '    <ele>{alt}</ele>\n'
+              '    <time>{time}</time>\n'
+              '    <hdop>{hdop}</hdop>\n'
+              '    <vdop>{vdop}</vdop>\n'
+              '</trkpt>'
+
+
+
+
+
+)
