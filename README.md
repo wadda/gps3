@@ -1,4 +1,5 @@
 # README #
+[![Coverage Status](https://coveralls.io/repos/wadda/gps3/badge.svg)](https://coveralls.io/r/wadda/gps3)
 
 gps3 is a Python3 interface for gpsd.  It is backwards compatable with Python2.7
 
