@@ -160,10 +160,17 @@ def show_human():
 def show_nmea():
     args = add_args()
     gps_connection = gps3.GPSDSocket(args.host, args.port, args.gpsd_protocol, args.devicepath)
-    gps_fix = gps3.Fix()
+    # # gps_fix = gps3.Fix()
+    # screen = curses.initscr()
+    #
+    # screen.clear()
+    # screen.scrollok(True)
+    while True:
+        gps_connection.next()
+        print(gps_connection.response)
+        sleep(.4)
 
-    screen = curses.initscr()
-    return NotImplemented
+    return
 
 
 def shut_down(gps_connection):
