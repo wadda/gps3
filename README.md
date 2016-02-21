@@ -9,43 +9,36 @@ The goal is to deliver a Python package to the Cheese Shop (https://pypi.python.
 
 ![GPSD-OBJECTS.png](http://wadda.org/dropbag/gps3proof.png)
 
-### gps3.py from the terminal ###
+### human.py for GPSD access for humans at a terminal ###
 ```
 #!bash
-me@work:~/projects/gps3$ python3 gps3.py --help
-usage: gps3.py [-h] [-human] [-host HOST] [-port PORT] [-metric] [-verbose]
-               [-device DEVICEPATH] [-json] [-nautical] [-imperial] [-nmea]
+me@work:~/projects/gps3$ python3 human.py --help
+usage: human.py [-h] [-host HOST] [-port PORT] [-device DEVICEPATH] [-json] [-nmea]
                [-rare] [-raw] [-scaled] [-timimg] [-split24] [-pps]
 
 optional arguments:
   -h, --help          show this help message and exit
-  -human              DEFAULT Human Friendlier
   -host HOST          DEFAULT "127.0.0.1"
   -port PORT          DEFAULT 2947
-  -metric             DEFAULT METRIC units
-  -verbose            increases verbosity, but not that much
-  -device DEVICEPATH  alternate devicepath e.g.,"/dev/ttyUSB0"
-  -json               /* output as JSON objects */
-  -nautical (WIP)     /* output in NAUTICAL units */
-  -imperial (WIP)     /* output in IMPERIAL units */
-  -nmea               /* output in NMEA */
-  -rare               /* output of packets in hex */
-  -raw                /* output of raw packets */
-  -scaled             /* scale output to floats */
-  -timing             /* timing information */
-  -split24 (WIP)      /* split AIS Type 24s */
-  -pps                /* enable PPS JSON */
+  -json               DEFAULT JSON objects */
+  -device DEVICEPATH  alternate devicepath e.g.,"-device /dev/ttyUSB4"
+  -nmea               */ output in NMEA */
+  -rare               */ output of packets in hex */
+  -raw                */ output of raw packets */
+  -scaled             */ scale output to floats */
+  -timimg             */ timing information */
+  -split24            */ split AIS Type 24s */
+  -pps                */ enable PPS JSON */
 me@work:~/projects/gps3$
 ```
-Currently not all options are implemented or fully  functional.
 Commandline execution without options is the same as using the DEFAULT option flags.
 
 Don't have a gps to experiment?   Try
 ```
 #!bash
-python3 gps3.py -host wadda.ddns.net  # python gps3.py -host wadda.ddns.net
+python3 human.py -host gps.ddns.net  # python human.py -host gps.ddns.net
 ```
-See if the gps server is running.  While it's not moving, you will have the gps jitter.
+See if the remote gpsd is running.  While it's not moving, it does return basic data.
 
 A trivial demonstration of functionality found in
 ```
