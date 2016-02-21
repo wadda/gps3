@@ -204,7 +204,7 @@ class Fix(object):
             for key in package.keys():  # TODO: Rollover and retry.  It fails here when device disappears
                 package[key] = fresh_data.get(key, 'n/a')  # Updates and restores 'n/a' if key is absent in the socket
                 # response, present --> "key: 'n/a'" instead.'
-                # setattr(package_name, key, package[key])  # Data accessible 'gps_fix.lat', 'gps_fix.lon', etc....
+                # setattr(package_name, key, package[key])  # Data accessible 'gps_fix.TPV.lat', 'gps_fix.TPV.lon', etc....
         except AttributeError:  # 'str' object has no attribute 'keys'  TODO: if returning 'None' is a good idea
             print("No Data")
             return None
