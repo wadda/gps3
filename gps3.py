@@ -185,6 +185,8 @@ class Fix(object):
             _emptydict = {key: 'n/a' for (key) in datalist}  # There is a case for using None instead of 'n/a'
             setattr(self, package_name, _emptydict)
         self.SKY['satellites'] = [{'PRN': 'n/a', 'ss': 'n/a', 'el': 'n/a', 'az': 'n/a', 'used': 'n/a'}]
+        self.DEVICES['devices'] = [{"class": 'n/a', "path": 'n/a', "activated": 'n/a', "flags": 'n/a', "driver": 'n/a',
+                                    "native": 'n/a', "bps": 'n/a', "parity": 'n/a', "stopbits": 'n/a', "cycle": 'n/a'}]
 
     def refresh(self, gpsd_data_package):
         """Sets new socket data as Fix attributes

@@ -22,7 +22,7 @@ __version__ = "0.11a"
 
 def add_args():
     """Adds commandline arguments and formatted Help"""
-    parser = argparse.ArgumentParser()  # TODO: beautify and idiot-proof makeover to prevent clash from options error
+    parser = argparse.ArgumentParser()
 
     parser.add_argument('-host', action='store', dest='host', default='127.0.0.1', help='DEFAULT "127.0.0.1"')
     parser.add_argument('-port', action='store', dest='port', default='2947', help='DEFAULT 2947', type=int)
@@ -86,10 +86,8 @@ def show_human():
     gps_fix = gps3.Fix()
 
     screen = curses.initscr()
-
     # curses.KEY_RESIZE
     curses.cbreak()
-
     screen.clear()
     screen.scrollok(True)
 
@@ -120,9 +118,9 @@ def show_human():
                 data_window.addstr(12, 2, 'Course Err:    +/-{epc}  '.format(**gps_fix.TPV), curses.A_DIM)
                 data_window.addstr(13, 2, 'Speed Err:     +/-{eps} m/s '.format(**gps_fix.TPV), curses.A_DIM)
                 data_window.addstr(14, 2, 'Time Offset:   +/-{ept}  '.format(**gps_fix.TPV), curses.A_DIM)
-                data_window.addstr(15, 2, 'Grid:           Not Implemented ', curses.A_DIM)
-                data_window.addstr(16, 2, 'Host: {0.host}, port {0.port}'.format(args))
-                data_window.addstr(17, 2, 'Device: {device}  '.format(**gps_fix.TPV))
+                data_window.addstr(15, 2, 'gdop:{gdop}  pdop:{pdop}  tdop:{tdop}'.format(**gps_fix.SKY))
+                data_window.addstr(16, 2, 'ydop:{ydop}  xdop:{xdop} '.format(**gps_fix.SKY))
+                data_window.addstr(17, 2, 'vdop:{vdop}  hdop:{hdop} '.format(**gps_fix.SKY))
 
                 sat_window.clear()
                 sat_window.border()
@@ -135,11 +133,11 @@ def show_human():
 
                 # dop_window.clear()
                 dop_window.border(0)
-
-                dop_window.addstr(1, 2, 'gdop:{gdop}  pdop:{pdop}  tdop:{tdop}'.format(**gps_fix.SKY))
-                dop_window.addstr(2, 2, 'ydop:{ydop}  xdop:{xdop} '.format(**gps_fix.SKY))
-                dop_window.addstr(3, 2, 'vdop:{vdop}  hdop:{hdop} '.format(**gps_fix.SKY))
-                dop_window.addstr(4, 2, 'Activated:{activated}'.format(**gps_fix.DEVICE))
+                for gizmo in gps_fix.DEVICES['devices']:
+                    dop_window.addstr(1, 2, 'Activated:{activated}'.format(**gizmo))
+                    dop_window.addstr(2, 2, 'Host: {0.host}:{0.port} {path}'.format(args, **gizmo))
+                    dop_window.addstr(3, 2, 'Driver:{driver} BPS:{bps}'.format(**gizmo))
+                    dop_window.addstr(4, 2, 'Cycle:{cycle} Hz'.format(**gizmo))
 
                 # packet_window.clear()
                 # packet_window.border(0)
@@ -206,7 +204,6 @@ if __name__ == '__main__':
 
     except KeyboardInterrupt:
         shut_down(show_human().gps_connection)
-
 #
 # Someday a cleaner Python interface will live here
 #
