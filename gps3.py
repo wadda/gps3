@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # coding=utf-8
 """
-GPS3 (gps3.py) is a Python 2.7 -3.5 GPSD interface (http://www.catb.org/gpsd)
+GPS3 (gps3.py) is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
 Defaults host='127.0.0.1', port=2947, gpsd_protocol='json'
 
 GPS3 has two classes.
 1) 'GPSDSocket' to create a socket connection and retreive the output from GPSD.
-2) 'Fix' which unpacks the streamed gpsd data into python dictionaries.
+2) 'Fix' unpacks the streamed gpsd data into python dictionaries.
 
 These dictionaries are populated from the JSON data packet sent from the GPSD.
 
@@ -39,7 +39,7 @@ PROTOCOL = 'json'  # "
 
 
 class GPSDSocket(object):
-    """The sole purpose is to establish a socket with gpsd, by which to send commands and receive data.
+    """Establish a socket with gpsd, by which to send commands and receive data.
     """
 
     def __init__(self, host=HOST, port=GPSD_PORT, gpsd_protocol=PROTOCOL, devicepath=None):
@@ -204,14 +204,12 @@ class Fix(object):
             for key in package.keys():  # TODO: Rollover and retry.  It fails here when device disappears
                 package[key] = fresh_data.get(key, 'n/a')  # Updates and restores 'n/a' if key is absent in the socket
                 # response, present --> "key: 'n/a'" instead.'
-                # setattr(package_name, key, package[key])  # Data accessible 'gps_fix.lat', 'gps_fix.lon', etc....
         except AttributeError:  # 'str' object has no attribute 'keys'  TODO: if returning 'None' is a good idea
             print("No Data")
             return None
 
         except (ValueError, KeyError) as error:
-            sys.stderr.write('There was a Value/KeyError at GPSDSocket.refresh: ', error,
-                             '\nThis should never happen.')  # Look for extra data in stream
+            sys.stderr.write(str(error))  # Look for extra data in stream
             return None
 
 
