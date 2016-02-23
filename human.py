@@ -158,12 +158,32 @@ def show_human():
 
 
 def show_nmea():
+    """NMEA"""
     args = add_args()
     gps_connection = gps3.GPSDSocket(args.host, args.port, args.gpsd_protocol, args.devicepath)
-    gps_fix = gps3.Fix()
 
     screen = curses.initscr()
-    return NotImplemented
+    # curses.KEY_RESIZE
+    curses.cbreak()
+
+    screen.clear()
+    screen.scrollok(True)
+
+    data_window = curses.newwin(23, 79, 1, 1)
+
+    try:
+        for new_data in gps_connection:
+            if new_data:
+                # gps_fix.refresh(new_data)
+
+                data_window.border(0)
+                data_window.addstr(0, 2, 'GPS3 Python {}.{}.{} GPSD Interface Showing NMEA protocol'.format(*sys.version_info), curses.A_BOLD)
+                data_window.addstr(2, 2, '{}'.format(gps_connection.response))
+                data_window.refresh()
+                sleep(.4)
+
+    except KeyboardInterrupt:
+        shut_down(gps_connection)
 
 
 def shut_down(gps_connection):
