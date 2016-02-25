@@ -4,15 +4,15 @@
 import argparse
 import curses
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime
 from time import sleep
 
 import gps3
 
 if sys.version_info[0] < 3:
-    from pytz import timezone
+    pass
 else:
-    from datetime import timezone
+    pass
 
 __author__ = 'Moe'
 __copyright__ = "Copyright 2015-2016  Moe"
@@ -60,23 +60,20 @@ def satellites_used(feed):
     return total_satellites, used_satellites
 
 
-def make_datetime(gps_time_string):
-    """Creates timezone aware datetime object from gpsd string data
-    Arguments:
-        gps_fix.TPV['time'] as a string
-    Returns:
-        gps_datetime_object(datetime):  Time zone aware datetime object
-        # type(gps_datetime_object) = < class 'datetime.datetime'>
-    """
-    timeformat = '%Y-%m-%dT%H:%M:%S.%fZ'  # ISO8601
-    if 'n/a' not in gps_time_string:
-        gps_datetime_object = datetime.strptime(gps_time_string, timeformat).replace(
-            tzinfo=(timezone(timedelta(0))))
-    else:  # shouldn't break anything, but return wrong Time, when IT, PO, ES, and PT switch to gregorian calendar
-        gps_datetime_object = datetime.strptime('1582-10-04T12:00:00.000Z', timeformat).replace(
-            tzinfo=(timezone(timedelta(0))))
+def make_time(gps__datetime_str):
+    if not 'n/a' == gps__datetime_str:
+        datetime_string, _, __ = gps__datetime_str.partition(".")
+        datetime_object = datetime.strptime(datetime_string, "%Y-%m-%dT%H:%M:%S")
+        return datetime_object
 
-    return gps_datetime_object
+
+def do_lapsed(start_time):
+    time_then = make_time(start_time)
+    time_now = datetime.utcnow().replace(microsecond=0)
+    if time_then is None:
+        return
+    delta_t = time_now - time_then
+    return delta_t
 
 
 def show_human():
@@ -134,10 +131,13 @@ def show_human():
                 # dop_window.clear()
                 dop_window.border(0)
                 for gizmo in gps_fix.DEVICES['devices']:
-                    dop_window.addstr(1, 2, 'Activated:{activated}'.format(**gizmo))
+                    start_time = '{activated}'.format(**gizmo)
+                    dop_window.addstr(1, 2, 'Activated:{}'.format(start_time))
                     dop_window.addstr(2, 2, 'Host: {0.host}:{0.port} {path}'.format(args, **gizmo))
                     dop_window.addstr(3, 2, 'Driver:{driver} BPS:{bps}'.format(**gizmo))
-                    dop_window.addstr(4, 2, 'Cycle:{cycle} Hz'.format(**gizmo))
+
+                lapsed_time = do_lapsed(start_time)
+                dop_window.addstr(4, 2, 'Cycle:{cycle} Hz       Elapsed: {}'.format(lapsed_time, **gizmo))
 
                 # packet_window.clear()
                 # packet_window.border(0)
