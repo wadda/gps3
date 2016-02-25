@@ -14,7 +14,7 @@ __version__ = "0.1a"
 import time
 import gps3
 
-the_connection = gps3.GPSDSocket(host='wadda.ddns.net')  # A demo address TODO: needs work for commandline host selection
+the_connection = gps3.GPSDSocket(host='gps.ddns.net')  # A demo address TODO: needs work for commandline host selection
 the_fix = gps3.Fix()
 the_link = '/tmp/gps3_live.kml'  # AFAIK, 'Links' call href on time events or entry/exit  Multiple href may be possible.
 the_file = '/tmp/gps3_static.kml'
@@ -149,7 +149,7 @@ try:
 
         else:
             pass
-        time.sleep(1)  # default GE refresh rate is 4 seconds, therefore no refresh older than 1 second from itself.
+        time.sleep(.9)  # default GE refresh rate is 4 seconds, therefore no refresh older than 1 second from itself.
 except KeyboardInterrupt:
     the_connection.close()
     print("\nTerminated by user\nGood Bye.\n")
