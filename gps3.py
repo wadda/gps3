@@ -13,8 +13,8 @@ These dictionaries are populated from the JSON data packet sent from the GPSD.
 Import           import gps3
 Instantiate      gps_connection = gps3.GPSDSocket()
                  gps_fix = gps3.Fix()
- Use             print('Altitude' = gps_fix.TPV['alt'])
-                 print('Latitude' = gps_fix.TPV['lat'])
+ Use             print('Altitude = 'gps_fix.TPV['alt'])
+                 print('Latitude = 'gps_fix.TPV['lat'])
 
 Consult Lines 150-ff for Attribute/Key possibilities.
 or http://www.catb.org/gpsd/gpsd_json.html
@@ -29,18 +29,17 @@ import socket
 import sys
 
 __author__ = 'Moe'
-__copyright__ = "Copyright 2015-2016  Moe"
-__license__ = "MIT"
-__version__ = "0.11a"
+__copyright__ = 'Copyright 2015-2016  Moe'
+__license__ = 'MIT'
+__version__ = '0.2'
 
-HOST = "127.0.0.1"  # gpsd defaults
+HOST = '127.0.0.1'  # gpsd defaults
 GPSD_PORT = 2947  # "
 PROTOCOL = 'json'  # "
 
 
 class GPSDSocket(object):
-    """Establish a socket with gpsd, by which to send commands and receive data.
-    """
+    """Establish a socket with gpsd, by which to send commands and receive data."""
 
     def __init__(self, host=HOST, port=GPSD_PORT, gpsd_protocol=PROTOCOL, devicepath=None):
         self.devicepath_alternate = devicepath
@@ -53,8 +52,8 @@ class GPSDSocket(object):
 
     def connect(self, host, port):
         """Connect to a host on a given port.
-        :param port:
-        :param host:
+        :param port:  default port=2947
+        :param host:localhost, <IPv4>, default host='127.0.0.1'
         """
         for alotta_stuff in socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM):
             family, socktype, proto, _canonname, host_port = alotta_stuff
@@ -62,26 +61,21 @@ class GPSDSocket(object):
                 self.streamSock = socket.socket(family, socktype, proto)
                 self.streamSock.connect(host_port)
                 self.streamSock.setblocking(False)
-
+                self.watch(gpsd_protocol=self.protocol)
             except OSError as error:
                 sys.stderr.write('\nGPSDSocket.connect OSError is-->', error)
                 sys.stderr.write('\nAttempt to connect to a gpsd at {0} on port \'{1}\' failed:\n'.format(host, port))
-                sys.stderr.write('Please, check your number and dial again.\n')
-                self.close()
                 sys.exit(1)  # TODO: gpsd existence check and start
-
-            finally:
-                self.watch(gpsd_protocol=self.protocol)
 
     def watch(self, enable=True, gpsd_protocol='json', devicepath=None):
         """watch gpsd in various gpsd_protocols or devices.
         Arguments:
             self:
             enable: (bool) stream data to socket
-            gpsd_protocol: (str) 'json', 'nmea', 'rare', 'raw', 'scaled', 'split24', or 'pps'
-            devicepath: option for non-default device path
+            gpsd_protocol: (str) 'json' | 'nmea' | 'rare' | 'raw' | 'scaled' | 'split24' | 'pps'
+            devicepath: device path - '/dev/ttyUSBn' for some number n or '/dev/whatever_works'
         Returns:
-            command: (str) e.g., '?WATCH={{"enable":true,"json":true}}'
+            command: (str) e.g., '?WATCH={{'enable':true,'json':true}}'
         """
         # TODO: 'timing' requires special attention, as it is undocumented and lives with dragons
         command = '?WATCH={{"enable":true,"{0}":true}}'.format(gpsd_protocol)
@@ -99,9 +93,9 @@ class GPSDSocket(object):
 
     def send(self, commands):
         """Ship commands to the daemon
-        :param commands:
+        :param commands: e.g., '?WATCH={{'enable':true,'json':true}}'
         """
-        # session.send("?POLL;")  # TODO: Figure a way to work this in.
+        # session.send('?POLL;')  # TODO: Figure a way to work this in.
         # The POLL command requests data from the last-seen fixes on all active GPS devices.
         # Devices must previously have been activated by ?WATCH to be pollable.
         if sys.version_info[0] < 3:  # Not less than 3, but 'broken hearted' because
@@ -116,22 +110,22 @@ class GPSDSocket(object):
 
     def next(self, timeout=0):
         """Return empty unless new data is ready for the client.  Will sit and wait for timeout seconds
-        :param timeout:
+        :param timeout: Default timeout=0  range zero to float specifies a time-out as a floating point
+        number in seconds. When the timeout argument is omitted the function blocks until at least one
+        file descriptor is ready. A time-out value of zero specifies a poll and never blocks.
         """
         try:
             (waitin, _waitout, _waiterror) = select.select((self.streamSock,), (), (), timeout)
-            if not waitin:
-                return
+            if not waitin: return
             else:
-                gpsd_response = self.streamSock.makefile()  # was '.makefile(buffering=4096)' In strictly Python3
+                gpsd_response = self.streamSock.makefile()  # '.makefile(buffering=4096)' In strictly Python3
                 self.response = gpsd_response.readline()
             return self.response
 
         except OSError as error:
             sys.stderr.write('The readline OSError in GPSDSocket.next is this: ', error)
-            return  # TODO: means to recover from error, except it is an error of unknown etiology/frequency. Good luck.
 
-    __next__ = next  # Workaround for changes in iterating between Python 2.7 and 3.4
+    __next__ = next  # Workaround for changes in iterating between Python 2.7 and 3
 
     def close(self):
         """turn off stream and close socket"""
@@ -139,7 +133,6 @@ class GPSDSocket(object):
             self.watch(enable=False)
             self.streamSock.close()
         self.streamSock = None
-        return
 
 
 class Fix(object):
@@ -150,69 +143,68 @@ class Fix(object):
     def __init__(self):
         """Sets of potential data packages from a device through gpsd, as a generator of class attribute dictionaries"""
 
-        version = {"release", "proto_major", "proto_minor", "remote", "rev"}
+        version = {'release', 'proto_major', 'proto_minor', 'remote', 'rev'}
 
-        tpv = {"alt", "climb", "device", "epc", "epd", "eps", "ept", "epv", "epx", "epy", "lat", "lon", "mode", "speed", "tag", "time", "track"}
+        tpv = {'alt', 'climb', 'device', 'epc', 'epd', 'eps', 'ept', 'epv', 'epx', 'epy', 'lat', 'lon', 'mode', 'speed', 'tag', 'time', 'track'}
 
-        sky = {"satellites", "gdop", "hdop", "pdop", "tdop", "vdop", "xdop", "ydop"}
+        sky = {'satellites', 'gdop', 'hdop', 'pdop', 'tdop', 'vdop', 'xdop', 'ydop'}
 
-        gst = {"alt", "device", "lat", "lon", "major", "minor", "orient", "rms", "time"}
+        gst = {'alt', 'device', 'lat', 'lon', 'major', 'minor', 'orient', 'rms', 'time'}
 
-        att = {"acc_len", "acc_x", "acc_y", "acc_z", "depth", "device", "dip", "gyro_x", "gyro_y", "heading", "mag_len", "mag_st", "mag_x", "mag_y", "mag_z",
-               "pitch", "pitch_st", "roll", "roll_st", "temperature", "time", "yaw", "yaw_st"}  # TODO: Check Device flags
+        att = {'acc_len', 'acc_x', 'acc_y', 'acc_z', 'depth', 'device', 'dip', 'gyro_x', 'gyro_y', 'heading', 'mag_len', 'mag_st', 'mag_x', 'mag_y', 'mag_z',
+               'pitch', 'pitch_st', 'roll', 'roll_st', 'temperature', 'time', 'yaw', 'yaw_st'}  #
 
-        pps = {"device", "clock_sec", "clock_nsec", "real_sec", "real_nsec"}
+        pps = {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec'}
 
-        device = {"activated", "bps", "cycle", "mincycle", "driver", "flags", "native", "parity", "path", "stopbits", "subtype"}  # TODO: Check Device flags
+        poll = {'active', 'fixes', 'skyviews', 'time'}
 
-        poll = {"active", "fixes", "skyviews", "time"}
+        devices = {'devices', 'remote'}
 
-        devices = {"devices", "remote"}
+        # device = {'activated', 'bps', 'cycle', 'mincycle', 'driver', 'flags', 'native', 'parity', 'path', 'stopbits', 'subtype'}
+        # satellites = {'PRN', 'ss', 'el', 'az', 'used'}  # These are subsets of DEVICES and SKY
 
         # ais = {}  # see: http://catb.org/gpsd/AIVDM.html
 
-        error = {"message"}
+        error = {'message'}
 
         # 'repository' of dictionaries possible, and possibly 'not applicable'
-        packages = {"VERSION": version,
-                    "TPV": tpv,
-                    "SKY": sky, "GST": gst, "ATT": att, "PPS": pps,
-                    "DEVICE": device, "POLL": poll,
-                    "DEVICES": devices,
-                    "ERROR": error}  # etc.
+        packages = {'VERSION': version, 'TPV': tpv, 'SKY': sky, 'GST': gst, 'ATT': att, 'PPS': pps,
+                    'POLL': poll, 'DEVICES': devices, 'ERROR': error}  # etc.
         # TODO: Create the full suite of possible JSON objects and a better way for deal with subsets
         for package_name, datalist in packages.items():
-            _emptydict = {key: 'n/a' for (key) in datalist}  # There is a case for using None instead of 'n/a'
+            _emptydict = {key: 'n/a' for key in datalist}  # There is a case for using None instead of 'n/a'
             setattr(self, package_name, _emptydict)
+
         self.SKY['satellites'] = [{'PRN': 'n/a', 'ss': 'n/a', 'el': 'n/a', 'az': 'n/a', 'used': 'n/a'}]
-        self.DEVICES['devices'] = [{"class": 'n/a', "path": 'n/a', "activated": 'n/a', "flags": 'n/a', "driver": 'n/a',
-                                    "native": 'n/a', "bps": 'n/a', "parity": 'n/a', "stopbits": 'n/a', "cycle": 'n/a'}]
+        self.DEVICES['devices'] = [{'class': 'n/a', 'path': 'n/a', 'activated': 'n/a', 'flags': 'n/a', 'driver': 'n/a',
+                                    'native': 'n/a', 'bps': 'n/a', 'parity': 'n/a', 'stopbits': 'n/a', 'cycle': 'n/a'}]
 
     def refresh(self, gpsd_data_package):
         """Sets new socket data as Fix attributes
         Arguments:
-            self (class):
+            self:
             gpsd_data_package (json object):
-        Returns:
-        self attribute dictionaries, e.g., self.TPV['lat']
+        Provides:
+        self attribute dictionaries, e.g., self.TPV['lat'], self.SKY['gdop']
         Raises:
         AttributeError: 'str' object has no attribute 'keys' when the device falls out of the system
-        ValueError, KeyError: stray data, should not happen
+        ValueError, KeyError: most likely extra, or mangled JSON data, should not happen, but that
+        applies to a lot of things.
         """
-        try:  # The reserved word 'class' is popped to allow the option, 'setattr(package_name, key, package[key])'
-            fresh_data = json.loads(gpsd_data_package)
-            package_name = fresh_data.pop('class', 'ERROR')  # "ERROR" the same name as the gpsd data package error.
-            package = getattr(self, package_name, package_name)
+        try:
+            fresh_data = json.loads(gpsd_data_package)  # The reserved word 'class' is popped from JSON object class
+            package_name = fresh_data.pop('class', 'ERROR')  # gpsd data package errors are also 'ERROR'.
+            package = getattr(self, package_name, package_name)  # packages are named for JSON object class
             for key in package.keys():  # TODO: Rollover and retry.  It fails here when device disappears
                 package[key] = fresh_data.get(key, 'n/a')  # Updates and restores 'n/a' if key is absent in the socket
-                # response, present --> "key: 'n/a'" instead.'
-        except AttributeError:  # 'str' object has no attribute 'keys'  TODO: if returning 'None' is a good idea
-            print("No Data")
-            return None
+                # response, present --> 'key: 'n/a'' instead.'
+        except AttributeError:  # 'str' object has no attribute 'keys'
+            print('No Data')
+            return
 
         except (ValueError, KeyError) as error:
             sys.stderr.write(str(error))  # Look for extra data in stream
-            return None
+            return
 
 
 if __name__ == '__main__':
