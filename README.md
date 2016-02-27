@@ -5,7 +5,7 @@ gps3 is a Python3 interface for gpsd.  It is backwards compatable with Python2.7
 
 gpsd (http://www.catb.org/gpsd/) is a fabulous application/daemon for many geo-location devices.
 
-The goal is to deliver a Python package to the Cheese Shop (https://pypi.python.org/pypi/gps3/0.1a)
+The goal is to deliver a Python package to the Cheese Shop (https://pypi.python.org/pypi/gps3/0.11a)
 
 ![GPSD-OBJECTS.png](http://i.imgur.com/g5NvIUO.png)
 
