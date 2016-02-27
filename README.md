@@ -33,17 +33,14 @@ me@work:~/projects/gps3$
 ```
 Commandline execution without options is the same as using the DEFAULT option flags.
 
-![Python2.7.png](http://i.imgur.com/Sb5Mt6F.png)  ![Python3.5.png](http://i.imgur.com/1YuCCaS.png)
-
-
-
+![Python3.5.png](http://i.imgur.com/ThZK7nt.png)   ![Python2.7.png](http://i.imgur.com/6ACJlEF.png)  
 
 Don't have a gps to experiment?   Try
 ```
 #!bash
 python3 human.py -host gps.ddns.net  # python human.py -host gps.ddns.net
 ```
-See if the remote gpsd is running.  While it's not moving, it does return basic data.
+See if a remote gpsd is running.  While it's not moving, it does return basic data.
 
 A trivial demonstration of functionality found in
 ```
