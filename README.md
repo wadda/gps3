@@ -7,7 +7,7 @@ gpsd (http://www.catb.org/gpsd/) is a fabulous application/daemon for many geo-l
 
 The goal is to deliver a Python package to the Cheese Shop (https://pypi.python.org/pypi/gps3/0.1a)
 
-![GPSD-OBJECTS.png](http://wadda.org/dropbag/gps3proof.png)
+![GPSD-OBJECTS.png](http://i.imgur.com/g5NvIUO.png)
 
 ### human.py for GPSD access for humans at a terminal ###
 ```
@@ -32,6 +32,11 @@ optional arguments:
 me@work:~/projects/gps3$
 ```
 Commandline execution without options is the same as using the DEFAULT option flags.
+
+![Python2.7.png](http://i.imgur.com/Sb5Mt6F.png)  ![Python3.5.png](http://i.imgur.com/1YuCCaS.png)
+
+
+
 
 Don't have a gps to experiment?   Try
 ```
