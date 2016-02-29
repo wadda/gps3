@@ -5,9 +5,9 @@ gps3 is a Python3 interface for gpsd.  It is backwards compatable with Python2.7
 
 gpsd (http://www.catb.org/gpsd/) is a fabulous application/daemon for many geo-location devices.
 
-The goal is to deliver a Python package to the Cheese Shop (https://pypi.python.org/pypi/gps3/0.1a)
+The goal is to deliver a Python package to the Cheese Shop (https://pypi.python.org/pypi/gps3/0.11a)
 
-![GPSD-OBJECTS.png](http://wadda.org/dropbag/gps3proof.png)
+![GPSD-OBJECTS.png](http://i.imgur.com/g5NvIUO.png)
 
 ### human.py for GPSD access for humans at a terminal ###
 ```
@@ -33,12 +33,14 @@ me@work:~/projects/gps3$
 ```
 Commandline execution without options is the same as using the DEFAULT option flags.
 
+![Python3.5.png](http://i.imgur.com/ThZK7nt.png)   ![Python2.7.png](http://i.imgur.com/6ACJlEF.png)  
+
 Don't have a gps to experiment?   Try
 ```
 #!bash
 python3 human.py -host gps.ddns.net  # python human.py -host gps.ddns.net
 ```
-See if the remote gpsd is running.  While it's not moving, it does return basic data.
+See if a remote gpsd is running.  While it's not moving, it does return basic data.
 
 A trivial demonstration of functionality found in
 ```
