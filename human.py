@@ -33,7 +33,7 @@ def add_args():
     parser.add_argument('-rare', dest='gpsd_protocol', const='rare', action='store_const', help='*/ output of packets in hex */')
     parser.add_argument('-raw', dest='gpsd_protocol', const='raw', action='store_const', help='*/ output of raw packets */')
     parser.add_argument('-scaled', dest='gpsd_protocol', const='scaled', action='store_const', help='*/ scale output to floats */')
-    parser.add_argument('-timimg', dest='gpsd_protocol', const='timing', action='store_const', help='*/ timing information */')
+    parser.add_argument('-timing', dest='gpsd_protocol', const='timing', action='store_const', help='*/ timing information */')
     parser.add_argument('-split24', dest='gpsd_protocol', const='split24', action='store_const', help='*/ split AIS Type 24s */')
     parser.add_argument('-pps', dest='gpsd_protocol', const='pps', action='store_const', help='*/ enable PPS JSON */')
 
@@ -43,26 +43,28 @@ def add_args():
 
 def satellites_used(feed):
     """Counts number of satellites use in calculation from total visible satellites
+    Arguments:
+        feed feed=gps_fix.TPV['satellites']
     Returns:
         total_satellites(int):
         used_satellites (int):
     """
     total_satellites = 0
     used_satellites = 0
-    for satellites in feed:
-        if satellites['used'] is 'n/a':
-            return 0, 0
-        used = satellites['used']
-        total_satellites += 1
-        if used:
-            used_satellites += 1
 
+    if not isinstance(feed, list):
+        return 0, 0
+
+    for satellites in feed:
+        total_satellites += 1
+        if satellites['used'] is True:
+            used_satellites += 1
     return total_satellites, used_satellites
 
 
 def make_time(gps__datetime_str):
     if not 'n/a' == gps__datetime_str:
-        datetime_string, _, __ = gps__datetime_str.partition(".")
+        datetime_string = gps__datetime_str
         datetime_object = datetime.strptime(datetime_string, "%Y-%m-%dT%H:%M:%S")
         return datetime_object
 
@@ -90,7 +92,7 @@ def show_human():
 
     data_window = curses.newwin(19, 39, 1, 1)
     sat_window = curses.newwin(19, 39, 1, 40)
-    dop_window = curses.newwin(6, 39, 14, 40)
+    device_window = curses.newwin(6, 39, 14, 40)
     packet_window = curses.newwin(20, 78, 20, 1)
 
     try:
@@ -100,7 +102,6 @@ def show_human():
 
                 data_window.border(0)
                 data_window.addstr(0, 2, 'GPS3 Python {}.{}.{} GPSD Interface'.format(*sys.version_info), curses.A_BOLD)
-
                 data_window.addstr(1, 2, 'Time:  {time} '.format(**gps_fix.TPV))
                 data_window.addstr(2, 2, 'Latitude:  {lat}° '.format(**gps_fix.TPV))
                 data_window.addstr(3, 2, 'Longitude: {lon}° '.format(**gps_fix.TPV))
@@ -122,22 +123,28 @@ def show_human():
                 sat_window.clear()
                 sat_window.border()
                 sat_window.addstr(0, 2, 'Using {0[1]}/{0[0]} satellites (truncated)'.format(satellites_used(gps_fix.SKY['satellites'])))
-                sat_window.addstr(1, 2, 'PRN     Elev   Azmith   SNR   Used')
+                sat_window.addstr(1, 2, 'PRN     Elev   Azimuth   SNR   Used')
                 line = 2
-                for satellites in gps_fix.SKY['satellites'][0:10]:
-                    sat_window.addstr(line, 2, '{PRN:>2}   {el:>6}   {az:>5}   {ss:>5}   {used:}'.format(**satellites))
-                    line += 1
+                if isinstance(gps_fix.SKY['satellites'], list):  # Nested lists of dictionaries are strings before data is present
+                    for sats in gps_fix.SKY['satellites'][0:10]:
+                        sat_window.addstr(line, 2, '{PRN:>2}   {el:>6}   {az:>5}   {ss:>5}   {used:}'.format(**sats))
+                        line += 1
 
-                # dop_window.clear()
-                dop_window.border(0)
-                for gizmo in gps_fix.DEVICES['devices']:
-                    start_time = '{activated}'.format(**gizmo)
-                    dop_window.addstr(1, 2, 'Activated:{}'.format(start_time))
-                    dop_window.addstr(2, 2, 'Host: {0.host}:{0.port} {path}'.format(args, **gizmo))
-                    dop_window.addstr(3, 2, 'Driver:{driver} BPS:{bps}'.format(**gizmo))
+                # device_window.clear()
+                device_window.border(0)
+                if not isinstance(gps_fix.DEVICES['devices'], list):  # Local machines need a 'device' kick start to have valid data
+                    gps_connection.send('?DEVICES;')
 
-                lapsed_time = do_lapsed(start_time)
-                dop_window.addstr(4, 2, 'Cycle:{cycle} Hz       Elapsed: {}'.format(lapsed_time, **gizmo))
+                if isinstance(gps_fix.DEVICES['devices'], list):  # Nested lists of dictionaries are strings before data is present
+
+                    for gizmo in gps_fix.DEVICES['devices']:
+                        start_time, _uicroseconds = gizmo['activated'].split('.')  # Remove '.000Z'
+                        elapsed = do_lapsed(start_time)
+
+                        device_window.addstr(1, 2, 'Activated:{}'.format(gizmo['activated']))
+                        device_window.addstr(2, 2, 'Host:{0.host}:{0.port} {1}'.format(args, gizmo['path']))
+                        device_window.addstr(3, 2, 'Driver:{driver} BPS:{bps}'.format(**gizmo))
+                        device_window.addstr(4, 2, 'Cycle:{} Hz       Elapsed: {}'.format(gizmo['cycle'], elapsed))
 
                 # packet_window.clear()
                 # packet_window.border(0)
@@ -146,10 +153,10 @@ def show_human():
 
                 data_window.refresh()
                 sat_window.refresh()
-                dop_window.refresh()
+                device_window.refresh()
                 packet_window.refresh()
 
-                sleep(.4)
+                sleep(.7)
 
     except KeyboardInterrupt:
         shut_down(gps_connection)
