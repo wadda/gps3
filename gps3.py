@@ -52,8 +52,9 @@ class GPSDSocket(object):
 
     def connect(self, host, port):
         """Connect to a host on a given port.
-        :param port:  default port=2947
-        :param host:localhost, <IPv4>, default host='127.0.0.1'
+        Arguments:
+            port: default port=2947
+            host: default host='127.0.0.1'
         """
         for alotta_stuff in socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM):
             family, socktype, proto, _canonname, host_port = alotta_stuff
@@ -75,7 +76,7 @@ class GPSDSocket(object):
             gpsd_protocol: (str) 'json' | 'nmea' | 'rare' | 'raw' | 'scaled' | 'split24' | 'pps'
             devicepath: device path - '/dev/ttyUSBn' for some number n or '/dev/whatever_works'
         Returns:
-            command: (str) e.g., '?WATCH={{'enable':true,'json':true}}'
+            command: (str) e.g., '?WATCH={"enable":true,"json":true};'
         """
         # TODO: 'timing' requires special attention, as it is undocumented and lives with dragons
         command = '?WATCH={{"enable":true,"{0}":true}}'.format(gpsd_protocol)
@@ -93,7 +94,8 @@ class GPSDSocket(object):
 
     def send(self, commands):
         """Ship commands to the daemon
-        :param commands: e.g., '?WATCH={{'enable':true,'json':true}}'
+        Arguments:
+            commands: e.g., '?WATCH={{'enable':true,'json':true}}'
         """
         # session.send('?POLL;')  # TODO: Figure a way to work this in.
         # The POLL command requests data from the last-seen fixes on all active GPS devices.
@@ -109,10 +111,12 @@ class GPSDSocket(object):
         return self
 
     def next(self, timeout=0):
-        """Return empty unless new data is ready for the client.  Will sit and wait for timeout seconds
-        :param timeout: Default timeout=0  range zero to float specifies a time-out as a floating point
-        number in seconds. When the timeout argument is omitted the function blocks until at least one
-        file descriptor is ready. A time-out value of zero specifies a poll and never blocks.
+        """Return empty unless new data is ready for the client.
+        Arguments:
+            timeout: Default timeout=0  range zero to float specifies a time-out as a floating point
+        number in seconds.  Will sit and wait for timeout seconds.  When the timeout argument is omitted
+        the function blocks until at least one file descriptor is ready. A time-out value of zero specifies
+        a poll and never blocks.
         """
         try:
             (waitin, _waitout, _waiterror) = select.select((self.streamSock,), (), (), timeout)
@@ -152,15 +156,15 @@ class Fix(object):
         gst = {'alt', 'device', 'lat', 'lon', 'major', 'minor', 'orient', 'rms', 'time'}
 
         att = {'acc_len', 'acc_x', 'acc_y', 'acc_z', 'depth', 'device', 'dip', 'gyro_x', 'gyro_y', 'heading', 'mag_len', 'mag_st', 'mag_x', 'mag_y', 'mag_z',
-               'pitch', 'pitch_st', 'roll', 'roll_st', 'temperature', 'time', 'yaw', 'yaw_st'}  #
+               'pitch', 'pitch_st', 'roll', 'roll_st', 'temperature', 'time', 'yaw', 'yaw_st'}
 
         pps = {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec'}
 
-        poll = {'active', 'fixes', 'skyviews', 'time'}
+        poll = {'active', 'tpv', 'sky', 'time'}
 
         devices = {'devices', 'remote'}
 
-        # device = {'activated', 'bps', 'cycle', 'mincycle', 'driver', 'flags', 'native', 'parity', 'path', 'stopbits', 'subtype'}
+        device = {'activated', 'bps', 'cycle', 'mincycle', 'driver', 'flags', 'native', 'parity', 'path', 'stopbits', 'subtype'}
         # satellites = {'PRN', 'ss', 'el', 'az', 'used'}  # These are subsets of DEVICES and SKY
 
         # ais = {}  # see: http://catb.org/gpsd/AIVDM.html
@@ -169,15 +173,15 @@ class Fix(object):
 
         # 'repository' of dictionaries possible, and possibly 'not applicable'
         packages = {'VERSION': version, 'TPV': tpv, 'SKY': sky, 'GST': gst, 'ATT': att, 'PPS': pps,
-                    'POLL': poll, 'DEVICES': devices, 'ERROR': error}  # etc.
+                    'POLL': poll, 'DEVICE': device, 'ERROR': error, 'DEVICES': devices}  # etc.
         # TODO: Create the full suite of possible JSON objects and a better way for deal with subsets
         for package_name, datalist in packages.items():
             _emptydict = {key: 'n/a' for key in datalist}  # There is a case for using None instead of 'n/a'
             setattr(self, package_name, _emptydict)
 
-        self.SKY['satellites'] = [{'PRN': 'n/a', 'ss': 'n/a', 'el': 'n/a', 'az': 'n/a', 'used': 'n/a'}]
-        self.DEVICES['devices'] = [{'class': 'n/a', 'path': 'n/a', 'activated': 'n/a', 'flags': 'n/a', 'driver': 'n/a',
-                                    'native': 'n/a', 'bps': 'n/a', 'parity': 'n/a', 'stopbits': 'n/a', 'cycle': 'n/a'}]
+        # self.SKY['satellites'] = {key: 'n/a' for key in satellites}  # Probably unnecessary.
+        # self.DEVICES['devices'] = {key: 'n/a' for key in device}
+        # self.POLL = {'tpv': self.TPV, 'sky': self.SKY, 'time': 'n/a', 'active': 'n/a'} # Probably necessary.
 
     def refresh(self, gpsd_data_package):
         """Sets new socket data as Fix attributes
