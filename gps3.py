@@ -11,12 +11,15 @@ GPS3 has two classes.
 These dictionaries are populated from the JSON data packet sent from the GPSD.
 
 Import           import gps3
-Instantiate      gps_connection = gps3.GPSDSocket()
+Instantiate      gps_connection = gps3.GPSDSocket(host='192.168.0.4')
                  gps_fix = gps3.Fix()
- Use             print('Altitude = 'gps_fix.TPV['alt'])
-                 print('Latitude = 'gps_fix.TPV['lat'])
+Iterate          for new_data in gps_connection:
+                     if new_data:
+                        gps_fix.refresh(new_data)
+Use                     print('Altitude = ',gps_fix.TPV['alt'])
+                        print('Latitude = ',gps_fix.TPV['lat'])
 
-Consult Lines 150-ff for Attribute/Key possibilities.
+Consult Lines 153-ff for Attribute/Key possibilities.
 or http://www.catb.org/gpsd/gpsd_json.html
 
 Run human.py; python[X] human.py [arguments] for a human experience.
