@@ -135,7 +135,7 @@ def show_human():
                 if not isinstance(gps_fix.DEVICES['devices'], list):  # Local machines need a 'device' kick start to have valid data
                     gps_connection.send('?DEVICES;')
 
-                if isinstance(gps_fix.DEVICES['devices'], list):  # Nested lists of dictionaries are strings before data is present
+                if isinstance(gps_fix.DEVICES['devices'], list):  # Nested lists of dictionaries are strings before data is present (REALLY?)
 
                     for gizmo in gps_fix.DEVICES['devices']:
                         start_time, _uicroseconds = gizmo['activated'].split('.')  # Remove '.000Z'
@@ -144,7 +144,7 @@ def show_human():
                         device_window.addstr(1, 2, 'Activated:{}'.format(gizmo['activated']))
                         device_window.addstr(2, 2, 'Host:{0.host}:{0.port} {1}'.format(args, gizmo['path']))
                         device_window.addstr(3, 2, 'Driver:{driver} BPS:{bps}'.format(**gizmo))
-                        device_window.addstr(4, 2, 'Cycle:{} Hz       Elapsed: {}'.format(gizmo['cycle'], elapsed))
+                        device_window.addstr(4, 2, 'Cycle:{0} Hz {1:>15} Elapsed'.format(gizmo['cycle'], elapsed))
 
                 # packet_window.clear()
                 # packet_window.border(0)
@@ -156,7 +156,7 @@ def show_human():
                 device_window.refresh()
                 packet_window.refresh()
 
-                sleep(.7)
+                sleep(.4)
 
     except KeyboardInterrupt:
         shut_down(gps_connection)
@@ -170,7 +170,6 @@ def show_nmea():
     screen = curses.initscr()
     # curses.KEY_RESIZE
     curses.cbreak()
-
     screen.clear()
     screen.scrollok(True)
 
@@ -179,8 +178,6 @@ def show_nmea():
     try:
         for new_data in gps_connection:
             if new_data:
-                # gps_fix.refresh(new_data)
-
                 data_window.border(0)
                 data_window.addstr(0, 2, 'GPS3 Python {}.{}.{} GPSD Interface Showing NMEA protocol'.format(*sys.version_info), curses.A_BOLD)
                 data_window.addstr(2, 2, '{}'.format(gps_connection.response))
