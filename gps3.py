@@ -5,18 +5,21 @@ GPS3 (gps3.py) is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
 Defaults host='127.0.0.1', port=2947, gpsd_protocol='json'
 
 GPS3 has two classes.
-1) 'GPSDSocket' to create a socket connection and retreive the output from GPSD.
+1) 'GPSDSocket' to create a GPSD socket connection and request/retreive GPSD output.
 2) 'Fix' unpacks the streamed gpsd data into python dictionaries.
 
-These dictionaries are populated from the JSON data packet sent from the GPSD.
+These dictionaries are literated from the JSON data packet sent from the GPSD.
 
 Import           import gps3
-Instantiate      gps_connection = gps3.GPSDSocket()
+Instantiate      gps_connection = gps3.GPSDSocket(host='192.168.0.4')
                  gps_fix = gps3.Fix()
- Use             print('Altitude = 'gps_fix.TPV['alt'])
-                 print('Latitude = 'gps_fix.TPV['lat'])
+Iterate          for new_data in gps_connection:
+                     if new_data:
+                        gps_fix.refresh(new_data)
+Use                     print('Altitude = ',gps_fix.TPV['alt'])
+                        print('Latitude = ',gps_fix.TPV['lat'])
 
-Consult Lines 150-ff for Attribute/Key possibilities.
+Consult Lines 152-ff for Attribute/Key possibilities.
 or http://www.catb.org/gpsd/gpsd_json.html
 
 Run human.py; python[X] human.py [arguments] for a human experience.
@@ -33,8 +36,8 @@ __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
 __version__ = '0.2'
 
-HOST = '127.0.0.1'  # gpsd defaults
-GPSD_PORT = 2947  # "
+HOST = '127.0.0.1'  # gpsd
+GPSD_PORT = 2947  # defaults
 PROTOCOL = 'json'  # "
 
 
@@ -74,11 +77,11 @@ class GPSDSocket(object):
             self:
             enable: (bool) stream data to socket
             gpsd_protocol: (str) 'json' | 'nmea' | 'rare' | 'raw' | 'scaled' | 'split24' | 'pps'
-            devicepath: device path - '/dev/ttyUSBn' for some number n or '/dev/whatever_works'
+            devicepath: (str) device path - '/dev/ttyUSBn' for some number n or '/dev/whatever_works'
         Returns:
             command: (str) e.g., '?WATCH={"enable":true,"json":true};'
         """
-        # TODO: 'timing' requires special attention, as it is undocumented and lives with dragons
+        # N.B.: 'timing' requires special attention, as it is undocumented and lives with dragons.
         command = '?WATCH={{"enable":true,"{0}":true}}'.format(gpsd_protocol)
 
         if gpsd_protocol == 'rare':  # 1 for a channel, gpsd reports the unprocessed NMEA or AIVDM data stream
@@ -95,9 +98,8 @@ class GPSDSocket(object):
     def send(self, commands):
         """Ship commands to the daemon
         Arguments:
-            commands: e.g., '?WATCH={{'enable':true,'json':true}}'
+            commands: e.g., '?WATCH={{'enable':true,'json':true}}'|'?VERSION;'|'?DEVICES;'|'?DEVICE;'|'?POLL;'
         """
-        # session.send('?POLL;')  # TODO: Figure a way to work this in.
         # The POLL command requests data from the last-seen fixes on all active GPS devices.
         # Devices must previously have been activated by ?WATCH to be pollable.
         if sys.version_info[0] < 3:  # Not less than 3, but 'broken hearted' because
@@ -119,7 +121,7 @@ class GPSDSocket(object):
         a poll and never blocks.
         """
         try:
-            (waitin, _waitout, _waiterror) = select.select((self.streamSock,), (), (), timeout)
+            waitin, _waitout, _waiterror = select.select((self.streamSock,), (), (), timeout)
             if not waitin: return
             else:
                 gpsd_response = self.streamSock.makefile()  # '.makefile(buffering=4096)' In strictly Python3
@@ -147,41 +149,37 @@ class Fix(object):
     def __init__(self):
         """Sets of potential data packages from a device through gpsd, as a generator of class attribute dictionaries"""
 
-        version = {'release', 'proto_major', 'proto_minor', 'remote', 'rev'}
+        packages = {'VERSION': {'release', 'proto_major', 'proto_minor', 'remote', 'rev'},
 
-        tpv = {'alt', 'climb', 'device', 'epc', 'epd', 'eps', 'ept', 'epv', 'epx', 'epy', 'lat', 'lon', 'mode', 'speed', 'tag', 'time', 'track'}
+                    'TPV': {'alt', 'climb', 'device', 'epc', 'epd', 'eps', 'ept', 'epv', 'epx', 'epy', 'lat', 'lon', 'mode', 'speed', 'tag', 'time', 'track'},
 
-        sky = {'satellites', 'gdop', 'hdop', 'pdop', 'tdop', 'vdop', 'xdop', 'ydop'}
+                    'SKY': {'satellites', 'gdop', 'hdop', 'pdop', 'tdop', 'vdop', 'xdop', 'ydop'},
+                    # Subset of SKY: 'satellites': {'PRN', 'ss', 'el', 'az', 'used'}  # is always present.
+                    'GST': {'alt', 'device', 'lat', 'lon', 'major', 'minor', 'orient', 'rms', 'time'},
 
-        gst = {'alt', 'device', 'lat', 'lon', 'major', 'minor', 'orient', 'rms', 'time'}
+                    'ATT': {'acc_len', 'acc_x', 'acc_y', 'acc_z', 'depth', 'device', 'dip', 'gyro_x', 'gyro_y', 'heading', 'mag_len', 'mag_st', 'mag_x',
+                            'mag_y', 'mag_z', 'pitch', 'pitch_st', 'roll', 'roll_st', 'temperature', 'time', 'yaw', 'yaw_st'},
 
-        att = {'acc_len', 'acc_x', 'acc_y', 'acc_z', 'depth', 'device', 'dip', 'gyro_x', 'gyro_y', 'heading', 'mag_len', 'mag_st', 'mag_x', 'mag_y', 'mag_z',
-               'pitch', 'pitch_st', 'roll', 'roll_st', 'temperature', 'time', 'yaw', 'yaw_st'}
+                    'PPS': {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec'},
 
-        pps = {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec'}
+                    'POLL': {'active', 'tpv', 'sky', 'time'},
 
-        poll = {'active', 'tpv', 'sky', 'time'}
+                    'TOFF': {'device', 'real_sec', 'real_nsec', 'clock_sec', 'clock_nsec'},
 
-        devices = {'devices', 'remote'}
+                    'DEVICES': {'devices', 'remote'},
 
-        device = {'activated', 'bps', 'cycle', 'mincycle', 'driver', 'flags', 'native', 'parity', 'path', 'stopbits', 'subtype'}
-        # satellites = {'PRN', 'ss', 'el', 'az', 'used'}  # These are subsets of DEVICES and SKY
+                    'DEVICE': {'activated', 'bps', 'cycle', 'mincycle', 'driver', 'flags', 'native', 'parity', 'path', 'stopbits', 'subtype'},
 
-        # ais = {}  # see: http://catb.org/gpsd/AIVDM.html
+                    'ERROR': {'message'}
+                    # 'AIS': {}  # see: http://catb.org/gpsd/AIVDM.html
+                    }  # TODO: Full suite of possible GPSD output
 
-        error = {'message'}
-
-        # 'repository' of dictionaries possible, and possibly 'not applicable'
-        packages = {'VERSION': version, 'TPV': tpv, 'SKY': sky, 'GST': gst, 'ATT': att, 'PPS': pps,
-                    'POLL': poll, 'DEVICE': device, 'ERROR': error, 'DEVICES': devices}  # etc.
-        # TODO: Create the full suite of possible JSON objects and a better way for deal with subsets
-        for package_name, datalist in packages.items():
-            _emptydict = {key: 'n/a' for key in datalist}  # There is a case for using None instead of 'n/a'
+        for package_name, dataset in packages.items():
+            _emptydict = {key: 'n/a' for key in dataset}  # None instead of 'n/a'?
             setattr(self, package_name, _emptydict)
 
-        # self.SKY['satellites'] = {key: 'n/a' for key in satellites}  # Probably unnecessary.
-        # self.DEVICES['devices'] = {key: 'n/a' for key in device}
-        # self.POLL = {'tpv': self.TPV, 'sky': self.SKY, 'time': 'n/a', 'active': 'n/a'} # Probably necessary.
+        self.DEVICES['devices'] = {key: 'n/a' for key in packages['DEVICE']}  # How does multiple listed devices work?
+        self.POLL = {'tpv': self.TPV, 'sky': self.SKY, 'time': 'n/a', 'active': 'n/a'}
 
     def refresh(self, gpsd_data_package):
         """Sets new socket data as Fix attributes
