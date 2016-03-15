@@ -160,7 +160,7 @@ class Fix(object):
                     'ATT': {'acc_len', 'acc_x', 'acc_y', 'acc_z', 'depth', 'device', 'dip', 'gyro_x', 'gyro_y', 'heading', 'mag_len', 'mag_st', 'mag_x',
                             'mag_y', 'mag_z', 'pitch', 'pitch_st', 'roll', 'roll_st', 'temperature', 'time', 'yaw', 'yaw_st'},
 
-                    'PPS': {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec'},
+                    'PPS': {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec', 'precision'},
 
                     'POLL': {'active', 'tpv', 'sky', 'time'},
 
