@@ -144,7 +144,7 @@ def show_human():
                         device_window.addstr(1, 2, 'Activated:{}'.format(gizmo['activated']))
                         device_window.addstr(2, 2, 'Host:{0.host}:{0.port} {1}'.format(args, gizmo['path']))
                         device_window.addstr(3, 2, 'Driver:{driver} BPS:{bps}'.format(**gizmo))
-                        device_window.addstr(4, 2, 'Cycle:{0} Hz {1:>15} Elapsed'.format(gizmo['cycle'], elapsed))
+                        device_window.addstr(4, 2, 'Cycle:{0} Hz {1!s:>15} Elapsed'.format(gizmo['cycle'], elapsed))
 
                 # packet_window.clear()
                 # packet_window.border(0)
