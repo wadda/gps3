@@ -1,15 +1,27 @@
-# README #
-[![Coverage Status](https://coveralls.io/repos/wadda/gps3/badge.svg)](https://coveralls.io/r/wadda/gps3)
+#### README #####
+![GPSD-OBJECTS.png](http://i.imgur.com/ajbEEfT.png)
+```
+GPS3 (gps3.py) is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
+Defaults host='127.0.0.1', port=2947, gpsd_protocol='json'
+GPS3 has two classes.
+1) 'GPSDSocket' to create a socket connection and retreive the output from GPSD.
+2) 'Fix' unpacks the streamed gpsd data into python dictionaries.
+These dictionaries are populated from the JSON data packet sent from the GPSD.
+Import           import gps3
+Instantiate      gps_connection = gps3.GPSDSocket(host='192.168.0.4')
+                 gps_fix = gps3.Fix()
+Iterate          for new_data in gps_connection:
+                     if new_data:
+                        gps_fix.refresh(new_data)
+Use                     print('Altitude = ',gps_fix.TPV['alt'])
+                        print('Latitude = ',gps_fix.TPV['lat'])
+Consult Lines 153-ff for Attribute/Key possibilities.
+or http://www.catb.org/gpsd/gpsd_json.html
+Run human.py; python[X] human.py [arguments] for a human experience.
 
-gps3 is a Python3 interface for gpsd.  It is backwards compatable with Python2.7
+```
 
-gpsd (http://www.catb.org/gpsd/) is a fabulous application/daemon for many geo-location devices.
-
-The goal is to deliver a Python package to the Cheese Shop (https://pypi.python.org/pypi/gps3/0.11a)
-
-![GPSD-OBJECTS.png](http://i.imgur.com/g5NvIUO.png)
-
-### human.py for GPSD access for humans at a terminal ###
+##### human.py access demo for gps3.py, for humans at a terminal #####
 ```
 #!bash
 me@work:~/projects/gps3$ python3 human.py --help
@@ -57,7 +69,3 @@ python3 gpex3.py
 ```
 
 However, it is not currently Python2 compliant.
-
-
-
-
