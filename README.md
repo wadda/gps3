@@ -1,5 +1,5 @@
 #### README #####
-![GPSD-OBJECTS.png](http://i.imgur.com/ajbEEfT.png)
+![GPSD-OBJECTS.png](http://i.imgur.com/jm1rYT8.png)
 ```
 GPS3 (gps3.py) is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
 Defaults host='127.0.0.1', port=2947, gpsd_protocol='json'
@@ -61,11 +61,3 @@ python3 demo_gegps3.py  # python demo_gegps3.py
 ```
 Presently, when placed in same directory as gps3.py, creates a keyhole (.kml) file for Google Earth (GE defaults 4 second refreshing) with age < 1 sec from refresh.
 Open the generated file (/tmp/gps3_live.kml) with Google Earth and watch the jitter and track scratch that way, all day.
-
-Similarly ***gpex3.py*** in the same directory as gps3.py creates a gpx log file at /tmp/gpx3.gpx.
-```
-#!bash
-python3 gpex3.py
-```
-
-However, it is not currently Python2 compliant.
