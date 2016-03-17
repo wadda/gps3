@@ -45,7 +45,7 @@ me@work:~/projects/gps3$
 ```
 Commandline execution without options is the same as using the DEFAULT option flags.
 
-![Python3.5.png](http://i.imgur.com/ThZK7nt.png)   ![Python2.7.png](http://i.imgur.com/6ACJlEF.png)  
+![Python3.5.png](http://i.imgur.com/hG1cFq3.png)   ![Python2.7.png](http://i.imgur.com/gUoZfHd.png)  
 
 Don't have a gps to experiment?   Try
 ```
