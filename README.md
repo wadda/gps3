@@ -55,6 +55,29 @@ Commandline execution without options is the same as using the DEFAULT option fl
 
 ![eafGPS3-attributes.png](http://i.imgur.com/hXCh3aW.png)
 
+````python
+"""
+eafgps3.py is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
+Defaults host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
+
+1) 'GPSDSocket' creates a GPSD socket connection & request/retreive GPSD output.
+2) 'Dot' unpacks the streamed gpsd data into object attribute values.
+
+Import           import eafgps3
+Instantiate      gps_connection = eafgps3.GPSDSocket(host='192.168.0.4')
+                 dot = eafgps3.Dot()
+Iterate          for new_data in gps_connection:
+                     if new_data:
+                        dot.unpack(new_data)
+Use                     print('Lat/Lon = ',dot.lat,' ', dot.lon)
+                        print('Altitude = ',dot.alt)
+
+Consult Lines 146-ff for Attribute/Key possibilities.
+There might be a data clash dumped in a pile like this I don't know.  EAFP,
+"""
+````
+Sure not the best names, but I'm open to suggestions.
+
 A short little test
 ```python
 import eafgps3
@@ -66,8 +89,8 @@ count = 0
 for new_data in gps_connection:
     if new_data:
         dot.unpack(new_data)
-##        print('Time = ', dot.time)
-##        print('Dime = ', datetime.utcnow().replace(microsecond=0))
+        print('Time = ', dot.time)
+        print('Dime = ', datetime.utcnow())  #.replace(microsecond=0))
 ##        print('Satelists = ', dot.satellites)
         print('alt = ', dot.alt)
         print('climb = ', dot.climb)
@@ -84,7 +107,7 @@ for new_data in gps_connection:
         print('mode = ', dot.mode)
         print('speed = ', dot.speed)
         print('tag = ', dot.tag)
-        print('time = ', dot.time)
+##        print('time = ', dot.time)
         print('track = ', dot.track)
         sleep(.4)
         count += 1
@@ -101,8 +124,7 @@ python3 human.py -host gps.ddns.net  # python human.py -host gps.ddns.net
 See if a remote gpsd is running.  While it's not moving, it does return basic data.
 
 A trivial demonstration of functionality found in
-```
-#!bash
+```bash
 python3 demo_gegps3.py  # python demo_gegps3.py
 ```
 Presently, when placed in same directory as gps3.py, creates a keyhole (.kml) file for Google Earth (GE defaults 4 second refreshing) with age < 1 sec from refresh.
