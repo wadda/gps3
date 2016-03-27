@@ -22,8 +22,7 @@ Run human.py; python[X] human.py [arguments] for a human experience.
 ```
 
 ##### human.py access demo for gps3.py, for humans at a terminal #####
-```
-#!bash
+```bash
 me@work:~/projects/gps3$ python3 human.py --help
 usage: human.py [-h] [-host HOST] [-port PORT] [-device DEVICEPATH] [-json] [-nmea]
                [-rare] [-raw] [-scaled] [-timimg] [-split24] [-pps]
@@ -47,6 +46,7 @@ Commandline execution without options is the same as using the DEFAULT option fl
 *0*,*1*,*2*,*3* toggle RAW, DDD, DMM, DMS, *m*,*i*,*n*,*0*, for metric, imperial, nautical, raw units
 
 ![Python3.5.png](http://i.imgur.com/hG1cFq3.png)   ![Python2.7.png](http://i.imgur.com/gUoZfHd.png)
+
  But waitt, theres more
 
  While not truely EAFP this perspective really does make one large unorganized associative array by
@@ -54,9 +54,9 @@ Commandline execution without options is the same as using the DEFAULT option fl
  they would even be in the same room.  With my $40 gps, it's not an issue.
 
 ![eafGPS3-attributes.png](http://i.imgur.com/hXCh3aW.png)
+
 A short little test
-```
-#!python
+```python
 import eafgps3
 from datetime import datetime
 from time import sleep
@@ -95,8 +95,7 @@ for new_data in gps_connection:
 ```
 
 Don't have a gps to experiment?   Try
-```
-#!bash
+```bash
 python3 human.py -host gps.ddns.net  # python human.py -host gps.ddns.net
 ```
 See if a remote gpsd is running.  While it's not moving, it does return basic data.
