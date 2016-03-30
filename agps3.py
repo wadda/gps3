@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # coding=utf-8
 """
-eafgps3.py is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
+agps3.py is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
 Defaults host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 
 1) 'GPSDSocket' creates a GPSD socket connection & request/retreive GPSD output.
 2) 'Dot' unpacks the streamed gpsd data into object attribute values.
 
-Import           import eafgps3
-Instantiate      gps_connection = eafgps3.GPSDSocket(host='192.168.0.4')
-                 dot = eafgps3.Dot()
+Import           import agps3
+Instantiate      gps_connection = agps3.GPSDSocket(host='192.168.0.4')
+                 dot = agps3.Dot()
 Iterate          for new_data in gps_connection:
                      if new_data:
                         dot.unpack(new_data)
