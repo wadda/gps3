@@ -32,7 +32,7 @@ __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
 __version__ = '0.21'
 
-HOST = '192.168.0.4'  # gpsd
+HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
 PROTOCOL = 'json'  # "
 
