@@ -1,28 +1,28 @@
 #!/usr/bin/env python3
 # coding=utf-8
 """
-GPS3 (gps3.py) is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
-Defaults host='127.0.0.1', port=2947, gpsd_protocol='json'
+agps3.py is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
+Defaults host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 
-GPS3 has two classes.
 1) 'GPSDSocket' creates a GPSD socket connection & request/retreive GPSD output.
-2) 'Fix' unpacks the streamed gpsd data into python dictionaries.
+2) 'Dot' unpacks the streamed gpsd data into object attribute values.
 
-These dictionaries are literated from the JSON data packet sent from the GPSD.
+These attributes are literated from the JSON data packet sent from the GPSD.
 
-Import           import gps3
-Instantiate      gps_connection = gps3.GPSDSocket(host='192.168.0.4')
-                 gps_fix = gps3.Fix()
+Import           import agps3
+Instantiate      gps_connection = agps3.GPSDSocket()
+                 dot = agps3.Dot()
 Iterate          for new_data in gps_connection:
                      if new_data:
-                        gps_fix.refresh(new_data)
-Use                     print('Altitude = ',gps_fix.TPV['alt'])
-                        print('Latitude = ',gps_fix.TPV['lat'])
+                        dot.unpack(new_data)
+Use                     print('Lat/Lon = ',dot.lat,' ', dot.lon)
+                        print('Altitude = ',dot.alt)
 
-Consult Lines 152-ff for Attribute/Key possibilities.
-or http://www.catb.org/gpsd/gpsd_json.html
+Consult Lines 146-ff for Attribute/Key possibilities.
 
-Run human.py; python[X] human.py [arguments] for a human experience.
+As long as TPV'time', GST'time', ATT'time', and POLL'time' are the same,
+or TPV'device', GST'device', ATT'device, PPS'device', and TOFF'device  is
+the same as DEVICES(device)'path' throughout "she'll be right"
 """
 from __future__ import print_function
 
@@ -36,7 +36,7 @@ __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
 __version__ = '0.20'
 
-HOST = '127.0.0.1'  # gpsd
+HOST = '192.168.0.4'  # gpsd
 GPSD_PORT = 2947  # defaults
 PROTOCOL = 'json'  # "
 
@@ -74,7 +74,6 @@ class GPSDSocket(object):
     def watch(self, enable=True, gpsd_protocol='json', devicepath=None):
         """watch gpsd in various gpsd_protocols or devices.
         Arguments:
-            self:
             enable: (bool) stream data to socket
             gpsd_protocol: (str) 'json' | 'nmea' | 'rare' | 'raw' | 'scaled' | 'split24' | 'pps'
             devicepath: (str) device path - '/dev/ttyUSBn' for some number n or '/dev/whatever_works'
@@ -100,12 +99,10 @@ class GPSDSocket(object):
         Arguments:
             commands: e.g., '?WATCH={{'enable':true,'json':true}}'|'?VERSION;'|'?DEVICES;'|'?DEVICE;'|'?POLL;'
         """
-        # The POLL command requests data from the last-seen fixes on all active GPS devices.
-        # Devices must previously have been activated by ?WATCH to be pollable.
         if sys.version_info[0] < 3:  # Not less than 3, but 'broken hearted' because
             self.streamSock.send(commands)  # 2.7 chokes on 'bytes' and 'encoding='
         else:
-            self.streamSock.send(bytes(commands, encoding='utf-8'))  # It craps out here when there is no gpsd running
+            self.streamSock.send(bytes(commands, encoding='utf-8'))  # It fails here when there is no gpsd running
             # TODO: Add recovery, check gpsd existence, re/start, etc..
 
     def __iter__(self):
@@ -141,55 +138,49 @@ class GPSDSocket(object):
         self.streamSock = None
 
 
-class Fix(object):
+class Dot(object):
     """Retrieve JSON Object(s) from GPSDSocket and unpack it into respective
-    gpsd 'class' dictionaries, TPV, SKY, etc. yielding hours of fun and entertainment.
+    object attributes, e.g., self.lat yielding hours of fun and entertainment.
     """
+    packages = {
+        'VERSION': {'release', 'proto_major', 'proto_minor', 'remote', 'rev'},
+        'TPV': {'alt', 'climb', 'device', 'epc', 'epd', 'eps', 'ept', 'epv', 'epx', 'epy', 'lat', 'lon', 'mode', 'speed', 'tag', 'time', 'track'},
+        'SKY': {'satellites', 'gdop', 'hdop', 'pdop', 'tdop', 'vdop', 'xdop', 'ydop'},
+        # Subset of SKY: 'satellites': {'PRN', 'ss', 'el', 'az', 'used'}  # is always present.
+        'GST': {'alt', 'device', 'lat', 'lon', 'major', 'minor', 'orient', 'rms', 'time'},
+        'ATT': {'acc_len', 'acc_x', 'acc_y', 'acc_z', 'depth', 'device', 'dip', 'gyro_x', 'gyro_y', 'heading', 'mag_len', 'mag_st', 'mag_x',
+                'mag_y', 'mag_z', 'pitch', 'pitch_st', 'roll', 'roll_st', 'temperature', 'time', 'yaw', 'yaw_st'},
+        'POLL': {'active', 'tpv', 'sky', 'time'},
+        'PPS': {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec', 'precision'},
+        'TOFF': {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec'},
+        'DEVICES': {'devices', 'remote'},
+        'DEVICE': {'activated', 'bps', 'cycle', 'mincycle', 'driver', 'flags', 'native', 'parity', 'path', 'stopbits', 'subtype'},
+        # 'AIS': {}  # see: http://catb.org/gpsd/AIVDM.html
+        'ERROR': {'message'}}  # TODO: Full suite of possible GPSD output
 
     def __init__(self):
-        """Potential data packages from gpsd for a generator of class attribute dictionaries"""
+        """Potential data packages from gpsd for a generator of class attributes"""
+        for laundry_list in self.packages.values():
+            for thingy in laundry_list:
+                setattr(self, thingy, 'n/a')
 
-        packages = {'VERSION': {'release', 'proto_major', 'proto_minor', 'remote', 'rev'},
-                    'TPV': {'alt', 'climb', 'device', 'epc', 'epd', 'eps', 'ept', 'epv', 'epx', 'epy', 'lat', 'lon', 'mode', 'speed', 'tag', 'time', 'track'},
-                    'SKY': {'satellites', 'gdop', 'hdop', 'pdop', 'tdop', 'vdop', 'xdop', 'ydop'},
-                    # Subset of SKY: 'satellites': {'PRN', 'ss', 'el', 'az', 'used'}  # is always present.
-                    'GST': {'alt', 'device', 'lat', 'lon', 'major', 'minor', 'orient', 'rms', 'time'},
-                    'ATT': {'acc_len', 'acc_x', 'acc_y', 'acc_z', 'depth', 'device', 'dip', 'gyro_x', 'gyro_y', 'heading', 'mag_len', 'mag_st', 'mag_x',
-                            'mag_y', 'mag_z', 'pitch', 'pitch_st', 'roll', 'roll_st', 'temperature', 'time', 'yaw', 'yaw_st'},
-                    # 'POLL': {'active', 'tpv', 'sky', 'time'},
-                    'PPS': {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec', 'precision'},
-                    'TOFF': {'device', 'clock_sec', 'clock_nsec','real_sec', 'real_nsec' },
-                    'DEVICES': {'devices', 'remote'},
-                    'DEVICE': {'activated', 'bps', 'cycle', 'mincycle', 'driver', 'flags', 'native', 'parity', 'path', 'stopbits', 'subtype'},
-                    # 'AIS': {}  # see: http://catb.org/gpsd/AIVDM.html
-                    'ERROR': {'message'}}  # TODO: Full suite of possible GPSD output
-
-        for package_name, dataset in packages.items():
-            _emptydict = {key: 'n/a' for key in dataset}
-            setattr(self, package_name, _emptydict)
-
-        self.DEVICES['devices'] = {key: 'n/a' for key in packages['DEVICE']}  # How does multiple listed devices work?
-        # self.POLL = {'tpv': self.TPV, 'sky': self.SKY, 'time': 'n/a', 'active': 'n/a'}
-
-    def refresh(self, gpsd_data_package):
+    def unpack(self, gpsd_data_package):
         """Sets new socket data as Fix attributes in those initialied dictionaries
         Arguments:
-            self:
             gpsd_data_package (json object):
         Provides:
-        self attribute dictionaries, e.g., self.TPV['lat'], self.SKY['gdop']
+        self attributes, e.g., self.lat, self.gdop
         Raises:
         AttributeError: 'str' object has no attribute 'keys' when the device falls out of the system
         ValueError, KeyError: most likely extra, or mangled JSON data, should not happen, but that
         applies to a lot of things.
         """
         try:
-            fresh_data = json.loads(gpsd_data_package)  # The reserved word 'class' is popped from JSON object class
-            package_name = fresh_data.pop('class', 'ERROR')  # gpsd data package errors are also 'ERROR'.
-            package = getattr(self, package_name, package_name)  # packages are named for JSON object class
-            for key in package.keys():  # TODO: Rollover and retry.  It fails here when device disappears
-                package[key] = fresh_data.get(key, 'n/a')  # Updates and restores 'n/a' if key is absent in the socket
-                # response, present --> 'key: 'n/a'' instead.'
+            fresh_data = json.loads(gpsd_data_package)  # 'class' is popped for interator lead
+            class_name = fresh_data.pop('class')
+            for key in self.packages[class_name]:
+                setattr(self, key, fresh_data.get(key, 'n/a'))  # Updates and restores 'n/a' if attribute is absent in the data
+
         except AttributeError:  # 'str' object has no attribute 'keys'
             print('No Data')
             return
@@ -200,7 +191,7 @@ class Fix(object):
 
 
 if __name__ == '__main__':
-    print(__doc__)
+    print( __doc__)
 
 #
 # Someday a cleaner Python interface will live here

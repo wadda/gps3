@@ -1,19 +1,19 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 # coding=utf-8
 # Concept from Jaroslaw Zachwieja <grok!warwick.ac.uk> &  TJ <linux!tjworld.net>
 # from their work in gegpsd.py included in gpsd project (http://catb.org/gpsd)
 """creates Google Earth kml file (/tmp/gps3_live.kml) for realtime (4 second GE default) updates of gps coordinates"""
 
 import time
-from gps3 import gps3
+from gps3 import agps3
 
 __author__ = 'Moe'
-__copyright__ = 'Copyright 2014-2016 Moe'
+__copyright__ = 'Copyright 2016 Moe'
 __license__ = 'MIT'
 __version__ = '0.20'
 
-the_connection = gps3.GPSDSocket(host='192.168.0.4')  # TODO: needs work for commandline host selection
-the_fix = gps3.Fix()
+the_connection = agps3.GPSDSocket(host='192.168.0.4')  # TODO: needs work for commandline host selection
+dot = agps3.Dot()
 the_link = '/tmp/gps3_live.kml'  # AFAIK, 'Links' call href on time events or entry/exit  Multiple href may be possible.
 the_file = '/tmp/gps3_static.kml'
 the_history = []
@@ -35,17 +35,17 @@ f.close()
 try:
     for new_data in the_connection:
         if new_data:
-            the_fix.refresh(new_data)
-        if not isinstance(the_fix.TPV['lat'], str):
-            speed = the_fix.TPV['speed']
-            latitude = the_fix.TPV['lat']
-            longitude = the_fix.TPV['lon']
-            altitude = the_fix.TPV['alt']
+            dot.unpack(new_data)
+        if not isinstance(dot.lat, str):
+            speed = dot.speed
+            latitude = dot.lat
+            longitude = dot.lon
+            altitude = dot.alt
 
-            if isinstance(the_fix.TPV['track'], str):  # 'track' frequently is missing and returns as 'n/a'
-                heading = the_fix.TPV['track']
+            if isinstance(dot.track, str):  # 'track' frequently is missing and returns as 'n/a'
+                heading = dot.track
             else:
-                heading = round(the_fix.TPV['track'])  # and heading percision in hundreths is just clutter.
+                heading = round(dot.track)  # and heading percision in hundreths is just clutter.
 
             the_history.append(longitude)
             the_history.append(latitude)
