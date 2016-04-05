@@ -10,7 +10,7 @@ GPS3 has two classes.
 
 These dictionaries are literated from the JSON data packet sent from the GPSD.
 
-Import           import gps3
+Import           from gps import gps3
 Instantiate      gps_connection = gps3.GPSDSocket(host='192.168.0.4')
                  gps_fix = gps3.Fix()
 Iterate          for new_data in gps_connection:

@@ -7,7 +7,7 @@ Defaults host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 1) 'GPSDSocket' creates a GPSD socket connection & request/retreive GPSD output.
 2) 'Dot' unpacks the streamed gpsd data into object attribute values.
 
-Import           import agps3
+Import           from gps3 import agps3
 Instantiate      gps_connection = agps3.GPSDSocket(host='192.168.0.4')
                  dot = agps3.Dot()
 Iterate          for new_data in gps_connection:
@@ -17,8 +17,10 @@ Use                     print('Lat/Lon = ',dot.lat,' ', dot.lon)
                         print('Altitude = ',dot.alt)
 
 Consult Lines 146-ff for Attribute/Key possibilities.
-There might be a data clash dumped in a pile like this I don't know.  EAFP,
 
+As long as TPV'time', GST'time', ATT'time', and POLL'time' are the same,
+or TPV'device', GST'device', ATT'device, PPS'device', and TOFF'device  is
+the same as DEVICES(device)'path' throughout "she'll be right"
 """
 from __future__ import print_function
 
@@ -30,7 +32,7 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.21'
+__version__ = '0.20'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
