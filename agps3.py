@@ -182,7 +182,7 @@ class Dot(object):
             return
 
         except (ValueError, KeyError) as error:
-            sys.stderr.write(str(error))  # Look for extra data in stream
+            sys.stderr.write(str(error))  # Look for extra data in stream.
             return
 
 
