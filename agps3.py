@@ -7,10 +7,8 @@ Defaults host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 1) 'GPSDSocket' creates a GPSD socket connection & request/retreive GPSD output.
 2) 'Dot' unpacks the streamed gpsd data into object attribute values.
 
-These attributes are literated from the JSON data packet sent from the GPSD.
-
 Import           import agps3
-Instantiate      gps_connection = agps3.GPSDSocket()
+Instantiate      gps_connection = agps3.GPSDSocket(host='192.168.0.4')
                  dot = agps3.Dot()
 Iterate          for new_data in gps_connection:
                      if new_data:
@@ -19,10 +17,8 @@ Use                     print('Lat/Lon = ',dot.lat,' ', dot.lon)
                         print('Altitude = ',dot.alt)
 
 Consult Lines 146-ff for Attribute/Key possibilities.
+There might be a data clash dumped in a pile like this I don't know.  EAFP,
 
-As long as TPV'time', GST'time', ATT'time', and POLL'time' are the same,
-or TPV'device', GST'device', ATT'device, PPS'device', and TOFF'device  is
-the same as DEVICES(device)'path' throughout "she'll be right"
 """
 from __future__ import print_function
 
@@ -34,9 +30,9 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.20'
+__version__ = '0.21'
 
-HOST = '192.168.0.4'  # gpsd
+HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
 PROTOCOL = 'json'  # "
 
@@ -150,7 +146,7 @@ class Dot(object):
         'GST': {'alt', 'device', 'lat', 'lon', 'major', 'minor', 'orient', 'rms', 'time'},
         'ATT': {'acc_len', 'acc_x', 'acc_y', 'acc_z', 'depth', 'device', 'dip', 'gyro_x', 'gyro_y', 'heading', 'mag_len', 'mag_st', 'mag_x',
                 'mag_y', 'mag_z', 'pitch', 'pitch_st', 'roll', 'roll_st', 'temperature', 'time', 'yaw', 'yaw_st'},
-        'POLL': {'active', 'tpv', 'sky', 'time'},
+        # 'POLL': {'active', 'tpv', 'sky', 'time'},
         'PPS': {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec', 'precision'},
         'TOFF': {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec'},
         'DEVICES': {'devices', 'remote'},
