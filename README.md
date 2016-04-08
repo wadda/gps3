@@ -7,7 +7,7 @@ GPS3 has two classes.
 1) 'GPSDSocket' to create a socket connection and retreive the output from GPSD.
 2) 'Fix' unpacks the streamed gpsd data into python dictionaries.
 These dictionaries are populated from the JSON data packet sent from the GPSD.
-Import           import gps3
+Import           from gps3 import gps3
 Instantiate      gps_connection = gps3.GPSDSocket(host='192.168.0.4')
                  gps_fix = gps3.Fix()
 Iterate          for new_data in gps_connection:
