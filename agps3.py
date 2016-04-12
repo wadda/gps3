@@ -8,7 +8,7 @@ Defaults host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 2) 'Dot' unpacks the streamed gpsd data into object attribute values.
 
 Import           from gps3 import agps3
-Instantiate      gps_connection = agps3.GPSDSocket(host='192.168.0.4')
+Instantiate      gps_connection = agps3.GPSDSocket()
                  dot = agps3.Dot()
 Iterate          for new_data in gps_connection:
                      if new_data:
@@ -32,7 +32,7 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.20'
+__version__ = '0.21'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
@@ -65,8 +65,8 @@ class GPSDSocket(object):
                 self.streamSock.setblocking(False)
                 self.watch(gpsd_protocol=self.protocol)
             except OSError as error:
-                sys.stderr.write('\nGPSDSocket.connect OSError is-->', error)
-                sys.stderr.write('\nAttempt to connect to a gpsd at {0} on port \'{1}\' failed:\n'.format(host, port))
+                sys.stderr.write('\nGPSDSocket.connect OSError is--> {}'.format(error))
+                sys.stderr.write('\nAttempt to connect to a gpsd at \'{0}\' on port \'{1}\' failed:\n'.format(host, port))
                 sys.exit(1)  # TODO: gpsd existence check and start
 
     def watch(self, enable=True, gpsd_protocol='json', devicepath=None):
@@ -124,7 +124,7 @@ class GPSDSocket(object):
             return self.response
 
         except OSError as error:
-            sys.stderr.write('The readline OSError in GPSDSocket.next is this: ', error)
+            sys.stderr.write('The readline OSError in GPSDSocket.next is--> {}'.format(error))
 
     __next__ = next  # Workaround for changes in iterating between Python 2.7 and 3
 
@@ -189,7 +189,7 @@ class Dot(object):
 
 
 if __name__ == '__main__':
-    print( __doc__)
+    print(__doc__)
 
 #
 # Someday a cleaner Python interface will live here
