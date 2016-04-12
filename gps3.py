@@ -10,7 +10,7 @@ GPS3 has two classes.
 
 These dictionaries are literated from the JSON data packet sent from the GPSD.
 
-Import           from gps import gps3
+Import           from gps3 import gps3
 Instantiate      gps_connection = gps3.GPSDSocket(host='192.168.0.4')
                  gps_fix = gps3.Fix()
 Iterate          for new_data in gps_connection:
@@ -34,7 +34,7 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.20'
+__version__ = '0.21'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
@@ -67,14 +67,13 @@ class GPSDSocket(object):
                 self.streamSock.setblocking(False)
                 self.watch(gpsd_protocol=self.protocol)
             except OSError as error:
-                sys.stderr.write('\nGPSDSocket.connect OSError is-->', error)
-                sys.stderr.write('\nAttempt to connect to a gpsd at {0} on port \'{1}\' failed:\n'.format(host, port))
+                sys.stderr.write('\nGPSDSocket.connect OSError is--> {}'.format(error))
+                sys.stderr.write('\nAttempt to connect to a gpsd at \'{0}\' on port \'{1}\' failed:\n'.format(host, port))
                 sys.exit(1)  # TODO: gpsd existence check and start
 
     def watch(self, enable=True, gpsd_protocol='json', devicepath=None):
         """watch gpsd in various gpsd_protocols or devices.
         Arguments:
-            self:
             enable: (bool) stream data to socket
             gpsd_protocol: (str) 'json' | 'nmea' | 'rare' | 'raw' | 'scaled' | 'split24' | 'pps'
             devicepath: (str) device path - '/dev/ttyUSBn' for some number n or '/dev/whatever_works'
@@ -105,7 +104,7 @@ class GPSDSocket(object):
         if sys.version_info[0] < 3:  # Not less than 3, but 'broken hearted' because
             self.streamSock.send(commands)  # 2.7 chokes on 'bytes' and 'encoding='
         else:
-            self.streamSock.send(bytes(commands, encoding='utf-8'))  # It craps out here when there is no gpsd running
+            self.streamSock.send(bytes(commands, encoding='utf-8'))  # It fails here when there is no gpsd running
             # TODO: Add recovery, check gpsd existence, re/start, etc..
 
     def __iter__(self):
@@ -129,7 +128,7 @@ class GPSDSocket(object):
             return self.response
 
         except OSError as error:
-            sys.stderr.write('The readline OSError in GPSDSocket.next is this: ', error)
+            sys.stderr.write('The readline OSError in GPSDSocket.next is--> {}'.format(error))
 
     __next__ = next  # Workaround for changes in iterating between Python 2.7 and 3
 
@@ -174,7 +173,6 @@ class Fix(object):
     def refresh(self, gpsd_data_package):
         """Sets new socket data as Fix attributes in those initialied dictionaries
         Arguments:
-            self:
             gpsd_data_package (json object):
         Provides:
         self attribute dictionaries, e.g., self.TPV['lat'], self.SKY['gdop']
