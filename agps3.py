@@ -7,16 +7,18 @@ Defaults host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 1) 'GPSDSocket' creates a GPSD socket connection & request/retreive GPSD output.
 2) 'Dot' unpacks the streamed gpsd data into object attribute values.
 
-Import           from gps3 import agps3
-Instantiate      gps_connection = agps3.GPSDSocket()
-                 dot = agps3.Dot()
-Iterate          for new_data in gps_connection:
-                     if new_data:
+Import          from gps3 import agps3
+Instantiate     gps_connection = agps3.GPSDSocket()
+                dot = agps3.Dot()
+Run             gps_socket.connect()
+                gps_socket.watch()
+Iterate         for new_data in gps_connection:
+                    if new_data:
                         dot.unpack(new_data)
 Use                     print('Lat/Lon = ',dot.lat,' ', dot.lon)
                         print('Altitude = ',dot.alt)
 
-Consult Lines 146-ff for Attribute/Key possibilities.
+Consult Lines 140-ff for Attribute/Key possibilities.
 
 As long as TPV'time', GST'time', ATT'time', and POLL'time' are the same,
 or TPV'device', GST'device', ATT'device, PPS'device', and TOFF'device  is
@@ -32,7 +34,7 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.21'
+__version__ = '0.30'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
@@ -42,20 +44,15 @@ PROTOCOL = 'json'  # "
 class GPSDSocket(object):
     """Establish a socket with gpsd, by which to send commands and receive data."""
 
-    def __init__(self, host=HOST, port=GPSD_PORT, gpsd_protocol=PROTOCOL, devicepath=None):
-        self.devicepath_alternate = devicepath
-        self.response = None
-        self.protocol = gpsd_protocol
+    def __init__(self):
         self.streamSock = None
+        self.response = None
 
-        if host:
-            self.connect(host, port)
-
-    def connect(self, host, port):
+    def connect(self, host=HOST, port=GPSD_PORT):
         """Connect to a host on a given port.
         Arguments:
-            port: default port=2947
             host: default host='127.0.0.1'
+            port: default port=2947
         """
         for alotta_stuff in socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM):
             family, socktype, proto, _canonname, host_port = alotta_stuff
@@ -63,13 +60,11 @@ class GPSDSocket(object):
                 self.streamSock = socket.socket(family, socktype, proto)
                 self.streamSock.connect(host_port)
                 self.streamSock.setblocking(False)
-                self.watch(gpsd_protocol=self.protocol)
-            except OSError as error:
-                sys.stderr.write('\nGPSDSocket.connect OSError is--> {}'.format(error))
-                sys.stderr.write('\nAttempt to connect to a gpsd at \'{0}\' on port \'{1}\' failed:\n'.format(host, port))
-                sys.exit(1)  # TODO: gpsd existence check and start
+            except (OSError, IOError) as error:
+                sys.stderr.write('\r\nGPSDSocket.connect exception is--> {}'.format(error))
+                sys.stderr.write('\r\nAGPS3 connection to a gpsd at \'{0}\' on port \'{1}\' failed\r\n'.format(host, port))
 
-    def watch(self, enable=True, gpsd_protocol='json', devicepath=None):
+    def watch(self, enable=True, gpsd_protocol=PROTOCOL, devicepath=None):
         """watch gpsd in various gpsd_protocols or devices.
         Arguments:
             enable: (bool) stream data to socket
@@ -97,14 +92,15 @@ class GPSDSocket(object):
         Arguments:
             commands: e.g., '?WATCH={{'enable':true,'json':true}}'|'?VERSION;'|'?DEVICES;'|'?DEVICE;'|'?POLL;'
         """
-        if sys.version_info[0] < 3:  # Not less than 3, but 'broken hearted' because
+        try:
+            self.streamSock.send(bytes(commands, encoding='utf-8'))
+        except TypeError:
             self.streamSock.send(commands)  # 2.7 chokes on 'bytes' and 'encoding='
-        else:
-            self.streamSock.send(bytes(commands, encoding='utf-8'))  # It fails here when there is no gpsd running
-            # TODO: Add recovery, check gpsd existence, re/start, etc..
+        except (OSError, IOError) as error:  # TODO: HEY MOE, LEAVE THIS ALONE FOR NOW!
+            sys.stderr.write('\nAGPS3 send command fail with {}\n'.format(error))  # [Errno 107] Transport endpoint is not connected
 
     def __iter__(self):
-        """banana"""  # <------- for scale
+        """banana"""  # <--- for scale
         return self
 
     def next(self, timeout=0):
@@ -123,8 +119,8 @@ class GPSDSocket(object):
                 self.response = gpsd_response.readline()
             return self.response
 
-        except OSError as error:
-            sys.stderr.write('The readline OSError in GPSDSocket.next is--> {}'.format(error))
+        except StopIteration as error:
+            sys.stderr.write('The readline exception in GPSDSocket.next is--> {}'.format(error))
 
     __next__ = next  # Workaround for changes in iterating between Python 2.7 and 3
 
@@ -162,10 +158,10 @@ class Dot(object):
             for thingy in laundry_list:
                 setattr(self, thingy, 'n/a')
 
-    def unpack(self, gpsd_data_package):
+    def unpack(self, gpsd_socket_response):
         """Sets new socket data as Fix attributes in those initialied dictionaries
         Arguments:
-            gpsd_data_package (json object):
+            gpsd_socket_response (json object):
         Provides:
         self attributes, e.g., self.lat, self.gdop
         Raises:
@@ -174,17 +170,17 @@ class Dot(object):
         applies to a lot of things.
         """
         try:
-            fresh_data = json.loads(gpsd_data_package)  # 'class' is popped for interator lead
+            fresh_data = json.loads(gpsd_socket_response)  # 'class' is popped for interator lead
             class_name = fresh_data.pop('class')
             for key in self.packages[class_name]:
                 setattr(self, key, fresh_data.get(key, 'n/a'))  # Updates and restores 'n/a' if attribute is absent in the data
 
         except AttributeError:  # 'str' object has no attribute 'keys'
-            print('No Data')
+            sys.stderr.write('There is an unexpected exception unpacking JSON object')
             return
 
         except (ValueError, KeyError) as error:
-            sys.stderr.write(str(error))  # Look for extra data in stream.
+            sys.stderr.write(str(error))  # Extra data or aberant data in stream.
             return
 
 
