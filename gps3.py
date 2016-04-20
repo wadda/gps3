@@ -21,7 +21,7 @@ Iterate         for new_data in gps_connection:
 Use                     print('Altitude = ',gps_fix.TPV['alt'])
                         print('Latitude = ',gps_fix.TPV['lat'])
 
-Consult Lines 149-ff for Attribute/Key possibilities.
+Consult Lines 147-ff for Attribute/Key possibilities.
 or http://www.catb.org/gpsd/gpsd_json.html
 
 Run human.py; python[X] human.py [arguments] for a human experience.
@@ -189,7 +189,7 @@ class Fix(object):
             return
 
         except (ValueError, KeyError) as error:
-            sys.stderr.write(str(error))  # Extra data or aberant data in stream.
+            sys.stderr.write(str(error))  # Extra data or aberrant data in stream.
             return
 
 

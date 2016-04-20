@@ -180,7 +180,7 @@ class Dot(object):
             return
 
         except (ValueError, KeyError) as error:
-            sys.stderr.write(str(error))  # Extra data or aberant data in stream.
+            sys.stderr.write(str(error))  # Extra data or aberrant data in stream.
             return
 
 

@@ -1,24 +1,22 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # coding=utf-8
+"""creates Google Earth kml file (/tmp/gps3_live.kml) for realtime (4 second GE default) updates of gps coordinates and history
 # Concept from Jaroslaw Zachwieja <grok!warwick.ac.uk> &  TJ <linux!tjworld.net>
 # from their work in gegpsd.py included in gpsd project (http://catb.org/gpsd)
-"""creates Google Earth kml file (/tmp/gps3_live.kml) for realtime (4 second GE default) updates of gps coordinates"""
-
+"""
 import time
-from gps3 import agps3
+from gps3 import agps3  # Moe, remember to CHANGE to straight 'import agps3' if not installed.
 
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2016 Moe'
 __license__ = 'MIT'
-__version__ = '0.20'
+__version__ = '0.30'
 
-the_connection = agps3.GPSDSocket(host='192.168.0.4')  # TODO: needs work for commandline host selection
-dot = agps3.Dot()
-the_link = '/tmp/gps3_live.kml'  # AFAIK, 'Links' call href on time events or entry/exit  Multiple href may be possible.
-the_file = '/tmp/gps3_static.kml'
-the_history = []
+link_file = '/tmp/gps3_live.kml'  # AFAIK, 'Links' call href on time events or entry/exit  Multiple href may be possible.
+gps3data_file = '/tmp/gps3_static.kml'
+gps3data_history = []
 
-live_link = ('<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n'
+link_data = ('<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n'
              '<kml xmlns=\'http://www.opengis.net/kml/2.2\' xmlns:gx=\'http://www.google.com/kml/ext/2.2\' xmlns:kml=\'http://www.opengis.net/kml/2.2\' xmlns:atom=\'http://www.w3.org/2005/Atom\'>\n'
              '<NetworkLink>\n'
              '    <name>GPS3 Live</name>\n'
@@ -27,30 +25,33 @@ live_link = ('<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n'
              '        <refreshMode>onInterval</refreshMode>\n'
              '    </Link>\n'
              '</NetworkLink>\n'
-             '</kml>').format(the_file)  # inserts 'the file' into a refresh mode default 4 second
-f = open(the_link, 'w')
-f.write(live_link)
+             '</kml>').format(gps3data_file)  # inserts 'the gps3data file' into a refresh mode default 4 second
+f = open(link_file, 'w')
+f.write(link_data)
 f.close()
 
+gps_socket = agps3.GPSDSocket()
+gps_socket.connect(host='localhost', port=2947)
+gps_socket.watch()
+dot = agps3.Dot()
+
 try:
-    for new_data in the_connection:
+    for new_data in gps_socket:
         if new_data:
             dot.unpack(new_data)
-        if not isinstance(dot.lat, str):
+        if dot.lat != 'n/a':
             speed = dot.speed
             latitude = dot.lat
             longitude = dot.lon
             altitude = dot.alt
 
-            if isinstance(dot.track, str):  # 'track' frequently is missing and returns as 'n/a'
-                heading = dot.track
-            else:
-                heading = round(dot.track)  # and heading percision in hundreths is just clutter.
+            if dot.track == 'n/a': heading = dot.track  # 'track' frequently is missing and returns as 'n/a'
+            else: heading = round(dot.track)  # and heading percision in hundreths is just clutter.
 
-            the_history.append(longitude)
-            the_history.append(latitude)
-            the_history.append(altitude)
-            hist_string = str(the_history).replace(' ', '')  # GE > 7.1.xxxx spits up on spaces in <coordinates>
+            gps3data_history.append(longitude)
+            gps3data_history.append(latitude)
+            gps3data_history.append(altitude)
+            hist_string = str(gps3data_history).replace(' ', '')  # GE > 7.1.xxxx spits up on spaces in <coordinates>
 
             static_file = ('<?xml version = \'1.0\' encoding = \'UTF-8\'?>\n'
                            '<kml xmlns = \'http://www.opengis.net/kml/2.2\' xmlns:gx = \'http://www.google.com/kml/ext/2.2\' xmlns:kml = \'http://www.opengis.net/kml/2.2\' xmlns:atom = \'http://www.w3.org/2005/Atom\'>\n'
@@ -85,14 +86,13 @@ try:
                            '</Folder>\n'
                            '</kml>').format(speed, longitude, latitude, altitude, heading, hist_string.strip('[]'))
 
-            f = open(the_file, 'w')
+            f = open(gps3data_file, 'w')
             f.write(static_file)
             f.close()
 
-        else:
-            pass
+        else: pass
         time.sleep(.8)  # default GE refresh rate is 4 seconds, therefore no refresh older than ~1 second from itself.
 except KeyboardInterrupt:
-    the_connection.close()
+    gps_socket.close()
     print('\nTerminated by user\nGood Bye.\n')
 # End

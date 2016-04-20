@@ -23,7 +23,7 @@ from datetime import datetime
 from math import modf
 from time import sleep
 
-import agps3  # TODO: SWITCH BACK TO 'from agps3
+from gps3 import agps3  # Moe, remember to CHANGE to straight 'import agps3' if not installed.
 
 __author__ = 'Moe'
 __copyright__ = "Copyright 2015-2016  Moe"
@@ -162,10 +162,10 @@ def show_human():
     form = 'RAW'
     units = 'raw'
 
-    data_window = curses.newwin(19, 39, 1, 1)
-    sat_window = curses.newwin(19, 39, 1, 40)
-    device_window = curses.newwin(6, 39, 14, 40)
-    packet_window = curses.newwin(20, 78, 20, 1)
+    data_window = curses.newwin(19, 39, 0, 0)
+    sat_window = curses.newwin(14, 39, 0, 40)
+    device_window = curses.newwin(6, 39, 13, 40)
+    packet_window = curses.newwin(7, 79, 19, 0)
 
     for new_data in gps_socket:
         if new_data:
@@ -233,7 +233,7 @@ def show_human():
                     sat_window.addstr(line, 2, '{PRN:>2}   {el:>6}   {az:>5}   {ss:>5}   {used:}'.format(**sats))
                     line += 1
 
-            # device_window.clear()
+            device_window.clear()
             device_window.box()
             if not isinstance(dot.devices, list):  # Local machines need a 'device' kick start
                 gps_socket.send('?DEVICES;')  # to have valid data.  I don't know why.
@@ -245,7 +245,7 @@ def show_human():
 
                     device_window.addstr(1, 2, 'Activated: {}'.format(gizmo['activated']))
                     device_window.addstr(2, 2, 'Host:{0.host}:{0.port} {1}'.format(args, gizmo['path']))
-                    device_window.addstr(3, 2, 'Driver:{driver} BPS:{bps}'.format(**gizmo))
+                    device_window.addstr(3, 2, 'Driver:{driver}     BPS:{bps}'.format(**gizmo))
                     device_window.addstr(4, 2, 'Cycle:{0} Hz {1!s:>14} Elapsed'.format(gizmo['cycle'], elapsed))
 
             packet_window.clear()
@@ -262,11 +262,11 @@ def show_human():
 
 
 def show_nmea():
-    """NMEA"""
-    data_window = curses.newwin(23, 79, 1, 1)
+    """NMEA outout in curses terminal"""
+    data_window = curses.newwin(24, 79, 0, 0)
 
     for new_data in gps_socket:
-        if new_data:
+        if new_data:2
             screen.nodelay(1)
             event = screen.getch()
             if event == ord('q'):

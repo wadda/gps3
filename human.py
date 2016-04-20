@@ -23,12 +23,12 @@ from datetime import datetime
 from math import modf
 from time import sleep
 
-import gps3  # TODO: SWITCH BACK TO 'from gps3
+import gps3  #  Moe, remember to CHANGE to straight 'import gps3' if not installed.
 
 __author__ = 'Moe'
 __copyright__ = "Copyright 2015-2016  Moe"
 __license__ = "MIT"
-__version__ = "0.20"
+__version__ = "0.30"
 
 CONVERSION = {'raw': (1, 1, 'm/s', 'meters'),
               'metric': (3.6, 1, 'kph', 'meters'),
@@ -162,10 +162,10 @@ def show_human():
     form = 'RAW'
     units = 'raw'
 
-    data_window = curses.newwin(19, 39, 1, 1)
-    sat_window = curses.newwin(19, 39, 1, 40)
-    device_window = curses.newwin(6, 39, 14, 40)
-    packet_window = curses.newwin(20, 78, 20, 1)
+    data_window = curses.newwin(19, 39, 0, 0)
+    sat_window = curses.newwin(14, 39, 0, 40)
+    device_window = curses.newwin(6, 39, 13, 40)
+    packet_window = curses.newwin(7, 79, 19, 0)
 
     for new_data in gps_socket:
         if new_data:
@@ -263,8 +263,8 @@ def show_human():
 
 
 def show_nmea():
-    """NMEA"""
-    data_window = curses.newwin(23, 79, 1, 1)
+    """NMEA outout in curses terminal"""
+    data_window = curses.newwin(24, 79, 0, 0)
 
     for new_data in gps_socket:
         if new_data:
