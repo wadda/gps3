@@ -27,7 +27,7 @@ or http://www.catb.org/gpsd/gpsd_json.html
 Run human.py; python[X] human.py [arguments] for a human experience.
 ```
 
-#N.B. Functions are no longer daisy-chained (except 'watch' and 'send' to allow control of exceptions.
+#N.B. Functions are no longer daisy-chained (except 'watch' and 'send') to allow control of exceptions.
 this requires calling 'connect' and 'watch' individually.
 
 ##### human.py access demo for gps3.py, for humans at a terminal #####
