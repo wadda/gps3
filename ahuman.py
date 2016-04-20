@@ -266,7 +266,7 @@ def show_nmea():
     data_window = curses.newwin(24, 79, 0, 0)
 
     for new_data in gps_socket:
-        if new_data:2
+        if new_data:
             screen.nodelay(1)
             event = screen.getch()
             if event == ord('q'):
