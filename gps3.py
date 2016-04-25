@@ -2,26 +2,23 @@
 # coding=utf-8
 """
 GPS3 (gps3.py) is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
-Default host='127.0.0.1', port=2947, gpsd_protocol='json'
+Default host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 
-GPS3 has two classes.
-1) 'GPSDSocket' creates a GPSD socket connection & request/retreive GPSD output.
-2) 'Fix' unpacks the streamed gpsd data into python dictionaries.
-
-These dictionaries are literated from the JSON data packet sent from the GPSD.
+1) 'GPSDSocket' creates a GPSD socket connection & request/retrieve GPSD output.
+2) 'Fix' unpacks streamed gpsd JSON data and literates it into python dictionaries.
 
 Import          from gps3 import gps3
 Instantiate     gps_socket = gps3.GPSDSocket()
                 gps_fix = gps3.Fix()
 Run             gps_socket.connect()
                 gps_socket.watch()
-Iterate         for new_data in gps_connection:
+Iterate         for new_data in gps_socket:
                     if new_data:
                         gps_fix.refresh(new_data)
 Use                     print('Altitude = ',gps_fix.TPV['alt'])
                         print('Latitude = ',gps_fix.TPV['lat'])
 
-Consult Lines 147-ff for Attribute/Key possibilities.
+Consult Lines 144-ff for Attribute/Key possibilities.
 or http://www.catb.org/gpsd/gpsd_json.html
 
 Run human.py; python[X] human.py [arguments] for a human experience.
@@ -36,7 +33,7 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.30'
+__version__ = '0.30.3'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
@@ -64,7 +61,7 @@ class GPSDSocket(object):
                 self.streamSock.setblocking(False)
             except (OSError, IOError) as error:
                 sys.stderr.write('\r\nGPSDSocket.connect exception is--> {}'.format(error))
-                sys.stderr.write('\r\nGPS3 connection to a gpsd at \'{0}\' on port \'{1}\' failed\r\n'.format(host, port))
+                sys.stderr.write('\r\nGPS3 gpsd connection at \'{0}\' on port \'{1}\' failed\r\n'.format(host, port))
 
     def watch(self, enable=True, gpsd_protocol=PROTOCOL, devicepath=None):
         """watch gpsd in various gpsd_protocols or devices.
@@ -100,11 +97,11 @@ class GPSDSocket(object):
             self.streamSock.send(bytes(commands, encoding='utf-8'))
         except TypeError:
             self.streamSock.send(commands)  # 2.7 chokes on 'bytes' and 'encoding='
-        except (OSError, IOError) as error:  # TODO: HEY MOE, LEAVE THIS ALONE!
-            sys.stderr.write('\nGPS3 send command fail with {}\n'.format(error))  # [Errno 107] Transport endpoint is not connected
+        except (OSError, IOError) as error:  # MOE, LEAVE THIS ALONE!...for now.
+            sys.stderr.write('\nGPS3 send command fail with {}\n'.format(error))  # [Errno 107] typically no socket
 
     def __iter__(self):
-        """banana"""  # <------- for scale
+        """banana"""  # <--- for scale
         return self
 
     def next(self, timeout=0):
@@ -167,7 +164,7 @@ class Fix(object):
         # self.POLL = {'tpv': self.TPV, 'sky': self.SKY, 'time': 'n/a', 'active': 'n/a'}
 
     def refresh(self, gpsd_data_package):
-        """Sets new socket data as Fix attributes in those initialied dictionaries
+        """Sets new socket data as Fix attributes in those initialised dictionaries
         Arguments:
             gpsd_data_package (json object):
         Provides:
@@ -181,11 +178,11 @@ class Fix(object):
             fresh_data = json.loads(gpsd_data_package)  # The reserved word 'class' is popped from JSON object class
             package_name = fresh_data.pop('class', 'ERROR')  # gpsd data package errors are also 'ERROR'.
             package = getattr(self, package_name, package_name)  # packages are named for JSON object class
-            for key in package.keys():  # TODO: Rollover and retry.  It fails here when device disappears
-                package[key] = fresh_data.get(key, 'n/a')  # Updates and restores 'n/a' if key is absent in the socket
-                # response, present --> 'key: 'n/a'' instead.'
+            for key in package.keys():
+                package[key] = fresh_data.get(key, 'n/a')  # Restores 'n/a' if key is absent in the socket response
+
         except AttributeError:  # 'str' object has no attribute 'keys'
-            sys.stderr.write('There is an unexpected exception in Dot.unpack')
+            sys.stderr.write('There is an unexpected exception in Fix.refresh')
             return
 
         except (ValueError, KeyError) as error:
