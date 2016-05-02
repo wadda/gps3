@@ -23,12 +23,12 @@ from datetime import datetime
 from math import modf
 from time import sleep
 
-from gps3 import agps3  # Moe, remember to CHANGE to straight 'import agps3' if not installed.
+import agps3  # Moe, remember to CHANGE to or from 'from gps3 import agps3' if not installed.
 
 __author__ = 'Moe'
 __copyright__ = "Copyright 2015-2016  Moe"
 __license__ = "MIT"
-__version__ = "0.20"
+__version__ = "0.30.3"
 
 CONVERSION = {'raw': (1, 1, 'm/s', 'meters'),
               'metric': (3.6, 1, 'kph', 'meters'),
@@ -52,13 +52,13 @@ def add_args():
     # parser.add_argument('-timing', dest='gpsd_protocol', const='timing', action='store_const', help='*/ timing information */')
     # parser.add_argument('-split24', dest='gpsd_protocol', const='split24', action='store_const', help='*/ split AIS Type 24s */')
     # parser.add_argument('-pps', dest='gpsd_protocol', const='pps', action='store_const', help='*/ enable PPS JSON */')
-
+    parser.add_argument('-v', '--version', action='version', version='Version: {}'.format(__version__))
     cli_args = parser.parse_args()
     return cli_args
 
 
 def satellites_used(feed):
-    """Counts number of satellites use in calculation from total visible satellites
+    """Counts number of satellites used in calculation from total visible satellites
     Arguments:
         feed feed=dot.satellites
     Returns:
@@ -78,10 +78,10 @@ def satellites_used(feed):
     return total_satellites, used_satellites
 
 
-def make_time(gps__datetime_str):
+def make_time(gps_datetime_str):
     """Makes datetime object from string object"""
-    if not 'n/a' == gps__datetime_str:
-        datetime_string = gps__datetime_str
+    if not 'n/a' == gps_datetime_str:
+        datetime_string = gps_datetime_str
         datetime_object = datetime.strptime(datetime_string, "%Y-%m-%dT%H:%M:%S")
         return datetime_object
 
@@ -97,12 +97,12 @@ def elapsed_time_from(start_time):
 
 
 def unit_conversion(thing, units, length=False):
-    """converts base data between metric, imperial, or natical units"""
+    """converts base data between metric, imperial, or nautical units"""
     if 'n/a' == thing:
         return 'n/a'
     try:
         thing = round(thing * CONVERSION[units][0 + length], 2)
-    except:
+    except TypeError:
         thing = 'fubar'
     return thing, CONVERSION[units][2 + length]
 
@@ -114,8 +114,8 @@ def sexagesimal(sexathang, tag, form='DDD'):
         tag: (str) 'lat' | 'lon'
         form: (str), 'DDD'|'DMM'|'DMS', decimal Degrees, decimal Minutes, decimal Seconds
     Returns:
-        latitude: e.g., '15°33'38.214" S'
-        longitude: e.g., '146°14'28.039" W'
+        latitude: e.g., '15°33'38.214"S'
+        longitude: e.g., '146°14'28.039"W'
     """
     cardinal = 'O'
     if not isinstance(sexathang, float):
@@ -135,7 +135,7 @@ def sexagesimal(sexathang, tag, form='DDD'):
             cardinal = 'S'
 
     if form == 'RAW':
-        sexathang = '{0:4.6f}°'.format(sexathang)  # 4 to allow -100° through -180.000000°
+        sexathang = '{0:4.9f}°'.format(sexathang)  # 4 to allow -100° through -179.999999° to -180°
         return sexathang
 
     if form == 'DDD':
@@ -172,34 +172,34 @@ def show_human():
             dot.unpack(new_data)
 
             screen.nodelay(1)
-            event = screen.getch()
+            key_press = screen.getch()
 
-            if event == ord('q'):  # quit
+            if key_press == ord('q'):  # quit
                 shut_down()
-            elif event == ord('a'):  # NMEA
+            elif key_press == ord('a'):  # NMEA
                 gps_socket.watch(enable=False, gpsd_protocol='json')
                 gps_socket.watch(gpsd_protocol='nmea')
                 show_nmea()
-            elif event == ord('0'):  # raw
+            elif key_press == ord('0'):  # raw
                 form = 'RAW'
                 units = 'raw'
                 data_window.clear()
-            elif event == ord("1"):  # DDD
+            elif key_press == ord("1"):  # DDD
                 form = 'DDD'
                 data_window.clear()
-            elif event == ord('2'):  # DMM
+            elif key_press == ord('2'):  # DMM
                 form = 'DMM'
                 data_window.clear()
-            elif event == ord("3"):  # DMS
+            elif key_press == ord("3"):  # DMS
                 form = 'DMS'
                 data_window.clear()
-            elif event == ord("m"):  # Metric
+            elif key_press == ord("m"):  # Metric
                 units = 'metric'
                 data_window.clear()
-            elif event == ord("i"):  # Imperial
+            elif key_press == ord("i"):  # Imperial
                 units = 'imperial'
                 data_window.clear()
-            elif event == ord("n"):  # Nautical
+            elif key_press == ord("n"):  # Nautical
                 units = 'nautical'
                 data_window.clear()
 
@@ -253,16 +253,15 @@ def show_human():
             packet_window.scrollok(True)
             packet_window.addstr(0, 0, '{}'.format(new_data))
 
-            sleep(.9)
-
             data_window.refresh()
             sat_window.refresh()
             device_window.refresh()
             packet_window.refresh()
-
+        else:  # Reducde CPU cycles with the non-blocking socket read, by putting 'sleep' here, rather than hitting
+            sleep(.3)  # the socket fast and furious with hundreds of empty checks between sleeps.
 
 def show_nmea():
-    """NMEA outout in curses terminal"""
+    """NMEA output in curses terminal"""
     data_window = curses.newwin(24, 79, 0, 0)
 
     for new_data in gps_socket:
@@ -280,7 +279,8 @@ def show_nmea():
             data_window.addstr(0, 2, 'AGPS3 Python {}.{}.{} GPSD Interface Showing NMEA protocol'.format(*sys.version_info), curses.A_BOLD)
             data_window.addstr(2, 2, '{}'.format(gps_socket.response))
             data_window.refresh()
-            sleep(.4)
+        else:
+            sleep(.1)
 
 
 def shut_down():
