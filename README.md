@@ -86,7 +86,8 @@ Consult Lines 140-ff for Attribute/Key possibilities.
 As long as TPV'time', GST'time', ATT'time', and POLL'time' are the same,
 or TPV'device', GST'device', ATT'device, PPS'device', and TOFF'device  is
 the same as DEVICES(device)'path' throughout "she'll be right"
-"""````
+"""
+````
 
 *N.B. Functions are no longer daisy-chained (except 'watch' and 'send' to allow control of exceptions.
 this requires calling 'connect' and 'watch' individually.
