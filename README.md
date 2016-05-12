@@ -106,3 +106,36 @@ Quit with '**q**' or '**^c**'
 **gegps3.py and agegps3.py**
 
 Are trivial applications that creates a 'live' kml files for Google Earth from their respective clients.  Scant documentation is in the files.
+
+You made it this far so test out either or both a/gps3.py locally calling them with
+
+.. code-block::
+    
+    import gps3
+    gps_socket = gps3.GPSDSocket()
+    gps_fix = gps3.Fix()
+    gps_socket.connect()
+    gps_socket.watch()
+    for new_data in gps_socket:
+        if new_data:
+            gps_fix.refresh(new_data)
+            print('Time = ', gps_fix.TPV['time'])
+            print('Altitude = ',gps_fix.TPV['alt'])
+            print('Latitude = ',gps_fix.TPV['lat'])
+
+or 
+
+.. code-block::
+    
+    import agps3
+    gps_socket = agps3.GPSDSocket()
+    dot = agps3.Dot()
+    gps_socket.connect()
+    gps_socket.watch()
+    for new_data in gps_socket:
+        if new_data:
+            dot.unpack(new_data)
+            print('Time = ', dot.time)
+            print('Altitude = ', dot.alt)
+            print('Latitude = ', dot.lat)
+
