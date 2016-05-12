@@ -6,7 +6,7 @@
 """
 import time
 
-from gps3.agps3 import gps3  # Moe, remember to CHANGE to straight 'import gps3' if not installed,
+from gps3 import gps3  # Moe, remember to CHANGE to straight 'import gps3' if not installed,
 
 # or check which Python version it's installed in. You forget sometimes.
 
