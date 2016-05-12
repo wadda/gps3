@@ -104,7 +104,7 @@ Quit with '**q**' or '**^c**'
 
 Are trivial applications that creates a 'live' kml files for Google Earth from their respective clients.  Scant documentation is in the files.
 
-You made it this far so test out either or both a/gps3.py locally calling them with
+You made it this far, so test out either or both a/gps3.py locally calling them with your favourite interpreter.
 
 .. code-block::
     
@@ -136,3 +136,10 @@ or
             print('Altitude = ', dot.alt)
             print('Latitude = ', dot.lat)
 
+Don't have a gps handy or gpsd installed, connect to a remote
+
+``` 
+gps_socket.connect(host='gps.ddns.net')
+```
+
+while one is online, and not abused.
