@@ -25,11 +25,10 @@ or http://www.catb.org/gpsd/gpsd_json.html
 Run human.py; python[X] human.py [arguments] for a human experience.
 """
 ```
-*N.B., functions are no longer daisy-chained (except 'watch' and 'send') to allow control of exceptions.  This requires calling 'connect' and 'watch' individually.**
 
 ##### human.py a showcase  demo for gps3.py, for humans at a terminal #####
 ```bash
-me@work:~/projects/gps3$ python3 human.py --help
+me@work:~/projects/gps3/examples$ python3 human.py --help
 usage: human.py [-h] [-host HOST] [-port PORT] [-device DEVICEPATH] [-json] [-nmea]
                [-rare] [-raw] [-scaled] [-timimg] [-split24] [-pps]
 
