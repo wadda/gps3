@@ -1,0 +1,4 @@
+include LICENSE.txt
+include DESCRIPTION.rst
+recursive-include examples *.py
+
