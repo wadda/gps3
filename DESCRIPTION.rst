@@ -16,7 +16,8 @@ defaults to host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 
 These dictionaries are literated from the JSON data packet sent from the GPSD.
 
-.. code-block:: python
+.. code-block::
+    
     from gps3 import gps3
     gps_socket = gps3.GPSDSocket()
     gps_fix = gps3.Fix()
@@ -41,8 +42,8 @@ defaults to host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 1) **GPSDSocket** creates a GPSD socket connection & request/retrieve GPSD output.
 2) **Dot** unpacks the streamed gpsd data into object attribute values.
 
-.. code-block:: python
-   :linenos:
+.. code-block::
+    
     from gps3 import agps3
     gps_socket = agps3.GPSDSocket()
     dot = agps3.Dot()
@@ -53,7 +54,6 @@ defaults to host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
             dot.unpack(new_data)
             print('Altitude = ', dot.alt)
             print('Latitude = ', dot.lat)
-
 
 Consult Lines 140-ff for Attribute-value possibilities.
 
