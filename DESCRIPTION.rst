@@ -1,3 +1,5 @@
+**Installation**
+
 ``[sudo [-H]] pip[2|3] install gps3``
 
 For example, ``sudo -H pip3 install gps3`` for your default P3 installation.
