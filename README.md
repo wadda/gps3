@@ -88,9 +88,6 @@ the same as DEVICES(device)'path' throughout "she'll be right"
 """
 ````
 
-*N.B. Functions are no longer daisy-chained (except 'watch' and 'send' to allow control of exceptions.
-this requires calling 'connect' and 'watch' individually.
-
 #### ahuman.py a showcase demo for agps3.py ####
 
 Simularly, toggle Lat/Lon form with '**0**', '**1**', '**2**', '**3**' for RAW, DDD, DMM, DMS
