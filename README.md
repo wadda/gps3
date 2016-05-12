@@ -25,11 +25,10 @@ or http://www.catb.org/gpsd/gpsd_json.html
 Run human.py; python[X] human.py [arguments] for a human experience.
 """
 ```
-*N.B., functions are no longer daisy-chained (except 'watch' and 'send') to allow control of exceptions.  This requires calling 'connect' and 'watch' individually.**
 
 ##### human.py a showcase  demo for gps3.py, for humans at a terminal #####
 ```bash
-me@work:~/projects/gps3$ python3 human.py --help
+me@work:~/projects/gps3/examples$ python3 human.py --help
 usage: human.py [-h] [-host HOST] [-port PORT] [-device DEVICEPATH] [-json] [-nmea]
                [-rare] [-raw] [-scaled] [-timimg] [-split24] [-pps]
 
@@ -86,10 +85,8 @@ Consult Lines 140-ff for Attribute/Key possibilities.
 As long as TPV'time', GST'time', ATT'time', and POLL'time' are the same,
 or TPV'device', GST'device', ATT'device, PPS'device', and TOFF'device  is
 the same as DEVICES(device)'path' throughout "she'll be right"
-"""````
-
-*N.B. Functions are no longer daisy-chained (except 'watch' and 'send' to allow control of exceptions.
-this requires calling 'connect' and 'watch' individually.
+"""
+````
 
 #### ahuman.py a showcase demo for agps3.py ####
 
@@ -106,3 +103,43 @@ Quit with '**q**' or '**^c**'
 **gegps3.py and agegps3.py**
 
 Are trivial applications that creates a 'live' kml files for Google Earth from their respective clients.  Scant documentation is in the files.
+
+You made it this far, so test out either or both a/gps3.py locally calling them with your favourite interpreter.
+
+.. code-block::
+    
+    import gps3
+    gps_socket = gps3.GPSDSocket()
+    gps_fix = gps3.Fix()
+    gps_socket.connect()
+    gps_socket.watch()
+    for new_data in gps_socket:
+        if new_data:
+            gps_fix.refresh(new_data)
+            print('Time = ', gps_fix.TPV['time'])
+            print('Altitude = ',gps_fix.TPV['alt'])
+            print('Latitude = ',gps_fix.TPV['lat'])
+
+or 
+
+.. code-block::
+    
+    import agps3
+    gps_socket = agps3.GPSDSocket()
+    dot = agps3.Dot()
+    gps_socket.connect()
+    gps_socket.watch()
+    for new_data in gps_socket:
+        if new_data:
+            dot.unpack(new_data)
+            print('Time = ', dot.time)
+            print('Altitude = ', dot.alt)
+            print('Latitude = ', dot.lat)
+
+Don't have a gps handy or gpsd installed, connect to a remote
+
+``` 
+gps_socket.connect(host='gps.ddns.net')
+```
+
+while one is online, and not abused.
