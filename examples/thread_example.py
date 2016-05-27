@@ -10,7 +10,7 @@ __license__ = 'MIT'
 __version__ = '0.1'
 
 agps_thread = AGPS3mechanism()  # Instantiate AGPS3 Mechanisms
-agps_thread.stream_data(host='192.168.0.4')  # Stream from localhost as default (), or e.g., host='192.168.0.2'
+agps_thread.stream_data(host='192.168.0.4')  # From localhost (), or other hosts, by example, (host='gps.ddns.net')
 agps_thread.run_thread(usnap=.2)  # Throttle the time to sleep after an empty lookup, default 0.2 two tenths of a second
 
 while True:  # All data is available via instantiated thread data stream attribute.
