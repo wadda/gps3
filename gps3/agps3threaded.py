@@ -38,19 +38,19 @@ class AGPS3mechanism(object):
             if new_data:
                 self.data_stream.unpack(new_data)
             else:
-                sleep(usnap)
+                sleep(usnap)  # Sleep in seconds after an empty look up.
 
     def run_thread(self, usnap=.2):
         """run thread with data
         """
-        # self.stream_data()
+        # self.stream_data() # Unless other changes are made this would limit to localhost only.
         gps3_data_thread = Thread(group=None, target=self.unpack_data, args={'usnap': usnap})
         gps3_data_thread.start()
 
     def stop(self):
         """ Stop as much as possible, as gracefully as possible, if possible.
         """
-        self.socket.close()
+        self.socket.close()  # Close socket, thread is on its own so far.
         # Thread.isAlive kill killkill...why are you running away?
         print('Process stopped by user')
         print('Good bye.')
