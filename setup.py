@@ -14,7 +14,7 @@ from os import path
 here = path.abspath(path.dirname(__file__))
 info_file = 'DESCRIPTION.rst'
 
-# Get the long description from the README file
+# Get the long description from the info_file
 with open(path.join(here, info_file), encoding='utf-8') as f:
     long_description = f.read()
 
