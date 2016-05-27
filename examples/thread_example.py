@@ -1,5 +1,12 @@
 #!/usr/bin/env python3.5
 # coding=utf-8
+"""TriviaL example using the thread triumvirate
+        agps_thread = AGPS3mechanism()
+        agps_thread.stream_data()
+        agps_thread.run_thread()
+    imported from the agps3threaded.py class AGPS3mechanism.  The unordered associative array
+    from the gpsd is then exposed as attributes of that 'data_stream'
+"""
 from time import sleep
 
 from agps3threaded import AGPS3mechanism

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3.5
 # coding=utf-8
 """creates Google Earth kml file (/tmp/gps3_live.kml) for realtime (4 second GE default) updates of gps coordinates and history
 # Concept from Jaroslaw Zachwieja <grok!warwick.ac.uk> &  TJ <linux!tjworld.net>
