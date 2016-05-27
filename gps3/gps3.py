@@ -33,7 +33,7 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.30.3'
+__version__ = '0.30.4'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
@@ -86,17 +86,17 @@ class GPSDSocket(object):
 
         return self.send(command)
 
-    def send(self, commands):
+    def send(self, command):
         """Ship commands to the daemon
         Arguments:
-            commands: e.g., '?WATCH={{'enable':true,'json':true}}'|'?VERSION;'|'?DEVICES;'|'?DEVICE;'|'?POLL;'
+            command: e.g., '?WATCH={{'enable':true,'json':true}}'|'?VERSION;'|'?DEVICES;'|'?DEVICE;'|'?POLL;'
         """
         # The POLL command requests data from the last-seen fixes on all active GPS devices.
         # Devices must previously have been activated by ?WATCH to be pollable.
         try:
-            self.streamSock.send(bytes(commands, encoding='utf-8'))
+            self.streamSock.send(bytes(command, encoding='utf-8'))
         except TypeError:
-            self.streamSock.send(commands)  # 2.7 chokes on 'bytes' and 'encoding='
+            self.streamSock.send(command)  # 2.7 chokes on 'bytes' and 'encoding='
         except (OSError, IOError) as error:  # MOE, LEAVE THIS ALONE!...for now.
             sys.stderr.write('\nGPS3 send command fail with {}\n'.format(error))  # [Errno 107] typically no socket
 

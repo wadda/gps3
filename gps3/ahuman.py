@@ -2,7 +2,7 @@
 # coding=utf-8
 
 """
-human.py is to showcase gps3.py, a Python 2.7-3.5 GPSD interface
+ahuman.py is to showcase agps3.py, a Python 2.7-3.5 GPSD interface
 Defaults host='127.0.0.1', port=2947, gpsd_protocol='json'
 
 Toggle Lat/Lon form with '0', '1', '2', '3' for RAW, DDD, DMM, DMS
@@ -23,12 +23,13 @@ from datetime import datetime
 from math import modf
 from time import sleep
 
-import gps3  # Moe, remember to CHANGE to or from 'from gps3 import gps3' if not installed.
+import agps3  # Moe, remember to CHANGE to straight 'import agps3' if not installed,
+# or check which Python version it's installed in. You forget sometimes.
 
 __author__ = 'Moe'
-__copyright__ = "Copyright 2015-2016  Moe"
-__license__ = "MIT"
-__version__ = "0.30.3"
+__copyright__ = 'Copyright 2015-2016  Moe'
+__license__ = 'MIT'
+__version__ = '0.30.4'
 
 CONVERSION = {'raw': (1, 1, 'm/s', 'meters'),
               'metric': (3.6, 1, 'kph', 'meters'),
@@ -60,7 +61,7 @@ def add_args():
 def satellites_used(feed):
     """Counts number of satellites used in calculation from total visible satellites
     Arguments:
-        feed feed=gps_fix.TPV['satellites']
+        feed feed=dot.satellites
     Returns:
         total_satellites(int):
         used_satellites (int):
@@ -169,7 +170,7 @@ def show_human():
 
     for new_data in gps_socket:
         if new_data:
-            gps_fix.refresh(new_data)
+            dot.unpack(new_data)
 
             screen.nodelay(1)
             key_press = screen.getch()
@@ -184,62 +185,62 @@ def show_human():
                 form = 'RAW'
                 units = 'raw'
                 data_window.clear()
-            elif key_press == ord("1"):  # DDD
+            elif key_press == ord('1'):  # DDD
                 form = 'DDD'
                 data_window.clear()
             elif key_press == ord('2'):  # DMM
                 form = 'DMM'
                 data_window.clear()
-            elif key_press == ord("3"):  # DMS
+            elif key_press == ord('3'):  # DMS
                 form = 'DMS'
                 data_window.clear()
-            elif key_press == ord("m"):  # Metric
+            elif key_press == ord('m'):  # Metric
                 units = 'metric'
                 data_window.clear()
-            elif key_press == ord("i"):  # Imperial
+            elif key_press == ord('i'):  # Imperial
                 units = 'imperial'
                 data_window.clear()
-            elif key_press == ord("n"):  # Nautical
+            elif key_press == ord('n'):  # Nautical
                 units = 'nautical'
                 data_window.clear()
 
             data_window.box()
-            data_window.addstr(0, 2, 'GPS3 Python {}.{}.{} GPSD Interface'.format(*sys.version_info), curses.A_BOLD)
-            data_window.addstr(1, 2, 'Time:  {time} '.format(**gps_fix.TPV))
-            data_window.addstr(2, 2, 'Latitude:  {} '.format(sexagesimal(gps_fix.TPV['lat'], 'lat', form)))
-            data_window.addstr(3, 2, 'Longitude: {} '.format(sexagesimal(gps_fix.TPV['lon'], 'lon', form)))
-            data_window.addstr(4, 2, 'Altitude:  {} {}'.format(*unit_conversion(gps_fix.TPV['alt'], units, length=True)))
-            data_window.addstr(5, 2, 'Speed:     {} {}'.format(*unit_conversion(gps_fix.TPV['speed'], units)))
-            data_window.addstr(6, 2, 'Heading:   {track}° True'.format(**gps_fix.TPV))
-            data_window.addstr(7, 2, 'Climb:     {} {}/s'.format(*unit_conversion(gps_fix.TPV['climb'], units, length=True)))
-            data_window.addstr(8, 2, 'Status:     {mode:<}D  '.format(**gps_fix.TPV))
-            data_window.addstr(9, 2, 'Latitude Err:  +/-{} {} '.format(*unit_conversion(gps_fix.TPV['epx'], units, length=True)))
-            data_window.addstr(10, 2, 'Longitude Err: +/-{} {}'.format(*unit_conversion(gps_fix.TPV['epy'], units, length=True)))
-            data_window.addstr(11, 2, 'Altitude Err:  +/-{} {} '.format(*unit_conversion(gps_fix.TPV['epv'], units, length=True)))
-            data_window.addstr(12, 2, 'Course Err:    +/-{epc}  '.format(**gps_fix.TPV), curses.A_DIM)
-            data_window.addstr(13, 2, 'Speed Err:     +/-{} {} '.format(*unit_conversion(gps_fix.TPV['eps'], units)), curses.A_DIM)
-            data_window.addstr(14, 2, 'Time Offset:   +/-{ept}  '.format(**gps_fix.TPV), curses.A_DIM)
-            data_window.addstr(15, 2, 'gdop:{gdop}  pdop:{pdop}  tdop:{tdop}'.format(**gps_fix.SKY))
-            data_window.addstr(16, 2, 'ydop:{ydop}  xdop:{xdop} '.format(**gps_fix.SKY))
-            data_window.addstr(17, 2, 'vdop:{vdop}  hdop:{hdop} '.format(**gps_fix.SKY))
+            data_window.addstr(0, 2, 'AGPS3 Python {}.{}.{} GPSD Interface'.format(*sys.version_info), curses.A_BOLD)
+            data_window.addstr(1, 2, 'Time:  {} '.format(dot.time))
+            data_window.addstr(2, 2, 'Latitude:  {} '.format(sexagesimal(dot.lat, 'lat', form)))
+            data_window.addstr(3, 2, 'Longitude: {} '.format(sexagesimal(dot.lon, 'lon', form)))
+            data_window.addstr(4, 2, 'Altitude:  {} {}'.format(*unit_conversion(dot.alt, units, length=True)))
+            data_window.addstr(5, 2, 'Speed:     {} {}'.format(*unit_conversion(dot.speed, units)))
+            data_window.addstr(6, 2, 'Heading:   {}° True'.format(dot.track))
+            data_window.addstr(7, 2, 'Climb:     {} {}'.format(*unit_conversion(dot.climb, units, length=True)))
+            data_window.addstr(8, 2, 'Status:     {:<}D  '.format(dot.mode))
+            data_window.addstr(9, 2, 'Latitude Err:  +/-{} {}'.format(*unit_conversion(dot.epx, units, length=True)))
+            data_window.addstr(10, 2, 'Longitude Err: +/-{} {}'.format(*unit_conversion(dot.epy, units, length=True)))
+            data_window.addstr(11, 2, 'Altitude Err:  +/-{} {}'.format(*unit_conversion(dot.epv, units, length=True)))
+            data_window.addstr(12, 2, 'Course Err:    +/-{}   '.format(dot.epc), curses.A_DIM)
+            data_window.addstr(13, 2, 'Speed Err:     +/-{} {}'.format(*unit_conversion(dot.eps, units)), curses.A_DIM)
+            data_window.addstr(14, 2, 'Time Offset:   +/-{}  '.format(dot.ept), curses.A_DIM)
+            data_window.addstr(15, 2, 'gdop:{}  pdop:{}  tdop:{}'.format(dot.gdop, dot.pdop, dot.tdop))
+            data_window.addstr(16, 2, 'ydop:{}  xdop:{} '.format(dot.ydop, dot.xdop))
+            data_window.addstr(17, 2, 'vdop:{}  hdop:{} '.format(dot.vdop, dot.hdop))
 
             sat_window.clear()
             sat_window.box()
-            sat_window.addstr(0, 2, 'Using {0[1]}/{0[0]} satellites (truncated)'.format(satellites_used(gps_fix.SKY['satellites'])))
+            sat_window.addstr(0, 2, 'Using {0[1]}/{0[0]} satellites (truncated)'.format(satellites_used(dot.satellites)))
             sat_window.addstr(1, 2, 'PRN     Elev   Azimuth   SNR   Used')
             line = 2
-            if isinstance(gps_fix.SKY['satellites'], list):  # Nested lists of dictionaries are strings before data is present
-                for sats in gps_fix.SKY['satellites'][0:10]:
+            if isinstance(dot.satellites, list):  # Nested lists of dictionaries are strings before data is present
+                for sats in dot.satellites[0:10]:
                     sat_window.addstr(line, 2, '{PRN:>2}   {el:>6}   {az:>5}   {ss:>5}   {used:}'.format(**sats))
                     line += 1
 
-            # device_window.clear()
+            device_window.clear()
             device_window.box()
-            if not isinstance(gps_fix.DEVICES['devices'], list):  # Local machines need a 'device' kick start
-                gps_socket.send('?DEVICES;')  # to have valid data I don't know why.
+            if not isinstance(dot.devices, list):  # Local machines need a 'device' kick start
+                gps_socket.send('?DEVICES;')  # to have valid data.  I don't know why.
 
-            if isinstance(gps_fix.DEVICES['devices'], list):  # Nested lists of dictionaries are strings before data is present.
-                for gizmo in gps_fix.DEVICES['devices']:
+            if isinstance(dot.devices, list):  # Nested lists of dictionaries are strings before data is present.
+                for gizmo in dot.devices:
                     start_time, _uicroseconds = gizmo['activated'].split('.')  # Remove '.000Z'
                     elapsed = elapsed_time_from(start_time)
 
@@ -253,11 +254,13 @@ def show_human():
             packet_window.scrollok(True)
             packet_window.addstr(0, 0, '{}'.format(new_data))
 
+#            sleep(.9)
+
             data_window.refresh()
             sat_window.refresh()
             device_window.refresh()
             packet_window.refresh()
-        else:  # Reducde CPU cycles with the non-blocking socket read, by putting 'sleep' here, rather than hitting
+        else:  # Reduced CPU cycles with the non-blocking socket read, by putting 'sleep' here, rather than hitting
             sleep(.3)  # the socket fast and furious with hundreds of empty checks between sleeps.
 
 
@@ -268,16 +271,16 @@ def show_nmea():
     for new_data in gps_socket:
         if new_data:
             screen.nodelay(1)
-            event = screen.getch()
-            if event == ord('q'):
+            key_press = screen.getch()
+            if key_press == ord('q'):
                 shut_down()
-            elif event == ord('j'):  # raw
+            elif key_press == ord('j'):  # raw
                 gps_socket.watch(enable=False, gpsd_protocol='nmea')
                 gps_socket.watch(gpsd_protocol='json')
                 show_human()
 
             data_window.border(0)
-            data_window.addstr(0, 2, 'GPS3 Python {}.{}.{} GPSD Interface Showing NMEA protocol'.format(*sys.version_info), curses.A_BOLD)
+            data_window.addstr(0, 2, 'AGPS3 Python {}.{}.{} GPSD Interface Showing NMEA protocol'.format(*sys.version_info), curses.A_BOLD)
             data_window.addstr(2, 2, '{}'.format(gps_socket.response))
             data_window.refresh()
         else:
@@ -290,16 +293,16 @@ def shut_down():
     curses.echo()
     curses.endwin()
     gps_socket.close()
-    print("Keyboard interrupt received\nTerminated by user\nGood Bye.\n")
+    print('Keyboard interrupt received\nTerminated by user\nGood Bye.\n')
     sys.exit(1)
 
 
 if __name__ == '__main__':
     args = add_args()
-    gps_socket = gps3.GPSDSocket()
+    gps_socket = agps3.GPSDSocket()
     gps_socket.connect(args.host, args.port)
     gps_socket.watch(gpsd_protocol=args.gpsd_protocol)
-    gps_fix = gps3.Fix()
+    dot = agps3.Dot()
 
     screen = curses.initscr()
     screen.clear()
@@ -321,8 +324,8 @@ if __name__ == '__main__':
         curses.nocbreak()
         curses.echo()
         curses.endwin()
-        sys.stderr.write('\rHUMAN error--> {}'.format(error))
-        sys.stderr.write('\rhuman connection to gpsd at \'{0}\' on port \'{1}\' failed.\n'.format(args.host, args.port))
+        sys.stderr.write('\rAHUMAN error--> {}'.format(error))
+        sys.stderr.write('\rahuman connection to gpsd at \'{0}\' on port \'{1}\' failed.\n'.format(args.host, args.port))
         sys.exit(1)  # TODO: gpsd existence check and start
 
 #

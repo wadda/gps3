@@ -1,38 +1,34 @@
 #### README #####
 ![GPSD-OBJECTS.png](http://i.imgur.com/jm1rYT8.png)
 ```
+"""
 GPS3 (gps3.py) is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
-Default host='127.0.0.1', port=2947, gpsd_protocol='json'
+Default host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 
-GPS3 has two classes.
-1) 'GPSDSocket' creates a GPSD socket connection & request/retreive GPSD output.
-2) 'Fix' unpacks the streamed gpsd data into python dictionaries.
-
-These dictionaries are literated from the JSON data packet sent from the GPSD.
+1) 'GPSDSocket' creates a GPSD socket connection & request/retrieve GPSD output.
+2) 'Fix' unpacks streamed gpsd JSON data and literates it into python dictionaries.
 
 Import          from gps3 import gps3
 Instantiate     gps_socket = gps3.GPSDSocket()
                 gps_fix = gps3.Fix()
 Run             gps_socket.connect()
                 gps_socket.watch()
-Iterate         for new_data in gps_connection:
+Iterate         for new_data in gps_socket:
                     if new_data:
                         gps_fix.refresh(new_data)
 Use                     print('Altitude = ',gps_fix.TPV['alt'])
                         print('Latitude = ',gps_fix.TPV['lat'])
 
-Consult Lines 147-ff for Attribute/Key possibilities.
+Consult Lines 144-ff for Attribute/Key possibilities.
 or http://www.catb.org/gpsd/gpsd_json.html
 
 Run human.py; python[X] human.py [arguments] for a human experience.
+"""
 ```
 
-#####N.B., functions are no longer daisy-chained (except 'watch' and 'send') to allow control of exceptions.
-this requires calling 'connect' and 'watch' individually.
-
-##### human.py access demo for gps3.py, for humans at a terminal #####
+##### human.py a showcase  demo for gps3.py, for humans at a terminal #####
 ```bash
-me@work:~/projects/gps3$ python3 human.py --help
+me@work:~/projects/gps3/examples$ python3 human.py --help
 usage: human.py [-h] [-host HOST] [-port PORT] [-device DEVICEPATH] [-json] [-nmea]
                [-rare] [-raw] [-scaled] [-timimg] [-split24] [-pps]
 
@@ -52,7 +48,7 @@ optional arguments:
 me@work:~/projects/gps3$
 ```
 Commandline execution without options is the same as using the DEFAULT option flags.
-*0*,*1*,*2*,*3* toggle RAW, DDD, DMM, DMS, *m*,*i*,*n*,*0*, for metric, imperial, nautical, raw units.
+*0*,*1*,*2*,*3* toggle RAW, DDD, DMM, DMS; *m*,*i*,*n*,*0*, for metric, imperial, nautical, raw units.
 Toggle 'JSON' and 'NMEA' display with '**j**' and '**a**', respectively.
 
 ![Python3.5.png](http://i.imgur.com/hG1cFq3.png)   ![Python2.7.png](http://i.imgur.com/gUoZfHd.png)
@@ -70,15 +66,15 @@ With my $40 gps, it's not an issue.
 agps3.py is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
 Defaults host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 
-1) 'GPSDSocket' creates a GPSD socket connection & request/retreive GPSD output.
+1) 'GPSDSocket' creates a GPSD socket connection & request/retrieve GPSD output.
 2) 'Dot' unpacks the streamed gpsd data into object attribute values.
 
 Import          from gps3 import agps3
-Instantiate     gps_connection = agps3.GPSDSocket()
+Instantiate     gps_socket = agps3.GPSDSocket()
                 dot = agps3.Dot()
 Run             gps_socket.connect()
                 gps_socket.watch()
-Iterate         for new_data in gps_connection:
+Iterate         for new_data in gps_socket
                     if new_data:
                         dot.unpack(new_data)
 Use                     print('Lat/Lon = ',dot.lat,' ', dot.lon)
@@ -91,9 +87,6 @@ or TPV'device', GST'device', ATT'device, PPS'device', and TOFF'device  is
 the same as DEVICES(device)'path' throughout "she'll be right"
 """
 ````
-
-##N.B.## Functions are no longer daisy-chained (except 'watch' and 'send' to allow control of exceptions.
-this requires calling 'connect' and 'watch' individually.
 
 #### ahuman.py a showcase demo for agps3.py ####
 
@@ -110,3 +103,43 @@ Quit with '**q**' or '**^c**'
 **gegps3.py and agegps3.py**
 
 Are trivial applications that creates a 'live' kml files for Google Earth from their respective clients.  Scant documentation is in the files.
+
+You made it this far, so test out either or both a/gps3.py locally calling them with your favourite interpreter.
+
+.. code-block::
+    
+    import gps3
+    gps_socket = gps3.GPSDSocket()
+    gps_fix = gps3.Fix()
+    gps_socket.connect()
+    gps_socket.watch()
+    for new_data in gps_socket:
+        if new_data:
+            gps_fix.refresh(new_data)
+            print('Time = ', gps_fix.TPV['time'])
+            print('Altitude = ',gps_fix.TPV['alt'])
+            print('Latitude = ',gps_fix.TPV['lat'])
+
+or 
+
+.. code-block::
+    
+    import agps3
+    gps_socket = agps3.GPSDSocket()
+    dot = agps3.Dot()
+    gps_socket.connect()
+    gps_socket.watch()
+    for new_data in gps_socket:
+        if new_data:
+            dot.unpack(new_data)
+            print('Time = ', dot.time)
+            print('Altitude = ', dot.alt)
+            print('Latitude = ', dot.lat)
+
+Don't have a gps handy or gpsd installed, connect to a remote
+
+``` 
+gps_socket.connect(host='gps.ddns.net')
+```
+
+while one is online, and not abused.

@@ -2,7 +2,7 @@
 # coding=utf-8
 """
 agps3.py is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
-Default host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
+Defaults host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 
 1) 'GPSDSocket' creates a GPSD socket connection & request/retrieve GPSD output.
 2) 'Dot' unpacks the streamed gpsd data into object attribute values.
@@ -12,15 +12,17 @@ Instantiate     gps_socket = agps3.GPSDSocket()
                 dot = agps3.Dot()
 Run             gps_socket.connect()
                 gps_socket.watch()
-Iterate         for new_data in gps_socket:
+Iterate         for new_data in gps_socket
                     if new_data:
                         dot.unpack(new_data)
 Use                     print('Lat/Lon = ',dot.lat,' ', dot.lon)
                         print('Altitude = ',dot.alt)
 
-Consult Lines 137-ff for Attribute/Key possibilities.
+Consult Lines 140-ff for Attribute/Key possibilities.
 
-Run ahuman.py; python[X] ahuman.py [arguments] for a human experience.
+As long as TPV'time', GST'time', ATT'time', and POLL'time' are the same,
+or TPV'device', GST'device', ATT'device, PPS'device', and TOFF'device  is
+the same as DEVICES(device)'path' throughout "she'll be right"
 """
 from __future__ import print_function
 
@@ -32,7 +34,7 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.30.3'
+__version__ = '0.30.4'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
@@ -60,7 +62,7 @@ class GPSDSocket(object):
                 self.streamSock.setblocking(False)
             except (OSError, IOError) as error:
                 sys.stderr.write('\r\nGPSDSocket.connect exception is--> {}'.format(error))
-                sys.stderr.write('\r\nAGPS3 gpsd connection at \'{0}\' on port \'{1}\' failed\r\n'.format(host, port))
+                sys.stderr.write('\r\nAGPS3 connection to a gpsd at \'{0}\' on port \'{1}\' failed\r\n'.format(host, port))
 
     def watch(self, enable=True, gpsd_protocol=PROTOCOL, devicepath=None):
         """watch gpsd in various gpsd_protocols or devices.
@@ -94,8 +96,8 @@ class GPSDSocket(object):
             self.streamSock.send(bytes(commands, encoding='utf-8'))
         except TypeError:
             self.streamSock.send(commands)  # 2.7 chokes on 'bytes' and 'encoding='
-        except (OSError, IOError) as error:  # MOE, LEAVE THIS ALONE!...for now.
-            sys.stderr.write('\nAGPS3 send command fail with {}\n'.format(error))  # [Errno 107] typically no/closed socket
+        except (OSError, IOError) as error:  # HEY MOE, LEAVE THIS ALONE FOR NOW!
+            sys.stderr.write('\nAGPS3 send command fail with {}\n'.format(error))  # [Errno 107] Transport endpoint is not connected
 
     def __iter__(self):
         """banana"""  # <--- for scale
@@ -171,7 +173,7 @@ class Dot(object):
             fresh_data = json.loads(gpsd_socket_response)  # 'class' is popped for iterator lead
             class_name = fresh_data.pop('class')
             for key in self.packages[class_name]:
-                setattr(self, key, fresh_data.get(key, 'n/a'))  # Restores 'n/a' if attribute is absent in the data
+                setattr(self, key, fresh_data.get(key, 'n/a'))  # Updates and restores 'n/a' if attribute is absent in the data
 
         except AttributeError:  # 'str' object has no attribute 'keys'
             sys.stderr.write('There is an unexpected exception unpacking JSON object')
