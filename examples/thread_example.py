@@ -9,7 +9,7 @@
 """
 from time import sleep
 
-from agps3threaded import AGPS3mechanism
+from gps3.agps3threaded import AGPS3mechanism # Bear with me while I grasp the syntax for concept of "Package"
 
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2016  Moe'
@@ -18,7 +18,7 @@ __version__ = '0.1'
 
 agps_thread = AGPS3mechanism()  # Instantiate AGPS3 Mechanisms
 agps_thread.stream_data(host='192.168.0.4')  # From localhost (), or other hosts, by example, (host='gps.ddns.net')
-agps_thread.run_thread(usnap=.2)  # Throttle the time to sleep after an empty lookup, default 0.2 two tenths of a second
+agps_thread.run_thread()  # Throttle the time to sleep after an empty lookup, default 0.2 two tenths of a second
 
 while True:  # All data is available via instantiated thread data stream attribute.
     # line #140-ff of /usr/local/lib/python3.5/dist-packages/gps3/agps.py
