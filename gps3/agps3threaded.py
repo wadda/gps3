@@ -4,7 +4,7 @@
 from threading import Thread
 from time import sleep
 
-import agps3
+from gps3 import agps3
 
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2016  Moe'
@@ -44,7 +44,7 @@ class AGPS3mechanism(object):
         """run thread with data
         """
         # self.stream_data() # Unless other changes are made this would limit to localhost only.
-        gps3_data_thread = Thread(group=None, target=self.unpack_data, args={'usnap': usnap})
+        gps3_data_thread = Thread(group=None, target=self.unpack_data, args={usnap: usnap})
         gps3_data_thread.start()
 
     def stop(self):
