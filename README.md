@@ -6,9 +6,9 @@ The recent addition is the 'threading adaptor'.  The simple and efficient Python
 
 You then engage the thread triumvirate.
 
-    agps_thread = AGPS3mechanism()  # Instantiate the mechanism
+    agps_thread = AGPS3mechanism()  # Instantiate the mechanism, I guess it's called.
     agps_thread.stream_data()  # Stream the data from host, port, devicepath
-    agps_thread.run_thread()  #  Run it as a thread with throttle control for empty look ups.
+    agps_thread.run_thread()  #  Iterate it as a thread with throttle control for empty look ups here.
 
 Four lines of code that lets you connect, communicate and control most of what you expect a gpsd to do.
 
@@ -23,6 +23,6 @@ Four lines of code that lets you connect, communicate and control most of what y
         print('----------------')
         sleep(60)  # Sleep, or do other things for as long as you like.
 
-Without arguments between the brackets the threaded client defaults to `host='127.0.0.1'`, `port=2947`, `gpsd_protocol='json'`, and `usnap=0.2`, for a respectable default of 2/10th of a second micro nap after each empty socket lookup.
+Without arguments between the parentheses, the threaded client defaults to `host='127.0.0.1'`, `port=2947`, `gpsd_protocol='json'`, and `usnap=0.2`, for a respectable default of 2/10th of a second micro nap after each empty socket lookup.
 
 The rest of the project is in DESCRIPTION.rst, or documented in the files themselves.
