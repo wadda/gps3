@@ -23,6 +23,6 @@ Four lines of code that lets you connect, communicate and control most of what y
         print('----------------')
         sleep(60)  # Sleep, or do other things for as long as you like.
 
-Without arguments between the brackets the threaded client defaults to `host='127.0.01'`, `port=2947`, `gpsd_protocol='json'`, and `usnap=0.2`, for a respectable default of 2/10th of a second micro nap after each empty socket lookup.
+Without arguments between the brackets the threaded client defaults to `host='127.0.0.1'`, `port=2947`, `gpsd_protocol='json'`, and `usnap=0.2`, for a respectable default of 2/10th of a second micro nap after each empty socket lookup.
 
 The rest of the project is in DESCRIPTION.rst, or documented in the files themselves.
