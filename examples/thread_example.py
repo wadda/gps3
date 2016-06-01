@@ -22,11 +22,11 @@ agps_thread.run_thread(usnap=1)  # Throttle time to sleep after an empty lookup,
 
 while True:  # All data is available via instantiated thread data stream attribute.
     # line #140-ff of /usr/local/lib/python3.5/dist-packages/gps3/agps.py
-    print('-----')
-    print(agps_thread.data_stream.time)
-    print('Lat:{}'.format(agps_thread.data_stream.lat))
-    print('Lon:{}'.format(agps_thread.data_stream.lon))
-    print('Speed:{}'.format(agps_thread.data_stream.speed))
+    print('---------------------')
+    print(                   agps_thread.data_stream.time)
+    print('Lat:{}   '.format(agps_thread.data_stream.lat))
+    print('Lon:{}   '.format(agps_thread.data_stream.lon))
+    print('Speed:{} '.format(agps_thread.data_stream.speed))
     print('Course:{}'.format(agps_thread.data_stream.track))
-    print('-----')
+    print('---------------------')
     sleep(60)
