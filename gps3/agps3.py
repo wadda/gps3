@@ -34,7 +34,7 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.30.4'
+__version__ = '0.32.0'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
@@ -171,7 +171,7 @@ class Dot(object):
         """
         try:
             fresh_data = json.loads(gpsd_socket_response)  # 'class' is popped for iterator lead
-            class_name = fresh_data.pop('class')
+            class_name = fresh_data.pop('class', 'ERROR')  # is 'message' regardless
             for key in self.packages[class_name]:
                 setattr(self, key, fresh_data.get(key, 'n/a'))  # Updates and restores 'n/a' if attribute is absent in the data
 

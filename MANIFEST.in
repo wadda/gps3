@@ -1,4 +1,4 @@
 include LICENSE
-include DESCRIPTION.rst
+include DESCRIPTION.rst 
 recursive-include examples *.py
 

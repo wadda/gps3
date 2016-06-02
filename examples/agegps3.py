@@ -1,17 +1,19 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/python3
 # coding=utf-8
 """creates Google Earth kml file (/tmp/gps3_live.kml) for realtime (4 second GE default) updates of gps coordinates and history
 # Concept from Jaroslaw Zachwieja <grok!warwick.ac.uk> &  TJ <linux!tjworld.net>
 # from their work in gegpsd.py included in gpsd project (http://catb.org/gpsd)
 """
 import time
+
 from gps3 import agps3  # Moe, remember to CHANGE to straight 'import agps3' if not installed,
+
 # or check which Python version it's installed in. You forget sometimes.
 
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2016 Moe'
 __license__ = 'MIT'
-__version__ = '0.30.4'
+__version__ = '0.32.0'
 
 link_file = '/tmp/agps3_live.kml'  # AFAIK, 'Links' call href on time events or entry/exit  Multiple href may be possible.
 gps3data_file = '/tmp/agps3_static.kml'

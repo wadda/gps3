@@ -17,7 +17,7 @@ defaults to host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 These dictionaries are literated from the JSON data packet sent from the GPSD.
 
 .. code-block::
-    
+
     from gps3 import gps3
     gps_socket = gps3.GPSDSocket()
     gps_fix = gps3.Fix()
@@ -43,7 +43,7 @@ defaults to host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 2) **Dot** unpacks the streamed gpsd data into object attribute values.
 
 .. code-block::
-    
+
     from gps3 import agps3
     gps_socket = agps3.GPSDSocket()
     dot = agps3.Dot()
@@ -96,9 +96,5 @@ Un-install using the method above and ``y`` to delete the old files, then
 This will bypass the cached version and fetch the most recent *typo-free* version.
 
 Comments are always appreciated.
-
-
-
-
 
 

@@ -33,7 +33,7 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.30.4'
+__version__ = '0.32.0'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
@@ -137,36 +137,35 @@ class Fix(object):
     """Retrieve JSON Object(s) from GPSDSocket and unpack it into respective
     gpsd 'class' dictionaries, TPV, SKY, etc. yielding hours of fun and entertainment.
     """
+    packages = {
+        'VERSION': {'release', 'proto_major', 'proto_minor', 'remote', 'rev'},
+        'TPV': {'alt', 'climb', 'device', 'epc', 'epd', 'eps', 'ept', 'epv', 'epx', 'epy', 'lat', 'lon', 'mode', 'speed', 'tag', 'time', 'track'},
+        'SKY': {'satellites', 'gdop', 'hdop', 'pdop', 'tdop', 'vdop', 'xdop', 'ydop'},
+        # Subset of SKY: 'satellites': {'PRN', 'ss', 'el', 'az', 'used'}  # is always present.
+        'GST': {'alt', 'device', 'lat', 'lon', 'major', 'minor', 'orient', 'rms', 'time'},
+        'ATT': {'acc_len', 'acc_x', 'acc_y', 'acc_z', 'depth', 'device', 'dip', 'gyro_x', 'gyro_y', 'heading', 'mag_len', 'mag_st', 'mag_x',
+                'mag_y', 'mag_z', 'pitch', 'pitch_st', 'roll', 'roll_st', 'temperature', 'time', 'yaw', 'yaw_st'},
+        # 'POLL': {'active', 'tpv', 'sky', 'time'},
+        'PPS': {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec', 'precision'},
+        'TOFF': {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec'},
+        'DEVICES': {'devices', 'remote'},
+        'DEVICE': {'activated', 'bps', 'cycle', 'mincycle', 'driver', 'flags', 'native', 'parity', 'path', 'stopbits', 'subtype'},
+        # 'AIS': {}  # see: http://catb.org/gpsd/AIVDM.html
+        'ERROR': {'message'}}  # TODO: Full suite of possible GPSD output
 
     def __init__(self):
         """Potential data packages from gpsd for a generator of class attribute dictionaries"""
-
-        packages = {'VERSION': {'release', 'proto_major', 'proto_minor', 'remote', 'rev'},
-                    'TPV': {'alt', 'climb', 'device', 'epc', 'epd', 'eps', 'ept', 'epv', 'epx', 'epy', 'lat', 'lon', 'mode', 'speed', 'tag', 'time', 'track'},
-                    'SKY': {'satellites', 'gdop', 'hdop', 'pdop', 'tdop', 'vdop', 'xdop', 'ydop'},
-                    # Subset of SKY: 'satellites': {'PRN', 'ss', 'el', 'az', 'used'}  # is always present.
-                    'GST': {'alt', 'device', 'lat', 'lon', 'major', 'minor', 'orient', 'rms', 'time'},
-                    'ATT': {'acc_len', 'acc_x', 'acc_y', 'acc_z', 'depth', 'device', 'dip', 'gyro_x', 'gyro_y', 'heading', 'mag_len', 'mag_st', 'mag_x',
-                            'mag_y', 'mag_z', 'pitch', 'pitch_st', 'roll', 'roll_st', 'temperature', 'time', 'yaw', 'yaw_st'},
-                    # 'POLL': {'active', 'tpv', 'sky', 'time'},
-                    'PPS': {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec', 'precision'},
-                    'TOFF': {'device', 'clock_sec', 'clock_nsec', 'real_sec', 'real_nsec'},
-                    'DEVICES': {'devices', 'remote'},
-                    'DEVICE': {'activated', 'bps', 'cycle', 'mincycle', 'driver', 'flags', 'native', 'parity', 'path', 'stopbits', 'subtype'},
-                    # 'AIS': {}  # see: http://catb.org/gpsd/AIVDM.html
-                    'ERROR': {'message'}}  # TODO: Full suite of possible GPSD output
-
-        for package_name, dataset in packages.items():
+        for package_name, dataset in self.packages.items():
             _emptydict = {key: 'n/a' for key in dataset}
             setattr(self, package_name, _emptydict)
 
         self.DEVICES['devices'] = {key: 'n/a' for key in packages['DEVICE']}  # How does multiple listed devices work?
         # self.POLL = {'tpv': self.TPV, 'sky': self.SKY, 'time': 'n/a', 'active': 'n/a'}
 
-    def refresh(self, gpsd_data_package):
+    def refresh(self, gpsd_socket_response):
         """Sets new socket data as Fix attributes in those initialised dictionaries
         Arguments:
-            gpsd_data_package (json object):
+            gpsd_socket_response (json object):
         Provides:
         self attribute dictionaries, e.g., self.TPV['lat'], self.SKY['gdop']
         Raises:
@@ -175,7 +174,7 @@ class Fix(object):
         applies to a lot of things.
         """
         try:
-            fresh_data = json.loads(gpsd_data_package)  # The reserved word 'class' is popped from JSON object class
+            fresh_data = json.loads(gpsd_socket_response)  # The reserved word 'class' is popped from JSON object class
             package_name = fresh_data.pop('class', 'ERROR')  # gpsd data package errors are also 'ERROR'.
             package = getattr(self, package_name, package_name)  # packages are named for JSON object class
             for key in package.keys():

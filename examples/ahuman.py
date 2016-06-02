@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/env python3
 # coding=utf-8
 
 """
@@ -29,7 +29,7 @@ from gps3 import agps3  # Moe, remember to CHANGE to straight 'import agps3' if 
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.30.4'
+__version__ = '0.32.0'
 
 CONVERSION = {'raw': (1, 1, 'm/s', 'meters'),
               'metric': (3.6, 1, 'kph', 'meters'),
@@ -247,7 +247,7 @@ def show_human():
                     device_window.addstr(1, 2, 'Activated: {}'.format(gizmo['activated']))
                     device_window.addstr(2, 2, 'Host:{0.host}:{0.port} {1}'.format(args, gizmo['path']))
                     device_window.addstr(3, 2, 'Driver:{driver}     BPS:{bps}'.format(**gizmo))
-                    device_window.addstr(4, 2, 'Cycle:{0} Hz {1!s:>14} Elapsed'.format(gizmo['cycle'], elapsed))
+                    device_window.addstr(4, 2, 'Cycle:{0} Hz {1!s:>14} Elapsed'.format(1 / gizmo['cycle'], elapsed))
 
             packet_window.clear()
             # packet_window.border(0)

@@ -3,7 +3,11 @@
 """Threaded gps client"""
 from threading import Thread
 from time import sleep
-from gps3 import agps3
+
+try: # This kludge to get around imports with files and directories the same name.
+    from gps3 import agps3  # Python 3
+except ImportError:
+    from . import agps3  # Python 2
 
 
 

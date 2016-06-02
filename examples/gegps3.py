@@ -5,7 +5,6 @@
 # from their work in gegpsd.py included in gpsd project (http://catb.org/gpsd)
 """
 import time
-
 from gps3 import gps3  # Moe, remember to CHANGE to straight 'import gps3' if not installed,
 
 # or check which Python version it's installed in. You forget sometimes.
@@ -13,7 +12,7 @@ from gps3 import gps3  # Moe, remember to CHANGE to straight 'import gps3' if no
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2014-2016 Moe'
 __license__ = 'MIT'
-__version__ = '0.30.4'
+__version__ = '0.32.0'
 
 link_file = '/tmp/gps3_live.kml'  # AFAIK, 'Links' call href on time events or entry/exit  Multiple href may be possible.
 gps3data_file = '/tmp/gps3_static.kml'
