@@ -202,6 +202,9 @@ def show_human():
             elif key_press == ord('n'):  # Nautical
                 units = 'nautical'
                 data_window.clear()
+            elif key_press == ord('d'):  # Refresh device listings
+                gps_socket.send('?DEVICES;')
+                device_window.clear()
 
             data_window.box()
             data_window.addstr(0, 2, 'GPS3 Python {}.{}.{} GPSD Interface'.format(*sys.version_info), curses.A_BOLD)
