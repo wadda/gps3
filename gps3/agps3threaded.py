@@ -14,7 +14,7 @@ except ImportError:
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.1'
+__version__ = '0.2'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
@@ -45,20 +45,26 @@ class AGPS3mechanism(object):
             else:
                 sleep(usnap)  # Sleep in seconds after an empty look up.
 
-    def run_thread(self, usnap=.2):
+    def run_thread(self, usnap=.2, daemon=True):
         """run thread with data
         """
         # self.stream_data() # Unless other changes are made this would limit to localhost only.
-        gps3_data_thread = Thread(group=None, target=self.unpack_data, args={usnap: usnap})
+        gps3_data_thread = Thread(target=self.unpack_data, args={usnap: usnap}, daemon=True)
         gps3_data_thread.start()
 
     def stop(self):
         """ Stop as much as possible, as gracefully as possible, if possible.
         """
         self.socket.close()  # Close socket, thread is on its own so far.
+        self.
         print('Process stopped by user')
         print('Good bye.')
 
+
+    def join(self, timeout=None):
+        """ Stop the thread and wait for it to end. """
+        self._stopevent.set()
+        threading.Thread.join(self, timeout)
 
 if __name__ == '__main__':
     from gps3.misc import add_args
