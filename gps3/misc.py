@@ -136,3 +136,10 @@ def sexagesimal(sexathang, tag, form='DDD'):
         sexathang = '{0}°{1}\'{2:2.3f}\"'.format(int(degree_latlon), int(minute_latlon), second_latlon)
 
     return sexathang + cardinal
+
+
+def hertz(hz):
+    """Change or enumerate a Faster/Slower gps refresh rate if device is able"""
+    from subprocess import call
+    inverse = str(1 / hz)
+    call((['gpsctl', '-c', inverse]))
