@@ -61,6 +61,27 @@ For a human experience, both versions have trivial showcase scripts, located at
 
 ``/usr/local/share/gps3/examples/``
 
+**agpsthreaded.py** is agps3 *prethreaded* as a default daemon thread with all data exposed as attributes of the threaded data stream.
+
+.. code-block::
+
+    from gps3.agps3threaded import AGPS3mechanism
+    agps_thread = AGPS3mechanism()  # Instantiate AGPS3 Mechanisms
+    agps_thread.stream_data()  # From localhost (), or other hosts, by example, (host='gps.ddns.net')
+    agps_thread.run_thread()  # Throttle time to sleep after an empty lookup, default '()' 0.2 two tenths of a second
+
+    while True:  # All data is available via instantiated thread data stream attribute.
+        # line #140-ff of /usr/local/lib/python3.5/dist-packages/gps3/agps.py
+        print('---------------------')
+        print(                   agps_thread.data_stream.time)
+        print('Lat:{}   '.format(agps_thread.data_stream.lat))
+        print('Lon:{}   '.format(agps_thread.data_stream.lon))
+        print('Speed:{} '.format(agps_thread.data_stream.speed))
+        print('Course:{}'.format(agps_thread.data_stream.track))
+        print('---------------------')
+        sleep(60) # Sleep, or do other things for as long as you like.
+
+
 **human.py** showcases gps3.py, **ahuman.py** showcases agps3.py
 
 ``python[X] /usr/local/share/gps3/examples/[a]human.py [-host] [-port]`` or ``--help``   for list of commandline options.
@@ -70,6 +91,8 @@ Toggle Lat/Lon form with '**0**', '**1**', '**2**', '**3**' for RAW, DDD, DMM, D
 Toggle units with  '**0**', '**m**', '**i**', '**n**', for 'raw', Metric, Imperial, Nautical
 
 Toggle between JSON and NMEA outputs with '**j**' and '**a**' respectively.
+
+Refresh the display of device information with '**d**' to see the return after issuing ``gps3.misc.hertz(5)`` to change capable gps devices to 5Hz
 
 Quit with '**q**' or '**^c**'
 
