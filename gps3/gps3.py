@@ -159,7 +159,7 @@ class Fix(object):
             _emptydict = {key: 'n/a' for key in dataset}
             setattr(self, package_name, _emptydict)
 
-        self.DEVICES['devices'] = {key: 'n/a' for key in packages['DEVICE']}  # How does multiple listed devices work?
+        self.DEVICES['devices'] = {key: 'n/a' for key in self.packages['DEVICE']}  # How does multiple listed devices work?
         # self.POLL = {'tpv': self.TPV, 'sky': self.SKY, 'time': 'n/a', 'active': 'n/a'}
 
     def refresh(self, gpsd_socket_response):
