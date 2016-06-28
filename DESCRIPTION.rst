@@ -12,7 +12,7 @@ defaults to host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 
 1) **GPSDSocket** creates a GPSD socket connection & request/retrieve GPSD output.
 
-2) **Fix** unpacks the streamed gpsd data into python dictionaries.
+2) **DataStream** unpacks the streamed gpsd data into python dictionaries.
 
 These dictionaries are literated from the JSON data packet sent from the GPSD.
 
@@ -20,14 +20,14 @@ These dictionaries are literated from the JSON data packet sent from the GPSD.
 
     from gps3 import gps3
     gps_socket = gps3.GPSDSocket()
-    gps_fix = gps3.Fix()
+    data_stream = gps3.DataStream()
     gps_socket.connect()
     gps_socket.watch()
     for new_data in gps_socket:
         if new_data:
-            gps_fix.refresh(new_data)
-            print('Altitude = ',gps_fix.TPV['alt'])
-            print('Latitude = ',gps_fix.TPV['lat'])
+            data_stream.unpack(new_data)
+            print('Altitude = ', data_stream.TPV['alt'])
+            print('Latitude = ', data_stream.TPV['lat'])
 
 Consult Lines 147-ff for Attribute/Key possibilities.
 or http://www.catb.org/gpsd/gpsd_json.html
@@ -40,20 +40,20 @@ agps3.py is also a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd) and
 defaults to host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 
 1) **GPSDSocket** creates a GPSD socket connection & request/retrieve GPSD output.
-2) **Dot** unpacks the streamed gpsd data into object attribute values.
+2) **DataStream** unpacks the streamed gpsd data into object attribute values.
 
 .. code-block::
 
     from gps3 import agps3
     gps_socket = agps3.GPSDSocket()
-    dot = agps3.Dot()
+    data_stream = agps3.DataStream()
     gps_socket.connect()
     gps_socket.watch()
     for new_data in gps_socket:
         if new_data:
-            dot.unpack(new_data)
-            print('Altitude = ', dot.alt)
-            print('Latitude = ', dot.lat)
+            data_stream.unpack(new_data)
+            print('Altitude = ', data_stream.alt)
+            print('Latitude = ', data_stream.lat)
 
 Consult Lines 140-ff for Attribute-value possibilities.
 
