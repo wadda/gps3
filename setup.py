@@ -24,7 +24,7 @@ setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.30.4',
+    version='0.33.0',
 
     description='Python 2.7-3.5 clients for gpsd',
     long_description=long_description,
@@ -101,7 +101,8 @@ setup(
                  ['examples/ahuman.py',
                   'examples/agegps3.py',
                   'examples/human.py',
-                  'examples/gegps3.py'])
+                  'examples/gegps3.py',
+                  'examples/thread_example.py'])
                 ],
 
     # To provide executable scripts, use entry points in preference to the
