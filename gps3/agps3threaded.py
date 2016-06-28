@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.5
 # coding=utf-8
 """Threaded gps client"""
+from __future__ import print_function
 from threading import Thread
 from time import sleep
 
@@ -27,7 +28,7 @@ class AGPS3mechanism(object):
 
     def __init__(self):
         self.socket = agps3.GPSDSocket()
-        self.data_stream = agps3.Dot()
+        self.data_stream = agps3.DataStream()
 
     def stream_data(self, host=HOST, port=GPSD_PORT, enable=True, gpsd_protocol=PROTOCOL, devicepath=None):
         """ Connect and command, point and shoot, flail and bail
@@ -36,7 +37,7 @@ class AGPS3mechanism(object):
         self.socket.watch(enable, gpsd_protocol, devicepath)
 
     def unpack_data(self, usnap=.2):  # 2/10th second sleep between empty requests
-        """ Iterates over socket response and refreshes values of object attributes.
+        """ Iterates over socket response and unpackes values of object attributes.
         Sleeping here has the greatest response to cpu cycles short of blocking sockets
         """
         for new_data in self.socket:
@@ -56,34 +57,33 @@ class AGPS3mechanism(object):
         """ Stop as much as possible, as gracefully as possible, if possible.
         """
         self.socket.close()  # Close socket, thread is on its own so far.
-        self.
         print('Process stopped by user')
         print('Good bye.')
 
 
-    def join(self, timeout=None):
-        """ Stop the thread and wait for it to end. """
-        self._stopevent.set()
-        threading.Thread.join(self, timeout)
-
 if __name__ == '__main__':
-    from gps3.misc import add_args
+    try:  # This kludge to get around imports with files and directories the same name.
+        from gps3.misc import add_args  # Python 3
+    except ImportError:
+        import sys
+        from os import path
+        sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+        from misc import add_args  # Python 2s
+
     args = add_args()
 
     agps3_thread = AGPS3mechanism()  # The thread triumvirate
     agps3_thread.stream_data(host=args.host, port=args.port, gpsd_protocol=args.gpsd_protocol)
     agps3_thread.run_thread(usnap=.2)  # Throttle sleep between empty lookups in seconds defaults = 0.2 of a second.
 
-    nod = 0
     seconds_nap = int(args.seconds_nap)  # Threaded Demo loop 'seconds_nap' is not the same as 'usnap'
-    while nod <= seconds_nap - 1:
+    while True:
         for nod in range(1, seconds_nap):
-            print('{}% completed wait period'.format(round(100 * (nod / seconds_nap), 2)))
+            print('{:.0%} wait period of {} seconds'.format(nod / seconds_nap, seconds_nap), end='\r')
             nod += 1
             sleep(1)
 
         print('\nGPS3 Thread is still functioning at {}'.format(agps3_thread.data_stream.time))
         print('Lat:{}  Lon:{}  Speed:{}  Course:{}\n'.format(agps3_thread.data_stream.lat, agps3_thread.data_stream.lon,
-                                                          agps3_thread.data_stream.speed,
-                                                          agps3_thread.data_stream.track))
-        nod = 0
+                                                      agps3_thread.data_stream.speed,
+                                                      agps3_thread.data_stream.track))
