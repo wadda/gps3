@@ -5,18 +5,18 @@ GPS3 (gps3.py) is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
 Default host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 
 1) 'GPSDSocket' creates a GPSD socket connection & request/retrieve GPSD output.
-2) 'Fix' unpacks streamed gpsd JSON data and literates it into python dictionaries.
+2) 'DataStream' Streamed gpsd JSON data literates it into python dictionaries.
 
 Import          from gps3 import gps3
 Instantiate     gps_socket = gps3.GPSDSocket()
-                gps_fix = gps3.Fix()
+                data_stream = gps3.DataStream()
 Run             gps_socket.connect()
                 gps_socket.watch()
 Iterate         for new_data in gps_socket:
                     if new_data:
-                        gps_fix.refresh(new_data)
-Use                     print('Altitude = ',gps_fix.TPV['alt'])
-                        print('Latitude = ',gps_fix.TPV['lat'])
+                        data_stream.unpack(new_data)
+Use                     print('Altitude = ',data_stream.TPV['alt'])
+                        print('Latitude = ',data_stream.TPV['lat'])
 
 Consult Lines 144-ff for Attribute/Key possibilities.
 or http://www.catb.org/gpsd/gpsd_json.html
@@ -33,7 +33,7 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.32.0'
+__version__ = '0.33.0'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
@@ -133,7 +133,7 @@ class GPSDSocket(object):
         self.streamSock = None
 
 
-class Fix(object):
+class DataStream(object):
     """Retrieve JSON Object(s) from GPSDSocket and unpack it into respective
     gpsd 'class' dictionaries, TPV, SKY, etc. yielding hours of fun and entertainment.
     """
@@ -162,8 +162,8 @@ class Fix(object):
         self.DEVICES['devices'] = {key: 'n/a' for key in self.packages['DEVICE']}  # How does multiple listed devices work?
         # self.POLL = {'tpv': self.TPV, 'sky': self.SKY, 'time': 'n/a', 'active': 'n/a'}
 
-    def refresh(self, gpsd_socket_response):
-        """Sets new socket data as Fix attributes in those initialised dictionaries
+    def unpack(self, gpsd_socket_response):
+        """Sets new socket data as DataStream attributes in those initialised dictionaries
         Arguments:
             gpsd_socket_response (json object):
         Provides:
@@ -181,7 +181,7 @@ class Fix(object):
                 package[key] = fresh_data.get(key, 'n/a')  # Restores 'n/a' if key is absent in the socket response
 
         except AttributeError:  # 'str' object has no attribute 'keys'
-            sys.stderr.write('There is an unexpected exception in Fix.refresh')
+            sys.stderr.write('There is an unexpected exception in DataStream.unpack')
             return
 
         except (ValueError, KeyError) as error:

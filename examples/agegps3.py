@@ -13,7 +13,7 @@ from gps3 import agps3  # Moe, remember to CHANGE to straight 'import agps3' if 
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2016 Moe'
 __license__ = 'MIT'
-__version__ = '0.32.0'
+__version__ = '0.33.0'
 
 link_file = '/tmp/agps3_live.kml'  # AFAIK, 'Links' call href on time events or entry/exit  Multiple href may be possible.
 gps3data_file = '/tmp/agps3_static.kml'
@@ -36,20 +36,20 @@ f.close()
 gps_socket = agps3.GPSDSocket()
 gps_socket.connect(host='localhost', port=2947)
 gps_socket.watch()
-dot = agps3.Dot()
+data_stream = agps3.DataStream()
 
 try:
     for new_data in gps_socket:
         if new_data:
-            dot.unpack(new_data)
-            if dot.lat != 'n/a':
-                speed = dot.speed
-                latitude = dot.lat
-                longitude = dot.lon
-                altitude = dot.alt
+            data_stream.unpack(new_data)
+            if data_stream.lat != 'n/a':
+                speed = data_stream.speed
+                latitude = data_stream.lat
+                longitude = data_stream.lon
+                altitude = data_stream.alt
 
-                if dot.track == 'n/a': heading = dot.track  # 'track' frequently is missing and returns as 'n/a'
-                else: heading = round(dot.track)  # and heading precision in hundreths is just clutter.
+                if data_stream.track == 'n/a': heading = data_stream.track  # 'track' frequently is missing and returns as 'n/a'
+                else: heading = round(data_stream.track)  # and heading precision in hundreths is just clutter.
 
                 gps3data_history.append(longitude)
                 gps3data_history.append(latitude)

@@ -5,6 +5,7 @@
 # from their work in gegpsd.py included in gpsd project (http://catb.org/gpsd)
 """
 import time
+
 from gps3 import gps3  # Moe, remember to CHANGE to straight 'import gps3' if not installed,
 
 # or check which Python version it's installed in. You forget sometimes.
@@ -12,7 +13,7 @@ from gps3 import gps3  # Moe, remember to CHANGE to straight 'import gps3' if no
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2014-2016 Moe'
 __license__ = 'MIT'
-__version__ = '0.32.0'
+__version__ = '0.33.0'
 
 link_file = '/tmp/gps3_live.kml'  # AFAIK, 'Links' call href on time events or entry/exit  Multiple href may be possible.
 gps3data_file = '/tmp/gps3_static.kml'
@@ -35,20 +36,20 @@ f.close()
 gps_socket = gps3.GPSDSocket()
 gps_socket.connect(host='127.0.0.1', port=2947)
 gps_socket.watch()
-fix = gps3.Fix()
+data_stream = gps3.DataStream()
 
 try:
     for new_data in gps_socket:
         if new_data:
-            fix.refresh(new_data)
-        if fix.TPV['lat'] != 'n/a':
-            speed = fix.TPV['speed']
-            latitude = fix.TPV['lat']
-            longitude = fix.TPV['lon']
-            altitude = fix.TPV['alt']
+            data_stream.unpack(new_data)
+        if data_stream.TPV['lat'] != 'n/a':
+            speed = data_stream.TPV['speed']
+            latitude = data_stream.TPV['lat']
+            longitude = data_stream.TPV['lon']
+            altitude = data_stream.TPV['alt']
 
-            if fix.TPV['track'] == 'n/a': heading = fix.TPV['track']  # 'track' frequently is missing and returns as 'n/a'
-            else: heading = round(fix.TPV['track'])  # and heading precision in hundreths is just clutter.
+            if data_stream.TPV['track'] == 'n/a': heading = data_stream.TPV['track']  # 'track' frequently is missing and returns as 'n/a'
+            else: heading = round(data_stream.TPV['track'])  # and heading precision in hundreths is just clutter.
 
             gps3data_history.append(longitude)
             gps3data_history.append(latitude)

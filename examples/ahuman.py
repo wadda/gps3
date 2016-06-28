@@ -29,7 +29,7 @@ from gps3 import agps3  # Moe, remember to CHANGE to straight 'import agps3' if 
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.32.0'
+__version__ = '0.33.0'
 
 CONVERSION = {'raw': (1, 1, 'm/s', 'meters'),
               'metric': (3.6, 1, 'kph', 'meters'),
@@ -61,7 +61,7 @@ def add_args():
 def satellites_used(feed):
     """Counts number of satellites used in calculation from total visible satellites
     Arguments:
-        feed feed=dot.satellites
+        feed feed=data_stream.satellites
     Returns:
         total_satellites(int):
         used_satellites (int):
@@ -108,11 +108,11 @@ def unit_conversion(thing, units, length=False):
     return thing, CONVERSION[units][2 + length]
 
 
-def sexagesimal(sexathang, tag, form='DDD'):
+def sexagesimal(sexathang, latlon, form='DDD'):
     """
     Arguments:
         sexathang: (float), -15.560615 (negative = South), -146.241122 (negative = West)  # Apataki Carenage
-        tag: (str) 'lat' | 'lon'
+        latlon: (str) 'lat' | 'lon'
         form: (str), 'DDD'|'DMM'|'DMS', decimal Degrees, decimal Minutes, decimal Seconds
     Returns:
         latitude: e.g., '15°33'38.214"S'
@@ -123,13 +123,13 @@ def sexagesimal(sexathang, tag, form='DDD'):
         sexathang = 'n/a'
         return sexathang
 
-    if tag == 'lon':
+    if latlon == 'lon':
         if sexathang > 0.0:
             cardinal = 'E'
         if sexathang < 0.0:
             cardinal = 'W'
 
-    if tag == 'lat':
+    if latlon == 'lat':
         if sexathang > 0.0:
             cardinal = 'N'
         if sexathang < 0.0:
@@ -170,7 +170,7 @@ def show_human():
 
     for new_data in gps_socket:
         if new_data:
-            dot.unpack(new_data)
+            data_stream.unpack(new_data)
 
             screen.nodelay(1)
             key_press = screen.getch()
@@ -209,41 +209,41 @@ def show_human():
 
             data_window.box()
             data_window.addstr(0, 2, 'AGPS3 Python {}.{}.{} GPSD Interface'.format(*sys.version_info), curses.A_BOLD)
-            data_window.addstr(1, 2, 'Time:  {} '.format(dot.time))
-            data_window.addstr(2, 2, 'Latitude:  {} '.format(sexagesimal(dot.lat, 'lat', form)))
-            data_window.addstr(3, 2, 'Longitude: {} '.format(sexagesimal(dot.lon, 'lon', form)))
-            data_window.addstr(4, 2, 'Altitude:  {} {}'.format(*unit_conversion(dot.alt, units, length=True)))
-            data_window.addstr(5, 2, 'Speed:     {} {}'.format(*unit_conversion(dot.speed, units)))
-            data_window.addstr(6, 2, 'Heading:   {}° True'.format(dot.track))
-            data_window.addstr(7, 2, 'Climb:     {} {}'.format(*unit_conversion(dot.climb, units, length=True)))
-            data_window.addstr(8, 2, 'Status:     {:<}D  '.format(dot.mode))
-            data_window.addstr(9, 2, 'Latitude Err:  +/-{} {}'.format(*unit_conversion(dot.epx, units, length=True)))
-            data_window.addstr(10, 2, 'Longitude Err: +/-{} {}'.format(*unit_conversion(dot.epy, units, length=True)))
-            data_window.addstr(11, 2, 'Altitude Err:  +/-{} {}'.format(*unit_conversion(dot.epv, units, length=True)))
-            data_window.addstr(12, 2, 'Course Err:    +/-{}   '.format(dot.epc), curses.A_DIM)
-            data_window.addstr(13, 2, 'Speed Err:     +/-{} {}'.format(*unit_conversion(dot.eps, units)), curses.A_DIM)
-            data_window.addstr(14, 2, 'Time Offset:   +/-{}  '.format(dot.ept), curses.A_DIM)
-            data_window.addstr(15, 2, 'gdop:{}  pdop:{}  tdop:{}'.format(dot.gdop, dot.pdop, dot.tdop))
-            data_window.addstr(16, 2, 'ydop:{}  xdop:{} '.format(dot.ydop, dot.xdop))
-            data_window.addstr(17, 2, 'vdop:{}  hdop:{} '.format(dot.vdop, dot.hdop))
+            data_window.addstr(1, 2, 'Time:  {} '.format(data_stream.time))
+            data_window.addstr(2, 2, 'Latitude:  {} '.format(sexagesimal(data_stream.lat, 'lat', form)))
+            data_window.addstr(3, 2, 'Longitude: {} '.format(sexagesimal(data_stream.lon, 'lon', form)))
+            data_window.addstr(4, 2, 'Altitude:  {} {}'.format(*unit_conversion(data_stream.alt, units, length=True)))
+            data_window.addstr(5, 2, 'Speed:     {} {}'.format(*unit_conversion(data_stream.speed, units)))
+            data_window.addstr(6, 2, 'Heading:   {}° True'.format(data_stream.track))
+            data_window.addstr(7, 2, 'Climb:     {} {}'.format(*unit_conversion(data_stream.climb, units, length=True)))
+            data_window.addstr(8, 2, 'Status:     {:<}D  '.format(data_stream.mode))
+            data_window.addstr(9, 2, 'Latitude Err:  +/-{} {}'.format(*unit_conversion(data_stream.epx, units, length=True)))
+            data_window.addstr(10, 2, 'Longitude Err: +/-{} {}'.format(*unit_conversion(data_stream.epy, units, length=True)))
+            data_window.addstr(11, 2, 'Altitude Err:  +/-{} {}'.format(*unit_conversion(data_stream.epv, units, length=True)))
+            data_window.addstr(12, 2, 'Course Err:    +/-{}   '.format(data_stream.epc), curses.A_DIM)
+            data_window.addstr(13, 2, 'Speed Err:     +/-{} {}'.format(*unit_conversion(data_stream.eps, units)), curses.A_DIM)
+            data_window.addstr(14, 2, 'Time Offset:   +/-{}  '.format(data_stream.ept), curses.A_DIM)
+            data_window.addstr(15, 2, 'gdop:{}  pdop:{}  tdop:{}'.format(data_stream.gdop, data_stream.pdop, data_stream.tdop))
+            data_window.addstr(16, 2, 'ydop:{}  xdop:{} '.format(data_stream.ydop, data_stream.xdop))
+            data_window.addstr(17, 2, 'vdop:{}  hdop:{} '.format(data_stream.vdop, data_stream.hdop))
 
             sat_window.clear()
             sat_window.box()
-            sat_window.addstr(0, 2, 'Using {0[1]}/{0[0]} satellites (truncated)'.format(satellites_used(dot.satellites)))
+            sat_window.addstr(0, 2, 'Using {0[1]}/{0[0]} satellites (truncated)'.format(satellites_used(data_stream.satellites)))
             sat_window.addstr(1, 2, 'PRN     Elev   Azimuth   SNR   Used')
             line = 2
-            if isinstance(dot.satellites, list):  # Nested lists of dictionaries are strings before data is present
-                for sats in dot.satellites[0:10]:
+            if isinstance(data_stream.satellites, list):  # Nested lists of dictionaries are strings before data is present
+                for sats in data_stream.satellites[0:10]:
                     sat_window.addstr(line, 2, '{PRN:>2}   {el:>6}   {az:>5}   {ss:>5}   {used:}'.format(**sats))
                     line += 1
 
             device_window.clear()
             device_window.box()
-            if not isinstance(dot.devices, list):  # Local machines need a 'device' kick start
+            if not isinstance(data_stream.devices, list):  # Local machines need a 'device' kick start
                 gps_socket.send('?DEVICES;')  # to have valid data.  I don't know why.
 
-            if isinstance(dot.devices, list):  # Nested lists of dictionaries are strings before data is present.
-                for gizmo in dot.devices:
+            if isinstance(data_stream.devices, list):  # Nested lists of dictionaries are strings before data is present.
+                for gizmo in data_stream.devices:
                     start_time, _uicroseconds = gizmo['activated'].split('.')  # Remove '.000Z'
                     elapsed = elapsed_time_from(start_time)
 
@@ -259,10 +259,10 @@ def show_human():
 
 #            sleep(.9)
 
-            data_window.refresh()
-            sat_window.refresh()
-            device_window.refresh()
-            packet_window.refresh()
+            data_window.unpack()
+            sat_window.unpack()
+            device_window.unpack()
+            packet_window.unpack()
         else:  # Reduced CPU cycles with the non-blocking socket read, by putting 'sleep' here, rather than hitting
             sleep(.3)  # the socket fast and furious with hundreds of empty checks between sleeps.
 
@@ -285,7 +285,7 @@ def show_nmea():
             data_window.border(0)
             data_window.addstr(0, 2, 'AGPS3 Python {}.{}.{} GPSD Interface Showing NMEA protocol'.format(*sys.version_info), curses.A_BOLD)
             data_window.addstr(2, 2, '{}'.format(gps_socket.response))
-            data_window.refresh()
+            data_window.unpack()
         else:
             sleep(.1)
 
@@ -305,7 +305,7 @@ if __name__ == '__main__':
     gps_socket = agps3.GPSDSocket()
     gps_socket.connect(args.host, args.port)
     gps_socket.watch(gpsd_protocol=args.gpsd_protocol)
-    dot = agps3.Dot()
+    data_stream = agps3.DataStream()
 
     screen = curses.initscr()
     screen.clear()

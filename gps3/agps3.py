@@ -5,18 +5,18 @@ agps3.py is a Python 2.7-3.5 GPSD interface (http://www.catb.org/gpsd)
 Defaults host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 
 1) 'GPSDSocket' creates a GPSD socket connection & request/retrieve GPSD output.
-2) 'Dot' unpacks the streamed gpsd data into object attribute values.
+2) 'DataStream' unpacks the streamed gpsd data into object attribute values.
 
 Import          from gps3 import agps3
 Instantiate     gps_socket = agps3.GPSDSocket()
-                dot = agps3.Dot()
+                data_stream = agps3.DataStream()
 Run             gps_socket.connect()
                 gps_socket.watch()
 Iterate         for new_data in gps_socket
                     if new_data:
-                        dot.unpack(new_data)
-Use                     print('Lat/Lon = ',dot.lat,' ', dot.lon)
-                        print('Altitude = ',dot.alt)
+                        data_stream.unpack(new_data)
+Use                     print('Lat/Lon = ',data_stream.lat,' ', data_stream.lon)
+                        print('Altitude = ',data_stream.alt)
 
 Consult Lines 140-ff for Attribute/Key possibilities.
 
@@ -34,7 +34,7 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.32.0'
+__version__ = '0.33.0'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
@@ -132,7 +132,7 @@ class GPSDSocket(object):
         self.streamSock = None
 
 
-class Dot(object):
+class DataStream(object):
     """Retrieve JSON Object(s) from GPSDSocket and unpack it into respective
     object attributes, e.g., self.lat yielding hours of fun and entertainment.
     """
@@ -159,7 +159,7 @@ class Dot(object):
                 setattr(self, thingy, 'n/a')
 
     def unpack(self, gpsd_socket_response):
-        """Sets new socket data as Fix attributes in those initialised dictionaries
+        """Sets new socket data as DataStream attributes in those initialised dictionaries
         Arguments:
             gpsd_socket_response (json object):
         Provides:
@@ -171,7 +171,7 @@ class Dot(object):
         """
         try:
             fresh_data = json.loads(gpsd_socket_response)  # 'class' is popped for iterator lead
-            class_name = fresh_data.pop('class', 'ERROR')  # is 'message' regardless
+            class_name = fresh_data.pop('class')
             for key in self.packages[class_name]:
                 setattr(self, key, fresh_data.get(key, 'n/a'))  # Updates and restores 'n/a' if attribute is absent in the data
 

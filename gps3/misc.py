@@ -7,7 +7,7 @@ from datetime import datetime
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.1'
+__version__ = '0.1.1'
 
 CONVERSION = {'raw': (1, 1, 'm/s', 'meters'),
               'metric': (3.6, 1, 'kph', 'meters'),
@@ -41,7 +41,7 @@ def add_args():
 def satellites_used(feed):
     """Counts number of satellites used in calculation from total visible satellites
     Arguments:
-        feed feed=dot.satellites
+        feed feed=data_stream.satellites
     Returns:
         total_satellites(int):
         used_satellites (int):
