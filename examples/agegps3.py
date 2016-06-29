@@ -33,13 +33,13 @@ f = open(link_file, 'w')
 f.write(link_data)
 f.close()
 
-gps_socket = agps3.GPSDSocket()
-gps_socket.connect(host='localhost', port=2947)
-gps_socket.watch()
+gpsd_socket = agps3.GPSDSocket()
+gpsd_socket.connect(host='localhost', port=2947)
+gpsd_socket.watch()
 data_stream = agps3.DataStream()
 
 try:
-    for new_data in gps_socket:
+    for new_data in gpsd_socket:
         if new_data:
             data_stream.unpack(new_data)
             if data_stream.lat != 'n/a':
@@ -97,6 +97,6 @@ try:
             time.sleep(.1)
         time.sleep(.7)  # default GE refresh rate is 4 seconds, therefore no refresh older than ~1 second from itself.
 except KeyboardInterrupt:
-    gps_socket.close()
+    gpsd_socket.close()
     print('\nTerminated by user\nGood Bye.\n')
 # End

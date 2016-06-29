@@ -5,8 +5,8 @@ from __future__ import print_function
 from threading import Thread
 from time import sleep
 
-try: # This kludge to get around imports with files and directories the same name.
-    from gps3 import agps3  # Python 3
+try:  # This kludge to get around imports with files and directories the same name.
+    import agps3  # Python 3
 except ImportError:
     from . import agps3  # Python 2
 
@@ -37,7 +37,7 @@ class AGPS3mechanism(object):
         self.socket.watch(enable, gpsd_protocol, devicepath)
 
     def unpack_data(self, usnap=.2):  # 2/10th second sleep between empty requests
-        """ Iterates over socket response and unpackes values of object attributes.
+        """ Iterates over socket response and unpacks values of object attributes.
         Sleeping here has the greatest response to cpu cycles short of blocking sockets
         """
         for new_data in self.socket:

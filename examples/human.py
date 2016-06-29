@@ -28,7 +28,7 @@ from gps3 import gps3  # Moe, remember to CHANGE to straight 'import gps3' if no
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.33.0'
+__version__ = '0.33.2'
 
 CONVERSION = {'raw': (1, 1, 'm/s', 'meters'),
               'metric': (3.6, 1, 'kph', 'meters'),
@@ -167,7 +167,7 @@ def show_human():
     device_window = curses.newwin(6, 39, 13, 40)
     packet_window = curses.newwin(7, 79, 19, 0)
 
-    for new_data in gps_socket:
+    for new_data in gpsd_socket:
         if new_data:
             data_stream.unpack(new_data)
 
@@ -177,8 +177,8 @@ def show_human():
             if key_press == ord('q'):  # quit
                 shut_down()
             elif key_press == ord('a'):  # NMEA
-                gps_socket.watch(enable=False, gpsd_protocol='json')
-                gps_socket.watch(gpsd_protocol='nmea')
+                gpsd_socket.watch(enable=False, gpsd_protocol='json')
+                gpsd_socket.watch(gpsd_protocol='nmea')
                 show_nmea()
             elif key_press == ord('0'):  # raw
                 form = 'RAW'
@@ -203,7 +203,7 @@ def show_human():
                 units = 'nautical'
                 data_window.clear()
             elif key_press == ord('d'):  # Refresh device listings
-                gps_socket.send('?DEVICES;')
+                gpsd_socket.send('?DEVICES;')
                 device_window.clear()
 
             data_window.box()
@@ -239,7 +239,7 @@ def show_human():
             # device_window.clear()
             device_window.box()
             if not isinstance(data_stream.DEVICES['devices'], list):  # Local machines need a 'device' kick start
-                gps_socket.send('?DEVICES;')  # to have valid data I don't know why.
+                gpsd_socket.send('?DEVICES;')  # to have valid data I don't know why.
 
             if isinstance(data_stream.DEVICES['devices'], list):  # Nested lists of dictionaries are strings before data is present.
                 for gizmo in data_stream.DEVICES['devices']:
@@ -258,10 +258,10 @@ def show_human():
 
 #            sleep(.9)
 
-            data_window.unpack()
-            sat_window.unpack()
-            device_window.unpack()
-            packet_window.unpack()
+            data_window.refresh()
+            sat_window.refresh()
+            device_window.refresh()
+            packet_window.refresh()
         else:  # Reduced CPU cycles with the non-blocking socket read, by putting 'sleep' here, rather than hitting
             sleep(.1)  # the socket fast and furious with hundreds of empty checks between sleeps.
 
@@ -270,21 +270,21 @@ def show_nmea():
     """NMEA output in curses terminal"""
     data_window = curses.newwin(24, 79, 0, 0)
 
-    for new_data in gps_socket:
+    for new_data in gpsd_socket:
         if new_data:
             screen.nodelay(1)
             key_press = screen.getch()
             if key_press == ord('q'):
                 shut_down()
             elif key_press == ord('j'):  # raw
-                gps_socket.watch(enable=False, gpsd_protocol='nmea')
-                gps_socket.watch(gpsd_protocol='json')
+                gpsd_socket.watch(enable=False, gpsd_protocol='nmea')
+                gpsd_socket.watch(gpsd_protocol='json')
                 show_human()
 
             data_window.border(0)
             data_window.addstr(0, 2, 'GPS3 Python {}.{}.{} GPSD Interface Showing NMEA protocol'.format(*sys.version_info), curses.A_BOLD)
-            data_window.addstr(2, 2, '{}'.format(gps_socket.response))
-            data_window.unpack()
+            data_window.addstr(2, 2, '{}'.format(gpsd_socket.response))
+            data_window.refresh()
         else:
             sleep(.1)
 
@@ -294,16 +294,16 @@ def shut_down():
     curses.nocbreak()
     curses.echo()
     curses.endwin()
-    gps_socket.close()
+    gpsd_socket.close()
     print('Keyboard interrupt received\nTerminated by user\nGood Bye.\n')
     sys.exit(1)
 
 
 if __name__ == '__main__':
     args = add_args()
-    gps_socket = gps3.GPSDSocket()
-    gps_socket.connect(args.host, args.port)
-    gps_socket.watch(gpsd_protocol=args.gpsd_protocol)
+    gpsd_socket = gps3.GPSDSocket()
+    gpsd_socket.connect(args.host, args.port)
+    gpsd_socket.watch(gpsd_protocol=args.gpsd_protocol)
     data_stream = gps3.DataStream()
 
     screen = curses.initscr()
@@ -322,7 +322,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         shut_down()
     except (OSError, IOError) as error:
-        gps_socket.close()
+        gpsd_socket.close()
         curses.nocbreak()
         curses.echo()
         curses.endwin()

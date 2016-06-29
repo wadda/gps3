@@ -13,7 +13,7 @@ from gps3 import gps3  # Moe, remember to CHANGE to straight 'import gps3' if no
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2014-2016 Moe'
 __license__ = 'MIT'
-__version__ = '0.33.0'
+__version__ = '0.33.2'
 
 link_file = '/tmp/gps3_live.kml'  # AFAIK, 'Links' call href on time events or entry/exit  Multiple href may be possible.
 gps3data_file = '/tmp/gps3_static.kml'
@@ -33,13 +33,13 @@ f = open(link_file, 'w')
 f.write(link_data)
 f.close()
 
-gps_socket = gps3.GPSDSocket()
-gps_socket.connect(host='127.0.0.1', port=2947)
-gps_socket.watch()
+gpsd_socket = gps3.GPSDSocket()
+gpsd_socket.connect(host='127.0.0.1', port=2947)
+gpsd_socket.watch()
 data_stream = gps3.DataStream()
 
 try:
-    for new_data in gps_socket:
+    for new_data in gpsd_socket:
         if new_data:
             data_stream.unpack(new_data)
         if data_stream.TPV['lat'] != 'n/a':
@@ -97,6 +97,6 @@ try:
             time.sleep(.1)
         time.sleep(.8)  # default GE refresh rate is 4 seconds, therefore no refresh older than ~1 second from itself.
 except KeyboardInterrupt:
-    gps_socket.close()
+    gpsd_socket.close()
     print('\nTerminated by user\nGood Bye.\n')
 # End

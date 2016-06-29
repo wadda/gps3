@@ -19,11 +19,11 @@ These dictionaries are literated from the JSON data packet sent from the GPSD.
 .. code-block::
 
     from gps3 import gps3
-    gps_socket = gps3.GPSDSocket()
+    gpsd_socket = gps3.GPSDSocket()
     data_stream = gps3.DataStream()
-    gps_socket.connect()
-    gps_socket.watch()
-    for new_data in gps_socket:
+    gpsd_socket.connect()
+    gpsd_socket.watch()
+    for new_data in gpsd_socket:
         if new_data:
             data_stream.unpack(new_data)
             print('Altitude = ', data_stream.TPV['alt'])
@@ -45,11 +45,11 @@ defaults to host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 .. code-block::
 
     from gps3 import agps3
-    gps_socket = agps3.GPSDSocket()
+    gpsd_socket = agps3.GPSDSocket()
     data_stream = agps3.DataStream()
-    gps_socket.connect()
-    gps_socket.watch()
-    for new_data in gps_socket:
+    gpsd_socket.connect()
+    gpsd_socket.watch()
+    for new_data in gpsd_socket:
         if new_data:
             data_stream.unpack(new_data)
             print('Altitude = ', data_stream.alt)

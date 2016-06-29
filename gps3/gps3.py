@@ -8,11 +8,11 @@ Default host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 2) 'DataStream' Streamed gpsd JSON data literates it into python dictionaries.
 
 Import          from gps3 import gps3
-Instantiate     gps_socket = gps3.GPSDSocket()
+Instantiate     gpsd_socket = gps3.GPSDSocket()
                 data_stream = gps3.DataStream()
-Run             gps_socket.connect()
-                gps_socket.watch()
-Iterate         for new_data in gps_socket:
+Run             gpsd_socket.connect()
+                gpsd_socket.watch()
+Iterate         for new_data in gpsd_socket:
                     if new_data:
                         data_stream.unpack(new_data)
 Use                     print('Altitude = ',data_stream.TPV['alt'])
@@ -33,7 +33,7 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.33.0'
+__version__ = '0.33.2'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults

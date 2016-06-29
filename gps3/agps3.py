@@ -8,11 +8,11 @@ Defaults host='127.0.0.1', port=2947, gpsd_protocol='json' in two classes.
 2) 'DataStream' unpacks the streamed gpsd data into object attribute values.
 
 Import          from gps3 import agps3
-Instantiate     gps_socket = agps3.GPSDSocket()
+Instantiate     gpsd_socket = agps3.GPSDSocket()
                 data_stream = agps3.DataStream()
-Run             gps_socket.connect()
-                gps_socket.watch()
-Iterate         for new_data in gps_socket
+Run             gpsd_socket.connect()
+                gpsd_socket.watch()
+Iterate         for new_data in gpsd_socket
                     if new_data:
                         data_stream.unpack(new_data)
 Use                     print('Lat/Lon = ',data_stream.lat,' ', data_stream.lon)
@@ -34,7 +34,7 @@ import sys
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2015-2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.33.0'
+__version__ = '0.33.2'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
