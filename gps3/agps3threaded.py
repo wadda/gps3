@@ -56,7 +56,7 @@ class AGPS3mechanism(object):
     def stop(self):
         """ Stop as much as possible, as gracefully as possible, if possible.
         """
-        self.socket.close()  # Close socket, thread is on its own so far.
+        self.stream_data(enable=False)  # Close data stream, thread is on its own so far.
         print('Process stopped by user')
         print('Good bye.')
 
