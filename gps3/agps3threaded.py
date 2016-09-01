@@ -58,7 +58,7 @@ class AGPS3mechanism(object):
         """
         self.stream_data(enable=False)  # Close data stream, thread is on its own so far.
         print('Process stopped by user')
-        print('Good bye.')
+        print('Good bye.')[  # You haven't gone anywhere, re-start it all with 'self..stream_data()'
 
 
 if __name__ == '__main__':
