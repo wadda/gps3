@@ -11,7 +11,6 @@ except ImportError:
     from . import agps3  # Python 2
 
 
-
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2016  Moe'
 __license__ = 'MIT'
@@ -50,7 +49,12 @@ class AGPS3mechanism(object):
         """run thread with data
         """
         # self.stream_data() # Unless other changes are made this would limit to localhost only.
-        gps3_data_thread = Thread(target=self.unpack_data, args={usnap: usnap}, daemon=True)
+        try:
+            gps3_data_thread = Thread(target=self.unpack_data, args={usnap: usnap}, daemon=daemon)
+        except TypeError:
+            # threading.Thread() only accepts daemon argument in Python 3.3
+            gps3_data_thread = Thread(target=self.unpack_data, args={usnap: usnap})
+            gps3_data_thread.setDaemon(daemon)
         gps3_data_thread.start()
 
     def stop(self):
@@ -58,7 +62,7 @@ class AGPS3mechanism(object):
         """
         self.stream_data(enable=False)  # Close data stream, thread is on its own so far.
         print('Process stopped by user')
-        print('Good bye.')[  # You haven't gone anywhere, re-start it all with 'self..stream_data()'
+        print('Good bye.')  # You haven't gone anywhere, re-start it all with 'self..stream_data()'
 
 
 if __name__ == '__main__':
