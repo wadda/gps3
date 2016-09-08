@@ -2,6 +2,7 @@
 # coding=utf-8
 """Threaded gps client"""
 from __future__ import print_function
+
 from threading import Thread
 from time import sleep
 
@@ -10,11 +11,10 @@ try:  # This kludge to get around imports with files and directories the same na
 except ImportError:
     from . import agps3  # Python 2
 
-
 __author__ = 'Moe'
 __copyright__ = 'Copyright 2016  Moe'
 __license__ = 'MIT'
-__version__ = '0.2'
+__version__ = '0.2.3'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
@@ -60,20 +60,13 @@ class AGPS3mechanism(object):
     def stop(self):
         """ Stop as much as possible, as gracefully as possible, if possible.
         """
-        self.stream_data(enable=False)  # Close data stream, thread is on its own so far.
+        self.stream_data(enable=False)  # Stop data stream, thread is on its own so far.
         print('Process stopped by user')
-        print('Good bye.')  # You haven't gone anywhere, re-start it all with 'self..stream_data()'
+        print('Good bye.')  # You haven't gone anywhere, re-start it all with 'self.stream_data()'
 
 
 if __name__ == '__main__':
-    try:  # This kludge to get around imports with files and directories the same name.
-        from gps3.misc import add_args  # Python 3
-    except ImportError:
-        import sys
-        from os import path
-        sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-        from misc import add_args  # Python 2s
-
+    from misc import add_args
     args = add_args()
 
     agps3_thread = AGPS3mechanism()  # The thread triumvirate
@@ -82,12 +75,15 @@ if __name__ == '__main__':
 
     seconds_nap = int(args.seconds_nap)  # Threaded Demo loop 'seconds_nap' is not the same as 'usnap'
     while True:
-        for nod in range(1, seconds_nap):
+        for nod in range(0, seconds_nap):
             print('{:.0%} wait period of {} seconds'.format(nod / seconds_nap, seconds_nap), end='\r')
-            nod += 1
             sleep(1)
 
-        print('\nGPS3 Thread is still functioning at {}'.format(agps3_thread.data_stream.time))
-        print('Lat:{}  Lon:{}  Speed:{}  Course:{}\n'.format(agps3_thread.data_stream.lat, agps3_thread.data_stream.lon,
-                                                      agps3_thread.data_stream.speed,
-                                                      agps3_thread.data_stream.track))
+        print('\nGPS3 Thread still functioning at {}'.format(agps3_thread.data_stream.time))
+        print('Lat:{}  Lon:{}  Speed:{}  Course:{}\n'.format(agps3_thread.data_stream.lat,
+                                                             agps3_thread.data_stream.lon,
+                                                             agps3_thread.data_stream.speed,
+                                                             agps3_thread.data_stream.track))
+#
+######
+# END
