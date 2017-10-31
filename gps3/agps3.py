@@ -32,9 +32,9 @@ import socket
 import sys
 
 __author__ = 'Moe'
-__copyright__ = 'Copyright 2015-2016  Moe'
+__copyright__ = 'Copyright 2015-2017  Moe'
 __license__ = 'MIT'
-__version__ = '0.33.2'
+__version__ = '0.35'
 
 HOST = '127.0.0.1'  # gpsd
 GPSD_PORT = 2947  # defaults
@@ -140,8 +140,10 @@ class DataStream(object):
         'VERSION': {'release', 'proto_major', 'proto_minor', 'remote', 'rev'},
         'TPV': {'alt', 'climb', 'device', 'epc', 'epd', 'eps', 'ept', 'epv', 'epx', 'epy', 'lat', 'lon', 'mode', 'speed', 'tag', 'time', 'track'},
         'SKY': {'satellites', 'gdop', 'hdop', 'pdop', 'tdop', 'vdop', 'xdop', 'ydop'},
-        # Subset of SKY: 'satellites': {'PRN', 'ss', 'el', 'az', 'used'}  # is always present.
-        'GST': {'alt', 'device', 'lat', 'lon', 'major', 'minor', 'orient', 'rms', 'time'},
+        # Subset of SKY: \\\'satellites': {'PRN', 'ss', 'el', 'az', 'used'}///  # is always present.
+        'GST': {'alt', 'device', 'sdlat', 'sdlon', 'major', 'minor', 'orient', 'rms', 'time'},
+        # In 'GST', 'lat' and 'lon' present a name collision and are amended to 'sdlat', 'sdlon',
+        # because they are standard deviations of of 'TPV' 'lat' and 'lon'
         'ATT': {'acc_len', 'acc_x', 'acc_y', 'acc_z', 'depth', 'device', 'dip', 'gyro_x', 'gyro_y', 'heading', 'mag_len', 'mag_st', 'mag_x',
                 'mag_y', 'mag_z', 'pitch', 'pitch_st', 'roll', 'roll_st', 'temperature', 'time', 'yaw', 'yaw_st'},
         # 'POLL': {'active', 'tpv', 'sky', 'time'},
@@ -155,8 +157,8 @@ class DataStream(object):
     def __init__(self):
         """Potential data packages from gpsd for a generator of class attributes"""
         for laundry_list in self.packages.values():
-            for thingy in laundry_list:
-                setattr(self, thingy, 'n/a')
+            for item in laundry_list:
+                setattr(self, item, 'n/a')
 
     def unpack(self, gpsd_socket_response):
         """Sets new socket data as DataStream attributes in those initialised dictionaries
@@ -173,6 +175,9 @@ class DataStream(object):
             fresh_data = json.loads(gpsd_socket_response)  # 'class' is popped for iterator lead
             class_name = fresh_data.pop('class')
             for key in self.packages[class_name]:
+                # Fudge around the namespace collision with GST data package lat/lon being standard deviations
+                if class_name == 'GST' and key == 'lat' or 'lon':
+                    setattr(self, 'sd' + key, fresh_data.get(key, 'n/a'))
                 setattr(self, key, fresh_data.get(key, 'n/a'))  # Updates and restores 'n/a' if attribute is absent in the data
 
         except AttributeError:  # 'str' object has no attribute 'keys'
