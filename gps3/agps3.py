@@ -18,11 +18,8 @@ Iterate         for new_data in gpsd_socket
 Use                     print('Lat/Lon = ',data_stream.lat,' ', data_stream.lon)
                         print('Altitude = ',data_stream.alt)
 
-Consult Lines 140-ff for Attribute/Key possibilities.
+Consult Lines 136-ff for Attribute/Key possibilities.
 
-As long as TPV'time', GST'time', ATT'time', and POLL'time' are the same,
-or TPV'device', GST'device', ATT'device, PPS'device', and TOFF'device  is
-the same as DEVICES(device)'path' throughout "she'll be right"
 """
 from __future__ import print_function
 
@@ -61,8 +58,8 @@ class GPSDSocket(object):
                 self.streamSock.connect(host_port)
                 self.streamSock.setblocking(False)
             except (OSError, IOError) as error:
-                sys.stderr.write('\r\nGPSDSocket.connect exception is--> {}'.format(error))
-                sys.stderr.write('\r\nAGPS3 connection to a gpsd at \'{0}\' on port \'{1}\' failed\r\n'.format(host, port))
+                sys.stderr.write(f'\r\nGPSDSocket.connect exception is--> {error}')
+                sys.stderr.write(f'\r\nAGPS3 connection to gpsd at \'{host}\' on port \'{port}\' failed\r\n')
 
     def watch(self, enable=True, gpsd_protocol=PROTOCOL, devicepath=None):
         """watch gpsd in various gpsd_protocols or devices.
@@ -97,7 +94,7 @@ class GPSDSocket(object):
         except TypeError:
             self.streamSock.send(commands)  # 2.7 chokes on 'bytes' and 'encoding='
         except (OSError, IOError) as error:  # HEY MOE, LEAVE THIS ALONE FOR NOW!
-            sys.stderr.write('\nAGPS3 send command fail with {}\n'.format(error))  # [Errno 107] Transport endpoint is not connected
+            sys.stderr.write(f'\nAGPS3 send command fail with {error}\n')  # [Errno 107] Transport endpoint is not connected
 
     def __iter__(self):
         """banana"""  # <--- for scale
@@ -141,7 +138,7 @@ class DataStream(object):
         'TPV': {'alt', 'climb', 'device', 'epc', 'epd', 'eps', 'ept', 'epv', 'epx', 'epy', 'lat', 'lon', 'mode', 'speed', 'tag', 'time', 'track'},
         'SKY': {'satellites', 'gdop', 'hdop', 'pdop', 'tdop', 'vdop', 'xdop', 'ydop'},
         # Subset of SKY: \\\'satellites': {'PRN', 'ss', 'el', 'az', 'used'}///  # is always present.
-        'GST': {'alt', 'device', 'sdlat', 'sdlon', 'major', 'minor', 'orient', 'rms', 'time'},
+        'GST': {'alt', 'device', 'lat', 'lon', 'major', 'minor', 'orient', 'rms', 'time'},
         # In 'GST', 'lat' and 'lon' present a name collision and are amended to 'sdlat', 'sdlon',
         # because they are standard deviations of of 'TPV' 'lat' and 'lon'
         'ATT': {'acc_len', 'acc_x', 'acc_y', 'acc_z', 'depth', 'device', 'dip', 'gyro_x', 'gyro_y', 'heading', 'mag_len', 'mag_st', 'mag_x',
@@ -158,6 +155,9 @@ class DataStream(object):
         """Potential data packages from gpsd for a generator of class attributes"""
         for laundry_list in self.packages.values():
             for item in laundry_list:
+                # Fudge around the namespace collision with GST data package lat/lon being standard deviations
+                if laundry_list == 'GST' and item == 'lat' or 'lon':
+                    setattr(self, 'sd' + item, 'n/a')
                 setattr(self, item, 'n/a')
 
     def unpack(self, gpsd_socket_response):
